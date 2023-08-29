@@ -1,0 +1,758 @@
+/* Berisi CSS Modifikasi dari CSS AdminLTE */
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+
+body {
+    font-family: 'Quicksand', sans-serif !important;
+}
+
+.copyright {
+    font-size: 11px;
+}
+
+/* Modifikasi Check list dengan Tombol Botton */
+.btn-info.active,
+.btn-info.active:focus,
+.btn-info.active:hover,
+.open>.dropdown-toggle.btn-info.focus,
+.open>.dropdown-toggle.btn-info:hover {
+    color: #fff;
+    background-color: #1788aa;
+    border-color: #1b6d85;
+}
+
+/* Modifikasi warna dan background Navigator Active */
+.nav-stacked>li.active>a,
+.nav-stacked>li.active>a:hover {
+    background-color: #d104dc;
+    color: #fff;
+    border-top: 0;
+    border-left-color: #1f2427;
+}
+
+/* Modifikasi input group */
+.input-group .form-control,
+.input-group-addon,
+.input-group-btn {
+    display: table-cell;
+}
+
+.input-group-sm>.form-control,
+.input-group-sm>.input-group-addon,
+.input-group-sm>.input-group-btn>.btn {
+    height: 25px;
+    padding: 5px 10px;
+    font-size: 11px;
+    line-height: 1.2;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.input-group .form-control {
+    position: relative;
+    z-index: 2;
+    float: left;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+@media (max-width:767px) {
+    .form-control {
+        margin-bottom: 10px
+    }
+
+    .input-group .form-control {
+        margin-bottom: 5px;
+    }
+
+    .input-group-sm>.form-control,
+    .input-group-sm>.input-group-addon,
+    .input-group-sm>.input-group-btn>.btn {
+        margin-bottom: 5px;
+    }
+}
+
+.btn-group-sm>.btn,
+.btn-sm {
+    line-height: 1.2;
+}
+
+.btn-social.btn-sm> :first-child {
+    line-height: 25px;
+    width: 28px;
+    font-size: 1.4em;
+}
+
+/* Modifikasi size gambar mini */
+.user-panel>.image2>img {
+    width: auto;
+    max-width: 45px;
+    height: auto;
+}
+
+/* Modifikasi margin antar button */
+.btn-margin {
+    margin: 0px 5px 5px 0px;
+}
+
+/* Modifikasi Sidabar menu */
+.main-sidebar {
+    width: 270px;
+}
+
+.main-header .navbar {
+    margin-left: 270px;
+}
+
+.main-header .logo {
+    width: 270px;
+}
+
+.content-wrapper,
+.main-footer {
+    margin-left: 270px;
+}
+
+.user-panel {
+    padding: 10px 0px 0px 0px;
+    margin: 0 10px 10px 10px;
+    width: auto;
+}
+
+.user-panel>.info {
+    font-size: 12px;
+}
+
+.sidebar-menu,
+.main-sidebar .user-panel,
+.sidebar-menu>li.header {
+    white-space: normal;
+}
+
+.treeview-menu>li>a {
+    font-size: 12px;
+}
+
+.sidebar-menu>li>a {
+    padding: 5px 5px 5px 15px;
+}
+
+.sidebar-menu li>a>.pull-right-container {
+    margin-top: -7px;
+}
+
+.sidebar-mini:not(.sidebar-mini-expand-feature).sidebar-collapse .sidebar-menu>li:hover>a>span {
+    padding: 14px 5px 12px 20px;
+}
+
+.sidebar-mini:not(.sidebar-mini-expand-feature).sidebar-collapse .sidebar-menu>li:hover>a>.pull-right-container {
+
+    width: auto !important;
+    left: 210px !important;
+    top: -15px !important;
+}
+
+.sidebar-mini:not(.sidebar-mini-expand-feature).sidebar-collapse .sidebar-menu>li:hover>a>span:not(.pull-right),
+.sidebar-mini:not(.sidebar-mini-expand-feature).sidebar-collapse .sidebar-menu>li:hover>.treeview-menu {
+    width: 210px;
+}
+
+@media (max-width:767px) {
+    .main-sidebar {
+        -webkit-transform: translate(-270px, 0);
+        -ms-transform: translate(-270px, 0);
+        -o-transform: translate(-270px, 0);
+        transform: translate(-270px, 0);
+    }
+
+    .main-header .logo,
+    .main-header .navbar {
+        width: 100%;
+    }
+
+    .main-header .navbar {
+        margin: 0;
+    }
+
+    .content-wrapper,
+    .main-footer {
+        margin-left: 0;
+    }
+}
+
+/* Modifikasi Ukuran Huruf pada header box--- */
+.content-header>h1 {
+    font-size: 18px;
+}
+
+.box-header>.fa,
+.box-header>.glyphicon,
+.box-header>.ion,
+.box-header .box-title {
+    font-size: 16px;
+}
+
+/* Modifikasi Tabel --- */
+.table-bordered>thead>tr>th,
+.table-bordered>thead>tr>td {
+    padding: 7px;
+}
+
+@media (max-width:480px) {
+
+    .selecta,
+    .inputa {
+        width: 150px
+    }
+
+    .form-group {
+        margin-bottom: 0px;
+    }
+
+    .leaflet-control-layers-expanded {
+        display: none;
+    }
+}
+
+
+@media (max-width:767px) {
+
+    .selecta,
+    .inputa {
+        width: 150px
+    }
+
+    .form-group {
+        margin-bottom: 0px;
+    }
+}
+
+/* Modifikasi Select2 --- */
+.select2-container--default .select2-selection--single,
+.select2-selection .select2-selection--single {
+    padding: 2px 12px;
+    height: 25px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 22px;
+}
+
+.fa {
+    width: 13px;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    margin: 2px 0 0;
+}
+
+.error {
+    color: #dd4b39;
+}
+
+/* Modifikasi Header DataTables--- */
+.table-bordered>thead>tr>th,
+.table-bordered>thead>tr>td {
+    vertical-align: middle;
+}
+
+table.table-bordered.dataTable th:last-child,
+table.table-bordered.dataTable th:last-child,
+table.table-bordered.dataTable td:last-child,
+table.table-bordered.dataTable td:last-child {
+    border-right-width: 1px;
+}
+
+.table-bordered>thead>tr>th,
+.table-bordered>thead>tr>td {
+    border-bottom-width: 0px;
+}
+
+.head-padding {
+    padding: 5px;
+}
+
+/* Modifikasi Font Size Autocomplate */
+.ui-widget-content {
+    font-size: 11px;
+}
+
+/* Modifikasi Datepicker dan DateTimePicker*/
+.bootstrap-datetimepicker-widget.dropdown-menu {
+    width: auto;
+}
+
+.datepicker table tr td:first-child{
+    color: red;
+}
+
+/* mengatur jarak atar isian yang berbeda group form*/
+.jar_form {
+    margin-top: -6px;
+}
+
+/* mengatur Judul Sub Title*/
+.subtitle_head {
+    padding: 10px 50px 10px 5px;
+    background-color: #a2f2ef;
+    margin: 15px 0px 10px 0px;
+    text-align: left;
+    color: #111
+}
+
+.subtitle_head label {
+    margin-bottom: 0px;
+}
+
+/* Modifikasi template AdminLTE: menambah scrollbar pada bagian sidebar menu*/
+.slimScrollBar {
+    background-color: white !important;
+    opacity: 0.3 !important;
+    width: 8px !important;
+}
+
+/* Supaya kolom tabel tidak wrap dan menggunakan spasi terkecil */
+td.nostretch,
+th.nostretch {
+    width: 1%;
+    white-space: nowrap;
+}
+
+/* Style untuk isian checkbox berkolom (input analisis, surat masuk) */
+.form-horizontal .checkbox,
+.form-horizontal .checkbox-inline,
+.form-horizontal .radio,
+.form-horizontal .radio-inline {
+    padding: 4px;
+}
+
+.panel-fullscreen {
+    display: block;
+    z-index: 999999;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    overflow: auto;
+}
+
+#op_item div {
+    margin: 1px 0;
+    background: #fafafa;
+    border: 1px solid #ddd;
+}
+
+#op_item input {
+    vertical-align: middle;
+    margin: 0px 2px;
+}
+
+#op_item label {
+    width: 100%;
+    padding: 4px 10px 0px 2px;
+    font-size: 11px;
+    line-height: 14px;
+    font-weight: normal;
+}
+
+table.head {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.atas {
+    vertical-align: top;
+}
+
+.checkbox input[type="checkbox"],
+.checkbox-inline input[type="checkbox"],
+.radio input[type="radio"],
+.radio-inline input[type="radio"] {
+    position: inherit;
+}
+
+#op_item div {
+    margin: 1px 0;
+    background: #fafafa;
+    border: 1px solid #ddd;
+}
+
+#op_item input {
+    vertical-align: middle;
+    margin: 0px 2px;
+}
+
+#op_item label {
+    padding: 4px 10px 0px 2px;
+    font-size: 11px;
+    line-height: 14px;
+    font-weight: normal;
+}
+
+table.head {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.atas {
+    vertical-align: top;
+}
+
+.form-horizontal .control-label {
+    text-align: left;
+}
+
+img {
+    margin-bottom: 5px;
+}
+
+.no-padding {
+    padding: 0px;
+}
+
+/* Notif */
+.badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: 4px;
+    margin-left: 3px;
+    font-size: 10px;
+    font-weight: normal;
+    margin-top: -11px;
+    line-height: 0.5;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #ff0505;
+    border-radius: 6px
+}
+
+.logo-text {
+    font-family: 'Quicksand', sans-serif !important;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.dashboard-header {
+    font-family: sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.small-box {
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.jumlah-widget {
+    font-family: sans-serif;
+    font-size: 34px;
+    font-weight: bold;
+}
+
+.title-widget {
+    font-family: 'Quicksand', sans-serif;
+}
+
+.detail-widget {
+    font-family: 'Quicksand', sans-serif;
+}
+
+.nama-user {
+    font-family: 'Quicksand', sans-serif;
+    text-transform: capitalize;
+}
+
+.block-header {
+    padding: 10px;
+}
+
+.widget-box {
+    background: #fff;
+    width: 64.666667%;
+    border-top: 2px solid #00acd7;
+    padding-left: 0;
+    padding-top: 16px;
+    padding-right: 0;
+    margin-left: 15px;
+}
+
+.widget-header {
+    font-family: sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+.widget-link {
+    color: #fff;
+    text-align: right;
+}
+
+.info-box {
+    min-height: 90px;
+}
+
+.info-box-icon {
+    height: 90px;
+    width: 90px;
+    font-size: 30px;
+    line-height: 90px;
+    font-weight: bold;
+}
+
+.info-box-content {
+    padding: 10px;
+    margin-left: 90px;
+}
+
+.info-box-text {
+    text-transform: uppercase;
+    padding: 10px 0;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.help-block {
+    font-size: 10px;
+    color: #e91d1d;
+}
+
+.menu-backend {
+    font-size: 12px;
+}
+
+.statistik-box {
+    padding: 0px 10px 10px 10px;
+}
+
+.title-statistik {
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px 0;
+}
+
+.table-widget {
+    margin-bottom: 5px;
+}
+
+.btn-rounded {
+    border-radius: 20px;
+}
+
+.skin-purple .sidebar-menu>li.header {
+    color: #f6f6f6;
+    font-weight: bold;
+}
+
+.profile-user-img {
+    height: auto;
+    box-shadow: 0px 0px 2px #999;
+}
+
+.kolom-tombol-atas {
+    padding: 10px 0;
+}
+
+.meta-laporan {
+    background: #ddd;
+    padding: 5px 10px;
+}
+
+.nama-pelapor {
+    font-size: 12px;
+    float: left;
+}
+
+.tgl-laporan {
+    font-size: 12px;
+    float: right;
+    display: inline-block;
+    margin-top: -27px;
+}
+
+.tgl-balasan {
+    font-size: 12px;
+    float: right;
+    display: inline-block;
+    margin-top: -18px;
+}
+
+.isi-laporan {
+    font-size: 12px;
+    background: #fff;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+}
+
+.lampiran-laporan {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 5px 10px;
+}
+
+.heading-laporan {
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+
+.body-laporan {
+    padding: 10px;
+}
+
+.box-laporan {
+    border: 1px solid #ddd;
+    background: #fff;
+    margin-bottom: 10px;
+}
+
+.box-lampiran {
+    padding: 10px 10px 5px 10px;
+    background: #eee;
+}
+
+.head-lampiran {
+    font-size: 10px;
+    padding: 5px;
+    background: #fff;
+    margin-bottom: 5px;
+}
+
+.sidebar-laporan {
+    background: #fff;
+    border: 1px solid #ddd;
+}
+
+.head-info-laporan {
+    background: #ddd;
+    padding: 10px;
+}
+
+.label-info-laporan {
+    font-size: 10px;
+    color: #ccc;
+}
+
+.judul-laporan {
+    background: #fff;
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+.tgl-info-laporan {
+    background: #fff;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-top: 1px solid #ddd;
+}
+
+.nama-info-laporan {
+    background: #fff;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-top: 1px solid #ddd;
+}
+
+.dropdown-menu {
+    border-radius: 0;
+    padding: 0;
+}
+
+.submenu-aksi {
+    border-bottom: 1px solid #ddd;
+}
+
+.logo-desa {
+    margin-left: 0;
+}
+
+.user-panel>.info {
+    left: 40px;
+}
+
+.sidebar-menu li.header {
+    padding: 5px 25px 5px 15px;
+}
+
+.foto-sambutan {
+    margin-top: 5px;
+}
+
+.pic-pemberi-sambutan {
+    margin: 0 auto;
+    width: 100px;
+    border-radius: 2px;
+    box-shadow: 2px 2px 2px #999;
+}
+
+.label-meta-pesan {
+    padding: 5px;
+    background: #eee;
+    font-weight: bold;
+}
+
+.judul-pesan {
+    font-size: 14px;
+    font-weight: bold;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.body-isi-pesan {
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.label-meta-pesan {
+    padding: 5px;
+    background: #eee;
+    font-weight: bold;
+}
+
+.judul-pesan {
+    font-size: 14px;
+    font-weight: bold;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.body-isi-pesan {
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.box .about-box {
+    padding: 0px 15px 15px 15px;
+}
+
+.box .about-box .title-about {
+    font-weight: bold;
+    font-size: 11px;
+    text-transform: uppercase;
+    padding: 10px 0;
+}
+
+.box .about-box .deks {
+    font-size: 12px;
+}
+
+/* Custom */

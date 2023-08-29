@@ -1,0 +1,259 @@
+/*body, input, select, textarea, button {
+	text-transform: uppercase;
+}*/
+
+.mt5 {
+	margin-top: 5px;
+}
+
+.mt10 {
+	margin-top: 10px;
+}
+
+.red {
+	background-color: #dc0000;
+	min-height: 25px;
+}
+
+.yellow {
+	background-color: yellow;
+	min-height: 25px;
+}
+
+.green {
+	background-color: green;
+	min-height: 25px;
+}
+
+.login-box-body input {
+	text-transform: initial;
+}
+
+#username, #password, #email {
+	text-transform: initial;
+}
+
+.mandatory {
+	color:#FF0000;
+}
+
+.center {
+	text-align: center;
+}
+
+.alert {
+	padding: 5px!important;
+	text-transform: initial!important;
+}
+
+.alert a {
+	text-decoration: none;
+}
+
+.close {
+	line-height: 100%;
+}
+
+/*.box-body .close {
+	line-height: 28px;
+}*/
+
+.box-header .box-tools {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+
+.modal-header {
+	border-bottom: none;
+	color: #FF0000;
+}
+
+.modal-footer {
+	border-top: none;
+}
+
+.modal-content {
+	background-color: #f2dede;
+	border-color: #ebccd1;
+}
+
+.modal-body i {
+	font-size: 1.4em;
+	color: #FF0000;
+}
+
+.modal-body p {
+	color: #FF0000;
+}
+
+.modal-footer button {
+	background-color: #FF0000;
+	color: #FFF;
+}
+
+.modal-footer button:hover {
+	background-color: #DC0000;
+	color: #FFF;
+}
+
+.dialog-empty .modal-dialog {
+	width: 950px;
+	height: 600px;
+	max-height: 600px;
+}
+
+.dialog-empty .modal-header {
+	border-bottom: none;
+	color: #000;
+}
+
+.dialog-empty .modal-footer {
+	border-top: none;
+}
+
+.dialog-empty .modal-content {
+	background-color: #FFF;
+	border-color: #FFF;
+	height: 600px;
+	max-height: 600px;
+	overflow-y: auto;
+}
+
+.dialog-empty .modal-content th, .dialog-empty .modal-content td {
+	text-align: center;
+	padding: 3px 7px;
+}
+
+#content-table td {
+	text-align: left;
+}
+
+.dialog-empty .modal-body i {
+	font-size: 1.4em;
+	color: #000;
+}
+
+.dialog-empty .modal-body p {
+	color: #000;
+}
+
+.dialog-empty .modal-footer button {
+	background-color: #3c8dbc;
+}
+
+.dialog-empty .modal-footer button:hover {
+	background-color:#367fa9
+}
+
+.dialog-form .modal-dialog {
+	width: 600px;
+	height: 300px;
+	max-height: 300px;
+}
+
+.dialog-form .modal-header {
+	border-bottom: none;
+	color: #000;
+}
+
+.dialog-form .modal-footer {
+	border-top: none;
+}
+
+.dialog-form .modal-content {
+	background-color: #FFF;
+	border-color: #FFF;
+	height: 300px;
+	max-height: 300px;
+	overflow-y: auto;
+}
+
+.dialog-form .modal-content th, .dialog-form .modal-content td {
+	text-align: center;
+	padding: 3px 7px;
+}
+
+.dialog-form .modal-body i {
+	font-size: 1.4em;
+	color: #000;
+}
+
+.dialog-form .modal-body p {
+	color: #000;
+}
+
+.dialog-form .modal-footer button {
+	background-color: #3c8dbc;
+}
+
+.dialog-form .modal-footer button:hover {
+	background-color:#367fa9
+}
+
+#buttonupdate {
+	display: none;
+}
+
+#transaksibuttonupdate {
+	display: none;
+}
+
+#stblbuttonupdate, #shtibuttonupdate, #logbookbuttonupdate {
+	display: none;
+}
+
+#pembayaranbuttonupdate {
+	display: none;
+}
+
+#pembayaranpiutangbuttonupdate {
+	display: none;
+}
+
+#fancybox-close {
+	right: -27px!important;
+}
+
+.float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:#25d366;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	font-size:30px;
+	box-shadow: 2px 2px 3px #999;
+	z-index:100;
+}
+
+.my-float{
+	margin-top:16px;
+}
+
+#myCanvas {
+	border: 4px solid #444;
+	border-radius: 15px;
+	background-color: #fafafa;
+	width: 100%;
+}
+
+#myCanvas:after {
+	width: 100%;
+	clear: both;
+	content: '';
+	display: block;
+}
+
+#myCanvass {
+	border: 4px solid #444;
+	border-radius: 15px;
+	background-color: #fafafa;
+}
+
+.shadow-custom {
+	box-shadow: 0 2px 13px 0 rgba(0, 0, 0, .25), 0 3px 10px 5px rgba(0, 0, 0, 0.14) !important;
+}
