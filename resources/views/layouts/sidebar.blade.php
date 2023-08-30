@@ -16,6 +16,7 @@
             <li class="{{ (request()->is('admin*')) ? 'active' : '' }}"><a href="/admin"><i class="fa fa-users"></i><span>Admin</span></a></li>
             <li class="{{ (request()->is('fakultas*')) ? 'active' : '' }}"><a href="/fakultas"><i class="fa fa-university"></i><span>Fakultas</span></a></li>
             <li class="{{ (request()->is('matakuliah*')) ? 'active' : '' }}"><a href="/matakuliah"><i class="fa fa-circle"></i><span>Mata Kuliah</span></a></li>
+            <li class="{{ (request()->is('kelas*')) ? 'active' : '' }}"><a href="/kelas"><i class="fa fa-circle"></i><span>Kelas</span></a></li>
         </ul>
     </section>
 </aside>
