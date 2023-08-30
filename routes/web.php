@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FakultasController;
+use App\Http\Controllers\MatakuliahController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('/admin', AdminController::class);
     Route::resource('/fakultas', FakultasController::class);
+    Route::resource('/matakuliah', MatakuliahController::class);
 });
 
 require __DIR__.'/auth.php';

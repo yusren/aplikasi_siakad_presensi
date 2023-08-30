@@ -9,9 +9,9 @@ class FakultasController extends Controller
 {
     public function index()
     {
-        $fakultas = Fakultas::get();
-
-        return view('fakultas.index', compact('fakultas'));
+        return view('fakultas.index', [
+            'fakultas' => Fakultas::get(),
+        ]);
     }
 
     public function create()
