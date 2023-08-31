@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\KelasRequest;
 use App\Models\Kelas;
+use App\Models\User;
 
 class KelasController extends Controller
 {
@@ -16,13 +17,16 @@ class KelasController extends Controller
 
     public function create()
     {
-        return view('kelas.create');
+        return view('kelas.create', [
+            'mahasiswa' => User::where('role', 'mahasiswa')->get(),
+        ]);
     }
 
     public function store(KelasRequest $request)
     {
         $data = $request->validated();
-        Kelas::create($data);
+        $kelas = Kelas::create($data);
+        $kelas->users()->attach($data['mahasiswa']);
 
         return redirect(route('kelas.index'))->with('toast_success', 'Berhasil Menyimpan Data!');
     }
@@ -34,13 +38,17 @@ class KelasController extends Controller
 
     public function edit(Kelas $kela)
     {
-        return view('kelas.edit', ['kelas' => $kela]);
+        return view('kelas.edit', [
+            'kelas' => $kela,
+            'mahasiswa' => User::where('role', 'mahasiswa')->get(),
+        ]);
     }
 
     public function update(KelasRequest $request, Kelas $kela)
     {
         $data = $request->validated();
         $kela->update($data);
+        $kela->users()->sync($data['mahasiswa']);
 
         return redirect(route('kelas.index'))->with('toast_success', 'Berhasil Menyimpan Data!');
     }

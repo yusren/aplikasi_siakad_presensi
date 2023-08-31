@@ -16,6 +16,7 @@ class KelasRequest extends FormRequest
         return [
             'name' => 'required',
             'code' => 'required',
+            'mahasiswa' => 'required',
         ];
     }
 }

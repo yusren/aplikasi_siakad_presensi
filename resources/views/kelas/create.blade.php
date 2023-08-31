@@ -23,6 +23,16 @@
                                 <input type="text" class="form-control" name="code" value="{{ old('code') }}" placeholder="Masukkan Kode Kelas">
                                 @error('code') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                             </div>
+                            <div class="form-group">
+                                <label>Mahasiswa</label>
+                                <select required class="form-control select2" name="mahasiswa[]" data-placeholder="Pilih Mahasiswa" style="width: 100%;" multiple>
+                                    @foreach ($mahasiswa as $mhs)
+                                        <option value="{{ $mhs->id }}"
+                                            {{ old('mahasiswa') == $mhs->id ? 'selected' : '' }}>{{ $mhs->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                         <div class="box-footer">
                             <a href="{{ route('kelas.index') }}" class="btn btn-default">Kembali</a>

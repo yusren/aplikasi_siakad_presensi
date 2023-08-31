@@ -13,4 +13,9 @@ class Kelas extends Model
         'name',
         'code',
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }
