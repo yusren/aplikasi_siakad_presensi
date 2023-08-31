@@ -23,7 +23,7 @@ class FakultasFactory extends Factory
             ['name' => 'Faculty of Engineering', 'code' => 'ENG'],
             ['name' => 'Faculty of Economics and Business', 'code' => 'EB'],
         ];
-        $faculty = $this->faker->unique()->randomElement($faculties);
+        $faculty = $this->faker->randomElement($faculties);
 
         return [
             'name' => $faculty['name'],

@@ -14,9 +14,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Fakultas::factory(3)->create();
+        $fakultases = \App\Models\Fakultas::factory(5)->create();
+
+        foreach ($fakultases as $fakultas) {
+            \App\Models\Prodi::factory()->create(['fakultas_id' => $fakultas->id]);
+        }
+
         \App\Models\Matakuliah::factory(3)->create();
-        \App\Models\Kelas::factory(3)->create();
+        $mahasiswas = \App\Models\User::factory(5)->create(['role' => 'mahasiswa']);
+        $kelases = \App\Models\Kelas::factory(3)->create();
+
+        $kelases->each(function ($kelas) use ($mahasiswas) {
+            $kelas->users()->attach($mahasiswas->random(2)->pluck('id')->toArray());
+        });
 
         \App\Models\User::factory()->create([
             'name' => 'Test User',
