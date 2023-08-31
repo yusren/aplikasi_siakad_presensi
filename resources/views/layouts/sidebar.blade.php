@@ -17,6 +17,7 @@
             <li class="{{ (request()->is('fakultas*')) ? 'active' : '' }}"><a href="/fakultas"><i class="fa fa-university"></i><span>Fakultas</span></a></li>
             <li class="{{ (request()->is('matakuliah*')) ? 'active' : '' }}"><a href="/matakuliah"><i class="fa fa-circle"></i><span>Mata Kuliah</span></a></li>
             <li class="{{ (request()->is('kelas*')) ? 'active' : '' }}"><a href="/kelas"><i class="fa fa-circle"></i><span>Kelas</span></a></li>
+            <li class="{{ (request()->is('ruang*')) ? 'active' : '' }}"><a href="/ruang"><i class="fa fa-circle"></i><span>Ruang</span></a></li>
             <li class="{{ (request()->is('prodi*')) ? 'active' : '' }}"><a href="/prodi"><i class="fa fa-circle"></i><span>Prodi</span></a></li>
         </ul>
     </section>

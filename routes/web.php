@@ -7,6 +7,7 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MatakuliahController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RuangController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/admin', AdminController::class);
     Route::resource('/fakultas', FakultasController::class);
     Route::resource('/matakuliah', MatakuliahController::class);
+    Route::resource('/ruang', RuangController::class);
     Route::resource('/kelas', KelasController::class);
     Route::resource('/prodi', ProdiController::class);
 });
