@@ -13,7 +13,7 @@ class AdminController extends Controller
     public function index()
     {
         return view('admins.index', [
-            'users' => User::get(),
+            'users' => User::where('role', ['superadmin', 'admin'])->get(),
         ]);
     }
 
@@ -23,7 +23,6 @@ class AdminController extends Controller
             'roles' => [
                 'superadmin',
                 'admin',
-                'mahasiswa',
             ],
         ]);
     }
@@ -50,7 +49,6 @@ class AdminController extends Controller
             'roles' => [
                 'superadmin',
                 'admin',
-                'mahasiswa',
             ],
         ]);
     }

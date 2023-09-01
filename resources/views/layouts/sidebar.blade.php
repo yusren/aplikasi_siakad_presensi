@@ -14,6 +14,7 @@
         <ul class="sidebar-menu">
             <li class="{{ (request()->is('dashboard*')) ? 'active' : '' }}"><a href="/dashboard"><i class="fa fa-tachometer"></i><span>Dashboard</span></a></li>
             <li class="{{ (request()->is('admin*')) ? 'active' : '' }}"><a href="/admin"><i class="fa fa-users"></i><span>Admin</span></a></li>
+            <li class="{{ (request()->is('user*')) ? 'active' : '' }}"><a href="/user"><i class="fa fa-users"></i><span>Users</span></a></li>
 
             <li class="treeview {{ request()->is('fakultas*') || request()->is('kelas*') || request()->is('matakuliah*') || request()->is('tahunajaran*') || request()->is('prodi*') || request()->is('ruang*') ? 'active' : '' }}">
                 <a href="#"><i class="fa fa-circle"></i><span>Master Data</span><i class="fa fa-angle-left pull-right"></i></a>

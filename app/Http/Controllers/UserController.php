@@ -2,25 +2,91 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\ExportUser;
-use App\Imports\ImportUser;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function importUsers(Request $request)
+    public function index()
     {
-        $request->validate([
-            'file' => 'required',
+        return view('users.index', [
+            'users' => User::where('role', ['dosen', 'mahasiswa'])->get(),
         ]);
-        Excel::import(new ImportUser, $request->file('file')->store('files'));
-
-        return redirect()->back();
     }
 
-    public function exportUsers(Request $request)
+    public function create()
     {
-        return Excel::download(new ExportUser, 'export.xlsx');
+        return view('users.create', [
+            'roles' => [
+                'dosen',
+                'mahasiswa',
+            ],
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'username' => 'required',
+            'role' => 'required',
+            'status' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'same:confirm-password',
+        ]);
+        $data = $request->all();
+        $data['password'] = Hash::make($data['password']);
+
+        User::create($data);
+
+        return redirect(route('user.index'))->with('toast_success', 'Berhasil Menyimpan Data!');
+    }
+
+    public function show(User $user)
+    {
+        dd($user);
+    }
+
+    public function edit(User $user)
+    {
+        return view('users.edit', [
+            'user' => $user,
+            'roles' => [
+                'dosen',
+                'mahasiswa',
+            ],
+        ]);
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'username' => 'required',
+            'role' => 'required',
+            'status' => 'required',
+            'email' => 'required|email|unique:users,email,'.$user->id,
+            'password' => 'same:confirm-password',
+        ]);
+
+        $data = $request->all();
+        if (! empty($data['password'])) {
+            $data['password'] = Hash::make($data['password']);
+        } else {
+            $data = Arr::except($data, ['password']);
+        }
+
+        $user->update($data);
+
+        return redirect(route('user.index'))->with('toast_success', 'Berhasil Menyimpan Data!');
+    }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+
+        return redirect(route('user.index'))->with('toast_success', 'Berhasil Menghapus Data!');
     }
 }

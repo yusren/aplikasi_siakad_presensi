@@ -10,6 +10,7 @@ use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RuangController;
 use App\Http\Controllers\TahunAjaranController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('/admin', AdminController::class);
+    Route::resource('/user', UserController::class);
     Route::resource('/fakultas', FakultasController::class);
     Route::resource('/matakuliah', MatakuliahController::class);
     Route::resource('/ruang', RuangController::class);
