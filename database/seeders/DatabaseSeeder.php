@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder
             $kelas->users()->attach($mahasiswas->random(2)->pluck('id')->toArray());
         });
 
+        \App\Models\TahunAjaran::factory(5)->create();
+
         \App\Models\User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
