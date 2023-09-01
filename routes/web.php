@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FakultasController;
+use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MatakuliahController;
 use App\Http\Controllers\ProdiController;
@@ -29,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/kelas', KelasController::class);
     Route::resource('/prodi', ProdiController::class);
     Route::resource('/tahunajaran', TahunAjaranController::class);
+    Route::resource('/jadwal', JadwalController::class);
 });
 
 require __DIR__.'/auth.php';
