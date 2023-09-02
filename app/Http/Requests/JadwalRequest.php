@@ -14,7 +14,12 @@ class JadwalRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'ruang_id' => 'required|integer',
+            'prodi_id' => 'required|integer',
+            'matakuliah_id' => 'required|integer',
+            'kelas_id' => 'required|integer',
+            'jam' => 'required|date_format:H:i',
+            'hari' => 'required|string',
         ];
     }
 }

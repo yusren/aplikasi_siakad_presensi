@@ -10,18 +10,21 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Tambah Jadwal</h3>
                 </div>
-                <form action="{{ route('matakuliah.store') }}" method="POST">
+                <form action="{{ route('jadwal.store') }}" method="POST">
                     @csrf
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="">Nama Jadwal</label>
-                            <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Masukkan Nama Jadwal">
-                            @error('name') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="">Kode Jadwal</label>
-                            <input type="text" class="form-control" name="code" value="{{ old('code') }}" placeholder="Masukkan Kode Jadwal">
-                            @error('code') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                            <label>Ruang</label>
+                            <select class="form-control select2" name="ruang_id" data-placeholder="Pilih Ruang" style="width: 100%;" id="ruang">
+                                <option value="" selected disabled>Pilih Ruang</option>
+                                @foreach ($ruangan as $ruang)
+                                <option value="{{ $ruang->id }}" {{ old('ruang_id')==$ruang->id ? 'selected' : '' }}>
+                                    {{ $ruang->name }}
+                                </option>
+                                @endforeach
+                            </select>
+                            @error('ruang_id')
+                            <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
                             <label>Fakultas</label>
@@ -38,13 +41,40 @@
                         </div>
                         <div class="form-group">
                             <label>Prodi</label>
-                            <select id="prodi" class="form-control select2" name="prodi_id" data-placeholder="Pilih Prodi" style="width: 100%;">
-                            </select>
+                            <select id="prodi" class="form-control select2" name="prodi_id" data-placeholder="Pilih Prodi" style="width: 100%;"></select>
                             @error('prodi_id') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Mata Kuliah</label>
+                            <select id="matakuliah" class="form-control select2" name="matakuliah_id" data-placeholder="Pilih Mata Kuliah" style="width: 100%;"></select>
+                            @error('matakuliah_id') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Kelas</label>
+                            <select id="kelas" class="form-control select2" name="kelas_id" data-placeholder="Pilih Kelas" style="width: 100%;"></select>
+                            @error('kelas_id') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Waktu/Jam</label>
+                            <input type="time" name="jam" id="jam" class="form-input">
+                            @error('jam') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Hari</label>
+                            <select class="form-control select2" name="hari" data-placeholder="Pilih Hari" style="width: 100%;" id="fakultas">
+                                <option value="" selected disabled>Pilih Hari</option>
+                                @foreach ($hari as $h)
+                                <option value="{{ $h }}" {{ old('hari')==$h ? 'selected' : '' }}>
+                                    {{ $h }}
+                                </option>
+                                @endforeach
+                            </select>
+                            @error('hari')
+                            <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                     </div>
                     <div class="box-footer">
-                        <a href="{{ route('matakuliah.index') }}" class="btn btn-default">Kembali</a>
+                        <a href="{{ route('jadwal.index') }}" class="btn btn-default">Kembali</a>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
@@ -56,6 +86,8 @@
 @section('page-script')
 <script>
     $('#prodi').prop('disabled', true);
+    $('#matakuliah').prop('disabled', true);
+    $('#kelas').prop('disabled', true);
     $('#fakultas').on('change', function() {
         let fakultas_id = $(this).val();
         $.get('/fakultas/' + fakultas_id + '/prodi', function(data) {
@@ -68,6 +100,31 @@
             });
             $('#prodi').trigger('change.select2');
             $('#prodi').prop('disabled', false);
+        });
+    });
+    $('#prodi').on('change', function() {
+        let prodi_id = $(this).val();
+        $.get('/prodi/' + prodi_id + '/matakuliah', function(data) {
+            $('#matakuliah').find('option').remove();
+            let defaultOption = $('<option>').val('').text('Pilih Kas').prop('disabled', true).prop('selected', true);
+            $('#matakuliah').append(defaultOption);
+            data.forEach(function(matakuliah) {
+                let option = $('<option>').val(matakuliah.id).text(matakuliah.name);
+                $('#matakuliah').append(option);
+            });
+            $('#matakuliah').trigger('change.select2');
+            $('#matakuliah').prop('disabled', false);
+        });
+        $.get('/prodi/' + prodi_id + '/kelas', function(data) {
+            $('#kelas').find('option').remove();
+            let defaultOption = $('<option>').val('').text('Pilih Kas').prop('disabled', true).prop('selected', true);
+            $('#kelas').append(defaultOption);
+            data.forEach(function(kelas) {
+                let option = $('<option>').val(kelas.id).text(kelas.name);
+                $('#kelas').append(option);
+            });
+            $('#kelas').trigger('change.select2');
+            $('#kelas').prop('disabled', false);
         });
     });
 </script>

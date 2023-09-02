@@ -26,6 +26,7 @@ class KelasFactory extends Factory
         $course = $this->faker->unique()->randomElement($courses);
 
         return [
+            'prodi_id' => \App\Models\Prodi::inRandomOrder()->first()->id,
             'name' => $course['name'],
             'code' => $course['code'],
         ];

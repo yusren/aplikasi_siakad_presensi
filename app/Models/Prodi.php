@@ -13,6 +13,7 @@ class Prodi extends Model
         'fakultas_id',
         'name',
         'code',
+        'jenjang',
     ];
 
     public function fakultas()

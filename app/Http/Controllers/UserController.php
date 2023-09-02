@@ -31,7 +31,7 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'nim' => 'required',
+            'nim' => 'required_if:role,mahasiswa',
             'photo' => 'nullable',
             // 'username' => 'required',
             'role' => 'required',
@@ -75,7 +75,7 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'nim' => 'required',
+            'nim' => 'required_if:role,mahasiswa',
             'photo' => 'nullable',
             // 'username' => 'required',
             'role' => 'required',

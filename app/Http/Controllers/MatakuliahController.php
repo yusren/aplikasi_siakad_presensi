@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MatakuliahRequest;
 use App\Models\Matakuliah;
+use App\Models\Prodi;
 
 class MatakuliahController extends Controller
 {
@@ -16,7 +17,9 @@ class MatakuliahController extends Controller
 
     public function create()
     {
-        return view('matakuliah.create');
+        return view('matakuliah.create', [
+            'prodi' => Prodi::get(),
+        ]);
     }
 
     public function store(MatakuliahRequest $request)
@@ -35,7 +38,10 @@ class MatakuliahController extends Controller
 
     public function edit(Matakuliah $matakuliah)
     {
-        return view('matakuliah.edit', ['matakuliah' => $matakuliah]);
+        return view('matakuliah.edit', [
+            'matakuliah' => $matakuliah,
+            'prodi' => Prodi::get(),
+        ]);
     }
 
     public function update(MatakuliahRequest $request, Matakuliah $matakuliah)

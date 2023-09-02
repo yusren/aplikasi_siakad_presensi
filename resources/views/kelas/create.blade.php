@@ -24,11 +24,36 @@
                                 @error('code') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                             </div>
                             <div class="form-group">
+                                <label for="">Angkatan</label>
+                                <input type="text" class="form-control" name="angkatan" value="{{ old('angkatan') }}" placeholder="Masukkan Angkatan">
+                                @error('angkatan') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                            </div>
+                            <div class="form-group">
                                 <label>Mahasiswa</label>
                                 <select required class="form-control select2" name="mahasiswa[]" data-placeholder="Pilih Mahasiswa" style="width: 100%;" multiple>
                                     @foreach ($mahasiswa as $mhs)
                                         <option value="{{ $mhs->id }}"
                                             {{ old('mahasiswa') == $mhs->id ? 'selected' : '' }}>{{ $mhs->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Prodi</label>
+                                <select required class="form-control select2" name="prodi_id" data-placeholder="Pilih Prodi" style="width: 100%;">
+                                    @foreach ($prodi as $pr)
+                                        <option value="{{ $pr->id }}"
+                                            {{ old('prodi_id') == $pr->id ? 'selected' : '' }}>{{ $pr->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Dosen</label>
+                                <select required class="form-control select2" name="user_id" data-placeholder="Pilih Dosen" style="width: 100%;">
+                                    @foreach ($dosen as $ds)
+                                        <option value="{{ $ds->id }}"
+                                            {{ old('user_id') == $ds->id ? 'selected' : '' }}>{{ $ds->name }}
                                         </option>
                                     @endforeach
                                 </select>

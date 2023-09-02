@@ -24,6 +24,8 @@
                                     <td>No</td>
                                     <td>Nama Mata Kuliah</td>
                                     <td>Kode Mata Kuliah</td>
+                                    <td>Prodi</td>
+                                    <td>Fakultas</td>
                                     <td>Aksi</td>
                                 </tr>
                             </thead>
@@ -32,6 +34,8 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $value->name }}</td>
                                     <td>{{ $value->code }}</td>
+                                    <td>{{ $value->prodi->name }}</td>
+                                    <td>{{ $value->prodi->fakultas->name }}</td>
                                     <td>
                                         <a class="btn btn-warning" href="{{ route('matakuliah.edit', $value->id) }}">Edit</a>
                                         <form action="{{ route('matakuliah.destroy', $value->id) }}" method="post"

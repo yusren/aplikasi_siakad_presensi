@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(Fakultas::class)->nullable()->constrained()->cascadeOnDelete();
             $table->string('name', 100)->nullable();
             $table->string('code', 100)->nullable();
+            $table->string('jenjang', 100)->nullable();
             $table->timestamps();
         });
     }

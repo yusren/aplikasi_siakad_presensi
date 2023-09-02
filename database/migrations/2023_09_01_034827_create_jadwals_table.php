@@ -27,8 +27,8 @@ return new class extends Migration
             $table->foreignIdFor(Matakuliah::class)->nullable()->constrained()->cascadeOnDelete();
             $table->foreignIdFor(User::class)->nullable()->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Ruang::class)->nullable()->constrained()->cascadeOnDelete();
-            $table->timestamp('tanggal')->nullable();
-            $table->string('time', 100)->nullable();
+            $table->string('hari', 100)->nullable();
+            $table->string('jam', 100)->nullable();
             $table->timestamps();
         });
     }

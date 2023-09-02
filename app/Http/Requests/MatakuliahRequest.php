@@ -14,8 +14,12 @@ class MatakuliahRequest extends FormRequest
     public function rules()
     {
         return [
+            'prodi_id' => 'required',
             'name' => 'required',
             'code' => 'required',
+            'sks' => 'required',
+            'semester' => 'required',
+            'kategori' => 'required',
         ];
     }
 }

@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\JadwalRequest;
 use App\Models\Fakultas;
 use App\Models\Jadwal;
+use App\Models\Ruang;
+use App\Models\User;
 
 class JadwalController extends Controller
 {
     public function index()
     {
-        dd(Jadwal::get()->toArray());
-
         return view('jadwal.index', [
             'jadwal' => Jadwal::get(),
         ]);
@@ -21,6 +21,9 @@ class JadwalController extends Controller
     {
         return view('jadwal.create', [
             'fakultas' => Fakultas::get(),
+            'dosen' => User::where('role', 'dosen')->get(),
+            'ruangan' => Ruang::get(),
+            'hari' => ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'],
         ]);
     }
 

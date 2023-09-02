@@ -16,15 +16,18 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Nama Prodi</label>
-                            <input type="text" class="form-control" name="name"
-                                value="{{ old('name', $prodi->name) }}" placeholder="Masukkan Nama Prodi">
+                            <input type="text" class="form-control" name="name" value="{{ old('name', $prodi->name) }}" placeholder="Masukkan Nama Prodi">
                             @error('name') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
                             <label for="">Kode Prodi</label>
-                            <input type="text" class="form-control" name="code"
-                                value="{{ old('code', $prodi->code) }}" placeholder="Masukkan Kode Prodi">
+                            <input type="text" class="form-control" name="code" value="{{ old('code', $prodi->code) }}" placeholder="Masukkan Kode Prodi">
                             @error('code') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="">Jenjang</label>
+                            <input type="text" class="form-control" name="jenjang" value="{{ old('jenjang', $prodi->jenjang) }}" placeholder="Masukkan Jenjang">
+                            @error('jenjang') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
                             <label>Fakultas</label>

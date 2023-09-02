@@ -24,6 +24,7 @@
                                     <td>No</td>
                                     <td>Nama Kelas</td>
                                     <td>Kode Kelas</td>
+                                    <td>Prodi</td>
                                     <td>Aksi</td>
                                 </tr>
                             </thead>
@@ -32,6 +33,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $value->name }}</td>
                                     <td>{{ $value->code }}</td>
+                                    <td>{{ $value->prodi->name }}</td>
                                     <td>
                                         <a class="btn btn-warning" href="{{ route('kelas.edit', $value->id) }}">Edit</a>
                                         <form action="{{ route('kelas.destroy', $value->id) }}" method="post"

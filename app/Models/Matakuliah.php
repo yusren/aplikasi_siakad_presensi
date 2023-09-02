@@ -10,7 +10,16 @@ class Matakuliah extends Model
     use HasFactory;
 
     protected $fillable = [
+        'prodi_id',
         'name',
         'code',
+        'sks',
+        'semester',
+        'kategori',
     ];
+
+    public function prodi()
+    {
+        return $this->belongsTo(Prodi::class);
+    }
 }

@@ -32,6 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/ruang', RuangController::class);
     Route::resource('/kelas', KelasController::class);
     Route::resource('/prodi', ProdiController::class);
+    Route::get('/prodi/{prodi_id}/matakuliah', [ProdiController::class, 'getMatakuliah']);
+    Route::get('/prodi/{prodi_id}/kelas', [ProdiController::class, 'getKelas']);
     Route::resource('/tahunajaran', TahunAjaranController::class);
     Route::resource('/jadwal', JadwalController::class);
 });

@@ -26,6 +26,7 @@ class MatakuliahFactory extends Factory
         $course = $this->faker->unique()->randomElement($courses);
 
         return [
+            'prodi_id' => \App\Models\Prodi::factory(),
             'name' => $course['name'],
             'code' => $course['code'],
         ];

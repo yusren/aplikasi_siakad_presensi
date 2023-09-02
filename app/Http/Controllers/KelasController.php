@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\KelasRequest;
 use App\Models\Kelas;
+use App\Models\Prodi;
 use App\Models\User;
 
 class KelasController extends Controller
@@ -18,7 +19,9 @@ class KelasController extends Controller
     public function create()
     {
         return view('kelas.create', [
+            'dosen' => User::where('role', 'dosen')->get(),
             'mahasiswa' => User::where('role', 'mahasiswa')->get(),
+            'prodi' => Prodi::get(),
         ]);
     }
 
@@ -40,7 +43,9 @@ class KelasController extends Controller
     {
         return view('kelas.edit', [
             'kelas' => $kela,
+            'dosen' => User::where('role', 'dosen')->get(),
             'mahasiswa' => User::where('role', 'mahasiswa')->get(),
+            'prodi' => Prodi::get(),
         ]);
     }
 

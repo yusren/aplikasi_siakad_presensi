@@ -4,10 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProdiRequest;
 use App\Models\Fakultas;
+use App\Models\Kelas;
+use App\Models\Matakuliah;
 use App\Models\Prodi;
 
 class ProdiController extends Controller
 {
+    public function getMatakuliah($prodi_id)
+    {
+        $matakuliah = Matakuliah::where('prodi_id', $prodi_id)->get();
+
+        return response()->json($matakuliah);
+    }
+
+    public function getKelas($prodi_id)
+    {
+        $kelas = Kelas::where('prodi_id', $prodi_id)->get();
+
+        return response()->json($kelas);
+    }
+
     public function index()
     {
         return view('prodi.index', [

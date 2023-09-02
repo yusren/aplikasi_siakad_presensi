@@ -14,15 +14,40 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $fakultases = \App\Models\Fakultas::factory(5)->create();
+        $faculties = [
+            ['name' => 'Faculty of Mathematics and Natural Sciences', 'code' => 'MNS'],
+            ['name' => 'Faculty of Social and Political Sciences', 'code' => 'SPS'],
+            ['name' => 'Faculty of Humanities', 'code' => 'HUM'],
+            ['name' => 'Faculty of Engineering', 'code' => 'ENG'],
+            ['name' => 'Faculty of Economics and Business', 'code' => 'EB'],
+        ];
 
-        foreach ($fakultases as $fakultas) {
+        foreach ($faculties as $faculty) {
+            $fakultas = \App\Models\Fakultas::factory()->create([
+                'name' => $faculty['name'],
+                'code' => $faculty['code'],
+            ]);
             \App\Models\Prodi::factory()->create(['fakultas_id' => $fakultas->id]);
         }
 
-        \App\Models\Matakuliah::factory(3)->create();
+        $matakuliahs = [
+            ['name' => 'Calculus', 'code' => 'CAL'],
+            ['name' => 'Linear Algebra', 'code' => 'LAL'],
+            ['name' => 'Introduction to Programming', 'code' => 'ITP'],
+            ['name' => 'Data Structures and Algorithms', 'code' => 'DSA'],
+            ['name' => 'Database Systems', 'code' => 'DBS'],
+        ];
+        foreach ($matakuliahs as $matakuliah) {
+            \App\Models\Matakuliah::factory()->create([
+                'prodi_id' => \App\Models\Prodi::inRandomOrder()->first()->id,
+                'name' => $matakuliah['name'],
+                'code' => $matakuliah['code'],
+            ]);
+        }
+
         $mahasiswas = \App\Models\User::factory(5)->create(['role' => 'mahasiswa']);
         $kelases = \App\Models\Kelas::factory(3)->create();
+        \App\Models\Ruang::factory(3)->create();
 
         $kelases->each(function ($kelas) use ($mahasiswas) {
             $kelas->users()->attach($mahasiswas->random(2)->pluck('id')->toArray());
