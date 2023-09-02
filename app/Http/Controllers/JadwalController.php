@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\JadwalRequest;
+use App\Models\Fakultas;
 use App\Models\Jadwal;
 
 class JadwalController extends Controller
 {
     public function index()
     {
+        dd(Jadwal::get()->toArray());
+
         return view('jadwal.index', [
             'jadwal' => Jadwal::get(),
         ]);
@@ -16,7 +19,9 @@ class JadwalController extends Controller
 
     public function create()
     {
-        return view('jadwal.create');
+        return view('jadwal.create', [
+            'fakultas' => Fakultas::get(),
+        ]);
     }
 
     public function store(JadwalRequest $request)

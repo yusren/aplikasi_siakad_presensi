@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\FakultasRequest;
 use App\Models\Fakultas;
+use App\Models\Prodi;
 
 class FakultasController extends Controller
 {
+    public function getProdi($fakultas_id)
+    {
+        $prodi = Prodi::where('fakultas_id', $fakultas_id)->get();
+
+        return response()->json($prodi);
+    }
+
     public function index()
     {
         return view('fakultas.index', [

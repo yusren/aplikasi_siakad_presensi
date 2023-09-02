@@ -13,7 +13,7 @@ class AdminController extends Controller
     public function index()
     {
         return view('admins.index', [
-            'users' => User::where('role', ['superadmin', 'admin'])->get(),
+            'users' => User::where('role', 'superadmin')->orWhere('role', 'admin')->get(),
         ]);
     }
 

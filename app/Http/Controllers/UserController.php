@@ -6,13 +6,14 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
     public function index()
     {
         return view('users.index', [
-            'users' => User::where('role', ['dosen', 'mahasiswa'])->get(),
+            'users' => User::where('role', 'dosen')->orWhere('role', 'mahasiswa')->get(),
         ]);
     }
 
@@ -30,13 +31,23 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'username' => 'required',
+            'nim' => 'required',
+            'photo' => 'nullable',
+            // 'username' => 'required',
             'role' => 'required',
+            'jenis_kelamin' => 'required',
             'status' => 'required',
+            'no_telp' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'same:confirm-password',
         ]);
         $data = $request->all();
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $fileName = time().'.'.$file->getClientOriginalExtension();
+            $file->storeAs('public/photos', $fileName);
+            $data['photo'] = 'storage/photos/'.$fileName;
+        }
         $data['password'] = Hash::make($data['password']);
 
         User::create($data);
@@ -64,14 +75,26 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'username' => 'required',
+            'nim' => 'required',
+            'photo' => 'nullable',
+            // 'username' => 'required',
             'role' => 'required',
+            'jenis_kelamin' => 'required',
             'status' => 'required',
+            'no_telp' => 'required',
             'email' => 'required|email|unique:users,email,'.$user->id,
             'password' => 'same:confirm-password',
         ]);
-
         $data = $request->all();
+        if ($request->hasFile('photo')) {
+            if ($user->photo) {
+                Storage::delete(str_replace('storage', 'public', $user->photo));
+            }
+            $file = $request->file('photo');
+            $fileName = time().'.'.$file->getClientOriginalExtension();
+            $file->storeAs('public/photos', $fileName);
+            $data['photo'] = 'storage/photos/'.$fileName;
+        }
         if (! empty($data['password'])) {
             $data['password'] = Hash::make($data['password']);
         } else {
