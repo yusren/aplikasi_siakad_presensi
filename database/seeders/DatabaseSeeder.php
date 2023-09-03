@@ -15,11 +15,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $faculties = [
-            ['name' => 'Faculty of Mathematics and Natural Sciences', 'code' => 'MNS'],
-            ['name' => 'Faculty of Social and Political Sciences', 'code' => 'SPS'],
-            ['name' => 'Faculty of Humanities', 'code' => 'HUM'],
-            ['name' => 'Faculty of Engineering', 'code' => 'ENG'],
-            ['name' => 'Faculty of Economics and Business', 'code' => 'EB'],
+            ['name' => 'Fakultas Ilmu Komputer', 'code' => 'FIK'],
+            ['name' => 'Fakultas Ekonomi dan Sosial', 'code' => 'FES'],
+            ['name' => 'Fakultas Sains dan Teknologi', 'code' => 'FST'],
+            ['name' => 'Fakultas Ilmu Bahasa', 'code' => 'FIB'],
         ];
 
         foreach ($faculties as $faculty) {

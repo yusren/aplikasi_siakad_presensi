@@ -24,6 +24,7 @@
                                 <td>No</td>
                                 <td>Nama Prodi</td>
                                 <td>Kode Prodi</td>
+                                <td>Jenjang</td>
                                 <td>Nama Fakultas</td>
                                 <td>Aksi</td>
                             </tr>
@@ -33,6 +34,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $value->name }}</td>
                             <td>{{ $value->code }}</td>
+                            <td>{{ $value->jenjang }}</td>
                             <td>{{ $value->fakultas->name }}</td>
                             <td>
                                 <a class="btn btn-warning" href="{{ route('prodi.edit', $value->id) }}">Edit</a>

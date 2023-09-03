@@ -17,6 +17,7 @@ class ProdiRequest extends FormRequest
             'fakultas_id' => 'required',
             'name' => 'required',
             'code' => 'required',
+            'jenjang' => 'required',
         ];
     }
 }

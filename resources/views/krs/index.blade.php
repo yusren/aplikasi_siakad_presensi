@@ -16,7 +16,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <a href="{{ route('user.create') }}" class="btn btn-md bg-green">Tambah</a>
+                    <a href="{{ route('krs.create') }}" class="btn btn-md bg-green">Tambah</a>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive">
                     <table id="example1" class="table table-bordered table-striped">
@@ -24,7 +24,6 @@
                             <tr>
                                 <td>No</td>
                                 <td>Nama</td>
-                                <td>Rule</td>
                                 <td>Aksi</td>
                             </tr>
                         </thead>
@@ -32,20 +31,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $value->name }}</td>
-                            <td>{{ $value->role }}</td>
-                            <td>
-                                <a class="btn btn-warning" href="{{ route('user.edit', $value->id) }}">Edit</a>
-                                @if ($value->role == 'mahasiswa')
-                                    <a class="btn btn-info" href="{{ route('user.show', $value->id) }}">Show</a>
-                                @endif
-                                <form action="{{ route('user.destroy', $value->id) }}" method="post"
-                                    style="display: inline;">
-                                    @method('delete')
-                                    @csrf
-                                    <button class="border-0 btn btn-danger"
-                                        onclick="return confirm('Are you sure?')">Hapus</button>
-                                </form>
-                            </td>
+                            <td><a class="btn btn-info" href="{{ route('user.show', $value->id) }}">Show</a></td>
                         </tr>
                         @endforeach
                     </table>

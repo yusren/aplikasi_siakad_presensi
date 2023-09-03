@@ -24,6 +24,9 @@
                                     <td>No</td>
                                     <td>Nama Mata Kuliah</td>
                                     <td>Kode Mata Kuliah</td>
+                                    <td>SKS</td>
+                                    <td>Kategori</td>
+                                    <td>Semester</td>
                                     <td>Prodi</td>
                                     <td>Fakultas</td>
                                     <td>Aksi</td>
@@ -34,6 +37,9 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $value->name }}</td>
                                     <td>{{ $value->code }}</td>
+                                    <td>{{ $value->sks }}</td>
+                                    <td>{{ $value->kategori }}</td>
+                                    <td>{{ $value->semester }}</td>
                                     <td>{{ $value->prodi->name }}</td>
                                     <td>{{ $value->prodi->fakultas->name }}</td>
                                     <td>

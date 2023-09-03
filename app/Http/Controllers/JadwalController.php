@@ -6,6 +6,7 @@ use App\Http\Requests\JadwalRequest;
 use App\Models\Fakultas;
 use App\Models\Jadwal;
 use App\Models\Ruang;
+use App\Models\TahunAjaran;
 use App\Models\User;
 
 class JadwalController extends Controller
@@ -20,6 +21,7 @@ class JadwalController extends Controller
     public function create()
     {
         return view('jadwal.create', [
+            'tahunAjaran' => TahunAjaran::get(),
             'fakultas' => Fakultas::get(),
             'dosen' => User::where('role', 'dosen')->get(),
             'ruangan' => Ruang::get(),

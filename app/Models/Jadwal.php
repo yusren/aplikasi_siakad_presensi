@@ -10,6 +10,8 @@ class Jadwal extends Model
     use HasFactory;
 
     protected $fillable = [
+        'tahun_ajaran_id',
+        'user_id',
         'ruang_id',
         'prodi_id',
         'matakuliah_id',
@@ -17,6 +19,11 @@ class Jadwal extends Model
         'jam',
         'hari',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function ruang()
     {
@@ -37,4 +44,14 @@ class Jadwal extends Model
     {
         return $this->belongsTo(Kelas::class);
     }
+
+    public function tahunAjaran()
+    {
+        return $this->belongsTo(tahunAjaran::class);
+    }
+
+    // public function krs()
+    // {
+    //     return $this->belongsToMany(Krs::class);
+    // }
 }

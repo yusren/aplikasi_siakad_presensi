@@ -26,8 +26,10 @@
                                 <td>Prodi</td>
                                 <td>Mata Kuliah</td>
                                 <td>Ruang</td>
+                                <td>Kelas</td>
                                 <td>Hari</td>
                                 <td>Jam</td>
+                                <td>Dosen</td>
                                 <td>Aksi</td>
                             </tr>
                         </thead>
@@ -38,8 +40,10 @@
                             <td>{{ $value->prodi->name }}</td>
                             <td>{{ $value->matakuliah->name }}</td>
                             <td>{{ $value->ruang->name }}</td>
+                            <td>{{ $value->kelas->name }}</td>
                             <td>{{ $value->hari }}</td>
                             <td>{{ $value->jam }}</td>
+                            <td>{{ $value->user->name }}</td>
                             <td>
                                 <a class="btn btn-warning" href="{{ route('jadwal.edit', $value->id) }}">Edit</a>
                                 <form action="{{ route('jadwal.destroy', $value->id) }}" method="post"

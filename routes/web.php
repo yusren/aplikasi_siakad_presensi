@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FakultasController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\KrsController;
 use App\Http\Controllers\MatakuliahController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\ProfileController;
@@ -36,6 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/prodi/{prodi_id}/kelas', [ProdiController::class, 'getKelas']);
     Route::resource('/tahunajaran', TahunAjaranController::class);
     Route::resource('/jadwal', JadwalController::class);
+    Route::resource('/krs', KrsController::class);
 });
 
 require __DIR__.'/auth.php';

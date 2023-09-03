@@ -17,16 +17,16 @@ class ProdiFactory extends Factory
     public function definition()
     {
         $prodis = [
-            ['name' => 'Prodi1', 'code' => 'P1'],
-            ['name' => 'Prodi2', 'code' => 'P2'],
-            ['name' => 'Prodi3', 'code' => 'P3'],
-            ['name' => 'Prodi4', 'code' => 'P4'],
-            ['name' => 'Prodi5', 'code' => 'P5'],
-            ['name' => 'Prodi6', 'code' => 'P6'],
-            ['name' => 'Prodi7', 'code' => 'P7'],
-            ['name' => 'Prodi8', 'code' => 'P8'],
-            ['name' => 'Prodi9', 'code' => 'P9'],
-            ['name' => 'Prodi10', 'code' => 'P10'],
+            ['name' => 'D3 Informatika', 'code' => 'DI'],
+            ['name' => 'D3 Manajemen Informatika', 'code' => 'DMI'],
+            ['name' => 'Teknik Komputer', 'code' => 'TK'],
+            ['name' => 'Informatika', 'code' => 'IF'],
+            ['name' => 'Teknologi Informasi', 'code' => 'TI'],
+            ['name' => 'Sistem Informasi', 'code' => 'SI'],
+            ['name' => 'Akuntansi', 'code' => 'AK'],
+            ['name' => 'Ilmu Komunikasi', 'code' => 'ILKOM'],
+            ['name' => 'Ekonomi', 'code' => 'EK'],
+            ['name' => 'Hubungan Internasional', 'code' => 'HI'],
         ];
         $prodi = $this->faker->unique()->randomElement($prodis);
 

@@ -20,4 +20,9 @@ class Prodi extends Model
     {
         return $this->belongsTo(Fakultas::class);
     }
+
+    public function kelas()
+    {
+        return $this->hasMany(Kelas::class);
+    }
 }

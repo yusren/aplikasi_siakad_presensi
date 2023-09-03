@@ -14,6 +14,8 @@ class JadwalRequest extends FormRequest
     public function rules()
     {
         return [
+            'tahun_ajaran_id' => 'required|integer',
+            'user_id' => 'required|integer',
             'ruang_id' => 'required|integer',
             'prodi_id' => 'required|integer',
             'matakuliah_id' => 'required|integer',

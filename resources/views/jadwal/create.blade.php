@@ -14,6 +14,19 @@
                     @csrf
                     <div class="box-body">
                         <div class="form-group">
+                            <label>Tahun Ajaran</label>
+                            <select class="form-control select2" name="tahun_ajaran_id" data-placeholder="Pilih Tahun Ajaran" style="width: 100%;" id="tahun_ajaran">
+                                <option value="" selected disabled>Pilih Tahun Ajaran</option>
+                                @foreach ($tahunAjaran as $tahun_ajaran)
+                                <option value="{{ $tahun_ajaran->id }}" {{ old('tahun_ajaran_id')==$tahun_ajaran->id ? 'selected' : '' }}>
+                                    {{ $tahun_ajaran->name }}, {{ $tahun_ajaran->semester }} {{ $tahun_ajaran->is_active ? 'active' : '' }}
+                                </option>
+                                @endforeach
+                            </select>
+                            @error('tahun_ajaran_id')
+                            <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                        </div>
+                        <div class="form-group">
                             <label>Ruang</label>
                             <select class="form-control select2" name="ruang_id" data-placeholder="Pilih Ruang" style="width: 100%;" id="ruang">
                                 <option value="" selected disabled>Pilih Ruang</option>
@@ -24,6 +37,19 @@
                                 @endforeach
                             </select>
                             @error('ruang_id')
+                            <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Dosen</label>
+                            <select class="form-control select2" name="user_id" data-placeholder="Pilih Dosen" style="width: 100%;" id="user">
+                                <option value="" selected disabled>Pilih Dosen</option>
+                                @foreach ($dosen as $user)
+                                <option value="{{ $user->id }}" {{ old('user_id')==$user->id ? 'selected' : '' }}>
+                                    {{ $user->name }}
+                                </option>
+                                @endforeach
+                            </select>
+                            @error('user_id')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">

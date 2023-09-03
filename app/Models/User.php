@@ -42,4 +42,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Kelas::class);
     }
+
+    public function krs()
+    {
+        return $this->hasMany(Krs::class);
+    }
 }

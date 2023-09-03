@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jadwal;
+use App\Models\TahunAjaran;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -57,7 +59,14 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        dd($user);
+        $tahunAjaran = TahunAjaran::where('is_active', true)->first();
+        $krs = $user->krs->where('tahun_ajaran_id', $tahunAjaran->id);
+        $matakuliahIds = $krs->pluck('matakuliah_id')->toArray();
+        $jadwal = Jadwal::where('tahun_ajaran_id', $tahunAjaran->id)->whereHas('kelas.users', function ($query) use ($user) {
+            $query->where('users.id', $user->id);
+        })->whereIn('matakuliah_id', $matakuliahIds)->get();
+
+        return view('users.show', ['user' => $user, 'krs' => $krs, 'jadwal' => $jadwal]);
     }
 
     public function edit(User $user)
