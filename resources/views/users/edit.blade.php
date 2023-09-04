@@ -61,8 +61,7 @@
                         </div>
                         <div class="form-group">
                             <label>Role</label>
-                            <select class="form-control select2" name="role" data-placeholder="Pilih Role"
-                                style="width: 100%;">
+                            <select @if (auth()->user()->role == 'mahasiswa') ? disabled : required @endif class="form-control select2" name="role" data-placeholder="Pilih Role" style="width: 100%;">
                                 <option value="" selected disabled>Pilih Role</option>
                                 @foreach ($roles as $role)
                                 <option value="{{ $role }}" {{ old('role', $user->role) == $role ? 'selected' : '' }}>
@@ -85,8 +84,7 @@
                         </div>
                         <div class="form-group">
                             <label>Status Registrasi</label>
-                            <select class="form-control select2" name="status" data-placeholder="Pilih Status"
-                                style="width: 100%;">
+                            <select @if (auth()->user()->role == 'mahasiswa') ? disabled : required @endif class="form-control select2" name="status" data-placeholder="Pilih Status" style="width: 100%;">
                                 <option value="" selected disabled>Pilih Status</option>
                                 <option @if ($user->status == 'active') selected @endif value="active">Aktif</option>
                                 <option @if ($user->status == 'non-active') selected @endif value="non-active">Non
@@ -95,11 +93,35 @@
                             @error('status')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
+                        <div class="form-group">
+                            <label for="">Alamat</label>
+                            <input type="text" class="form-control" name="alamat" value="{{ old('alamat', $user->alamat) }}" placeholder="Masukkan Alamat">
+                            @error('alamat')
+                            <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="">Agama</label>
+                            <input type="text" class="form-control" name="agama" value="{{ old('agama', $user->agama) }}" placeholder="Masukkan Agama">
+                            @error('agama')
+                            <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="">Tempat Lahir</label>
+                            <input type="text" class="form-control" name="tempat_lahir" value="{{ old('tempat_lahir', $user->tempat_lahir) }}" placeholder="Masukkan Tempat Lahir">
+                            @error('tempat_lahir')
+                            <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="">Tanggal Lahir</label>
+                            <input type="date" class="form-control" name="tanggal_lahir" value="{{ old('tanggal_lahir', $user->tanggal_lahir) }}" placeholder="Masukkan Tanggal Lahir">
+                            @error('tanggal_lahir')
+                            <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                        </div>
 
                         @if ($user->role == 'mahasiswa')
                             <div class="form-group">
                                 <label>Dosen Pembimbing Akademik</label>
-                                <select required class="form-control select2" name="user_id" data-placeholder="Pilih Dosen" style="width: 100%;">
+                                <select @if (auth()->user()->role == 'mahasiswa') ? disabled : required @endif class="form-control select2" name="user_id" data-placeholder="Pilih Dosen" style="width: 100%;">
                                     <option value="" selected disabled></option>
                                     @foreach ($dosen as $ds)
                                         <option value="{{ $ds->id }}"

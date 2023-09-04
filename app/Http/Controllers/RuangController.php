@@ -49,6 +49,6 @@ class RuangController extends Controller
     {
         $ruang->delete();
 
-        return redirect(route('ruang.index'))->with('toast_success', 'Berhasil Menghapus Data!');
+        return redirect(route('ruang.index'))->with('toast_error', 'Berhasil Menghapus Data!');
     }
 }

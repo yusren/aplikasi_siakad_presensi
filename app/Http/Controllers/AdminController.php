@@ -80,6 +80,6 @@ class AdminController extends Controller
     {
         $admin->delete();
 
-        return redirect(route('admin.index'))->with('toast_success', 'Berhasil Menghapus Data!');
+        return redirect(route('admin.index'))->with('toast_error', 'Berhasil Menghapus Data!');
     }
 }

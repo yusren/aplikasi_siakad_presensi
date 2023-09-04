@@ -53,4 +53,22 @@ class User extends Authenticatable
     {
         return $this->hasMany(Krs::class);
     }
+
+    public function pertemuan()
+    {
+        if ($this->role == 'dosen') {
+            return $this->hasMany(Pertemuan::class);
+        }
+
+        return null;
+    }
+
+    public function presensi()
+    {
+        if ($this->role == 'mahasiswa') {
+            return $this->hasMany(Presensi::class);
+        }
+
+        return null;
+    }
 }

@@ -8,14 +8,37 @@ use App\Models\Jadwal;
 use App\Models\Ruang;
 use App\Models\TahunAjaran;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class JadwalController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('jadwal.index', [
-            'jadwal' => Jadwal::get(),
-        ]);
+        $user = auth()->user();
+        $tahunAjaranId = $request->tahun_ajaran_id ?: TahunAjaran::where('is_active', true)->latest()->first()->id;
+        $tahunAjaranAktif = TahunAjaran::find($tahunAjaranId);
+        $krs = $user->krs->where('tahun_ajaran_id', $tahunAjaranId);
+        $matakuliahIds = $krs->pluck('matakuliah_id')->toArray();
+        $jadwal = Jadwal::where('tahun_ajaran_id', $tahunAjaranId)
+            ->whereHas('kelas.users', function ($query) use ($user) {
+                $query->where('users.id', $user->id);
+            })
+            ->whereIn('matakuliah_id', $matakuliahIds)
+            ->get();
+        $tahunAjaran = TahunAjaran::orderBy('name')->get();
+
+        switch (auth()->user()->role) {
+            case 'mahasiswa':
+                return view('jadwal.user.index', ['jadwal' => $jadwal, 'tahunAjaranAktif' => $tahunAjaranAktif, 'tahunAjaran' => $tahunAjaran]);
+            case 'dosen':
+                $jadwal = Jadwal::where('user_id', $user->id)->where('tahun_ajaran_id', $tahunAjaranId)->whereHas('matakuliah.user', function ($query) {
+                    $query->where('id', auth()->id());
+                })->get();
+
+                return view('jadwal.dosen.index', ['jadwal' => $jadwal, 'tahunAjaranAktif' => $tahunAjaranAktif, 'tahunAjaran' => $tahunAjaran]);
+            default:
+                return view('jadwal.index', ['jadwal' => Jadwal::get()]);
+        }
     }
 
     public function create()
@@ -66,6 +89,6 @@ class JadwalController extends Controller
     {
         $jadwal->delete();
 
-        return redirect(route('jadwal.index'))->with('toast_success', 'Berhasil Menghapus Data!');
+        return redirect(route('jadwal.index'))->with('toast_error', 'Berhasil Menghapus Data!');
     }
 }

@@ -49,6 +49,6 @@ class TahunAjaranController extends Controller
     {
         $tahunajaran->delete();
 
-        return redirect(route('tahunajaran.index'))->with('toast_success', 'Berhasil Menghapus Data!');
+        return redirect(route('tahunajaran.index'))->with('toast_error', 'Berhasil Menghapus Data!');
     }
 }

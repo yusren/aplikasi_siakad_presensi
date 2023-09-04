@@ -23,7 +23,7 @@
                                 @foreach($tahunAjaran as $ta)
                                 <option value="{{ $ta->id }}" {{ (request('tahun_ajaran_id')==$ta->id ||
                                     $tahunAjaranAktif->id == $ta->id) ? 'selected' : '' }}>
-                                    {{ $ta->name }}, {{ $ta->semester }} {{ $ta->is_active ? 'aktif' : '' }}
+                                    {{ $ta->name }} - {{ $ta->semester }}. {{ $ta->is_active ? 'aktif' : '' }}
                                 </option>
                                 @endforeach
                             </select>

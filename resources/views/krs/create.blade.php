@@ -32,7 +32,7 @@
                             <select required class="form-control select2" name="tahun_ajaran_id" data-placeholder="Pilih Tahun Ajaran" style="width: 100%;">
                                 @foreach ($tahunAjaran as $ta)
                                 <option value="{{ $ta->id }}" {{ old('tahun_ajaran_id')==$ta->id ? 'selected' : '' }}>
-                                    {{ $ta->name }}, {{ $ta->semester }} {{ $ta->is_active ? 'active' : '' }}
+                                    {{ $ta->name }} - {{ $ta->semester }}. {{ $ta->is_active ? 'active' : '' }}
                                 </option>
                                 @endforeach
                             </select>

@@ -22,7 +22,7 @@ class Jadwal extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class); // Dosen
     }
 
     public function ruang()
@@ -48,6 +48,11 @@ class Jadwal extends Model
     public function tahunAjaran()
     {
         return $this->belongsTo(tahunAjaran::class);
+    }
+
+    public function pertemuan()
+    {
+        return $this->hasMany(Pertemuan::class);
     }
 
     // public function krs()

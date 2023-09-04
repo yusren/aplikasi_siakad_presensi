@@ -59,6 +59,6 @@ class MatakuliahController extends Controller
     {
         $matakuliah->delete();
 
-        return redirect(route('matakuliah.index'))->with('toast_success', 'Berhasil Menghapus Data!');
+        return redirect(route('matakuliah.index'))->with('toast_error', 'Berhasil Menghapus Data!');
     }
 }

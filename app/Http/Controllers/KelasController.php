@@ -62,6 +62,6 @@ class KelasController extends Controller
     {
         $kela->delete();
 
-        return redirect(route('kelas.index'))->with('toast_success', 'Berhasil Menghapus Data!');
+        return redirect(route('kelas.index'))->with('toast_error', 'Berhasil Menghapus Data!');
     }
 }

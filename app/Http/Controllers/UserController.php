@@ -42,6 +42,10 @@ class UserController extends Controller
             'no_telp' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'same:confirm-password',
+            'agama' => 'required',
+            'alamat' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
         ]);
         $data = $request->all();
         if ($request->hasFile('photo')) {
@@ -111,6 +115,10 @@ class UserController extends Controller
             'no_telp' => 'required',
             'email' => 'required|email|unique:users,email,'.$user->id,
             'password' => 'same:confirm-password',
+            'agama' => 'required',
+            'alamat' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
         ]);
         $data = $request->all();
         if ($request->hasFile('photo')) {
@@ -130,6 +138,10 @@ class UserController extends Controller
 
         $user->update($data);
 
+        if (auth()->user()->role == 'mahasiswa') {
+            return redirect()->back()->with('toast_success', 'Berhasil Menyimpan Data!');
+        }
+
         return redirect(route('user.index'))->with('toast_success', 'Berhasil Menyimpan Data!');
     }
 
@@ -137,6 +149,6 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return redirect(route('user.index'))->with('toast_success', 'Berhasil Menghapus Data!');
+        return redirect(route('user.index'))->with('toast_error', 'Berhasil Menghapus Data!');
     }
 }

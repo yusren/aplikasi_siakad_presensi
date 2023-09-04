@@ -15,7 +15,6 @@ class KrsController extends Controller
     public function index(Request $request)
     {
         $tahunAjaranId = $request->input('tahun_ajaran_id', TahunAjaran::where('is_active', true)->latest()->first()->id);
-
         $users = User::where('role', 'mahasiswa')
             ->whereHas('krs', function ($query) use ($tahunAjaranId) {
                 $query->where('tahun_ajaran_id', $tahunAjaranId);
@@ -25,11 +24,20 @@ class KrsController extends Controller
             }])
             ->get();
 
-        return view('krs.index', [
-            'users' => $users,
-            'tahunAjaranAktif' => TahunAjaran::find($tahunAjaranId),
-            'tahunAjaran' => TahunAjaran::orderBy('name')->get(),
-        ]);
+        if (auth()->user()->role == 'mahasiswa') {
+            return view('krs.user.index', [
+                'users' => auth()->user(),
+                'krs' => auth()->user()->krs->where('tahun_ajaran_id', $tahunAjaranId),
+                'tahunAjaranAktif' => TahunAjaran::find($tahunAjaranId),
+                'tahunAjaran' => TahunAjaran::orderBy('name')->get(),
+            ]);
+        } else {
+            return view('krs.index', [
+                'users' => $users,
+                'tahunAjaranAktif' => TahunAjaran::find($tahunAjaranId),
+                'tahunAjaran' => TahunAjaran::orderBy('name')->get(),
+            ]);
+        }
     }
 
     public function create()

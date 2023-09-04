@@ -29,7 +29,7 @@
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
-                            <label for="">NIM</label>
+                            <label for="">Nomor Induk</label>
                             <input type="text" class="form-control" name="nomor" value="{{ old('nomor') }}" placeholder="Masukkan NIM">
                             @error('nomor')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
@@ -91,6 +91,30 @@
                                 <option value="non-active">Non Aktif</option>
                             </select>
                             @error('status')
+                            <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="">Alamat</label>
+                            <input type="text" class="form-control" name="alamat" value="{{ old('alamat') }}" placeholder="Masukkan Alamat">
+                            @error('alamat')
+                            <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="">Agama</label>
+                            <input type="text" class="form-control" name="agama" value="{{ old('agama') }}" placeholder="Masukkan Agama">
+                            @error('agama')
+                            <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="">Tempat Lahir</label>
+                            <input type="text" class="form-control" name="tempat_lahir" value="{{ old('tempat_lahir') }}" placeholder="Masukkan Tempat Lahir">
+                            @error('tempat_lahir')
+                            <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="">Tanggal Lahir</label>
+                            <input type="date" class="form-control" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" placeholder="Masukkan Tanggal Lahir">
+                            @error('tanggal_lahir')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                     </div><!-- /.box-body -->

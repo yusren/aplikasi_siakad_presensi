@@ -8,8 +8,12 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('dashboard.index', [
-            'users' => User::count(),
-        ]);
+        if (auth()->user()->role == 'mahasiswa') {
+            return view('dashboard.user.index', []);
+        } else {
+            return view('dashboard.index', [
+                'users' => User::count(),
+            ]);
+        }
     }
 }

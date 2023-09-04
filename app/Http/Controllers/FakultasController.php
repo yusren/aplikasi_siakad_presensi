@@ -57,6 +57,6 @@ class FakultasController extends Controller
     {
         $fakulta->delete();
 
-        return redirect(route('fakultas.index'))->with('toast_success', 'Berhasil Menghapus Data!');
+        return redirect(route('fakultas.index'))->with('toast_error', 'Berhasil Menghapus Data!');
     }
 }
