@@ -31,7 +31,7 @@
                         @foreach ($users as $value)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $value->name }}</td>
+                            <td>{{ $value->kelas->first()->name ?? '' }} {{ $value->name }}</td>
                             <td>{{ $value->role }}</td>
                             <td>
                                 <a class="btn btn-warning" href="{{ route('user.edit', $value->id) }}">Edit</a>

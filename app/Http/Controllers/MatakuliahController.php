@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\MatakuliahRequest;
 use App\Models\Matakuliah;
 use App\Models\Prodi;
+use App\Models\User;
 
 class MatakuliahController extends Controller
 {
@@ -18,6 +19,7 @@ class MatakuliahController extends Controller
     public function create()
     {
         return view('matakuliah.create', [
+            'users' => User::where('role', 'dosen')->get(),
             'prodi' => Prodi::get(),
         ]);
     }
@@ -40,6 +42,7 @@ class MatakuliahController extends Controller
     {
         return view('matakuliah.edit', [
             'matakuliah' => $matakuliah,
+            'users' => User::where('role', 'dosen')->get(),
             'prodi' => Prodi::get(),
         ]);
     }

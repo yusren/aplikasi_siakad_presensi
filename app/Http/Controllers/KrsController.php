@@ -31,19 +31,22 @@ class KrsController extends Controller
 
     public function store(Request $request)
     {
-        $prodi = Prodi::findOrFail($request->prodi_id);
+        // $prodi = Prodi::findOrFail($request->prodi_id);
+        $kelas = Kelas::findOrFail($request->kelas_id);
 
-        foreach ($prodi->kelas as $kelas) {
-            foreach ($kelas->users as $user) {
-                foreach ($request->matakuliah as $mk) {
-                    Krs::create([
-                        'user_id' => $user->id,
-                        'matakuliah_id' => $mk,
-                        'tahun_ajaran_id' => $request->tahun_ajaran_id,
-                    ]);
-                }
+        // foreach ($prodi->kelas as $kelas) {
+        foreach ($kelas->users as $user) {
+            foreach ($request->matakuliah as $mk) {
+                Krs::create([
+                    'user_id' => $user->id,
+                    'matakuliah_id' => $mk,
+                    'tahun_ajaran_id' => $request->tahun_ajaran_id,
+                ]);
             }
         }
+        // }
+
+        return redirect(route('krs.index'))->with('toast_success', 'Berhasil Menyimpan Data!');
     }
 
     public function show(Krs $kr)

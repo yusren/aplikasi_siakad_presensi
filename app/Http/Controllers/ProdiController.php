@@ -12,7 +12,7 @@ class ProdiController extends Controller
 {
     public function getMatakuliah($prodi_id)
     {
-        $matakuliah = Matakuliah::where('prodi_id', $prodi_id)->get();
+        $matakuliah = Matakuliah::with('prodi', 'user')->where('prodi_id', $prodi_id)->get();
 
         return response()->json($matakuliah);
     }

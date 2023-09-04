@@ -44,7 +44,14 @@ class JadwalController extends Controller
 
     public function edit(Jadwal $jadwal)
     {
-        return view('jadwal.edit', ['jadwal' => $jadwal]);
+        return view('jadwal.edit', [
+            'jadwal' => $jadwal,
+            'tahunAjaran' => TahunAjaran::get(),
+            'fakultas' => Fakultas::get(),
+            'dosen' => User::where('role', 'dosen')->get(),
+            'ruangan' => Ruang::get(),
+            'hari' => ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'],
+        ]);
     }
 
     public function update(JadwalRequest $request, Jadwal $jadwal)

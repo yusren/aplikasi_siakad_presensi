@@ -15,6 +15,17 @@
                         @csrf
                         <div class="box-body">
                             <div class="form-group">
+                                <label>Dosen</label>
+                                <select required class="form-control select2" name="user_id" data-placeholder="Pilih Dosen" style="width: 100%;">
+                                    <option value="" selected disabled>Pilih Dosen</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}"
+                                            {{ old('user_id', $matakuliah->user_id) == $user->id ? 'selected' : '' }}>{{ $user->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="exampleInputEmail1">Nama Mata Kuliah</label>
                                 <input type="text" class="form-control" name="name" value="{{ old('name', $matakuliah->name) }}" placeholder="Masukkan Nama Mata Kuliah">
                                 @error('name') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror

@@ -24,11 +24,11 @@ class Kelas extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class); //Dosen Wali
     }
 
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class); //Mahasiswa
     }
 }

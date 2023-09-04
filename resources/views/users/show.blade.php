@@ -15,49 +15,54 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-body table-responsive">
-                    @if (count($krs) > 0)
                     <table id="krs" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th colspan="2">Kelas</th>
+                                <th colspan="4">Kelas</th>
                                 <th>{{$user->kelas->first()->name}}</th>
                             </tr>
                             <tr>
-                                <th colspan="2">Nama</th>
+                                <th colspan="4">Nama</th>
                                 <th>{{$user->name}}</th>
                             </tr>
                             <tr>
-                                <th colspan="2">NIM</th>
+                                <th colspan="4">NIM</th>
                                 <th>{{$user->nim}}</th>
                             </tr>
+                            @if (count($krs) > 0)
                             <tr>
-                                <th colspan="2">Tahun Ajaran</th>
+                                <th colspan="4">Tahun Ajaran</th>
                                 <th>{{$krs->first()->tahunAjaran->name}}</th>
                             </tr>
+                            @endif
                         </thead>
+                        @if (count($krs) > 0)
                         <tbody>
                             <tr>
-                                <th colspan="3">KRS</th>
+                                <th colspan="5" class="text-right">KRS</th>
                             </tr>
                             <tr>
+                                <th>Dosen</th>
                                 <th>Matakuliah</th>
                                 <th>Kode</th>
                                 <th>SKS</th>
+                                <th>Nilai</th>
                             </tr>
-                            @foreach($krs as $kr)
+                            @forelse($krs as $kr)
                             <tr>
+                                <td>{{$kr->matakuliah->user->name}}</td>
                                 <td>{{$kr->matakuliah->name}}</td>
                                 <td>{{$kr->matakuliah->code}}</td>
                                 <td>{{$kr->matakuliah->sks}}</td>
+                                <td>{{$kr->nilai}}</td>
                             </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-
-                    <table id="jadwal" class="table table-bordered table-striped">
-                        <thead>
+                            @empty
                             <tr>
-                                <th colspan="4">Jadwal</th>
+                                <td colspan="5">Kosong</td>
+                            </tr>
+                            @endforelse
+                            <tr>
+                                <th colspan="5" class="text-right">Jadwal</th>
                             </tr>
                             <tr>
                                 <th>Matakuliah</th>
@@ -66,9 +71,7 @@
                                 <th>Ruang</th>
                                 <th>Dosen</th>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($jadwal as $j)
+                            @forelse($jadwal as $j)
                             <tr>
                                 <td>{{$j->matakuliah->name}}</td>
                                 <td>{{$j->hari}}</td>
@@ -76,10 +79,14 @@
                                 <td>{{$j->ruang->name}}</td>
                                 <td>{{$j->user->name}}</td>
                             </tr>
-                            @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="5">Kosong</td>
+                            </tr>
+                            @endforelse
                         </tbody>
+                        @endif
                     </table>
-                    @endif
                 </div>
                 <div class="box-footer">
                     <a href="{{ route('user.index') }}" class="btn btn-default">Kembali</a>

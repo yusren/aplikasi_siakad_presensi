@@ -22,6 +22,7 @@
                             <thead>
                                 <tr>
                                     <td>No</td>
+                                    <td>Dosen</td>
                                     <td>Nama Mata Kuliah</td>
                                     <td>Kode Mata Kuliah</td>
                                     <td>SKS</td>
@@ -35,6 +36,7 @@
                             @foreach ($matakuliah as $value)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $value->user->name }}</td>
                                     <td>{{ $value->name }}</td>
                                     <td>{{ $value->code }}</td>
                                     <td>{{ $value->sks }}</td>

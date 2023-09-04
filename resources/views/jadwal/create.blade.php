@@ -82,7 +82,7 @@
                         </div>
                         <div class="form-group">
                             <label>Waktu/Jam</label>
-                            <input type="time" name="jam" id="jam" class="form-input">
+                            <input type="time" name="jam" id="jam" class="form-input" value="{{ old('jam') }}">
                             @error('jam') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
@@ -118,7 +118,7 @@
         let fakultas_id = $(this).val();
         $.get('/fakultas/' + fakultas_id + '/prodi', function(data) {
             $('#prodi').find('option').remove();
-            let defaultOption = $('<option>').val('').text('Pilih Kas').prop('disabled', true).prop('selected', true);
+            let defaultOption = $('<option>').val('').text('Pilih Prodi').prop('disabled', true).prop('selected', true);
             $('#prodi').append(defaultOption);
             data.forEach(function(prodi) {
                 let option = $('<option>').val(prodi.id).text(prodi.name);
@@ -132,7 +132,7 @@
         let prodi_id = $(this).val();
         $.get('/prodi/' + prodi_id + '/matakuliah', function(data) {
             $('#matakuliah').find('option').remove();
-            let defaultOption = $('<option>').val('').text('Pilih Kas').prop('disabled', true).prop('selected', true);
+            let defaultOption = $('<option>').val('').text('Pilih Mata Kuliah').prop('disabled', true).prop('selected', true);
             $('#matakuliah').append(defaultOption);
             data.forEach(function(matakuliah) {
                 let option = $('<option>').val(matakuliah.id).text(matakuliah.name);
@@ -143,7 +143,7 @@
         });
         $.get('/prodi/' + prodi_id + '/kelas', function(data) {
             $('#kelas').find('option').remove();
-            let defaultOption = $('<option>').val('').text('Pilih Kas').prop('disabled', true).prop('selected', true);
+            let defaultOption = $('<option>').val('').text('Pilih Kelas').prop('disabled', true).prop('selected', true);
             $('#kelas').append(defaultOption);
             data.forEach(function(kelas) {
                 let option = $('<option>').val(kelas.id).text(kelas.name);
