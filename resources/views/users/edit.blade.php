@@ -30,9 +30,9 @@
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
-                            <label for="">NIM</label>
-                            <input type="text" class="form-control" name="nim" value="{{ old('nim', $user->nim) }}" placeholder="Masukkan NIM">
-                            @error('nim')
+                            <label for="">{{ $user->role == 'mahasiswa' ? 'NIM' : 'Nomor Karyawan' }}</label>
+                            <input type="text" class="form-control" name="nomor" value="{{ old('nomor', $user->nomor) }}" placeholder="Masukkan Nomor">
+                            @error('nomor')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
@@ -95,6 +95,24 @@
                             @error('status')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
+
+                        @if ($user->role == 'mahasiswa')
+                            <div class="form-group">
+                                <label>Dosen Pembimbing Akademik</label>
+                                <select required class="form-control select2" name="user_id" data-placeholder="Pilih Dosen" style="width: 100%;">
+                                    <option value="" selected disabled></option>
+                                    @foreach ($dosen as $ds)
+                                        <option value="{{ $ds->id }}"
+                                            {{ old('user_id', $user->user_id) == $ds->id ? 'selected' : '' }}>{{ $ds->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Program Studi</label>
+                                <input readonly type="text" class="form-control" name="kelas" value="{{ $user->kelas->first()->prodi->name }}">
+                            </div>
+                        @endif
                     </div><!-- /.box-body -->
 
                     <div class="box-footer">

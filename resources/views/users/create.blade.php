@@ -30,8 +30,8 @@
                         </div>
                         <div class="form-group">
                             <label for="">NIM</label>
-                            <input type="text" class="form-control" name="nim" value="{{ old('nim') }}" placeholder="Masukkan NIM">
-                            @error('nim')
+                            <input type="text" class="form-control" name="nomor" value="{{ old('nomor') }}" placeholder="Masukkan NIM">
+                            @error('nomor')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">

@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/tahunajaran', TahunAjaranController::class);
     Route::resource('/jadwal', JadwalController::class);
     Route::resource('/krs', KrsController::class);
+    // Route::get('/krs/{user}/input-nilai', [KrsController::class, 'inputNilai'])->name('krs.input');
 });
 
 require __DIR__.'/auth.php';

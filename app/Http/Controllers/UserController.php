@@ -33,7 +33,7 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'nim' => 'required_if:role,mahasiswa',
+            'nomor' => 'required_if:role,mahasiswa',
             'photo' => 'nullable',
             // 'username' => 'required',
             'role' => 'required',
@@ -59,30 +59,37 @@ class UserController extends Controller
 
     public function show(Request $request, User $user)
     {
-        $tahunAjaranId = $request->tahun_ajaran_id ?: TahunAjaran::where('is_active', true)->latest()->first()->id;
-        $tahunAjaranAktif = TahunAjaran::find($tahunAjaranId);
-        $krs = $user->krs->where('tahun_ajaran_id', $tahunAjaranId);
-        $matakuliahIds = $krs->pluck('matakuliah_id')->toArray();
-        $jadwal = Jadwal::where('tahun_ajaran_id', $tahunAjaranId)
-            ->whereHas('kelas.users', function ($query) use ($user) {
-                $query->where('users.id', $user->id);
-            })
-            ->whereIn('matakuliah_id', $matakuliahIds)
-            ->get();
+        if ($user->role == 'mahasiswa') {
+            $tahunAjaranId = $request->tahun_ajaran_id ?: TahunAjaran::where('is_active', true)->latest()->first()->id;
+            $tahunAjaranAktif = TahunAjaran::find($tahunAjaranId);
+            $krs = $user->krs->where('tahun_ajaran_id', $tahunAjaranId);
+            $matakuliahIds = $krs->pluck('matakuliah_id')->toArray();
+            $jadwal = Jadwal::where('tahun_ajaran_id', $tahunAjaranId)
+                ->whereHas('kelas.users', function ($query) use ($user) {
+                    $query->where('users.id', $user->id);
+                })
+                ->whereIn('matakuliah_id', $matakuliahIds)
+                ->get();
 
-        return view('users.show', [
-            'user' => $user,
-            'krs' => $krs,
-            'jadwal' => $jadwal,
-            'tahunAjaranAktif' => $tahunAjaranAktif,
-            'tahunAjaran' => TahunAjaran::orderBy('name')->get(),
-        ]);
+            return view('users.show', [
+                'user' => $user,
+                'krs' => $krs,
+                'jadwal' => $jadwal,
+                'tahunAjaranAktif' => $tahunAjaranAktif,
+                'tahunAjaran' => TahunAjaran::orderBy('name')->get(),
+            ]);
+        } else {
+            dd($user->toArray());
+
+            return view('users.non-mahasiswa.show', []);
+        }
     }
 
     public function edit(User $user)
     {
         return view('users.edit', [
             'user' => $user,
+            'dosen' => User::where('role', 'dosen')->get(),
             'roles' => [
                 'dosen',
                 'mahasiswa',
@@ -93,8 +100,9 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $this->validate($request, [
+            'user_id' => 'nullable',
             'name' => 'required',
-            'nim' => 'required_if:role,mahasiswa',
+            'nomor' => 'required_if:role,mahasiswa',
             'photo' => 'nullable',
             // 'username' => 'required',
             'role' => 'required',

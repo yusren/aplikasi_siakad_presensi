@@ -83,8 +83,8 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="{{ route('profile.edit') }}" class="btn btn-default btn-flat">
-                                            Ganti Password
+                                        <a href="{{ route('user.edit', auth()->user()->id) }}" class="mb-1 btn btn-default btn-flat">
+                                            Edit Profile
                                         </a>
                                     </div>
                                     <div class="pull-right">

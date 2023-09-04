@@ -21,7 +21,8 @@
                             <select required class="form-control select2" name="tahun_ajaran_id"
                                 data-placeholder="Pilih Tahun Ajaran" style="width: 100%;">
                                 @foreach($tahunAjaran as $ta)
-                                <option value="{{ $ta->id }}" {{ (request('tahun_ajaran_id') == $ta->id || $tahunAjaranAktif->id == $ta->id) ? 'selected' : '' }}>
+                                <option value="{{ $ta->id }}" {{ (request('tahun_ajaran_id')==$ta->id ||
+                                    $tahunAjaranAktif->id == $ta->id) ? 'selected' : '' }}>
                                     {{ $ta->name }}, {{ $ta->semester }} {{ $ta->is_active ? 'aktif' : '' }}
                                 </option>
                                 @endforeach
@@ -43,7 +44,7 @@
                             </tr>
                             <tr>
                                 <th>NIM</th>
-                                <th colspan="4">{{$user->nim}}</th>
+                                <th colspan="4">{{$user->nomor}}</th>
                             </tr>
                             @if (count($krs) > 0)
                             <tr>
@@ -66,7 +67,16 @@
                                 <th>Matakuliah</th>
                                 <th>Kode</th>
                                 <th>SKS</th>
-                                <th>Nilai</th>
+                                <th>
+                                    <table class="table table-bordered table-sm">
+                                        <tr>
+                                            <th>Tugas</th>
+                                            <th>UTS</th>
+                                            <th>UAS</th>
+                                            <th>Keaktifan</th>
+                                        </tr>
+                                    </table>
+                                </th>
                             </tr>
                             @forelse($krs as $kr)
                             <tr>
@@ -75,10 +85,14 @@
                                 <td>{{$kr->matakuliah->code}}</td>
                                 <td>{{$kr->matakuliah->sks}}</td>
                                 <td>
-                                    {{$kr->nilai_tugas}},
-                                    {{$kr->nilai_uts}},
-                                    {{$kr->nilai_uas}},
-                                    {{$kr->nilai_keaktifan}}
+                                    <table class="table table-bordered table-sm">
+                                        <tr>
+                                            <td>{{$kr->nilai_tugas}}</td>
+                                            <td>{{$kr->nilai_uts}}</td>
+                                            <td>{{$kr->nilai_uas}}</td>
+                                            <td>{{$kr->nilai_keaktifan}}</td>
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
                             @empty

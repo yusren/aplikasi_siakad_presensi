@@ -30,7 +30,7 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        $user = User::where('email', $this->loginname)->orWhere('nim', $this->loginname)->first();
+        $user = User::where('email', $this->loginname)->orWhere('nomor', $this->loginname)->first();
         if (! $user || ! Hash::check($this->password, $user->password)) {
             throw ValidationException::withMessages([
                 'loginname' => trans('auth.failed'),

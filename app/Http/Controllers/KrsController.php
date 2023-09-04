@@ -12,10 +12,23 @@ use Illuminate\Http\Request;
 
 class KrsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $tahunAjaranId = $request->input('tahun_ajaran_id', TahunAjaran::where('is_active', true)->latest()->first()->id);
+
+        $users = User::where('role', 'mahasiswa')
+            ->whereHas('krs', function ($query) use ($tahunAjaranId) {
+                $query->where('tahun_ajaran_id', $tahunAjaranId);
+            })
+            ->with(['krs' => function ($query) use ($tahunAjaranId) {
+                $query->where('tahun_ajaran_id', $tahunAjaranId);
+            }])
+            ->get();
+
         return view('krs.index', [
-            'users' => User::where('role', 'mahasiswa')->whereHas('krs')->get(),
+            'users' => $users,
+            'tahunAjaranAktif' => TahunAjaran::find($tahunAjaranId),
+            'tahunAjaran' => TahunAjaran::orderBy('name')->get(),
         ]);
     }
 
@@ -25,7 +38,7 @@ class KrsController extends Controller
             'kelas' => Kelas::get(),
             'prodi' => Prodi::get(),
             'matakuliah' => Matakuliah::get(),
-            'tahunAjaran' => TahunAjaran::get(),
+            'tahunAjaran' => TahunAjaran::orderBy('name')->get(),
         ]);
     }
 
@@ -55,15 +68,26 @@ class KrsController extends Controller
         return view('krs.show', compact('krs'));
     }
 
-    public function edit(Krs $krs)
-    {
-        //
-    }
+    // public function inputNilai(Request $request, User $user)
+    // {
+    //     $krs = $user->krs->where('tahun_ajaran_id', $request->tahun_ajaran_id);
 
-    public function update(Request $request, Krs $krs)
-    {
-        //
-    }
+    //     return view('krs.inputNilai', [
+    //         'user' => $user,
+    //         'krs' => $krs,
+    //         'tahunAjaran' => TahunAjaran::orderBy('name')->get(),
+    //     ]);
+    // }
+
+    // public function edit(Krs $kr)
+    // {
+    //     //
+    // }
+
+    // public function update(Request $request, Krs $kr)
+    // {
+    //     //
+    // }
 
     public function destroy(Krs $krs)
     {

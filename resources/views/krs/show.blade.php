@@ -8,7 +8,7 @@
 <h2>Data Mahasiswa</h2>
 <ul>
     <li>Nama: {{ $krs->user->name }}</li>
-    <li>NIM: {{ $krs->user->nim }}</li>
+    <li>NIM: {{ $krs->user->nomor }}</li>
     <li>Prodi: {{ $krs->user->prodi->name }}</li>
 </ul>
 

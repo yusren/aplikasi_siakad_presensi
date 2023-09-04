@@ -37,9 +37,9 @@ class AdminController extends Controller
         return redirect(route('admin.index'))->with('toast_success', 'Berhasil Menyimpan Data!');
     }
 
-    public function show(User $user)
+    public function show(User $admin)
     {
-        dd($user);
+        dd($admin);
     }
 
     public function edit(User $admin)

@@ -24,7 +24,7 @@
                                 <tr>
                                     <td>No</td>
                                     <td>Nama</td>
-                                    <td>Rule</td>
+                                    <td>Email</td>
                                     <td>Aksi</td>
                                 </tr>
                             </thead>
@@ -32,7 +32,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $value->name }}</td>
-                                    <td>{{ $value->role }}</td>
+                                    <td>{{ $value->email }}</td>
                                     <td>
                                         <a class="btn btn-warning" href="{{ route('admin.edit', $value->id) }}">Edit</a>
                                         <form action="{{ route('admin.destroy', $value->id) }}" method="post"
