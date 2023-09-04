@@ -25,6 +25,7 @@
                                 <td>No</td>
                                 <td>Nama</td>
                                 <td>Rule</td>
+                                <td>Satus</td>
                                 <td>Aksi</td>
                             </tr>
                         </thead>
@@ -33,6 +34,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $value->kelas->first()->name ?? '' }} {{ $value->name }}</td>
                             <td>{{ $value->role }}</td>
+                            <td>Registrasi {{ $value->status }}</td>
                             <td>
                                 <a class="btn btn-warning" href="{{ route('user.edit', $value->id) }}">Edit</a>
                                 @if ($value->role == 'mahasiswa')

@@ -48,16 +48,16 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label>Dosen</label>
-                                <select required class="form-control select2" name="user_id" data-placeholder="Pilih Dosen" style="width: 100%;">
-                                    @foreach ($dosen as $ds)
-                                        <option value="{{ $ds->id }}"
-                                            {{ old('user_id') == $ds->id ? 'selected' : '' }}>{{ $ds->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
+                            {{-- <div class="form-group"> --}}
+                                {{-- <label>Dosen</label> --}}
+                                {{-- <select required class="form-control select2" name="user_id" data-placeholder="Pilih Dosen" style="width: 100%;"> --}}
+                                    {{-- @foreach ($dosen as $ds) --}}
+                                        {{-- <option value="{{ $ds->id }}" --}}
+                                            {{-- {{ old('user_id') == $ds->id ? 'selected' : '' }}>{{ $ds->name }} --}}
+                                        {{-- </option> --}}
+                                    {{-- @endforeach --}}
+                                {{-- </select> --}}
+                            {{-- </div> --}}
                         </div>
                         <div class="box-footer">
                             <a href="{{ route('kelas.index') }}" class="btn btn-default">Kembali</a>

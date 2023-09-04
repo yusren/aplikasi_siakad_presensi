@@ -57,16 +57,26 @@ class UserController extends Controller
         return redirect(route('user.index'))->with('toast_success', 'Berhasil Menyimpan Data!');
     }
 
-    public function show(User $user)
+    public function show(Request $request, User $user)
     {
-        $tahunAjaran = TahunAjaran::where('is_active', true)->first();
-        $krs = $user->krs->where('tahun_ajaran_id', $tahunAjaran->id);
+        $tahunAjaranId = $request->tahun_ajaran_id ?: TahunAjaran::where('is_active', true)->latest()->first()->id;
+        $tahunAjaranAktif = TahunAjaran::find($tahunAjaranId);
+        $krs = $user->krs->where('tahun_ajaran_id', $tahunAjaranId);
         $matakuliahIds = $krs->pluck('matakuliah_id')->toArray();
-        $jadwal = Jadwal::where('tahun_ajaran_id', $tahunAjaran->id)->whereHas('kelas.users', function ($query) use ($user) {
-            $query->where('users.id', $user->id);
-        })->whereIn('matakuliah_id', $matakuliahIds)->get();
+        $jadwal = Jadwal::where('tahun_ajaran_id', $tahunAjaranId)
+            ->whereHas('kelas.users', function ($query) use ($user) {
+                $query->where('users.id', $user->id);
+            })
+            ->whereIn('matakuliah_id', $matakuliahIds)
+            ->get();
 
-        return view('users.show', ['user' => $user, 'krs' => $krs, 'jadwal' => $jadwal]);
+        return view('users.show', [
+            'user' => $user,
+            'krs' => $krs,
+            'jadwal' => $jadwal,
+            'tahunAjaranAktif' => $tahunAjaranAktif,
+            'tahunAjaran' => TahunAjaran::orderBy('name')->get(),
+        ]);
     }
 
     public function edit(User $user)

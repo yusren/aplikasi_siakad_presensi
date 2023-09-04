@@ -13,6 +13,12 @@ class Krs extends Model
         'user_id',
         'matakuliah_id',
         'tahun_ajaran_id',
+        'semester',
+        'status',
+        'nilai_tugas',
+        'nilai_uts',
+        'nilai_uas',
+        'nilai_keaktifan',
     ];
 
     public function user()

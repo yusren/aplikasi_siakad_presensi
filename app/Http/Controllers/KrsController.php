@@ -41,6 +41,7 @@ class KrsController extends Controller
                     'user_id' => $user->id,
                     'matakuliah_id' => $mk,
                     'tahun_ajaran_id' => $request->tahun_ajaran_id,
+                    'semester' => $request->semester,
                 ]);
             }
         }

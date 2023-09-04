@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,11 +14,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('krs', function (Blueprint $table) {
-            $table->string('nilai_tugas', 100)->nullable()->default(0);
-            $table->string('nilai_uts', 100)->nullable()->default(0);
-            $table->string('nilai_uas', 100)->nullable()->default(0);
-            $table->string('nilai_keaktifan', 100)->nullable()->default(0);
+        Schema::table('prodis', function (Blueprint $table) {
+            $table->foreignIdFor(User::class)->nullable()->constrained()->cascadeOnDelete();
         });
     }
 
@@ -28,7 +26,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('krs', function (Blueprint $table) {
+        Schema::table('prodis', function (Blueprint $table) {
             //
         });
     }

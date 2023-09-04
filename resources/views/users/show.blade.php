@@ -14,27 +14,47 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
+                <div class="box-header">
+                    <form method="GET" action="{{ url()->current() }}">
+                        <div class="form-group">
+                            <label>Tahun Ajaran</label>
+                            <select required class="form-control select2" name="tahun_ajaran_id"
+                                data-placeholder="Pilih Tahun Ajaran" style="width: 100%;">
+                                @foreach($tahunAjaran as $ta)
+                                <option value="{{ $ta->id }}" {{ (request('tahun_ajaran_id') == $ta->id || $tahunAjaranAktif->id == $ta->id) ? 'selected' : '' }}>
+                                    {{ $ta->name }}, {{ $ta->semester }} {{ $ta->is_active ? 'aktif' : '' }}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                    </form>
+                </div>
                 <div class="box-body table-responsive">
                     <table id="krs" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th colspan="4">Kelas</th>
-                                <th>{{$user->kelas->first()->name}}</th>
+                                <th>Kelas</th>
+                                <th colspan="4">{{$user->kelas->first()->name}}</th>
                             </tr>
                             <tr>
-                                <th colspan="4">Nama</th>
-                                <th>{{$user->name}}</th>
+                                <th>Nama</th>
+                                <th colspan="4">{{$user->name}}</th>
                             </tr>
                             <tr>
-                                <th colspan="4">NIM</th>
-                                <th>{{$user->nim}}</th>
+                                <th>NIM</th>
+                                <th colspan="4">{{$user->nim}}</th>
                             </tr>
                             @if (count($krs) > 0)
                             <tr>
-                                <th colspan="4">Tahun Ajaran</th>
-                                <th>{{$krs->first()->tahunAjaran->name}}</th>
+                                <th>Semester</th>
+                                <th colspan="4">{{$krs->first()->semester}}</th>
                             </tr>
                             @endif
+                            <tr>
+                                <th>Tahun Ajaran</th>
+                                <th colspan="4">{{$tahunAjaranAktif->name}}, {{$tahunAjaranAktif->semester}}</th>
+                            </tr>
                         </thead>
                         @if (count($krs) > 0)
                         <tbody>
@@ -54,7 +74,12 @@
                                 <td>{{$kr->matakuliah->name}}</td>
                                 <td>{{$kr->matakuliah->code}}</td>
                                 <td>{{$kr->matakuliah->sks}}</td>
-                                <td>{{$kr->nilai}}</td>
+                                <td>
+                                    {{$kr->nilai_tugas}},
+                                    {{$kr->nilai_uts}},
+                                    {{$kr->nilai_uas}},
+                                    {{$kr->nilai_keaktifan}}
+                                </td>
                             </tr>
                             @empty
                             <tr>

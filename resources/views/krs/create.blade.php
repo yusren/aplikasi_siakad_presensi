@@ -38,6 +38,11 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="">Semester</label>
+                            <input type="text" class="form-control" name="semester" value="{{ old('semester') }}" placeholder="Masukkan Semester">
+                            @error('semester') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                        </div>
+                        <div class="form-group">
                             <label>Mata Kuliah</label>
                             <select required class="form-control select2" name="matakuliah[]" data-placeholder="Pilih Tahun Mata Kuliah" style="width: 100%;" multiple id="matakuliah">
                                 <option value="" selected disabled>Pilih Mata Kuliah</option>

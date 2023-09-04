@@ -14,10 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('krs', function (Blueprint $table) {
-            $table->string('nilai_tugas', 100)->nullable()->default(0);
-            $table->string('nilai_uts', 100)->nullable()->default(0);
-            $table->string('nilai_uas', 100)->nullable()->default(0);
-            $table->string('nilai_keaktifan', 100)->nullable()->default(0);
+            $table->string('semester', 100)->nullable();
         });
     }
 

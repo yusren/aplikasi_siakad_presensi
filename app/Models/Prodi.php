@@ -10,11 +10,17 @@ class Prodi extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'fakultas_id',
         'name',
         'code',
         'jenjang',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class); //Kapordi
+    }
 
     public function fakultas()
     {

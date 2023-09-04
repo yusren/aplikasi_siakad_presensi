@@ -7,6 +7,7 @@ use App\Models\Fakultas;
 use App\Models\Kelas;
 use App\Models\Matakuliah;
 use App\Models\Prodi;
+use App\Models\User;
 
 class ProdiController extends Controller
 {
@@ -28,6 +29,7 @@ class ProdiController extends Controller
     {
         return view('prodi.index', [
             'prodi' => Prodi::get(),
+            'dosen' => User::where('role', 'dosen')->get(),
         ]);
     }
 
@@ -55,6 +57,7 @@ class ProdiController extends Controller
     {
         return view('prodi.edit', [
             'prodi' => $prodi,
+            'dosen' => User::where('role', 'dosen')->get(),
             'fakultas' => Fakultas::get(),
         ]);
     }

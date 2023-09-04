@@ -25,7 +25,8 @@
                                 <td>Nama Prodi</td>
                                 <td>Kode Prodi</td>
                                 <td>Jenjang</td>
-                                <td>Nama Fakultas</td>
+                                <td>Fakultas</td>
+                                <td>Dosen/Kaprodi</td>
                                 <td>Aksi</td>
                             </tr>
                         </thead>
@@ -36,6 +37,7 @@
                             <td>{{ $value->code }}</td>
                             <td>{{ $value->jenjang }}</td>
                             <td>{{ $value->fakultas->name }}</td>
+                            <td>{{ $value->user->name }}</td>
                             <td>
                                 <a class="btn btn-warning" href="{{ route('prodi.edit', $value->id) }}">Edit</a>
                                 <form action="{{ route('prodi.destroy', $value->id) }}" method="post"

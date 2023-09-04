@@ -83,7 +83,7 @@
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
-                            <label>Status</label>
+                            <label>Status Registrasi</label>
                             <select class="form-control select2" name="status" data-placeholder="Pilih Status"
                                 style="width: 100%;">
                                 <option value="" selected disabled>Pilih Status</option>

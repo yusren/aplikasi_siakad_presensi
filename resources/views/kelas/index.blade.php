@@ -25,7 +25,7 @@
                                     <td>Nama Kelas</td>
                                     <td>Kode Kelas</td>
                                     <td>Angkatan</td>
-                                    <td>Dosen Wali</td>
+                                    {{-- <td>Dosen Wali</td> --}}
                                     <td>Prodi</td>
                                     <td>Aksi</td>
                                 </tr>
@@ -36,7 +36,7 @@
                                     <td>{{ $value->name }}</td>
                                     <td>{{ $value->code }}</td>
                                     <td>{{ $value->angkatan }}</td>
-                                    <td>{{ $value->user->name }}</td>
+                                    {{-- <td>{{ $value->user->name }}</td> --}}
                                     <td>{{ $value->prodi->name }}</td>
                                     <td>
                                         <a class="btn btn-warning" href="{{ route('kelas.edit', $value->id) }}">Edit</a>
