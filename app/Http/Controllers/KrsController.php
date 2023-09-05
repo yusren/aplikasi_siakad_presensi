@@ -76,17 +76,6 @@ class KrsController extends Controller
         return view('krs.show', compact('krs'));
     }
 
-    // public function inputNilai(Request $request, User $user)
-    // {
-    //     $krs = $user->krs->where('tahun_ajaran_id', $request->tahun_ajaran_id);
-
-    //     return view('krs.inputNilai', [
-    //         'user' => $user,
-    //         'krs' => $krs,
-    //         'tahunAjaran' => TahunAjaran::orderBy('name')->get(),
-    //     ]);
-    // }
-
     // public function edit(Krs $kr)
     // {
     //     //

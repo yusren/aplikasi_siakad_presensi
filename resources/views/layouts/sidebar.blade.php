@@ -22,7 +22,7 @@
                 @case('dosen')
                     <li class=""><a href="#"><i class="fa fa-circle"></i><span>Mata Kuliah</span></a></li>
                     <li class="{{ (request()->is('jadwal*')) ? 'active' : '' }}"><a href="/jadwal"><i class="fa fa-circle"></i><span>Absensi</span></a></li>
-                    <li class=""><a href="#"><i class="fa fa-circle"></i><span>Nilai</span></a></li>
+                    <li class="{{ (request()->is('nilai*')) ? 'active' : '' }}"><a href="/nilai"><i class="fa fa-circle"></i><span>Nilai</span></a></li>
                     @break
                 @default
                 <li class="{{ (request()->is('admin*')) ? 'active' : '' }}"><a href="/admin"><i class="fa fa-users"></i><span>Admin</span></a></li>

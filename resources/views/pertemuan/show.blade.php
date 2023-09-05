@@ -9,6 +9,7 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">Detail Pertemuan</h3>
+                    {{ $pertemuan->jadwal->kelas->name }} {{ $pertemuan->jadwal->ruang->name }}
                 </div>
                 <div class="box-body">
                     <div class="form-group">
@@ -65,12 +66,16 @@
                                 <td>{{$record['nomor']}}</td>
                                 <td>{{$record['name']}}</td>
                                 <td>{{optional($record['created_at'])->format('h:i:s')}}</td>
-                                <td>@if($record['id'])<form action="{{ route('presensi.destroy', $record['id']) }}" method="post"
+                                <td>
+                                    @if($record['id'])
+                                    <form action="{{ route('presensi.destroy', $record['id']) }}" method="post"
                                         style="display: inline;">
                                         @method('delete')
                                         @csrf
                                         <button class="border-0 btn btn-danger" onclick="return confirm('Are you sure?')">Hapus</button>
-                                    </form>@endif</td>
+                                    </form>
+                                    @endif
+                                </td>
                             </tr>
                             @endforeach
                         </table>

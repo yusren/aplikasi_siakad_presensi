@@ -7,6 +7,7 @@ use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\KrsController;
 use App\Http\Controllers\MatakuliahController;
+use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\PertemuanController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\ProdiController;
@@ -40,6 +41,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/tahunajaran', TahunAjaranController::class);
     Route::resource('/jadwal', JadwalController::class);
     Route::resource('/krs', KrsController::class);
+    Route::get('/nilai', [NilaiController::class, 'index'])->name('nilai.index');
+    Route::post('/nilai', [NilaiController::class, 'store'])->name('nilai.store');
     Route::resource('/pertemuan', PertemuanController::class);
     Route::resource('/presensi', PresensiController::class);
     // Route::get('/krs/{user}/input-nilai', [KrsController::class, 'inputNilai'])->name('krs.input');

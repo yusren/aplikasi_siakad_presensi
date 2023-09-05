@@ -40,6 +40,7 @@
                                 <th>Hari</th>
                                 <th>Jam</th>
                                 <th>Ruang</th>
+                                <th>Kelas</th>
                                 <th>Buat Pertemuan</th>
                             </tr>
                             @forelse($jadwal as $j)
@@ -48,6 +49,7 @@
                                 <td>{{$j->hari}}</td>
                                 <td>{{$j->jam}}</td>
                                 <td>{{$j->ruang->name}}</td>
+                                <td>{{$j->kelas->name}}</td>
                                 <td><a class="btn btn-success" href="{{ route('pertemuan.create', ['jadwal_id' => $j->id]) }}">+</a></td>
                             </tr>
                             @foreach ($j->pertemuan as $pertemuan)

@@ -9,7 +9,7 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">Tambah Pertemuan</h3>
-                    {{ $jadwal->kelas->name }}
+                    {{ $jadwal->kelas->name }} {{ $jadwal->ruang->name }}
                 </div>
                 <form action="{{ route('pertemuan.store') }}" method="POST">
                     @csrf
