@@ -109,9 +109,9 @@ class UserController extends Controller
             'nomor' => 'required_if:role,mahasiswa',
             'photo' => 'nullable',
             // 'username' => 'required',
-            'role' => 'required',
+            'role' => 'required_if:role, !=, mahasiswa',
             'jenis_kelamin' => 'required',
-            'status' => 'required',
+            'status' => 'required_if:role, !=, mahasiswa',
             'no_telp' => 'required',
             'email' => 'required|email|unique:users,email,'.$user->id,
             'password' => 'same:confirm-password',
@@ -139,6 +139,15 @@ class UserController extends Controller
         $user->update($data);
 
         if (auth()->user()->role == 'mahasiswa') {
+            $user->keluarga()->updateOrCreate([], [
+                'ayah' => $request->ayah,
+                'ibu' => $request->ibu,
+                'pekerjaan_ayah' => $request->pekerjaan_ayah,
+                'pekerjaan_ibu' => $request->pekerjaan_ibu,
+                'penghasilan_ayah' => $request->penghasilan_ayah,
+                'penghasilan_ibu' => $request->penghasilan_ibu,
+            ]);
+
             return redirect()->back()->with('toast_success', 'Berhasil Menyimpan Data!');
         }
 

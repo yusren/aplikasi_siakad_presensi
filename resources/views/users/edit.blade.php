@@ -134,6 +134,30 @@
                                 <label>Program Studi</label>
                                 <input readonly type="text" class="form-control" name="kelas" value="{{ $user->kelas->first()->prodi->name }}">
                             </div>
+                            <div class="form-group">
+                                <label>Nama Ayah</label>
+                                <input type="text" class="form-control" name="ayah" value="{{ $user->keluarga->ayah ?? '-' }}">
+                            </div>
+                            <div class="form-group">
+                                <label>Nama Ibu</label>
+                                <input type="text" class="form-control" name="ibu" value="{{ $user->keluarga->ibu ?? '-' }}">
+                            </div>
+                            <div class="form-group">
+                                <label>Pekerjaan Ayah</label>
+                                <input type="text" class="form-control" name="pekerjaan_ayah" value="{{ $user->keluarga->pekerjaan_ayah ?? '-' }}">
+                            </div>
+                            <div class="form-group">
+                                <label>Pekerjaan Ibu</label>
+                                <input type="text" class="form-control" name="pekerjaan_ibu" value="{{ $user->keluarga->pekerjaan_ibu ?? '-' }}">
+                            </div>
+                            <div class="form-group">
+                                <label>Penghasilan Ayah</label>
+                                <input type="text" class="form-control" name="penghasilan_ayah" value="{{ $user->keluarga->penghasilan_ayah ?? '-' }}">
+                            </div>
+                            <div class="form-group">
+                                <label>Penghasilan Ibu</label>
+                                <input type="text" class="form-control" name="penghasilan_ibu" value="{{ $user->keluarga->penghasilan_ibu ?? '-' }}">
+                            </div>
                         @endif
                     </div><!-- /.box-body -->
 

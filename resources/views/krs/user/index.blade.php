@@ -40,6 +40,7 @@
                                 <th>Matakuliah</th>
                                 <th>Kode</th>
                                 <th>SKS</th>
+                                <th>Status</th>
                             </tr>
                             @forelse($krs as $kr)
                             <tr>
@@ -47,6 +48,7 @@
                                 <td>{{$kr->matakuliah->name}}</td>
                                 <td>{{$kr->matakuliah->code}}</td>
                                 <td>{{$kr->matakuliah->sks}}</td>
+                                <td>{{$kr->status}}</td>
                             </tr>
                             @empty
                             <tr>

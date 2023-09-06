@@ -54,6 +54,11 @@ class User extends Authenticatable
         return $this->hasMany(Krs::class);
     }
 
+    public function keluarga()
+    {
+        return $this->hasOne(Keluarga::class);
+    }
+
     public function pertemuan()
     {
         if ($this->role == 'dosen') {
