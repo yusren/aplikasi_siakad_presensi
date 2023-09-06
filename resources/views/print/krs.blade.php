@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="{{ asset('assets/zenTheme/css/custom.css') }}">
     {{-- <link rel="stylesheet" href="{{ asset('assets/zenTheme/css/admin-style.css') }}"> --}}
     <style>
-        body {
+        * {
             font-family: "Times New Roman", Times, serif;
             /* font-size: 16px; */
         }
@@ -106,7 +106,7 @@
                         Mengetahui
                         <h5><b>Ketua Prodi</b></h5>
                         <u>{{ auth()->user()->prodi->user->name }}</u><br>
-                        {{ auth()->user()->prodi->user->nomor }}
+                        NIDN. {{ auth()->user()->prodi->user->nomor }}
                     </div>
                 </div>
                 <div class="col-4 col-sm-4 col-lg-4">
@@ -114,13 +114,15 @@
                         Menyetujui
                         <h5><b>Dosen Pembimbing Akademik</b></h5>
                         <u>{{ auth()->user()->user->name }}</u><br>
-                        {{ auth()->user()->user->nomor }}
+                        NIDN. {{ auth()->user()->user->nomor }}
                     </div>
                 </div>
                 <div class="col-4 col-sm-4 col-lg-4">
                     <div class="text-center">
                         Pacitan, {{ date('d M Y') }}
                         <h5><b>Kabiro Administrasi Keuangan</b></h5>
+                        <u>{{ json_decode(Storage::disk('public')->get('settings.json'), true)['keuangan'] }}</u><br>
+                        NITK. {{ json_decode(Storage::disk('public')->get('settings.json'), true)['keuangan_nomor'] }}
                     </div>
                 </div>
             </div>

@@ -125,13 +125,15 @@
                 <div class="col-4 col-sm-4 col-lg-4">
                     <div class="text-center">
                         <h5><b>Ketua BAAK</b></h5>
+<u>{{ json_decode(Storage::disk('public')->get('settings.json'), true)['baak'] }}</u><br>
+                        NITK. {{ json_decode(Storage::disk('public')->get('settings.json'), true)['baak_nomor'] }}
                     </div>
                 </div>
                 <div class="col-4 col-sm-4 col-lg-4">
                     <div class="text-center">
                         <h5><b>Ketua Program Studi</b></h5>
                         <u>{{ auth()->user()->prodi->user->name }}</u><br>
-                        {{ auth()->user()->prodi->user->nomor }}
+                        NIDN. {{ auth()->user()->prodi->user->nomor }}
                     </div>
                 </div>
                 <div class="col-4 col-sm-4 col-lg-4">
@@ -139,7 +141,7 @@
                         <b>Pacitan,</b> {{ date('d M Y') }}
                         <h5><b>Dosen Pembimbing Akademik</b></h5>
                         <u>{{ auth()->user()->user->name }}</u><br>
-                        {{ auth()->user()->user->nomor }}
+                        NIDN. {{ auth()->user()->user->nomor }}
                     </div>
                 </div>
             </div>
