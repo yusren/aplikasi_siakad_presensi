@@ -14,6 +14,7 @@ class User extends Authenticatable
 
     protected $fillable = [
         'user_id',
+        'prodi_id',
         'name',
         'nomor',
         'username',
@@ -57,6 +58,11 @@ class User extends Authenticatable
     public function keluarga()
     {
         return $this->hasOne(Keluarga::class);
+    }
+
+    public function prodi()
+    {
+        return $this->belongsTo(Prodi::class);
     }
 
     public function pertemuan()

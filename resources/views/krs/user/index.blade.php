@@ -31,6 +31,19 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Filter</button>
                     </form>
+                    <hr />
+                    <form method="GET" action="{{ route('export.print.krs') }}">
+                        <div class="form-group">
+                            <input type="hidden" name="tahun_ajaran_id" value="{{ $tahunAjaranAktif->id }}">
+                            <button type="submit" class="btn btn-success">Cetak KRS</button>
+                        </div>
+                    </form>
+                    <form method="GET" action="{{ route('export.print.khs') }}">
+                        <div class="form-group">
+                            <input type="hidden" name="tahun_ajaran_id" value="{{ $tahunAjaranAktif->id }}">
+                            <button type="submit" class="btn btn-success">Cetak KHS</button>
+                        </div>
+                    </form>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive">
                     <table class="table table-bordered table-responsive">

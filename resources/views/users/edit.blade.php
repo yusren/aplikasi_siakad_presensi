@@ -131,10 +131,6 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Program Studi</label>
-                                <input readonly type="text" class="form-control" name="kelas" value="{{ $user->kelas->first()->prodi->name }}">
-                            </div>
-                            <div class="form-group">
                                 <label>Nama Ayah</label>
                                 <input type="text" class="form-control" name="ayah" value="{{ $user->keluarga->ayah ?? '-' }}">
                             </div>
@@ -159,6 +155,16 @@
                                 <input type="text" class="form-control" name="penghasilan_ibu" value="{{ $user->keluarga->penghasilan_ibu ?? '-' }}">
                             </div>
                         @endif
+                        <div class="form-group">
+                            <label>Program Studi</label>
+                            <select required class="form-control select2" name="prodi_id" data-placeholder="Pilih Prodi" style="width: 100%;">
+                                @foreach ($prodi as $pr)
+                                    <option value="{{ $pr->id }}"
+                                        {{ old('prodi_id', $user->prodi_id) == $pr->id ? 'selected' : '' }}>{{ $pr->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div><!-- /.box-body -->
 
                     <div class="box-footer">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jadwal;
+use App\Models\Prodi;
 use App\Models\TahunAjaran;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -22,6 +23,7 @@ class UserController extends Controller
     public function create()
     {
         return view('users.create', [
+            'prodi' => Prodi::get(),
             'roles' => [
                 'dosen',
                 'mahasiswa',
@@ -32,6 +34,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'prodi_id' => 'required',
             'name' => 'required',
             'nomor' => 'required_if:role,mahasiswa',
             'photo' => 'nullable',
@@ -94,6 +97,7 @@ class UserController extends Controller
         return view('users.edit', [
             'user' => $user,
             'dosen' => User::where('role', 'dosen')->get(),
+            'prodi' => Prodi::get(),
             'roles' => [
                 'dosen',
                 'mahasiswa',
@@ -105,6 +109,7 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'user_id' => 'nullable',
+            'prodi_id' => 'nullable',
             'name' => 'required',
             'nomor' => 'required_if:role,mahasiswa',
             'photo' => 'nullable',

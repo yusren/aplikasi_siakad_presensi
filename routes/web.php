@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\FakultasController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\KelasController;
@@ -46,6 +47,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/pertemuan', PertemuanController::class);
     Route::resource('/presensi', PresensiController::class);
     // Route::get('/krs/{user}/input-nilai', [KrsController::class, 'inputNilai'])->name('krs.input');
+    Route::get('/print-krs', [ExportController::class, 'printKrs'])->name('export.print.krs');
+    Route::get('/print-khs', [ExportController::class, 'printKhs'])->name('export.print.khs');
 });
 
 require __DIR__.'/auth.php';

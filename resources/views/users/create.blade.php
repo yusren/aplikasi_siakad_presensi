@@ -117,6 +117,17 @@
                             @error('tanggal_lahir')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
+
+                        <div class="form-group">
+                            <label>Program Studi</label>
+                            <select required class="form-control select2" name="prodi_id" data-placeholder="Pilih Prodi" style="width: 100%;">
+                                @foreach ($prodi as $pr)
+                                    <option value="{{ $pr->id }}"
+                                        {{ old('prodi_id') == $pr->id ? 'selected' : '' }}>{{ $pr->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div><!-- /.box-body -->
 
                     <div class="box-footer">
