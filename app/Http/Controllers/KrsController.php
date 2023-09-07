@@ -27,7 +27,7 @@ class KrsController extends Controller
         if (auth()->user()->role == 'mahasiswa') {
             return view('krs.user.index', [
                 'users' => auth()->user(),
-                'krs' => auth()->user()->krs->where('tahun_ajaran_id', $tahunAjaranId),
+                'krs' => auth()->user()->krs->where('tahun_ajaran_id', $tahunAjaranId)->where('status', 'menunggu'),
                 'tahunAjaranAktif' => TahunAjaran::find($tahunAjaranId),
                 'tahunAjaran' => TahunAjaran::orderBy('name')->get(),
             ]);

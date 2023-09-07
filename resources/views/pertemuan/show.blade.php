@@ -75,7 +75,12 @@
                                         <button class="border-0 btn btn-danger" onclick="return confirm('Are you sure?')">Hapus</button>
                                     </form>
                                     @else
-                                    <a class="btn btn-success" href="#">Absen</a>
+                                    <form action="{{ route('presensi.store') }}" method="POST">
+                                        @csrf
+                                            <input type="hidden" name="pertemuan_id" value="{{ $pertemuan->id }}">
+                                            <input type="hidden" class="form-control" name="nim" value="{{ old('nim', $record['nomor']) }}">
+                                        <button type="submit" class="btn btn-success">absen</button>
+                                    </form>
                                     @endif
                                 </td>
                             </tr>

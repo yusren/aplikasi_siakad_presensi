@@ -122,7 +122,7 @@
                         Pacitan, {{ date('d M Y') }}
                         <h5><b>Kabiro Administrasi Keuangan</b></h5>
                         <u>{{ json_decode(Storage::disk('public')->get('settings.json'), true)['keuangan'] }}</u><br>
-                        NITK. {{ json_decode(Storage::disk('public')->get('settings.json'), true)['keuangan_nomor'] }}
+                        {{ json_decode(Storage::disk('public')->get('settings.json'), true)['keuangan_status'] }}. {{ json_decode(Storage::disk('public')->get('settings.json'), true)['keuangan_nomor'] }}
                     </div>
                 </div>
             </div>

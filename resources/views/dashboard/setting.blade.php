@@ -21,9 +21,9 @@
                             <label for="baak">BAAK :</label>
                             <input class="form-control" type="text" name="baak" id="" value="{{ $baak }}">
                         </div>
-                        <select class="form-select" name="status" id="">
-                            <option value="nitk">nitk</option>
-                            <option value="nidn">nidn</option>
+                        <select class="form-control select2" name="baak_status" id="">
+                            <option @if ($baak_status == 'NITK') selected @endif value="NITK">NITK</option>
+                            <option @if ($baak_status == 'NIDN') selected @endif value="NIDN">NIDN</option>
                         </select>
                         <div class="form-group">
                             <label for="baak_nomor">Nomor :</label>
@@ -33,9 +33,9 @@
                             <label for="keuangan">Keuangan :</label>
                             <input class="form-control" type="text" name="keuangan" id="" value="{{ $keuangan }}">
                         </div>
-                        <select class="form-select" name="status" id="">
-                            <option value="nitk">nitk</option>
-                            <option value="nidn">nidn</option>
+                        <select class="form-control select2" name="keuangan_status" id="">
+                            <option @if ($keuangan_status == 'NITK') selected @endif value="NITK">NITK</option>
+                            <option @if ($keuangan_status == 'NIDN') selected @endif value="NIDN">NIDN</option>
                         </select>
                         <div class="form-group">
                             <label for="keuangan_nomor">Nomor :</label>

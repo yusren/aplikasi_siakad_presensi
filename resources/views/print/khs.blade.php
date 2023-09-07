@@ -52,6 +52,7 @@
                 <h1><u>KARTU HASIL STUDI</u></h1>
             </div>
 
+            @if ($krs->count() > 0)
             <table class="table table-sm table-borderless">
                 <tr>
                     <td>Nama Mahasiswa</td>
@@ -120,13 +121,15 @@
                     <td>3.53</td>
                 </tr>
             </table>
+            @endif
 
             <div class="row">
                 <div class="col-4 col-sm-4 col-lg-4">
                     <div class="text-center">
                         <h5><b>Ketua BAAK</b></h5>
-<u>{{ json_decode(Storage::disk('public')->get('settings.json'), true)['baak'] }}</u><br>
-                        NITK. {{ json_decode(Storage::disk('public')->get('settings.json'), true)['baak_nomor'] }}
+                        <u>{{ json_decode(Storage::disk('public')->get('settings.json'), true)['baak'] }}</u><br>
+                        {{ json_decode(Storage::disk('public')->get('settings.json'), true)['baak_status'] }}. {{
+                        json_decode(Storage::disk('public')->get('settings.json'), true)['baak_nomor'] }}
                     </div>
                 </div>
                 <div class="col-4 col-sm-4 col-lg-4">
