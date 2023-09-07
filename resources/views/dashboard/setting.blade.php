@@ -21,16 +21,24 @@
                             <label for="baak">BAAK :</label>
                             <input class="form-control" type="text" name="baak" id="" value="{{ $baak }}">
                         </div>
+                        <select class="form-select" name="status" id="">
+                            <option value="nitk">nitk</option>
+                            <option value="nidn">nidn</option>
+                        </select>
                         <div class="form-group">
-                            <label for="baak_nomor">NITK BAAK :</label>
+                            <label for="baak_nomor">Nomor :</label>
                             <input class="form-control" type="text" name="baak_nomor" id="" value="{{ $baak_nomor }}">
                         </div>
                         <div class="form-group">
                             <label for="keuangan">Keuangan :</label>
                             <input class="form-control" type="text" name="keuangan" id="" value="{{ $keuangan }}">
                         </div>
+                        <select class="form-select" name="status" id="">
+                            <option value="nitk">nitk</option>
+                            <option value="nidn">nidn</option>
+                        </select>
                         <div class="form-group">
-                            <label for="keuangan_nomor">NITK Keuangan :</label>
+                            <label for="keuangan_nomor">Nomor :</label>
                             <input class="form-control" type="text" name="keuangan_nomor" id="" value="{{ $keuangan_nomor }}">
                         </div>
                         <button type="submit" class="btn btn-primary">Simpan</button>

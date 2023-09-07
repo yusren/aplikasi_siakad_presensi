@@ -59,7 +59,7 @@
                                 <th>NIM</th>
                                 <th>Nama</th>
                                 <th>Jam</th>
-                                <th>Hapus</th>
+                                <th>Aksi</th>
                             </tr>
                             @foreach($records as $record)
                             <tr>
@@ -74,6 +74,8 @@
                                         @csrf
                                         <button class="border-0 btn btn-danger" onclick="return confirm('Are you sure?')">Hapus</button>
                                     </form>
+                                    @else
+                                    <a class="btn btn-success" href="#">Absen</a>
                                     @endif
                                 </td>
                             </tr>

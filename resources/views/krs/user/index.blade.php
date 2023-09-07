@@ -35,7 +35,7 @@
                     <form method="GET" action="{{ route('export.print.krs') }}">
                         <div class="form-group">
                             <input type="hidden" name="tahun_ajaran_id" value="{{ $tahunAjaranAktif->id }}">
-                            <button type="submit" class="btn btn-success">Cetak KRS</button>
+                            <button type="submit" class="btn btn-success">Ajukan KRS</button>
                         </div>
                     </form>
                     <form method="GET" action="{{ route('export.print.khs') }}">

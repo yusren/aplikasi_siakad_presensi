@@ -55,7 +55,7 @@
                             @foreach ($j->pertemuan as $pertemuan)
                             <tr>
                                 <th>{{ $pertemuan->created_at->format('D d M Y') }}</th>
-                                <th>{{ $pertemuan->name }}</th>
+                                <th colspan="3">{{ $pertemuan->name }}</th>
                                 <th>{{ $pertemuan->topic }}</th>
                                 <th><a class="btn btn-info" href="{{ route('pertemuan.show', $pertemuan->id) }}"><i class="fa fa-info"></i></a></th>
                             </tr>

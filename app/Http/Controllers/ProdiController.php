@@ -37,6 +37,7 @@ class ProdiController extends Controller
     {
         return view('prodi.create', [
             'fakultas' => Fakultas::get(),
+            'dosen' => User::where('role', 'dosen')->get(),
         ]);
     }
 
