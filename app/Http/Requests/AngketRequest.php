@@ -16,6 +16,8 @@ class AngketRequest extends FormRequest
         return [
             'name' => 'required',
             'tujuan' => 'required',
+            'start_at' => 'required',
+            'end_at' => 'required',
         ];
     }
 }

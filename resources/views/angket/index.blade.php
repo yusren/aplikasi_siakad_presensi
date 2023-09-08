@@ -34,6 +34,7 @@
                             <td>{{ $value->tujuan }}</td>
                             <td>
                                 <a class="btn btn-warning" href="{{ route('angket.edit', $value->id) }}">Edit</a>
+                                <a class="btn btn-info" href="{{ route('angket.show', $value->id) }}">Show</a>
                                 <form action="{{ route('angket.destroy', $value->id) }}" method="post"
                                     style="display: inline;">
                                     @method('delete')

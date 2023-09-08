@@ -50,7 +50,7 @@ class FakultasController extends Controller
         $data = $request->validated();
         $fakulta->update($data);
 
-        return redirect(route('fakultas.index'))->with('toast_success', 'Berhasil Menyimpan Data!');
+        return redirect(route('fakultas.index'))->with('toast_success', 'Berhasil Mengubah Data!');
     }
 
     public function destroy(Fakultas $fakulta)

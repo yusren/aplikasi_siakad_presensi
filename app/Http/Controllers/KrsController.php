@@ -76,6 +76,16 @@ class KrsController extends Controller
         return view('krs.show', compact('krs'));
     }
 
+    public function pengajuanKrs(Request $request)
+    {
+        $krsCollection = auth()->user()->krs->where('tahun_ajaran_id', $request->tahun_ajaran_id);
+        foreach ($krsCollection as $krs) {
+            $krs->update(['status' => 'ajukan']);
+        }
+
+        return redirect(route('krs.index'))->with('toast_success', 'Krs Berhasil Di Ajukan!');
+    }
+
     // public function edit(Krs $kr)
     // {
     //     //
@@ -86,8 +96,8 @@ class KrsController extends Controller
     //     //
     // }
 
-    public function destroy(Krs $krs)
-    {
-        //
-    }
+    // public function destroy(Krs $krs)
+    // {
+    //     //
+    // }
 }

@@ -15,4 +15,9 @@ class Pertanyaan extends Model
     {
         return $this->belongsTo(Angket::class);
     }
+
+    public function jawaban()
+    {
+        return $this->hasMany(Jawaban::class);
+    }
 }

@@ -15,15 +15,23 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label for="">Nama Angket</label>
-                            <input type="text" class="form-control" name="name" value="{{ old('name') }}"
-                                placeholder="Masukkan Nama Angket">
+                            <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Masukkan Nama Angket">
                             @error('name') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
                             <label for="">Tujuan Angket</label>
-                            <input type="text" class="form-control" name="tujuan" value="{{ old('tujuan') }}"
-                                placeholder="Masukkan Tujuan Angket">
+                            <input type="text" class="form-control" name="tujuan" value="{{ old('tujuan') }}" placeholder="Masukkan Tujuan Angket">
                             @error('tujuan') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="">Mulai Dari</label>
+                            <input type="datetime-local" class="form-control" name="start_at" value="{{ old('start_at') }}" placeholder="Masukkan Tujuan Angket">
+                            @error('start_at') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="">Berakhir</label>
+                            <input type="datetime-local" class="form-control" name="end_at" value="{{ old('end_at') }}" placeholder="Masukkan Tujuan Angket">
+                            @error('end_at') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                     </div>
                     <div class="box-footer">

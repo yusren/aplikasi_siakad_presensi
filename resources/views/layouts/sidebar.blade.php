@@ -28,6 +28,7 @@
                     @break
                 @default
                 <li class="{{ request()->is('setting*') ? 'active' : '' }}"><a href="/setting"><i class="fa fa-gear"></i><span>Setting</span></a></li>
+                <li class="{{ (request()->is('angket*')) ? 'active' : '' }}"><a href="/angket"><i class="fa fa-circle"></i><span>Angket</span></a></li>
                 <li class="{{ (request()->is('admin*')) ? 'active' : '' }}"><a href="/admin"><i class="fa fa-users"></i><span>Admin</span></a></li>
                 <li class="{{ (request()->is('user*')) ? 'active' : '' }}"><a href="/user"><i class="fa fa-users"></i><span>Users</span></a></li>
                 <li class="treeview {{ request()->is('fakultas*') || request()->is('kelas*') || request()->is('matakuliah*') || request()->is('tahunajaran*') || request()->is('prodi*') || request()->is('jadwal*') || request()->is('krs*') || request()->is('ruang*') ? 'active' : '' }}">

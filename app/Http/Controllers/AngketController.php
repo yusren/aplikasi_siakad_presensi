@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AngketRequest;
 use App\Models\Angket;
+use App\Models\Pertanyaan;
 
 class AngketController extends Controller
 {
@@ -25,12 +26,13 @@ class AngketController extends Controller
         Angket::create($data);
 
         return redirect(route('angket.index'))->with('toast_success', 'Berhasil Menyimpan Data!');
-
     }
 
     public function show(Angket $angket)
     {
-        dd($angket);
+        $pertanyaan = Pertanyaan::where('angket_id', $angket->id)->get();
+
+        return view('angket.show', ['angket' => $angket, 'pertanyaan' => $pertanyaan]);
     }
 
     public function edit(Angket $angket)
