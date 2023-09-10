@@ -25,6 +25,14 @@
                             @error('description') <div class="invalid-feedback text-danger"> {{ $message }} </div>
                             @enderror
                         </div>
+                        <div class="form-group">
+                            <label>Tipe Soal</label>
+                            <select required class="form-control select2" name="type" data-placeholder="Pilih Tipe" style="width: 100%;">
+                                <option value="" selected disabled>Pilih Tipe</option>
+                                <option value="multiple_choice">Pilihan Ganda</option>
+                                <option value="essay">Essay</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="box-footer">
                         <a href="{{ route('angket.index') }}" class="btn btn-default">Kembali</a>
@@ -41,6 +49,7 @@
                             <tr>
                                 <td>No</td>
                                 <td>Pertanyaan</td>
+                                <td>Jenis</td>
                                 <td>Banyak Jawaban</td>
                                 <td>Aksi</td>
                             </tr>
@@ -49,6 +58,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $value->description }}</td>
+                            <td>{{ $value->type }}</td>
                             <td>{{ $value->jawaban->count() }}</td>
                             <td>
                                 <a class="btn btn-warning" href="{{ route('pertanyaan.edit', $value->id) }}">Edit</a>

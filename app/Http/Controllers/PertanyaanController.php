@@ -21,6 +21,7 @@ class PertanyaanController extends Controller
     {
         Pertanyaan::create([
             'angket_id' => $request->angket_id,
+            'type' => $request->type,
             'description' => $request->description,
         ]);
 
@@ -41,6 +42,7 @@ class PertanyaanController extends Controller
     {
         $pertanyaan->update([
             'angket_id' => $request->angket_id,
+            'type' => $request->type,
             'description' => $request->description,
         ]);
 

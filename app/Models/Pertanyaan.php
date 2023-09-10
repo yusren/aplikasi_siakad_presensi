@@ -9,7 +9,7 @@ class Pertanyaan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['angket_id', 'description'];
+    protected $fillable = ['angket_id', 'type', 'description'];
 
     public function angket()
     {

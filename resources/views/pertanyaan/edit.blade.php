@@ -20,6 +20,13 @@
                             <textarea class="form-control" name="description">{{ old('description', $pertanyaan->description) }}</textarea>
                             @error('description') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
+                        <div class="form-group">
+                            <label>Tipe Soal</label>
+                            <select required class="form-control select2" name="type" data-placeholder="Pilih Tipe" style="width: 100%;">
+                                <option @if($pertanyaan->type == 'multiple_choice') @endif value="multiple_choice">Pilihan Ganda</option>
+                                <option @if($pertanyaan->type == 'essay') @endif value="essay">Essay</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="box-footer">
                         <a href="{{ route('angket.index') }}" class="btn btn-default">Kembali</a>
