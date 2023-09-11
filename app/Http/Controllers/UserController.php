@@ -15,11 +15,13 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
+        $users = User::where('role', $request->role)->get();
+        abort_if(! isset($users), 404);
         switch ($request->role) {
             case 'mahasiswa':
-                return view('users.mahasiswa.index', ['users' => User::where('role', 'mahasiswa')->get()]);
+                return view('users.mahasiswa.index', ['users' => $users]);
             case 'dosen':
-                return view('users.dosen.index');
+                return view('users.dosen.index', ['users' => $users]);
             default:
                 abort(404);
         }

@@ -39,9 +39,7 @@
                             <td>{{ $value->user->name ?? '' }}</td>
                             <td>
                                 <a class="btn btn-warning" href="{{ route('user.edit', ['user'=>$value->id, 'role'=>'mahasiswa']) }}">Edit</a>
-                                @if ($value->role == 'mahasiswa')
                                 <a class="btn btn-info" href="{{ route('user.show', ['user'=>$value->id, 'role'=>'mahasiswa']) }}">Show</a>
-                                @endif
                                 <form action="{{ route('user.destroy', ['user'=>$value->id, 'role'=>'mahasiswa']) }}" method="post" style="display: inline;">
                                     @method('delete')
                                     @csrf

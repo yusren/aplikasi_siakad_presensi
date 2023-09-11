@@ -60,8 +60,7 @@
                         </div>
                         <div class="form-group">
                             <label>Jenis Kelamin</label>
-                            <select class="form-control select2" name="jenis_kelamin"
-                                data-placeholder="Pilih Jenis Kelamin" style="width: 100%;">
+                            <select class="form-control select2" name="jenis_kelamin" data-placeholder="Pilih Jenis Kelamin" style="width: 100%;">
                                 <option value="" selected disabled>Pilih Jenis Kelamin</option>
                                 <option value="laki-laki">Laki-Laki</option>
                                 <option value="perempuan">Perempuan</option>

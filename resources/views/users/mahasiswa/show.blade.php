@@ -33,100 +33,125 @@
                     </form>
                 </div>
                 <div class="box-body table-responsive">
-                    <table id="krs" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Kelas</th>
-                                <th colspan="4">{{$user->kelas->first()->name}}</th>
-                            </tr>
-                            <tr>
-                                <th>Nama</th>
-                                <th colspan="4">{{$user->name}}</th>
-                            </tr>
-                            <tr>
-                                <th>NIM</th>
-                                <th colspan="4">{{$user->nomor}}</th>
-                            </tr>
-                            @if (count($krs) > 0)
-                            <tr>
-                                <th>Semester</th>
-                                <th colspan="4">{{$krs->first()->semester}}</th>
-                            </tr>
-                            @endif
-                            <tr>
-                                <th>Tahun Ajaran</th>
-                                <th colspan="4">{{$tahunAjaranAktif->name}}, {{$tahunAjaranAktif->semester}}</th>
-                            </tr>
-                        </thead>
-                        @if (count($krs) > 0)
-                        <tbody>
-                            <tr>
-                                <th colspan="5" class="text-right">KRS</th>
-                            </tr>
-                            <tr>
-                                <th>Dosen</th>
-                                <th>Matakuliah</th>
-                                <th>Kode</th>
-                                <th>SKS</th>
-                                <th>
-                                    <table class="table table-bordered table-sm">
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                            <li><a href="#tab_1" data-toggle="tab">Data Mahasiswa</a></li>
+                            <li class="active"><a href="#tab_2" data-toggle="tab">KRS</a></li>
+                            <li><a href="#tab_3" data-toggle="tab">Jadwal</a></li>
+                            {{-- <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li> --}}
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane" id="tab_1">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
                                         <tr>
-                                            <th>Tugas</th>
-                                            <th>UTS</th>
-                                            <th>UAS</th>
-                                            <th>Keaktifan</th>
+                                            <th>Kelas</th>
+                                            <th colspan="4">{{$user->kelas->first()->name}}</th>
                                         </tr>
-                                    </table>
-                                </th>
-                            </tr>
-                            @forelse($krs as $kr)
-                            <tr>
-                                <td>{{$kr->matakuliah->user->name}}</td>
-                                <td>{{$kr->matakuliah->name}}</td>
-                                <td>{{$kr->matakuliah->code}}</td>
-                                <td>{{$kr->matakuliah->sks}}</td>
-                                <td>
-                                    <table class="table table-bordered table-sm">
                                         <tr>
-                                            <td>{{$kr->nilai_tugas}}</td>
-                                            <td>{{$kr->nilai_uts}}</td>
-                                            <td>{{$kr->nilai_uas}}</td>
-                                            <td>{{$kr->nilai_keaktifan}}</td>
+                                            <th>Nama</th>
+                                            <th colspan="4">{{$user->name}}</th>
                                         </tr>
+                                        <tr>
+                                            <th>NIM</th>
+                                            <th colspan="4">{{$user->nomor}}</th>
+                                        </tr>
+                                        @if (count($krs) > 0)
+                                        <tr>
+                                            <th>Semester</th>
+                                            <th colspan="4">{{$krs->first()->semester}}</th>
+                                        </tr>
+                                        @endif
+                                        <tr>
+                                            <th>Tahun Ajaran</th>
+                                            <th colspan="4">{{$tahunAjaranAktif->name}}, {{$tahunAjaranAktif->semester}}
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+
+                            <div class="tab-pane active" id="tab_2">
+                                <div class="box-body table-responsive">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Dosen</th>
+                                                <th>Matakuliah</th>
+                                                <th>Kode</th>
+                                                <th>SKS</th>
+                                                <th>
+                                                    <table class="table table-bordered table-sm">
+                                                        <tr>
+                                                            <th>Tugas</th>
+                                                            <th>UTS</th>
+                                                            <th>UAS</th>
+                                                            <th>Keaktifan</th>
+                                                        </tr>
+                                                    </table>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @forelse($krs as $kr)
+                                            <tr>
+                                                <td>{{$kr->matakuliah->user->name}}</td>
+                                                <td>{{$kr->matakuliah->name}}</td>
+                                                <td>{{$kr->matakuliah->code}}</td>
+                                                <td>{{$kr->matakuliah->sks}}</td>
+                                                <td>
+                                                    <table class="table table-bordered table-sm">
+                                                        <tr>
+                                                            <td>{{$kr->nilai_tugas}}</td>
+                                                            <td>{{$kr->nilai_uts}}</td>
+                                                            <td>{{$kr->nilai_uas}}</td>
+                                                            <td>{{$kr->nilai_keaktifan}}</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            @empty
+                                            <tr>
+                                                <td colspan="5">Kosong</td>
+                                            </tr>
+                                            @endforelse
+                                        </tbody>
                                     </table>
-                                </td>
-                            </tr>
-                            @empty
-                            <tr>
-                                <td colspan="5">Kosong</td>
-                            </tr>
-                            @endforelse
-                            <tr>
-                                <th colspan="5" class="text-right">Jadwal</th>
-                            </tr>
-                            <tr>
-                                <th>Matakuliah</th>
-                                <th>Hari</th>
-                                <th>Jam</th>
-                                <th>Ruang</th>
-                                <th>Dosen</th>
-                            </tr>
-                            @forelse($jadwal as $j)
-                            <tr>
-                                <td>{{$j->matakuliah->name}}</td>
-                                <td>{{$j->hari}}</td>
-                                <td>{{$j->jam}}</td>
-                                <td>{{$j->ruang->name}}</td>
-                                <td>{{$j->user->name}}</td>
-                            </tr>
-                            @empty
-                            <tr>
-                                <td colspan="5">Kosong</td>
-                            </tr>
-                            @endforelse
-                        </tbody>
-                        @endif
-                    </table>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="tab_3">
+                                <div class="box-body table-responsive">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Matakuliah</th>
+                                                <th>Hari</th>
+                                                <th>Jam</th>
+                                                <th>Ruang</th>
+                                                <th>Dosen</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @forelse($jadwal as $j)
+                                            <tr>
+                                                <td>{{$j->matakuliah->name}}</td>
+                                                <td>{{$j->hari}}</td>
+                                                <td>{{$j->jam}}</td>
+                                                <td>{{$j->ruang->name}}</td>
+                                                <td>{{$j->user->name}}</td>
+                                            </tr>
+                                            @empty
+                                            <tr>
+                                                <td colspan="5">Kosong</td>
+                                            </tr>
+                                            @endforelse
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="box-footer">
                     <a href="{{ route('user.index', ['role' => 'mahasiswa']) }}" class="btn btn-default">Kembali</a>
