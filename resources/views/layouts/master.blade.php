@@ -83,7 +83,7 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="{{ route('user.edit', auth()->user()->id) }}" class="mb-1 btn btn-default btn-flat">
+                                        <a href="{{ auth()->user()->role == 'mahasiswa' ? route('user.edit', ['id' => auth()->user()->id, 'role' => 'mahasiswa']) : '' }}" class="mb-1 btn btn-default btn-flat">
                                             Edit Profile
                                         </a>
                                     </div>

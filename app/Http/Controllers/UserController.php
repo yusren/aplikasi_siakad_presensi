@@ -13,22 +13,29 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('users.index', [
-            'users' => User::where('role', 'dosen')->orWhere('role', 'mahasiswa')->get(),
-        ]);
+        switch ($request->role) {
+            case 'mahasiswa':
+                return view('users.mahasiswa.index', ['users' => User::where('role', 'mahasiswa')->get()]);
+            case 'dosen':
+                return view('users.dosen.index');
+            default:
+                abort(404);
+        }
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        return view('users.create', [
-            'prodi' => Prodi::get(),
-            'roles' => [
-                'dosen',
-                'mahasiswa',
-            ],
-        ]);
+        $prodi = Prodi::get();
+        switch ($request->role) {
+            case 'mahasiswa':
+                return view('users.mahasiswa.create', ['prodi' => $prodi]);
+            case 'dosen':
+                return view('users.dosen.create', ['prodi' => $prodi]);
+            default:
+                abort(404);
+        }
     }
 
     public function store(Request $request)
@@ -38,7 +45,6 @@ class UserController extends Controller
             'name' => 'required',
             'nomor' => 'required_if:role,mahasiswa',
             'photo' => 'nullable',
-            // 'username' => 'required',
             'role' => 'required',
             'jenis_kelamin' => 'required',
             'status' => 'required',
@@ -61,12 +67,12 @@ class UserController extends Controller
 
         User::create($data);
 
-        return redirect(route('user.index'))->with('toast_success', 'Berhasil Menyimpan Data!');
+        return redirect(route('user.index', ['role' => $request->role]))->with('toast_success', 'Berhasil Menyimpan Data!');
     }
 
     public function show(Request $request, User $user)
     {
-        if ($user->role == 'mahasiswa') {
+        if ($request->role == 'mahasiswa') {
             $tahunAjaranId = $request->tahun_ajaran_id ?: TahunAjaran::where('is_active', true)->latest()->first()->id;
             $tahunAjaranAktif = TahunAjaran::find($tahunAjaranId);
             $krs = $user->krs->where('tahun_ajaran_id', $tahunAjaranId);
@@ -78,7 +84,7 @@ class UserController extends Controller
                 ->whereIn('matakuliah_id', $matakuliahIds)
                 ->get();
 
-            return view('users.show', [
+            return view('users.mahasiswa.show', [
                 'user' => $user,
                 'krs' => $krs,
                 'jadwal' => $jadwal,
@@ -92,17 +98,19 @@ class UserController extends Controller
         }
     }
 
-    public function edit(User $user)
+    public function edit(Request $request, User $user)
     {
-        return view('users.edit', [
-            'user' => $user,
-            'dosen' => User::where('role', 'dosen')->get(),
-            'prodi' => Prodi::get(),
-            'roles' => [
-                'dosen',
-                'mahasiswa',
-            ],
-        ]);
+        $prodi = Prodi::get();
+        $dosen = User::where('role', 'dosen')->get();
+
+        switch ($request->role) {
+            case 'mahasiswa':
+                return view('users.mahasiswa.edit', ['user' => $user, 'prodi' => $prodi, 'dosen' => $dosen]);
+            case 'dosen':
+                return view('users.dosen.edit', ['user' => $user, 'prodi' => $prodi]);
+            default:
+                abort(404);
+        }
     }
 
     public function update(Request $request, User $user)
@@ -152,17 +160,15 @@ class UserController extends Controller
                 'penghasilan_ayah' => $request->penghasilan_ayah,
                 'penghasilan_ibu' => $request->penghasilan_ibu,
             ]);
-
-            return redirect()->back()->with('toast_success', 'Berhasil Menyimpan Data!');
         }
 
-        return redirect(route('user.index'))->with('toast_success', 'Berhasil Menyimpan Data!');
+        return redirect(route('user.index', ['role' => $request->role]))->with('toast_warning', 'Berhasil Merubah Data!');
     }
 
-    public function destroy(User $user)
+    public function destroy(Request $request, User $user)
     {
         $user->delete();
 
-        return redirect(route('user.index'))->with('toast_error', 'Berhasil Menghapus Data!');
+        return redirect(route('user.index', ['role' => $request->role]))->with('toast_error', 'Berhasil Menghapus Data!');
     }
 }
