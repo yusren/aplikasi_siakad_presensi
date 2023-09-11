@@ -66,10 +66,8 @@
                             <label>Jenis Kelamin</label>
                             <select class="form-control select2" name="jenis_kelamin" data-placeholder="Pilih Jenis Kelamin" style="width: 100%;">
                                 <option value="" selected disabled>Pilih Jenis Kelamin</option>
-                                <option value="laki-laki" @if ($user->jenis_kelamin == 'laki-laki') selected
-                                    @endif>Laki-Laki</option>
-                                <option value="perempuan" @if ($user->jenis_kelamin == 'perempuan') selected
-                                    @endif>Perempuan</option>
+                                <option value="laki-laki" @if ($user->jenis_kelamin == 'laki-laki') selected @endif>Laki-Laki</option>
+                                <option value="perempuan" @if ($user->jenis_kelamin == 'perempuan') selected @endif>Perempuan</option>
                             </select>
                             @error('role')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
@@ -91,8 +89,12 @@
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
-                            <label for="">Agama</label>
-                            <input type="text" class="form-control" name="agama" value="{{ old('agama', $user->agama) }}" placeholder="Masukkan Agama">
+                            <label>Agama</label>
+                            <select required class="form-control select2" name="agama" data-placeholder="Pilih Agama" style="width: 100%;">
+                                @foreach ($agama as $value)
+                                <option value="{{ $value }}" {{ old('agama', $user->agama) == $value ? 'selected' : '' }}>{{ $value }} </option>
+                                @endforeach
+                            </select>
                             @error('agama')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>

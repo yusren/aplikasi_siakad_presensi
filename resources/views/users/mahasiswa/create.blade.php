@@ -86,7 +86,14 @@
                         </div>
                         <div class="form-group">
                             <label for="">Agama</label>
-                            <input type="text" class="form-control" name="agama" value="{{ old('agama') }}" placeholder="Masukkan Agama">
+                            <select required class="form-control select2" name="agama" data-placeholder="Pilih Agama" style="width: 100%;">
+                                <option value="" selected disabled>Pilih Agama</option>
+                                @foreach ($agama as $value)
+                                <option value="{{ $value }}" {{ old('agama')==$value ? 'selected' : '' }}>
+                                    {{ $value }}
+                                </option>
+                                @endforeach
+                            </select>
                             @error('agama')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>

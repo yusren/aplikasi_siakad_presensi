@@ -30,11 +30,12 @@ class UserController extends Controller
     public function create(Request $request)
     {
         $prodi = Prodi::get();
+        $agama = ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Konghucu'];
         switch ($request->role) {
             case 'mahasiswa':
-                return view('users.mahasiswa.create', ['prodi' => $prodi]);
+                return view('users.mahasiswa.create', ['prodi' => $prodi, 'agama' => $agama]);
             case 'dosen':
-                return view('users.dosen.create', ['prodi' => $prodi]);
+                return view('users.dosen.create', ['prodi' => $prodi, 'agama' => $agama]);
             default:
                 abort(404);
         }
@@ -104,12 +105,13 @@ class UserController extends Controller
     {
         $prodi = Prodi::get();
         $dosen = User::where('role', 'dosen')->get();
+        $agama = ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Konghucu'];
 
         switch ($request->role) {
             case 'mahasiswa':
-                return view('users.mahasiswa.edit', ['user' => $user, 'prodi' => $prodi, 'dosen' => $dosen]);
+                return view('users.mahasiswa.edit', ['user' => $user, 'prodi' => $prodi, 'dosen' => $dosen, 'agama' => $agama]);
             case 'dosen':
-                return view('users.dosen.edit', ['user' => $user, 'prodi' => $prodi]);
+                return view('users.dosen.edit', ['user' => $user, 'prodi' => $prodi, 'agama' => $agama]);
             default:
                 abort(404);
         }
