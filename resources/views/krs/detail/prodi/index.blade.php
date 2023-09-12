@@ -20,8 +20,7 @@
                     <form method="GET" action="{{ url()->current() }}">
                         <div class="form-group">
                             <label>Tahun Ajaran</label>
-                            <select required class="form-control select2" name="tahun_ajaran_id"
-                                data-placeholder="Pilih Tahun Ajaran" style="width: 100%;">
+                            <select required class="form-control select2" name="tahun_ajaran_id" data-placeholder="Pilih Tahun Ajaran" style="width: 100%;">
                                 @foreach($tahunAjaran as $ta)
                                 <option value="{{ $ta->id }}" {{ (request('tahun_ajaran_id')==$ta->id || $tahunAjaranAktif->id == $ta->id) ? 'selected' : '' }}>
                                     {{ $ta->name }} - {{ $ta->semester }}. {{ $ta->is_active ? 'aktif' : '' }}
@@ -37,27 +36,18 @@
                         <thead>
                             <tr>
                                 <td>No</td>
-                                <td>NIM</td>
-                                <td>Nama Mahasiswa</td>
-                                <td>Status</td>
-                                <td>Kelas</td>
-                                <td>Semester</td>
-                                <td>Validasi</td>
+                                <td>Nama Prodi</td>
+                                <td>Kode Prodi</td>
                                 <td>Aksi</td>
                             </tr>
                         </thead>
-                        @foreach ($users as $value)
+                        @foreach($users as $prodiData => $value)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $value->nomor }}</td>
-                            <td>{{ $value->name }}</td>
-                            <td>Registrasi {{ $value->status }}</td>
-                            <td>{{ $value->kelas->first()->name }}</td>
-                            <td>{{ $value->krs->first()->semester }}</td>
-                            <td>{{ $value->krs->first()->status }}</td>
+                            <td>{{ $prodiData }}</td>
+                            <td>{{ $value->first()->kelas->first()->prodi->code }}</td>
                             <td>
-                                <a class="btn btn-info" href="{{ route('user.show', ['user' => $value->id, 'role' => 'mahasiswa' , 'tahun_ajaran_id' => $tahunAjaranAktif->id]) }}">Show</a>
-                                {{-- <a class="btn btn-success" href="{{ route('krs.input', ['user' => $value->id, 'tahun_ajaran_id' => $tahunAjaranAktif->id]) }}">Input Nilai</a> --}}
+                                <a class="btn btn-info" href="{{ route('krs.index.detailkelas', ['groupKey' => 'kelas', 'prodi' => $value->first()->kelas->first()->prodi->id, 'tahun_ajaran_id' => $tahunAjaranAktif->id ]) }}">Show</a>
                             </td>
                         </tr>
                         @endforeach

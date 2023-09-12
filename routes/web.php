@@ -47,6 +47,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('/tahunajaran', TahunAjaranController::class);
     Route::resource('/jadwal', JadwalController::class);
     Route::resource('/krs', KrsController::class);
+    Route::get('/krs-detailprodi', [KrsController::class, 'indexDetailprodi'])->name('krs.index.detailprodi');
+    Route::get('/krs-detailkelas', [KrsController::class, 'indexDetailkelas'])->name('krs.index.detailkelas');
+    Route::get('/krs-detailmahasiswa', [KrsController::class, 'indexDetailmahasiswa'])->name('krs.index.detailmahasiswa');
     Route::post('/pengajuan-krs', [KrsController::class, 'pengajuanKrs'])->name('krs.pengajuan');
     Route::get('/nilai', [NilaiController::class, 'index'])->name('nilai.index');
     Route::post('/nilai', [NilaiController::class, 'store'])->name('nilai.store');

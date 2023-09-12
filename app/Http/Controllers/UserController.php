@@ -60,9 +60,10 @@ class UserController extends Controller
 
     public function show(Request $request, User $user)
     {
+        $tahunAjaranId = $request->tahun_ajaran_id ?: TahunAjaran::where('is_active', true)->latest()->first()->id;
+        $tahunAjaranAktif = TahunAjaran::find($tahunAjaranId);
+        $tahunAjaran = TahunAjaran::orderBy('name')->get();
         if ($request->role == 'mahasiswa') {
-            $tahunAjaranId = $request->tahun_ajaran_id ?: TahunAjaran::where('is_active', true)->latest()->first()->id;
-            $tahunAjaranAktif = TahunAjaran::find($tahunAjaranId);
             $krs = $user->krs->where('tahun_ajaran_id', $tahunAjaranId);
             $matakuliahIds = $krs->pluck('matakuliah_id')->toArray();
             $jadwal = Jadwal::where('tahun_ajaran_id', $tahunAjaranId)
@@ -77,16 +78,24 @@ class UserController extends Controller
                 'krs' => $krs,
                 'jadwal' => $jadwal,
                 'tahunAjaranAktif' => $tahunAjaranAktif,
-                'tahunAjaran' => TahunAjaran::orderBy('name')->get(),
+                'tahunAjaran' => $tahunAjaran,
                 'bobot_tugas' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_tugas'],
                 'bobot_uts' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_uts'],
                 'bobot_uas' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_uas'],
                 'bobot_keaktifan' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_keaktifan'],
             ]);
         } else {
-            dd($user->toArray());
+            $userid = $user->id;
+            $jadwal = Jadwal::where('user_id', $userid)->where('tahun_ajaran_id', $tahunAjaranId)->whereHas('matakuliah.user', function ($query) use ($userid) {
+                $query->where('id', $userid);
+            })->get();
 
-            return view('users.non-mahasiswa.show', []);
+            return view('users.dosen.show', [
+                'user' => $user,
+                'jadwal' => $jadwal,
+                'tahunAjaranAktif' => $tahunAjaranAktif,
+                'tahunAjaran' => $tahunAjaran,
+            ]);
         }
     }
 

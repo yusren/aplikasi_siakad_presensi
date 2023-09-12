@@ -15,7 +15,7 @@
             <li class="{{ (request()->is('dashboard*')) ? 'active' : '' }}"><a href="/dashboard"><i class="fa fa-tachometer"></i><span>Dashboard</span></a></li>
             @switch(auth()->user()->role)
                 @case('mahasiswa')
-                    <li class="{{ (request()->is('user*')) ? 'active' : '' }}"><a href="{{ route('user.edit', auth()->user()) }}"><i class="fa fa-circle"></i><span>Data Diri</span></a></li>
+                    <li class="{{ (request()->is('user*')) ? 'active' : '' }}"><a href="{{ route('user.edit', ['user' => auth()->user()->id, 'role' => 'mahasiswa']) }}"><i class="fa fa-circle"></i><span>Data Diri</span></a></li>
                     <li class="{{ (request()->is('krs*')) ? 'active' : '' }}"><a href="/krs"><i class="fa fa-circle"></i><span>Entri KRS</span></a></li>
                     <li class="#"><a href="#"><i class="fa fa-circle"></i><span>Lihat KRS</span></a></li>
                     <li class="#"><a href="#"><i class="fa fa-circle"></i><span>Lihat Rekap</span></a></li>
@@ -42,7 +42,7 @@
                         <li class="{{ (request()->is('matakuliah*')) ? 'active' : '' }}"><a href="/matakuliah"><i class="fa fa-circle"></i><span>Mata Kuliah</span></a></li>
                         <li class="{{ (request()->is('ruang*')) ? 'active' : '' }}"><a href="/ruang"><i class="fa fa-circle"></i><span>Ruang</span></a></li>
                         <li class="{{ (request()->is('jadwal*')) ? 'active' : '' }}"><a href="/jadwal"><i class="fa fa-circle"></i><span>Jadwal</span></a></li>
-                        <li class="{{ (request()->is('krs*')) ? 'active' : '' }}"><a href="/krs"><i class="fa fa-circle"></i><span>KRS</span></a></li>
+                        <li class="{{ (request()->is('krs*')) ? 'active' : '' }}"><a href="/krs-detailprodi"><i class="fa fa-circle"></i><span>KRS</span></a></li>
                     </ul>
                 </li>
             @endswitch

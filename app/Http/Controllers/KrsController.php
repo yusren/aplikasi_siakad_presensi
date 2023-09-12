@@ -12,10 +12,9 @@ use Illuminate\Http\Request;
 
 class KrsController extends Controller
 {
-    public function index(Request $request)
+    public function getUsersByRoleAndTahunAjaran($role, $tahunAjaranId)
     {
-        $tahunAjaranId = $request->input('tahun_ajaran_id', TahunAjaran::where('is_active', true)->latest()->first()->id);
-        $users = User::where('role', 'mahasiswa')
+        return User::where('role', $role)
             ->whereHas('krs', function ($query) use ($tahunAjaranId) {
                 $query->where('tahun_ajaran_id', $tahunAjaranId);
             })
@@ -23,6 +22,12 @@ class KrsController extends Controller
                 $query->where('tahun_ajaran_id', $tahunAjaranId);
             }])
             ->get();
+    }
+
+    public function index(Request $request)
+    {
+        $tahunAjaranId = $request->input('tahun_ajaran_id', TahunAjaran::where('is_active', true)->latest()->first()->id);
+        $users = $this->getUsersByRoleAndTahunAjaran('mahasiswa', $tahunAjaranId);
 
         if (auth()->user()->role == 'mahasiswa') {
             return view('krs.user.index', [
@@ -38,6 +43,63 @@ class KrsController extends Controller
                 'tahunAjaran' => TahunAjaran::orderBy('name')->get(),
             ]);
         }
+    }
+
+    public function indexDetailprodi(Request $request)
+    {
+        $tahunAjaranId = $request->input('tahun_ajaran_id', TahunAjaran::where('is_active', true)->latest()->first()->id);
+        $users = $this->getUsersByRoleAndTahunAjaran('mahasiswa', $tahunAjaranId)
+            ->groupBy(function ($item, $key) {
+                return $item->kelas->first()->prodi->name;
+            });
+
+        if (auth()->user()->role == 'mahasiswa') {
+            return view('krs.user.index', [
+                'users' => auth()->user(),
+                'krs' => auth()->user()->krs->where('tahun_ajaran_id', $tahunAjaranId)->where('status', 'menunggu'),
+                'tahunAjaranAktif' => TahunAjaran::find($tahunAjaranId),
+                'tahunAjaran' => TahunAjaran::orderBy('name')->get(),
+            ]);
+        } else {
+            return view('krs.detail.prodi.index', [
+                'users' => $users,
+                'tahunAjaranAktif' => TahunAjaran::find($tahunAjaranId),
+                'tahunAjaran' => TahunAjaran::orderBy('name')->get(),
+            ]);
+        }
+    }
+
+    public function indexDetailkelas(Request $request)
+    {
+        $prodi = $request->prodi;
+        $tahunAjaranId = $request->input('tahun_ajaran_id', TahunAjaran::where('is_active', true)->latest()->first()->id);
+        $users = $this->getUsersByRoleAndTahunAjaran('mahasiswa', $tahunAjaranId)
+            ->filter(function ($item) use ($prodi) {
+                return $item->kelas->first()->prodi->id == $prodi;
+            })
+            ->groupBy(function ($item, $key) {
+                return $item->kelas->first()->name;
+            });
+
+        return view('krs.detail.kelas.index', [
+            'tahunAjaranAktif' => TahunAjaran::find($tahunAjaranId),
+            'users' => $users,
+        ]);
+    }
+
+    public function indexDetailmahasiswa(Request $request)
+    {
+        $kelas = $request->kelas;
+        $tahunAjaranId = $request->input('tahun_ajaran_id', TahunAjaran::where('is_active', true)->latest()->first()->id);
+        $users = $this->getUsersByRoleAndTahunAjaran('mahasiswa', $tahunAjaranId)
+            ->filter(function ($item) use ($kelas) {
+                return $item->kelas->first()->id == $kelas;
+            });
+
+        return view('krs.detail.mahasiswa.index', [
+            'tahunAjaranAktif' => TahunAjaran::find($tahunAjaranId),
+            'users' => $users,
+        ]);
     }
 
     public function create()
