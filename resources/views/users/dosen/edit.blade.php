@@ -20,15 +20,13 @@
                     <div class="box-body">
                         <div class="form-group">
                             <img class="img-thumbnail" src="{{ asset($user->photo) }}" alt="" width="200px">
-                            <input type="file" class="form-control" name="photo" value="{{ old('photo') }}"
-                                placeholder="Masukkan Foto">
+                            <input type="file" class="form-control" name="photo" value="{{ old('photo') }}" placeholder="Masukkan Foto">
                             @error('photo')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
                             <label for="">Nama</label>
-                            <input type="text" class="form-control" name="name" value="{{ old('name', $user->name) }}"
-                                placeholder="Masukkan Nama">
+                            <input type="text" class="form-control" name="name" value="{{ old('name', $user->name) }}" placeholder="Masukkan Nama">
                             @error('name')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
@@ -52,8 +50,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Password</label>
-                            <input type="password" class="form-control" name="password" value="{{ old('password') }}"
-                                placeholder="Masukkan Password">
+                            <input type="password" class="form-control" name="password" value="{{ old('password') }}" placeholder="Masukkan Password">
                             @error('password')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
@@ -65,22 +62,17 @@
                         </div>
                         <div class="form-group">
                             <label>Jenis Kelamin</label>
-                            <select class="form-control select2" name="jenis_kelamin"
-                                data-placeholder="Pilih Jenis Kelamin" style="width: 100%;">
+                            <select class="form-control select2" name="jenis_kelamin" data-placeholder="Pilih Jenis Kelamin" style="width: 100%;">
                                 <option value="" selected disabled>Pilih Jenis Kelamin</option>
-                                <option value="laki-laki" @if ($user->jenis_kelamin == 'laki-laki') selected
-                                    @endif>Laki-Laki</option>
-                                <option value="perempuan" @if ($user->jenis_kelamin == 'perempuan') selected
-                                    @endif>Perempuan</option>
+                                <option value="laki-laki" @if ($user->jenis_kelamin == 'laki-laki') selected @endif>Laki-Laki</option>
+                                <option value="perempuan" @if ($user->jenis_kelamin == 'perempuan') selected @endif>Perempuan</option>
                             </select>
                             @error('role')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
                             <label>Status Registrasi</label>
-                            <select @if (auth()->user()->role == 'dosen') ? disabled : required @endif
-                                class="form-control select2" name="status" data-placeholder="Pilih Status" style="width:
-                                100%;">
+                            <select @if (auth()->user()->role == 'dosen') ? disabled : required @endif class="form-control select2" name="status" data-placeholder="Pilih Status" style="width: 100%;">
                                 <option value="" selected disabled>Pilih Status</option>
                                 <option @if ($user->status == 'active') selected @endif value="active">Aktif</option>
                                 <option @if ($user->status == 'non-active') selected @endif value="non-active">Non Aktif
@@ -107,27 +99,71 @@
                         </div>
                         <div class="form-group">
                             <label for="">Tempat Lahir</label>
-                            <input type="text" class="form-control" name="tempat_lahir" value="{{ old('tempat_lahir', $user->tempat_lahir) }}"
-                                placeholder="Masukkan Tempat Lahir">
+                            <input type="text" class="form-control" name="tempat_lahir" value="{{ old('tempat_lahir', $user->tempat_lahir) }}" placeholder="Masukkan Tempat Lahir">
                             @error('tempat_lahir')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
                             <label for="">Tanggal Lahir</label>
-                            <input type="date" class="form-control" name="tanggal_lahir" value="{{ old('tanggal_lahir', $user->tanggal_lahir) }}"
-                                placeholder="Masukkan Tanggal Lahir">
+                            <input type="date" class="form-control" name="tanggal_lahir" value="{{ old('tanggal_lahir', $user->tanggal_lahir) }}" placeholder="Masukkan Tanggal Lahir">
                             @error('tanggal_lahir')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
                             <label>Program Studi</label>
-                            <select required class="form-control select2" name="prodi_id" data-placeholder="Pilih Prodi"
-                                style="width: 100%;">
+                            <select required class="form-control select2" name="prodi_id" data-placeholder="Pilih Prodi" style="width: 100%;">
                                 @foreach ($prodi as $pr)
                                 <option value="{{ $pr->id }}" {{ old('prodi_id', $user->prodi_id) == $pr->id ?
                                     'selected' : '' }}>{{ $pr->name }} </option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Gelar Akademik</label>
+                            <input type="text" class="form-control" name="gelar_akademik" value="{{ old('gelar_akademik', $user->gelar_akademik) }}" placeholder="Masukkan Gelar Akademik">
+                            @error('gelar_akademik')
+                            <div class="invalid-feedback text-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Jabatan Akademik</label>
+                            <select class="form-control select2" name="jabatan_akademik">
+                                <option value="">Pilih Jabatan Akademik</option>
+                                <option {{ $user->jabatan_akademik == 'Tenaga Pengajar' ? 'selected' : '' }} value="Tenaga Pengajar">Tenaga Pengajar</option>
+                                <option {{ $user->jabatan_akademik == 'Karyawan' ? 'selected' : '' }} value="Karyawan">Karyawan</option>
+                            </select>
+                            @error('jabatan_akademik')
+                            <div class="invalid-feedback text-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Pendidikan Tinggi</label>
+                            <select class="form-control select2" name="pendidikan_tinggi">
+                                <option value="">Pilih Pendidikan Tinggi</option>
+                                <option {{ $user->pendidikan_tinggi == 'SD/MI' ? 'selected' : '' }} value="SD/MI">SD/MI</option>
+                                <option {{ $user->pendidikan_tinggi == 'SLTP/Sederajat' ? 'selected' : '' }} value="SLTP/Sederajat">SLTP/Sederajat</option>
+                                <option {{ $user->pendidikan_tinggi == 'SLTA/Sederajat' ? 'selected' : '' }} value="SLTA/Sederajat">SLTA/Sederajat</option>
+                                <option {{ $user->pendidikan_tinggi == 'D4/S1' ? 'selected' : '' }} value="D4/S1">D4/S1</option>
+                                <option {{ $user->pendidikan_tinggi == 'S2' ? 'selected' : '' }} value="S2">S2</option>
+                                <option {{ $user->pendidikan_tinggi == 'S3' ? 'selected' : '' }} value="S3">S3</option>
+                            </select>
+                            @error('pendidikan_tinggi')
+                            <div class="invalid-feedback text-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Status Ikatan Kerja</label>
+                            <select class="form-control select2" name="status_ikatan_kerja">
+                                <option value="">Pilih Status Ikatan Kerja</option>
+                                <option {{ $user->status_ikatan_kerja == 'Tetap' ? 'selected' : '' }} value="Tetap">Tetap</option>
+                                <option {{ $user->status_ikatan_kerja == 'Sementara' ? 'selected' : '' }} value="Sementara">Sementara</option>
+                            </select>
+                            @error('status_ikatan_kerja')
+                            <div class="invalid-feedback text-danger">{{$message}}</div>
+                            @enderror
                         </div>
                         <input type="hidden" name="role" value="dosen">
                     </div><!-- /.box-body -->

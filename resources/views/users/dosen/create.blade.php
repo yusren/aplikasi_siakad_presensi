@@ -55,8 +55,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Confirm Password</label>
-                            <input type="password" class="form-control" name="confirm-password"
-                                value="{{ old('confirm-password') }}" placeholder="Confirm Password">
+                            <input type="password" class="form-control" name="confirm-password" value="{{ old('confirm-password') }}" placeholder="Confirm Password">
                             @error('confirm-password')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
@@ -102,15 +101,13 @@
                         </div>
                         <div class="form-group">
                             <label for="">Tempat Lahir</label>
-                            <input type="text" class="form-control" name="tempat_lahir"
-                                value="{{ old('tempat_lahir') }}" placeholder="Masukkan Tempat Lahir">
+                            <input type="text" class="form-control" name="tempat_lahir" value="{{ old('tempat_lahir') }}" placeholder="Masukkan Tempat Lahir">
                             @error('tempat_lahir')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
                             <label for="">Tanggal Lahir</label>
-                            <input type="date" class="form-control" name="tanggal_lahir"
-                                value="{{ old('tanggal_lahir') }}" placeholder="Masukkan Tanggal Lahir">
+                            <input type="date" class="form-control" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" placeholder="Masukkan Tanggal Lahir">
                             @error('tanggal_lahir')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
@@ -120,10 +117,57 @@
                                 <option value="" selected disabled>Pilih Prodi</option>
                                 @foreach ($prodi as $pr)
                                 <option value="{{ $pr->id }}" {{ old('prodi_id')==$pr->id ? 'selected' : '' }}>
-                                {{ $pr->name }}
+                                    {{ $pr->name }}
                                 </option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Gelar Akademik</label>
+                            <input type="text" class="form-control" name="gelar_akademik" value="{{ old('gelar_akademik') }}" placeholder="Masukkan Gelar Akademik">
+                            @error('gelar_akademik')
+                            <div class="invalid-feedback text-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Jabatan Akademik</label>
+                            <select class="form-control select2" name="jabatan_akademik">
+                                <option value="">Pilih Jabatan Akademik</option>
+                                <option value="Tenaga Pengajar">Tenaga Pengajar</option>
+                                <option value="Karyawan">Karyawan</option>
+                            </select>
+                            @error('jabatan_akademik')
+                            <div class="invalid-feedback text-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Pendidikan Tinggi</label>
+                            <select class="form-control select2" name="pendidikan_tinggi">
+                                <option value="">Pilih Pendidikan Tinggi</option>
+                                <option value="SD/MI">SD/MI</option>
+                                <option value="SLTP/Sederajat">SLTP/Sederajat</option>
+                                <option value="SLTA/Sederajat">SLTA/Sederajat</option>
+                                <option value="D4/S1">D4/S1</option>
+                                <option value="S2">S2</option>
+                                <option value="S3">S3</option>
+                            </select>
+                            @error('pendidikan_tinggi')
+                            <div class="invalid-feedback text-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Status Ikatan Kerja</label>
+                            <select class="form-control select2" name="status_ikatan_kerja">
+                                <option value="">Pilih Status Ikatan Kerja</option>
+                                <option value="Tetap">Tetap</option>
+                                <option value="Sementara">Sementara</option>
+                            </select>
+                            @error('status_ikatan_kerja')
+                            <div class="invalid-feedback text-danger">{{$message}}</div>
+                            @enderror
                         </div>
                         <input type="hidden" name="role" value="dosen">
                     </div><!-- /.box-body -->

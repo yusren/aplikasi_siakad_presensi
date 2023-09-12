@@ -38,6 +38,7 @@
                             <li><a href="#tab_1" data-toggle="tab">Data Mahasiswa</a></li>
                             <li class="active"><a href="#tab_2" data-toggle="tab">KRS</a></li>
                             <li><a href="#tab_3" data-toggle="tab">Jadwal</a></li>
+                            <li><a href="#tab_4" data-toggle="tab">KHS</a></li>
                             {{-- <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li> --}}
                         </ul>
                         <div class="tab-content">
@@ -73,9 +74,9 @@
 
                             <div class="tab-pane active" id="tab_2">
                                 <div class="box-body table-responsive">
-                                    <table class="table table-bordered table-striped">
+                                    <table class="table table-bordered table-striped table-sm">
                                         <thead>
-                                            <tr>
+                                            <tr class="bg-info">
                                                 <th>Dosen</th>
                                                 <th>Matakuliah</th>
                                                 <th>Kode</th>
@@ -122,9 +123,9 @@
 
                             <div class="tab-pane" id="tab_3">
                                 <div class="box-body table-responsive">
-                                    <table class="table table-bordered table-striped">
+                                    <table class="table table-bordered table-striped table-sm">
                                         <thead>
-                                            <tr>
+                                            <tr class="bg-info">
                                                 <th>Matakuliah</th>
                                                 <th>Hari</th>
                                                 <th>Jam</th>
@@ -147,6 +148,37 @@
                                             </tr>
                                             @endforelse
                                         </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab_4">
+                                <div class="box-body table-responsive">
+                                    <table class="table table-bordered">
+                                        <tr class="bg-info">
+                                            <th>No</th>
+                                            <th>Kode MK</th>
+                                            <th>Nama Mata Kuliah</th>
+                                            <th>SKS</th>
+                                            <th>Nilai</th>
+                                            <th>Bobot</th>
+                                        </tr>
+                                        @foreach ($krs as $value)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $value->matakuliah->code }}</td>
+                                            <td>{{ $value->matakuliah->name }}</td>
+                                            <td>{{ $value->matakuliah->sks }}</td>
+                                            <td>{{ $convertScoreToGrade((($bobot_tugas/100)*$value->nilai_tugas)+(($bobot_uts/100)*$value->nilai_uts)+(($bobot_uas/100)*$value->nilai_uas)+(($bobot_keaktifan/100)*$value->nilai_keaktifan)) }}</td>
+                                            <td>{{ (($bobot_tugas/100)*$value->nilai_tugas) + (($bobot_uts/100)*$value->nilai_uts) + (($bobot_uas/100)*$value->nilai_uas) + (($bobot_keaktifan/100)*$value->nilai_keaktifan) }}</td>
+                                        </tr>
+                                        @endforeach
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <th>Jumlah</th>
+                                            <td>{{ $krs->sum('matakuliah.sks') }}</td>
+                                            <td></td>
+                                        </tr>
                                     </table>
                                 </div>
                             </div>

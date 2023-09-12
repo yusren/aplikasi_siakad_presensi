@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Models\Jadwal;
 use App\Models\Prodi;
 use App\Models\TahunAjaran;
@@ -41,25 +42,9 @@ class UserController extends Controller
         }
     }
 
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $this->validate($request, [
-            'prodi_id' => 'required',
-            'name' => 'required',
-            'nomor' => 'required_if:role,mahasiswa',
-            'photo' => 'nullable',
-            'role' => 'required',
-            'jenis_kelamin' => 'required',
-            'status' => 'required',
-            'no_telp' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'same:confirm-password',
-            'agama' => 'required',
-            'alamat' => 'required',
-            'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required',
-        ]);
-        $data = $request->all();
+        $data = $request->validated();
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
             $fileName = time().'.'.$file->getClientOriginalExtension();
@@ -93,6 +78,10 @@ class UserController extends Controller
                 'jadwal' => $jadwal,
                 'tahunAjaranAktif' => $tahunAjaranAktif,
                 'tahunAjaran' => TahunAjaran::orderBy('name')->get(),
+                'bobot_tugas' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_tugas'],
+                'bobot_uts' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_uts'],
+                'bobot_uas' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_uas'],
+                'bobot_keaktifan' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_keaktifan'],
             ]);
         } else {
             dd($user->toArray());
@@ -117,27 +106,9 @@ class UserController extends Controller
         }
     }
 
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
-        $this->validate($request, [
-            'user_id' => 'nullable',
-            'prodi_id' => 'nullable',
-            'name' => 'required',
-            'nomor' => 'required_if:role,mahasiswa',
-            'photo' => 'nullable',
-            // 'username' => 'required',
-            'role' => 'required_if:role, !=, mahasiswa',
-            'jenis_kelamin' => 'required',
-            'status' => 'required_if:role, !=, mahasiswa',
-            'no_telp' => 'required',
-            'email' => 'required|email|unique:users,email,'.$user->id,
-            'password' => 'same:confirm-password',
-            'agama' => 'required',
-            'alamat' => 'required',
-            'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required',
-        ]);
-        $data = $request->all();
+        $data = $request->validated();
         if ($request->hasFile('photo')) {
             if ($user->photo) {
                 Storage::delete(str_replace('storage', 'public', $user->photo));
