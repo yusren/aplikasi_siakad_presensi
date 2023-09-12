@@ -7,12 +7,13 @@ use App\Models\Matakuliah;
 use App\Models\TahunAjaran;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class NilaiController extends Controller
 {
     public function index(Request $request)
     {
-        $tahunAjaranId = $request->input('tahun_ajaran_id', TahunAjaran::where('is_active', true)->latest()->first()->id);
+        $tahunAjaranId = $request->tahun_ajaran_id ?: TahunAjaran::where('is_active', true)->latest()->first()->id;
         $matakuliahId = $request->input('matakuliah_id', Matakuliah::where('user_id', auth()->id())->first()->id);
         $tahunAjaranAktif = TahunAjaran::find($tahunAjaranId);
         $matakuliahAktif = Matakuliah::find($matakuliahId);
@@ -25,6 +26,10 @@ class NilaiController extends Controller
         })->get();
 
         return view('input.index', [
+            'bobot_tugas' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_tugas'],
+            'bobot_uts' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_uts'],
+            'bobot_uas' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_uas'],
+            'bobot_keaktifan' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_keaktifan'],
             'users' => $users,
             'matakuliah' => Matakuliah::where('user_id', auth()->id())->get(),
             'tahunAjaran' => TahunAjaran::orderBy('name')->get(),

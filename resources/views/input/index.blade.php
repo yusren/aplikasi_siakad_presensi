@@ -74,8 +74,8 @@
                                     <td><input type="number" name="nilai_uts[]" value="{{ $value->krs->first()->nilai_uts }}" min="0"></td>
                                     <td><input type="number" name="nilai_uas[]" value="{{ $value->krs->first()->nilai_uas }}" min="0"></td>
                                     <td><input type="number" name="nilai_keaktifan[]" value="{{ $value->krs->first()->nilai_keaktifan }}" min="0"></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{ $convertScoreToGrade((($bobot_tugas/100)*$value->krs->first()->nilai_tugas)+(($bobot_uts/100)*$value->krs->first()->nilai_uts)+(($bobot_uas/100)*$value->krs->first()->nilai_uas)+(($bobot_keaktifan/100)*$value->krs->first()->nilai_keaktifan)) }}</td>
+                                    <td>{{ (($bobot_tugas/100)*$value->krs->first()->nilai_tugas) + (($bobot_uts/100)*$value->krs->first()->nilai_uts) + (($bobot_uas/100)*$value->krs->first()->nilai_uas) + (($bobot_keaktifan/100)*$value->krs->first()->nilai_keaktifan) }}</td>
                                 </tr>
                                 @endforeach
                             </table>

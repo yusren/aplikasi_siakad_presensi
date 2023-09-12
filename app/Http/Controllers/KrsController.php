@@ -26,7 +26,7 @@ class KrsController extends Controller
 
     public function index(Request $request)
     {
-        $tahunAjaranId = $request->input('tahun_ajaran_id', TahunAjaran::where('is_active', true)->latest()->first()->id);
+        $tahunAjaranId = $request->tahun_ajaran_id ?: TahunAjaran::where('is_active', true)->latest()->first()->id;
         $users = $this->getUsersByRoleAndTahunAjaran('mahasiswa', $tahunAjaranId);
 
         if (auth()->user()->role == 'mahasiswa') {
@@ -47,7 +47,7 @@ class KrsController extends Controller
 
     public function indexDetailprodi(Request $request)
     {
-        $tahunAjaranId = $request->input('tahun_ajaran_id', TahunAjaran::where('is_active', true)->latest()->first()->id);
+        $tahunAjaranId = $request->tahun_ajaran_id ?: TahunAjaran::where('is_active', true)->latest()->first()->id;
         $users = $this->getUsersByRoleAndTahunAjaran('mahasiswa', $tahunAjaranId)
             ->groupBy(function ($item, $key) {
                 return $item->kelas->first()->prodi->name;
@@ -72,7 +72,7 @@ class KrsController extends Controller
     public function indexDetailkelas(Request $request)
     {
         $prodi = $request->prodi;
-        $tahunAjaranId = $request->input('tahun_ajaran_id', TahunAjaran::where('is_active', true)->latest()->first()->id);
+        $tahunAjaranId = $request->tahun_ajaran_id ?: TahunAjaran::where('is_active', true)->latest()->first()->id;
         $users = $this->getUsersByRoleAndTahunAjaran('mahasiswa', $tahunAjaranId)
             ->filter(function ($item) use ($prodi) {
                 return $item->kelas->first()->prodi->id == $prodi;
@@ -90,7 +90,7 @@ class KrsController extends Controller
     public function indexDetailmahasiswa(Request $request)
     {
         $kelas = $request->kelas;
-        $tahunAjaranId = $request->input('tahun_ajaran_id', TahunAjaran::where('is_active', true)->latest()->first()->id);
+        $tahunAjaranId = $request->tahun_ajaran_id ?: TahunAjaran::where('is_active', true)->latest()->first()->id;
         $users = $this->getUsersByRoleAndTahunAjaran('mahasiswa', $tahunAjaranId)
             ->filter(function ($item) use ($kelas) {
                 return $item->kelas->first()->id == $kelas;

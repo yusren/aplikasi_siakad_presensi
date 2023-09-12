@@ -46,6 +46,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/prodi/{prodi_id}/kelas', [ProdiController::class, 'getKelas']);
     Route::resource('/tahunajaran', TahunAjaranController::class);
     Route::resource('/jadwal', JadwalController::class);
+    Route::get('/jadwal-detailprodi', [JadwalController::class, 'indexDetailprodi'])->name('jadwal.index.detailprodi');
+    Route::get('/jadwal-detailkelas', [JadwalController::class, 'indexDetailkelas'])->name('jadwal.index.detailkelas');
+    Route::get('/jadwal-detailmatakuliah', [JadwalController::class, 'indexDetailmatakuliah'])->name('jadwal.index.detailmatakuliah');
+    Route::get('/jadwal-detailpertemuan', [JadwalController::class, 'indexDetailpertemuan'])->name('jadwal.index.detailpertemuan');
     Route::resource('/krs', KrsController::class);
     Route::get('/krs-detailprodi', [KrsController::class, 'indexDetailprodi'])->name('krs.index.detailprodi');
     Route::get('/krs-detailkelas', [KrsController::class, 'indexDetailkelas'])->name('krs.index.detailkelas');

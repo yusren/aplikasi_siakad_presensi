@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
-@section('title', 'KRS')
+@section('title', 'Jadwal')
 
 @section('container')
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Data KRS
+        Data Jadwal
     </h1>
 </section>
 
@@ -20,18 +20,18 @@
                         <thead>
                             <tr>
                                 <td>No</td>
-                                <td>Nama Kelas</td>
-                                <td>Kode Kelas</td>
+                                <td>Nama Matakuliah</td>
+                                <td>Kode Matakuliah</td>
                                 <td>Aksi</td>
                             </tr>
                         </thead>
-                        @foreach ($users as $kelas => $value)
+                        @foreach ($jadwal as $matakuliah => $value)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $kelas }}</td>
-                            <td>{{ $value->first()->kelas->first()->code }}</td>
+                            <td>{{ $matakuliah }}</td>
+                            <td>{{ $value->first()->matakuliah->code }}</td>
                             <td>
-                                <a class="btn btn-info" href="{{ route('krs.index.detailmahasiswa', ['kelas' => $value->first()->kelas->first()->id, 'tahun_ajaran_id' => $tahunAjaranAktif->id ]) }}">Show</a>
+                                <a class="btn btn-info" href="{{ route('jadwal.index.detailpertemuan', ['matakuliah' => $value->first()->matakuliah->id, 'kelas' => $value->first()->kelas->id, 'tahun_ajaran_id' => $tahunAjaranAktif->id ]) }}">Show</a>
                             </td>
                         </tr>
                         @endforeach
