@@ -11,6 +11,12 @@ class MatakuliahController extends Controller
 {
     public function index()
     {
+        if (auth()->user()->role == 'dosen') {
+            return view('matakuliah.index', [
+                'matakuliah' => Matakuliah::where('user_id', auth()->id())->get(),
+            ]);
+        }
+
         return view('matakuliah.index', [
             'matakuliah' => Matakuliah::get(),
         ]);
