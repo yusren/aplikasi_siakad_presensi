@@ -96,6 +96,9 @@ class JadwalController extends Controller
         $tahunAjaranId = $request->get('tahun_ajaran_id', TahunAjaran::where('is_active', true)->latest()->first()->id);
 
         $jadwal = Jadwal::where(['user_id' => auth()->id(), 'tahun_ajaran_id' => $tahunAjaranId])
+            ->whereHas('matakuliah.user', function ($query) {
+                $query->where('id', auth()->id());
+            })
             ->when($request->$groupKey, ($filters[$groupKey] ?? null))
             ->with(['pertemuan'])
             ->get()->when(
@@ -107,6 +110,9 @@ class JadwalController extends Controller
         switch ($groupKey) {
             case 'kelas':
                 $jadwal = Jadwal::where(['user_id' => auth()->id(), 'tahun_ajaran_id' => $tahunAjaranId])
+                    ->whereHas('matakuliah.user', function ($query) {
+                        $query->where('id', auth()->id());
+                    })
                     ->when($request->$groupKey, ($filters[$groupKey] ?? null))
                     ->with(['pertemuan'])
                     ->get()->filter(function ($item) use ($prodiID) {
@@ -122,6 +128,9 @@ class JadwalController extends Controller
 
             case 'matakuliah':
                 $jadwal = Jadwal::where(['user_id' => auth()->id(), 'tahun_ajaran_id' => $tahunAjaranId])
+                    ->whereHas('matakuliah.user', function ($query) {
+                        $query->where('id', auth()->id());
+                    })
                     ->when($request->$groupKey, ($filters[$groupKey] ?? null))
                     ->with(['pertemuan'])
                     ->get()->filter(function ($item) use ($kelasID) {
