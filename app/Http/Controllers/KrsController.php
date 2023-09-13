@@ -9,6 +9,7 @@ use App\Models\Prodi;
 use App\Models\TahunAjaran;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class KrsController extends Controller
 {
@@ -32,7 +33,7 @@ class KrsController extends Controller
         if (auth()->user()->role == 'mahasiswa') {
             return view('krs.user.index', [
                 'users' => auth()->user(),
-                'krs' => auth()->user()->krs->where('tahun_ajaran_id', $tahunAjaranId)->where('status', 'menunggu'),
+                'krs' => auth()->user()->krs->where('tahun_ajaran_id', $tahunAjaranId),
                 'tahunAjaranAktif' => TahunAjaran::find($tahunAjaranId),
                 'tahunAjaran' => TahunAjaran::orderBy('name')->get(),
             ]);
@@ -148,18 +149,15 @@ class KrsController extends Controller
         return redirect(route('krs.index'))->with('toast_success', 'Krs Berhasil Di Ajukan!');
     }
 
-    // public function edit(Krs $kr)
-    // {
-    //     //
-    // }
+    public function rekap(Request $request)
+    {
+        return view('krs.rekap', [
+            'krs' => auth()->user()->krs->sortBy('tahunAjaran'),
+            'bobot_tugas' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_tugas'],
+            'bobot_uts' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_uts'],
+            'bobot_uas' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_uas'],
+            'bobot_keaktifan' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_keaktifan'],
 
-    // public function update(Request $request, Krs $kr)
-    // {
-    //     //
-    // }
-
-    // public function destroy(Krs $krs)
-    // {
-    //     //
-    // }
+        ]);
+    }
 }

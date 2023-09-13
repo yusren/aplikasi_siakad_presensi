@@ -18,7 +18,7 @@
                     <li class="{{ (request()->is('user*')) ? 'active' : '' }}"><a href="{{ route('user.edit', ['user' => auth()->user()->id, 'role' => 'mahasiswa']) }}"><i class="fa fa-circle"></i><span>Data Diri</span></a></li>
                     <li class="{{ (request()->is('krs*')) ? 'active' : '' }}"><a href="/krs"><i class="fa fa-circle"></i><span>Entri KRS</span></a></li>
                     <li class="#"><a href="#"><i class="fa fa-circle"></i><span>Lihat KRS</span></a></li>
-                    <li class="#"><a href="#"><i class="fa fa-circle"></i><span>Lihat Rekap</span></a></li>
+                    <li class="{{ (request()->is('rekap*')) ? 'active' : '' }}"><a href="/rekap"><i class="fa fa-circle"></i><span>Lihat Rekap</span></a></li>
                     <li class="{{ (request()->is('jadwal*')) ? 'active' : '' }}"><a href="/jadwal"><i class="fa fa-circle"></i><span>Jadwal</span></a></li>
                     @break
                 @case('dosen')
