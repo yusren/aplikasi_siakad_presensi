@@ -54,6 +54,7 @@
                                         <td>NIM</td>
                                         <td>Nama Mahasiswa</td>
                                         <td>Kelas</td>
+                                        <td>Prodi</td>
                                         <td>Absen</td>
                                         <td>Tugas</td>
                                         <td>UTS</td>
@@ -69,6 +70,7 @@
                                     <td>{{ $value->nomor }}</td>
                                     <td>{{ $value->name }} <input type="hidden" name="krs_id[]" value="{{ $value->krs->first()->id }}"></td>
                                     <td>{{ $value->kelas->first()->name }}</td>
+                                    <td>{{ $value->kelas->first()->prodi->name }}</td>
                                     <td>{{ $value->presensi->count() }}</td>
                                     <td><input type="number" name="nilai_tugas[]" value="{{ $value->krs->first()->nilai_tugas }}" min="0"></td>
                                     <td><input type="number" name="nilai_uts[]" value="{{ $value->krs->first()->nilai_uts }}" min="0"></td>

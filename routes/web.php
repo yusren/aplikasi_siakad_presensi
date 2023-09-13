@@ -57,6 +57,9 @@ Route::middleware(['auth', 'checkangket'])->group(function () {
     Route::get('/krs-detailmahasiswa', [KrsController::class, 'indexDetailmahasiswa'])->name('krs.index.detailmahasiswa');
     Route::post('/pengajuan-krs', [KrsController::class, 'pengajuanKrs'])->name('krs.pengajuan');
     Route::get('/nilai', [NilaiController::class, 'index'])->name('nilai.index');
+    Route::get('/nilai-detailprodi', [NilaiController::class, 'indexDetailprodi'])->name('nilai.index.detailprodi');
+    Route::get('/nilai-detailkelas', [NilaiController::class, 'indexDetailkelas'])->name('nilai.index.detailkelas');
+    Route::get('/nilai-detailmatakuliah', [NilaiController::class, 'indexDetailmatakuliah'])->name('nilai.index.detailmatakuliah');
     Route::post('/nilai', [NilaiController::class, 'store'])->name('nilai.store');
     Route::resource('/pertemuan', PertemuanController::class);
     Route::resource('/presensi', PresensiController::class);

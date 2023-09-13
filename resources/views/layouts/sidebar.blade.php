@@ -24,7 +24,7 @@
                 @case('dosen')
                     <li class="{{ (request()->is('matakuliah*')) ? 'active' : '' }}"><a href="/matakuliah"><i class="fa fa-circle"></i><span>Mata Kuliah</span></a></li>
                     <li class="{{ (request()->is('jadwal*')) ? 'active' : '' }}"><a href="/jadwal-detailprodi"><i class="fa fa-circle"></i><span>Absensi</span></a></li>
-                    <li class="{{ (request()->is('nilai*')) ? 'active' : '' }}"><a href="/nilai"><i class="fa fa-circle"></i><span>Nilai</span></a></li>
+                    <li class="{{ (request()->is('nilai*')) ? 'active' : '' }}"><a href="/nilai-detailprodi"><i class="fa fa-circle"></i><span>Nilai</span></a></li>
                     @break
                 @default
                 <li class="{{ request()->is('setting*') ? 'active' : '' }}"><a href="/setting"><i class="fa fa-gear"></i><span>Setting</span></a></li>
