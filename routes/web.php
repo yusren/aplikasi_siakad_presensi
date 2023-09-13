@@ -27,7 +27,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'checkangket'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -67,8 +67,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/print-krs', [ExportController::class, 'printKrs'])->name('export.print.krs');
     Route::get('/print-khs', [ExportController::class, 'printKhs'])->name('export.print.khs');
 
-    Route::resource('/test', TestController::class);
 });
+Route::resource('/test', TestController::class)->middleware('auth');
 
 require __DIR__.'/auth.php';
 

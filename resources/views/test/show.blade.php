@@ -30,14 +30,14 @@
                                     <ul>
                                         @foreach($value->jawaban as $jawaban)
                                         <li>
-                                            <input type="radio" name="{{ $value->id }}" value="{{ $jawaban->id }}" {{ isset(json_decode($hasilAngket->data_jawaban, true)[$value->id]) && json_decode($hasilAngket->data_jawaban, true)[$value->id] == $jawaban->id ? 'checked' : '' }}>
+                                            <input type="radio" name="{{ $value->id }}" value="{{ $jawaban->id }}" {{ isset($hasilAngket->data_jawaban[$value->id]) && json_decode($hasilAngket->data_jawaban, true)[$value->id] == $jawaban->id ? 'checked' : '' }}>
                                             {{$jawaban->answer_text}}
                                         </li>
                                         @endforeach
                                     </ul>
                                     @else
                                     <textarea name="{{ $value->id }}" cols="30"
-                                        rows="10">{{ isset(json_decode($hasilAngket->data_jawaban, true)[$value->id]) ? json_decode($hasilAngket->data_jawaban, true)[$value->id] : '' }}</textarea>
+                                        rows="10">{{ isset($hasilAngket->data_jawaban[$value->id]) ? json_decode($hasilAngket->data_jawaban, true)[$value->id] : '' }}</textarea>
                                     @endif
                                 </td>
                             </tr>
