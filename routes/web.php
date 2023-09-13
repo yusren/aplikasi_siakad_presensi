@@ -70,6 +70,7 @@ Route::middleware(['auth', 'checkangket'])->group(function () {
     // Route::get('/krs/{user}/input-nilai', [KrsController::class, 'inputNilai'])->name('krs.input');
     Route::get('/print-krs', [ExportController::class, 'printKrs'])->name('export.print.krs');
     Route::get('/print-khs', [ExportController::class, 'printKhs'])->name('export.print.khs');
+    Route::get('/print-jurnaldosen', [ExportController::class, 'printJurnalDosen'])->name('export.print.jurnaldosen');
 
 });
 Route::resource('/test', TestController::class)->middleware('auth');

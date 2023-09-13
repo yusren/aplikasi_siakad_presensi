@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\JadwalRequest;
 use App\Models\Fakultas;
 use App\Models\Jadwal;
+use App\Models\Kelas;
+use App\Models\Matakuliah;
 use App\Models\Ruang;
 use App\Models\TahunAjaran;
 use App\Models\User;
@@ -58,10 +60,12 @@ class JadwalController extends Controller
 
     public function indexDetailpertemuan(Request $request)
     {
-        $matakuliahId = $request->matakuliah;
-        $kelasId = $request->kelas;
         $tahunAjaranId = $request->tahun_ajaran_id ?: TahunAjaran::where('is_active', true)->latest()->first()->id;
         $tahunAjaranAktif = TahunAjaran::find($tahunAjaranId);
+        $kelasId = $request->kelas;
+        $kelasAktif = Kelas::find($kelasId);
+        $matakuliahId = $request->matakuliah;
+        $matakuliahAktif = Matakuliah::find($matakuliahId);
 
         $jadwal = Jadwal::where('tahun_ajaran_id', $tahunAjaranId)
             ->where('kelas_id', $kelasId)
@@ -71,11 +75,14 @@ class JadwalController extends Controller
             ->with('pertemuan')
             ->get();
 
-        return view('jadwal.dosen.pertemuan.index', ['jadwal' => $jadwal, 'tahunAjaranAktif' => $tahunAjaranAktif]);
+        return view('jadwal.dosen.pertemuan.index', ['jadwal' => $jadwal, 'tahunAjaranAktif' => $tahunAjaranAktif, 'kelasAktif' => $kelasAktif, 'matakuliahAktif' => $matakuliahAktif]);
     }
 
     private function indexDetail(Request $request, ?string $groupKey)
     {
+        $prodiID = $request->prodi;
+        $kelasID = $request->kelas;
+
         $filters = [
             'prodi' => fn ($query, $value) => $query->whereHas('kelas.prodi', fn ($q) => $q->where('id', $value)),
             'kelas' => fn ($query, $value) => $query->whereHas('kelas', fn ($q) => $q->where('id', $value)),
@@ -88,17 +95,49 @@ class JadwalController extends Controller
 
         $tahunAjaranId = $request->get('tahun_ajaran_id', TahunAjaran::where('is_active', true)->latest()->first()->id);
 
+        $jadwal = Jadwal::where(['user_id' => auth()->id(), 'tahun_ajaran_id' => $tahunAjaranId])
+            ->when($request->$groupKey, ($filters[$groupKey] ?? null))
+            ->with(['pertemuan'])
+            ->get()->when(
+                $groupKey,
+                fn ($results) => $results->groupBy(
+                    fn ($item) => data_get($item, "{$groupKey}.name")
+                )
+            );
+        switch ($groupKey) {
+            case 'kelas':
+                $jadwal = Jadwal::where(['user_id' => auth()->id(), 'tahun_ajaran_id' => $tahunAjaranId])
+                    ->when($request->$groupKey, ($filters[$groupKey] ?? null))
+                    ->with(['pertemuan'])
+                    ->get()->filter(function ($item) use ($prodiID) {
+                        $kelas = $item->kelas;
+
+                        return $kelas && $kelas->prodi && $kelas->prodi->id == $prodiID;
+                    })->groupBy(function ($item, $key) {
+                        $kelas = $item->kelas;
+
+                        return $kelas ? $kelas->name : 'No Kelas';
+                    });
+                break;
+
+            case 'matakuliah':
+                $jadwal = Jadwal::where(['user_id' => auth()->id(), 'tahun_ajaran_id' => $tahunAjaranId])
+                    ->when($request->$groupKey, ($filters[$groupKey] ?? null))
+                    ->with(['pertemuan'])
+                    ->get()->filter(function ($item) use ($kelasID) {
+                        $kelas = $item->kelas;
+
+                        return $kelas && $kelas->id == $kelasID;
+                    })->groupBy(function ($item, $key) {
+                        $matakuliah = $item->matakuliah;
+
+                        return $matakuliah ? $matakuliah->name : 'No Matakuliah';
+                    });
+                break;
+        }
+
         return view("jadwal.dosen.{$groupKey}.index", [
-            'jadwal' => Jadwal::where(['user_id' => auth()->id(), 'tahun_ajaran_id' => $tahunAjaranId])
-                ->when($request->$groupKey, ($filters[$groupKey] ?? null))
-                ->with(['pertemuan'])
-                ->get()
-                ->when(
-                    $groupKey,
-                    fn ($results) => $results->groupBy(
-                        fn ($item) => data_get($item, "{$groupKey}.name")
-                    )
-                ),
+            'jadwal' => $jadwal,
             'tahunAjaranAktif' => TahunAjaran::find($tahunAjaranId),
             'tahunAjaran' => TahunAjaran::orderBy('name')->get(),
         ]);

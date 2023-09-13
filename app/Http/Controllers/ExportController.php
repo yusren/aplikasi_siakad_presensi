@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jadwal;
 use App\Models\TahunAjaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -86,4 +87,17 @@ class ExportController extends Controller
 
     //     return 0; // score <30
     // }
+
+    public function printJurnalDosen(Request $request)
+    {
+        $jadwal = Jadwal::where([
+            ['matakuliah_id', $request->matakuliah_id],
+            ['kelas_id', $request->kelas_id],
+            ['tahun_ajaran_id', $request->tahun_ajaran_id],
+        ])->first();
+
+        return view('print.jurnaldosen', [
+            'jadwal' => $jadwal,
+        ]);
+    }
 }

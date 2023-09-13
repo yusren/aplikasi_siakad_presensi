@@ -15,6 +15,18 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
+                <div class="box-header">
+                    <h1>{{ $matakuliahAktif->name }}, {{ $kelasAktif->name }}</h1>
+                    <h3>{{ $tahunAjaranAktif->semester }} - {{ $tahunAjaranAktif->name }}</h3>
+                    <form method="GET" action="{{ route('export.print.jurnaldosen') }}">
+                        <div class="form-group">
+                            <input type="hidden" name="tahun_ajaran_id" value="{{ $tahunAjaranAktif->id }}">
+                            <input type="hidden" name="matakuliah_id" value="{{ $matakuliahAktif->id }}">
+                            <input type="hidden" name="kelas_id" value="{{ $kelasAktif->id }}">
+                            <button type="submit" class="btn btn-success">Cetak Jurnal Dosen</button>
+                        </div>
+                    </form>
+                </div>
                 <div class="box-body table-responsive">
                     <table class="table table-bordered table-responsive">
                         <tbody>
