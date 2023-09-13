@@ -18,6 +18,7 @@ use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RuangController;
 use App\Http\Controllers\TahunAjaranController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -65,6 +66,8 @@ Route::middleware('auth')->group(function () {
     // Route::get('/krs/{user}/input-nilai', [KrsController::class, 'inputNilai'])->name('krs.input');
     Route::get('/print-krs', [ExportController::class, 'printKrs'])->name('export.print.krs');
     Route::get('/print-khs', [ExportController::class, 'printKhs'])->name('export.print.khs');
+
+    Route::resource('/test', TestController::class);
 });
 
 require __DIR__.'/auth.php';

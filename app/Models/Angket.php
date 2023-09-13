@@ -22,4 +22,9 @@ class Angket extends Model
     {
         return $this->hasMany(Pertanyaan::class);
     }
+
+    public function hasil()
+    {
+        return $this->hasMany(HasilAngket::class);
+    }
 }

@@ -57,7 +57,7 @@
                                 <td>Aksi</td>
                             </tr>
                         </thead>
-                        @foreach ($pertanyaan as $value)
+                        @foreach ($angket->pertanyaan as $value)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $value->description }}</td>

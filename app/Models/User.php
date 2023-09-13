@@ -91,4 +91,9 @@ class User extends Authenticatable
 
         return null;
     }
+
+    public function hasilAngket()
+    {
+        return $this->hasMany(HasilAngket::class);
+    }
 }
