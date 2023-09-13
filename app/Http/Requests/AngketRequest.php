@@ -18,6 +18,8 @@ class AngketRequest extends FormRequest
             'tujuan' => 'required',
             'start_at' => 'required',
             'end_at' => 'required',
+            'kondisi' => 'required',
+            'kondisi_detail' => 'nullable',
         ];
     }
 }

@@ -33,6 +33,9 @@
                                 <option value="essay">Essay</option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            {{ $angket->kondisi }}
+                        </div>
                     </div>
                     <div class="box-footer">
                         <a href="{{ route('angket.index') }}" class="btn btn-default">Kembali</a>

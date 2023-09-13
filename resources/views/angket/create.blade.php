@@ -33,6 +33,13 @@
                             <input type="datetime-local" class="form-control" name="end_at" value="{{ old('end_at') }}" placeholder="Masukkan Tujuan Angket">
                             @error('end_at') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
+                        <div class="form-group">
+                            <label>Kondisi</label>
+                            <select required class="form-control select2" name="kondisi" data-placeholder="Pilih Kondisi" style="width: 100%;">
+                                <option value="sebelum_lihat_nilai" selected>sebelum_lihat_nilai</option>
+                                <option value="setelah_login">setelah_login</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="box-footer">
                         <a href="{{ route('angket.index') }}" class="btn btn-default">Kembali</a>

@@ -14,6 +14,8 @@ class Angket extends Model
         'tujuan',
         'start_at',
         'end_at',
+        'kondisi',
+        'kondisi_detail',
     ];
 
     public function pertanyaan()

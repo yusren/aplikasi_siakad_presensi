@@ -113,12 +113,12 @@
                     <td>Gagal</td>
                 </tr>
                 <tr>
-                    <td>20</td>
                     <td>0</td>
-                    <td>30.5</td>
-                    <td>66.5</td>
-                    <td>3.33</td>
-                    <td>3.53</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>{{ $totalScore }}</td>
+                    <td>{{ $ip }}</td>
+                    <td>{{ $ipk }}</td>
                 </tr>
             </table>
             @endif
