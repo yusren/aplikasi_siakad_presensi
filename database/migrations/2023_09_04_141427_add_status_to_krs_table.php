@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('krs', function (Blueprint $table) {
-            $table->enum('status', ['menunggu', 'ajukan', 'setujui', 'tolak'])->nullable()->default('menunggu');
+            $table->enum('status', ['menunggu', 'ajukan', 'setujui_by_dosbing', 'setujui_by_kaprodi', 'setujui_by_keuangan', 'tolak'])->nullable()->default('menunggu');
         });
     }
 

@@ -46,22 +46,31 @@ Route::middleware(['auth', 'checkangketsetelahlogin'])->group(function () {
     Route::get('/prodi/{prodi_id}/matakuliah', [ProdiController::class, 'getMatakuliah']);
     Route::get('/prodi/{prodi_id}/kelas', [ProdiController::class, 'getKelas']);
     Route::resource('/tahunajaran', TahunAjaranController::class);
+
     Route::resource('/jadwal', JadwalController::class);
     Route::get('/jadwal-detailprodi', [JadwalController::class, 'indexDetailprodi'])->name('jadwal.index.detailprodi');
     Route::get('/jadwal-detailkelas', [JadwalController::class, 'indexDetailkelas'])->name('jadwal.index.detailkelas');
     Route::get('/jadwal-detailmatakuliah', [JadwalController::class, 'indexDetailmatakuliah'])->name('jadwal.index.detailmatakuliah');
     Route::get('/jadwal-detailpertemuan', [JadwalController::class, 'indexDetailpertemuan'])->name('jadwal.index.detailpertemuan');
+
     Route::resource('/krs', KrsController::class)->middleware('checkangketsebelumlihatnilai');
-    Route::get('/rekap', [KrsController::class, 'rekap'])->name('krs.rekap');
+    Route::get('/krs-rekap', [KrsController::class, 'rekap'])->name('krs.rekap');
     Route::get('/krs-detailprodi', [KrsController::class, 'indexDetailprodi'])->name('krs.index.detailprodi');
     Route::get('/krs-detailkelas', [KrsController::class, 'indexDetailkelas'])->name('krs.index.detailkelas');
     Route::get('/krs-detailmahasiswa', [KrsController::class, 'indexDetailmahasiswa'])->name('krs.index.detailmahasiswa');
-    Route::post('/pengajuan-krs', [KrsController::class, 'pengajuanKrs'])->name('krs.pengajuan');
+    Route::post('/krs-pengajuan', [KrsController::class, 'pengajuanKrs'])->name('krs.pengajuan');
+
+    Route::get('/krs-approveByDosbing', [KrsController::class, 'approveByDosbingKrs'])->name('krs.approveByDosbing');
+    Route::post('/krs-approveByDosbingStore', [KrsController::class, 'approveByDosbingStoreKrs'])->name('krs.approveByDosbingStore');
+    Route::get('/krs-approveByKaprodi', [KrsController::class, 'approveByKaprodiKrs'])->name('krs.approveByKaprodi');
+    Route::get('/krs-approveByKeuangan', [KrsController::class, 'approveByKeuanganKrs'])->name('krs.approveByKeuangan');
+
     Route::get('/nilai', [NilaiController::class, 'index'])->name('nilai.index');
     Route::get('/nilai-detailprodi', [NilaiController::class, 'indexDetailprodi'])->name('nilai.index.detailprodi');
     Route::get('/nilai-detailkelas', [NilaiController::class, 'indexDetailkelas'])->name('nilai.index.detailkelas');
     Route::get('/nilai-detailmatakuliah', [NilaiController::class, 'indexDetailmatakuliah'])->name('nilai.index.detailmatakuliah');
     Route::post('/nilai', [NilaiController::class, 'store'])->name('nilai.store');
+
     Route::resource('/pertemuan', PertemuanController::class);
     Route::resource('/presensi', PresensiController::class);
     Route::resource('/angket', AngketController::class);

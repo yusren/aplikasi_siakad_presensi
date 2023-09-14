@@ -160,4 +160,32 @@ class KrsController extends Controller
 
         ]);
     }
+
+    public function approveByDosbingKrs(Request $request)
+    {
+        $krs = Krs::where('status', 'ajukan')->whereHas('user', function ($query) {
+            $query->where('user_id', auth()->id());
+        })->get();
+
+        return view('krs.approveByDosbingKrs', [
+            'krs' => $krs,
+        ]);
+    }
+
+    public function approveByDosbingStoreKrs(Request $request)
+    {
+        Krs::whereIn('id', $request->selectedKrsID)->update(['status' => 'setujui_by_dosbing']);
+
+        return redirect(route('krs.approveByDosbing'))->with('toast_success', 'Krs Berhasil Di Ajukan!');
+    }
+
+    public function approveByKaprodiKrs(Request $request)
+    {
+        dd($request->all());
+    }
+
+    public function approveByKeuanganKrs(Request $request)
+    {
+        dd($request->all());
+    }
 }
