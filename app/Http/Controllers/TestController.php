@@ -10,7 +10,7 @@ class TestController extends Controller
 {
     public function index(Request $request)
     {
-        $angket = Angket::where('kondisi', 'setelah_login')->get();
+        $angket = Angket::where('kondisi', $request->kondisi)->get();
 
         return view('test.index', [
             'angket' => $angket,

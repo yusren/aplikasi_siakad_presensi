@@ -45,7 +45,7 @@
                         </table>
                     </div>
                     <div class="box-footer">
-                        <a href="{{ route('test.index') }}" class="btn btn-default">Kembali</a>
+                        <a href="{{ route('test.index', ['kondisi' => $angket->kondisi]) }}" class="btn btn-default">Kembali</a>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>

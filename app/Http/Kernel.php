@@ -64,6 +64,7 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'checkangket' => \App\Http\Middleware\CheckAngket::class,
+        'checkangketsetelahlogin' => \App\Http\Middleware\CheckAngketSetelahLogin::class,
+        'checkangketsebelumlihatnilai' => \App\Http\Middleware\CheckAngketSblmLihatNilai::class,
     ];
 }
