@@ -63,7 +63,9 @@ Route::middleware(['auth', 'checkangketsetelahlogin'])->group(function () {
     Route::get('/krs-approveByDosbing', [KrsController::class, 'approveByDosbingKrs'])->name('krs.approveByDosbing');
     Route::post('/krs-approveByDosbingStore', [KrsController::class, 'approveByDosbingStoreKrs'])->name('krs.approveByDosbingStore');
     Route::get('/krs-approveByKaprodi', [KrsController::class, 'approveByKaprodiKrs'])->name('krs.approveByKaprodi');
+    Route::post('/krs-approveByKaprodiStore', [KrsController::class, 'approveByKaprodiStoreKrs'])->name('krs.approveByKaprodiStore');
     Route::get('/krs-approveByKeuangan', [KrsController::class, 'approveByKeuanganKrs'])->name('krs.approveByKeuangan');
+    Route::post('/krs-approveByKeuanganStore', [KrsController::class, 'approveByKeuanganStoreKrs'])->name('krs.approveByKeuanganStore');
 
     Route::get('/nilai', [NilaiController::class, 'index'])->name('nilai.index');
     Route::get('/nilai-detailprodi', [NilaiController::class, 'indexDetailprodi'])->name('nilai.index.detailprodi');

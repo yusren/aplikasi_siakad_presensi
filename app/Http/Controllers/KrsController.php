@@ -146,7 +146,8 @@ class KrsController extends Controller
             $krs->update(['status' => 'ajukan']);
         }
 
-        return redirect(route('krs.index'))->with('toast_success', 'Krs Berhasil Di Ajukan!');
+        // return redirect(route('krs.index'))->with('toast_success', 'Krs Berhasil Di Ajukan!');
+        return redirect()->back()->with('toast_success', 'Krs Berhasil Di Ajukan!');
     }
 
     public function rekap(Request $request)
@@ -165,27 +166,50 @@ class KrsController extends Controller
     {
         $krs = Krs::where('status', 'ajukan')->whereHas('user', function ($query) {
             $query->where('user_id', auth()->id());
-        })->get();
+        })->get()->sortBy('tahunAjaran');
 
         return view('krs.approveByDosbingKrs', [
             'krs' => $krs,
         ]);
     }
 
-    public function approveByDosbingStoreKrs(Request $request)
-    {
-        Krs::whereIn('id', $request->selectedKrsID)->update(['status' => 'setujui_by_dosbing']);
-
-        return redirect(route('krs.approveByDosbing'))->with('toast_success', 'Krs Berhasil Di Ajukan!');
-    }
-
     public function approveByKaprodiKrs(Request $request)
     {
-        dd($request->all());
+        $krs = Krs::where('status', 'setujui_by_dosbing')->get();
+
+        return view('krs.approveByKaprodiKrs', [
+            'krs' => $krs,
+        ]);
     }
 
     public function approveByKeuanganKrs(Request $request)
     {
-        dd($request->all());
+        $krs = Krs::where('status', 'setujui_by_kaprodi')->orWhere('status', 'setujui_by_keuangan')->get();
+
+        return view('krs.approveByKeuanganKrs', [
+            'krs' => $krs,
+        ]);
+    }
+
+    public function approveByDosbingStoreKrs(Request $request)
+    {
+        return $this->approveBy($request, 'dosbing', 'Dosbing');
+    }
+
+    public function approveByKaprodiStoreKrs(Request $request)
+    {
+        return $this->approveBy($request, 'kaprodi', 'Kaprodi');
+    }
+
+    public function approveByKeuanganStoreKrs(Request $request)
+    {
+        return $this->approveBy($request, 'keuangan', 'Keuangan');
+    }
+
+    private function approveBy(Request $request, $status, $role)
+    {
+        Krs::whereIn('id', $request->selectedKrsID)->update(['status' => 'setujui_by_'.$status]);
+
+        return redirect(route('krs.approveBy'.$role))->with('toast_success', 'Krs Berhasil Di Approve '.$role.'!');
     }
 }
