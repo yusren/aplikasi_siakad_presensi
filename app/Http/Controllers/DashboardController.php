@@ -2,14 +2,44 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Angket;
+use App\Models\Pertanyaan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $angket = Angket::with('hasil')->first();
+        $pertanyaans = Pertanyaan::where('angket_id', $angket->id)->with('jawaban')->get();
+        $results = [];
+
+        foreach ($pertanyaans as $pertanyaan) {
+            $counts = collect($angket->hasil)
+                ->map(function ($hasil) use ($pertanyaan) {
+                    $answers = json_decode($hasil->data_jawaban, true);
+
+                    return $answers[$pertanyaan->id] ?? null;
+                })
+                ->countBy();
+
+            $results[] = [
+                'pertanyaan_id' => $pertanyaan->id,
+                'description' => $pertanyaan->description,
+                'jawaban' => $counts->map(function ($count, $jawabanId) use ($pertanyaan) {
+                    $jawaban = $pertanyaan->jawaban()->find($jawabanId);
+
+                    return $jawaban ? ['answer_text' => $jawaban->answer_text, 'count' => $count] : null;
+                })->values(),
+            ];
+        }
+
+        if ($request->wantsJson()) {
+            return response()->json(['angkets' => $results]);
+        }
+
         if (auth()->user()->role == 'mahasiswa') {
             return view('dashboard.user.index', []);
         } else {
