@@ -164,18 +164,19 @@ class KrsController extends Controller
         ]);
     }
 
-    /** TODO di grouping bersarankan mahasiswa dan tahun ajaran */
     public function approveByDosbingKrs(Request $request)
     {
-        $krs = Krs::where('status', 'ajukan')->whereHas('user', function ($query) {
-            $query->where('user_id', auth()->id());
-        })->get()->sortBy('tahunAjaran');
+        $krs = Krs::where('status', 'ajukan')
+            ->whereHas('user', function ($query) {
+                $query->where('user_id', auth()->id());
+            })
+            ->get()
+            ->groupBy(['user_id', 'tahun_ajaran_id']);
 
-        return view('krs.approveByDosbingKrs', [
-            'krs' => $krs,
-        ]);
+        return view('krs.approveByDosbingKrs', ['krs' => $krs]);
     }
 
+    /** TODO di grouping bersarankan mahasiswa dan tahun ajaran */
     public function approveByKaprodiKrs(Request $request)
     {
         $krs = Krs::where('status', 'setujui_by_dosbing')->get();
@@ -196,7 +197,16 @@ class KrsController extends Controller
 
     public function approveByDosbingStoreKrs(Request $request)
     {
-        return $this->approveBy($request, 'dosbing', 'Dosbing');
+        foreach ($request->selectedUserTahunAjaranID as $userTahunAjaran) {
+            [$userId, $tahunAjaranId] = explode('_', $userTahunAjaran);
+
+            Krs::where('user_id', $userId)
+                ->where('tahun_ajaran_id', $tahunAjaranId)
+                ->update(['status' => 'setujui_by_dosbing']);
+        }
+
+        // return $this->approveBy($request, 'dosbing', 'Dosbing');
+        return redirect(route('krs.approveByDosbing'))->with('toast_success', 'Krs Berhasil Di Approve Dosbing!');
     }
 
     public function approveByKaprodiStoreKrs(Request $request)
