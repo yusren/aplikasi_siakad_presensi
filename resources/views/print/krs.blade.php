@@ -105,6 +105,11 @@
                     <div class="text-center">
                         Mengetahui
                         <h5><b>Ketua Prodi</b></h5>
+                        @if ($krs->first()->status == 'setujui_by_kaprodi' || $krs->first()->status == 'setujui_by_keuangan')
+                            <div style="display: flex; justify-content: center;">
+                                {!! DNS2D::getBarcodeHTML(auth()->user()->prodi->user->name, 'QRCODE') !!}
+                            </div>
+                        @endif
                         <u>{{ auth()->user()->prodi->user->name }}</u><br>
                         NIDN. {{ auth()->user()->prodi->user->nomor }}
                     </div>
@@ -113,6 +118,11 @@
                     <div class="text-center">
                         Menyetujui
                         <h5><b>Dosen Pembimbing Akademik</b></h5>
+                        @if ($krs->first()->status != 'menunggu' && $krs->first()->status != 'ajukan')
+                        <div style="display: flex; justify-content: center;">
+                        {!! DNS2D::getBarcodeHTML(auth()->user()->user->name, 'QRCODE') !!}
+                        </div>
+                        @endif
                         <u>{{ auth()->user()->user->name }}</u><br>
                         NIDN. {{ auth()->user()->user->nomor }}
                     </div>
@@ -120,6 +130,11 @@
                 <div class="col-4 col-sm-4 col-lg-4">
                     <div class="text-center">
                         Pacitan, {{ date('d M Y') }}
+                        @if ($krs->first()->status == 'setujui_by_keuangan')
+                        <div style="display: flex; justify-content: center;">
+                        {!! DNS2D::getBarcodeHTML(json_decode(Storage::disk('public')->get('settings.json'), true)['keuangan'], 'QRCODE') !!}
+                        </div>
+                        @endif
                         <h5><b>Kabiro Administrasi Keuangan</b></h5>
                         <u>{{ json_decode(Storage::disk('public')->get('settings.json'), true)['keuangan'] }}</u><br>
                         {{ json_decode(Storage::disk('public')->get('settings.json'), true)['keuangan_status'] }}. {{ json_decode(Storage::disk('public')->get('settings.json'), true)['keuangan_nomor'] }}

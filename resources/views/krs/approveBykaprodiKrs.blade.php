@@ -25,7 +25,6 @@
                                     <th>Mahasiswa</th>
                                     <th>Semester</th>
                                     <th>Tahun Ajaran</th>
-                                    <th>KRS</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -35,33 +34,7 @@
                                     <td><input type="checkbox" name="selectedUserTahunAjaranID[]" value="{{ $userId }}_{{ $tahunAjaranId }}"></td>
                                     <td>{{ $kr->first()->user->name }}</td>
                                     <td>{{ $kr->first()->semester }}</td>
-                                    <td>{{ $kr->first()->tahunAjaran->name }}</td>
-                                    <td colspan="4">
-                                        <table class="table table-bordered table-responsive table-sm">
-                                            <thead>
-                                                <tr>
-                                                    <th>Matakuliah</th>
-                                                    <th>Kode</th>
-                                                    <th>SKS</th>
-                                                    <th>Prodi</th>
-                                                    <th>Status</th>
-                                                    <th>Dosen MK</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach($kr as $item)
-                                                <tr>
-                                                    <td>{{$item->matakuliah->name}}</td>
-                                                    <td>{{$item->matakuliah->code}}</td>
-                                                    <td>{{$item->matakuliah->sks}}</td>
-                                                    <td>{{$item->matakuliah->prodi->name}}</td>
-                                                    <td>{{$item->status}}</td>
-                                                    <td>{{$item->matakuliah->user->name}}</td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </td>
+                                    <td>{{ $kr->first()->tahunAjaran->semester }} - {{ $kr->first()->tahunAjaran->name }}</td>
                                 </tr>
                                 @endforeach
                                 @endforeach

@@ -186,7 +186,6 @@ class KrsController extends Controller
         ]);
     }
 
-    /** TODO di grouping bersarankan mahasiswa dan tahun ajaran */
     public function approveByKeuanganKrs(Request $request)
     {
         $krs = Krs::where('status', 'setujui_by_kaprodi')->orWhere('status', 'setujui_by_keuangan')->get()
