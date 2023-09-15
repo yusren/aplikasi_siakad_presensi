@@ -30,8 +30,12 @@ class JadwalController extends Controller
                     })
                     ->whereIn('matakuliah_id', $matakuliahIds)
                     ->get();
+                $taUser = Jadwal::whereHas('kelas.users', function ($query) {
+                    $query->where('users.id', auth()->id());
+                })
+                    ->pluck('tahun_ajaran_id');
 
-                return view('jadwal.user.index', ['jadwal' => $jadwal, 'tahunAjaranAktif' => $tahunAjaranAktif, 'tahunAjaran' => $tahunAjaran]);
+                return view('jadwal.user.index', ['jadwal' => $jadwal, 'tahunAjaranAktif' => $tahunAjaranAktif, 'tahunAjaran' => TahunAjaran::whereIn('id', $taUser)->orderBy('name')->get()]);
             case 'dosen':
                 $jadwal = Jadwal::where('user_id', auth()->id())->where('tahun_ajaran_id', $tahunAjaranId)->whereHas('matakuliah.user', function ($query) {
                     $query->where('id', auth()->id());

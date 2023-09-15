@@ -135,7 +135,7 @@
             let defaultOption = $('<option>').val('').text('Pilih Mata Kuliah').prop('disabled', true).prop('selected', true);
             $('#matakuliah').append(defaultOption);
             data.forEach(function(matakuliah) {
-                let option = $('<option>').val(matakuliah.id).text(matakuliah.name);
+                let option = $('<option>').val(matakuliah.id).text(matakuliah.name + ' ' + matakuliah.code+ ' ' + matakuliah.user.name);
                 $('#matakuliah').append(option);
             });
             $('#matakuliah').trigger('change.select2');

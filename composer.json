@@ -11,6 +11,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "maatwebsite/excel": "*",
+        "milon/barcode": "^10.0",
         "realrashid/sweet-alert": "^7.0"
     },
     "require-dev": {

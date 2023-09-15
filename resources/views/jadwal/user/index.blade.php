@@ -36,6 +36,7 @@
                     <table class="table table-bordered table-responsive">
                         <tbody>
                             <tr>
+                                <th>Kode MK</th>
                                 <th>Matakuliah</th>
                                 <th>Hari</th>
                                 <th>Jam</th>
@@ -44,6 +45,7 @@
                             </tr>
                             @forelse($jadwal as $j)
                             <tr>
+                                <td>{{$j->matakuliah->code}}</td>
                                 <td>{{$j->matakuliah->name}}</td>
                                 <td>{{$j->hari}}</td>
                                 <td>{{$j->jam}}</td>

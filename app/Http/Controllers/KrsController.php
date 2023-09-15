@@ -31,11 +31,13 @@ class KrsController extends Controller
         $users = $this->getUsersByRoleAndTahunAjaran('mahasiswa', $tahunAjaranId);
 
         if (auth()->user()->role == 'mahasiswa') {
+            $taUser = auth()->user()->krs->pluck('tahun_ajaran_id');
+
             return view('krs.user.index', [
                 'users' => auth()->user(),
                 'krs' => auth()->user()->krs->where('tahun_ajaran_id', $tahunAjaranId),
                 'tahunAjaranAktif' => TahunAjaran::find($tahunAjaranId),
-                'tahunAjaran' => TahunAjaran::orderBy('name')->get(),
+                'tahunAjaran' => TahunAjaran::whereIn('id', $taUser)->orderBy('name')->get(),
             ]);
         } else {
             return view('krs.index', [
@@ -162,6 +164,7 @@ class KrsController extends Controller
         ]);
     }
 
+    /** TODO di grouping bersarankan mahasiswa dan tahun ajaran */
     public function approveByDosbingKrs(Request $request)
     {
         $krs = Krs::where('status', 'ajukan')->whereHas('user', function ($query) {
