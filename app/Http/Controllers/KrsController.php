@@ -176,16 +176,17 @@ class KrsController extends Controller
         return view('krs.approveByDosbingKrs', ['krs' => $krs]);
     }
 
-    /** TODO di grouping bersarankan mahasiswa dan tahun ajaran */
     public function approveByKaprodiKrs(Request $request)
     {
-        $krs = Krs::where('status', 'setujui_by_dosbing')->get();
+        $krs = Krs::where('status', 'setujui_by_dosbing')->get()
+            ->groupBy(['user_id', 'tahun_ajaran_id']);
 
         return view('krs.approveByKaprodiKrs', [
             'krs' => $krs,
         ]);
     }
 
+    /** TODO di grouping bersarankan mahasiswa dan tahun ajaran */
     public function approveByKeuanganKrs(Request $request)
     {
         $krs = Krs::where('status', 'setujui_by_kaprodi')->orWhere('status', 'setujui_by_keuangan')->get();
@@ -211,7 +212,16 @@ class KrsController extends Controller
 
     public function approveByKaprodiStoreKrs(Request $request)
     {
-        return $this->approveBy($request, 'kaprodi', 'Kaprodi');
+        foreach ($request->selectedUserTahunAjaranID as $userTahunAjaran) {
+            [$userId, $tahunAjaranId] = explode('_', $userTahunAjaran);
+
+            Krs::where('user_id', $userId)
+                ->where('tahun_ajaran_id', $tahunAjaranId)
+                ->update(['status' => 'setujui_by_kaprodi']);
+        }
+
+        // return $this->approveBy($request, 'kaprodi', 'Kaprodi');
+        return redirect(route('krs.approveByKaprodi'))->with('toast_success', 'Krs Berhasil Di Approve Kaprodi!');
     }
 
     public function approveByKeuanganStoreKrs(Request $request)
