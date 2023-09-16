@@ -16,6 +16,7 @@ class UserRequest extends FormRequest
     {
         $rules = [
             'prodi_id' => 'required',
+            'user_id' => 'nullable',
             'name' => 'required',
             'nomor' => 'required_if:role,mahasiswa',
             'photo' => 'nullable',

@@ -173,7 +173,7 @@ class KrsController extends Controller
             ->get()
             ->groupBy(['user_id', 'tahun_ajaran_id']);
 
-        return view('krs.approveBydosbingKrs', ['krs' => $krs]);
+        return view('krs.approveByDosbingKrs', ['krs' => $krs]);
     }
 
     public function approveByKaprodiKrs(Request $request)
