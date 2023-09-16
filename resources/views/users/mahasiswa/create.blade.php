@@ -110,6 +110,16 @@
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
+                            <label>Dosen Pembimbing Akademik</label>
+                            <select required class="form-control select2" name="user_id" data-placeholder="Pilih Dosen" style="width: 100%;">
+                                <option value="" selected disabled>Pilih Dosen PA</option>
+                                @foreach ($dosen as $ds)
+                                    <option value="{{ $ds->id }}" {{ old('user_id') == $ds->id ? 'selected' : '' }}>{{ $ds->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
                             <label>Program Studi</label>
                             <select required class="form-control select2" name="prodi_id" data-placeholder="Pilih Prodi" style="width: 100%;">
                                 <option value="" selected disabled>Pilih Prodi</option>

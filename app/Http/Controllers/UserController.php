@@ -31,10 +31,11 @@ class UserController extends Controller
     public function create(Request $request)
     {
         $prodi = Prodi::get();
+        $dosen = User::where('role', 'dosen')->get();
         $agama = ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Konghucu'];
         switch ($request->role) {
             case 'mahasiswa':
-                return view('users.mahasiswa.create', ['prodi' => $prodi, 'agama' => $agama]);
+                return view('users.mahasiswa.create', ['prodi' => $prodi, 'agama' => $agama, 'dosen' => $dosen]);
             case 'dosen':
                 return view('users.dosen.create', ['prodi' => $prodi, 'agama' => $agama]);
             default:
