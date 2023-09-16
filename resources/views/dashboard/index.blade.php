@@ -49,7 +49,7 @@
                             let existingSeries = seriesData.find(series => series.name === jawaban.answer_text);
 
                             if (existingSeries) {
-                                existingSeries.data[i] = jawaban.count;
+                                existingSeries.data[i] = jawaban.count.map(Number);
                             } else {
                                 let data = new Array(angkets.length).fill(0);
                                 data[i] = jawaban.count;
