@@ -15,7 +15,7 @@ class CheckAngketSetelahLogin
             $angketIds = Angket::where('kondisi', 'setelah_login')->pluck('id');
             $userAngkets = Auth::user()->hasilAngket;
 
-            if (Auth::user()->role != 'superadmin' && Auth::user()->role != 'admin' && $angketIds->count() > 0 && $userAngkets->whereIn('angket_id', $angketIds)->count() != Angket::where('kondisi', 'setelah_login')->count()) {
+            if (! in_array(Auth::user()->role, ['superadmin', 'admin', 'lpm', 'kaprodi', 'birokeuangan']) && $angketIds->count() > 0 && $userAngkets->whereIn('angket_id', $angketIds)->count() != Angket::where('kondisi', 'setelah_login')->count()) {
                 return redirect()->route('test.index', ['kondisi' => 'setelah_login'])->with('toast_warning', 'Isi Angket, Anda perlu mengisi angket terlebih dahulu!');
             }
         }

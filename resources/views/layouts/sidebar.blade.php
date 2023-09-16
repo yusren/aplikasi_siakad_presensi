@@ -26,6 +26,15 @@
                     <li class="{{ (request()->is('nilai*')) ? 'active' : '' }}"><a href="/nilai-detailprodi"><i class="fa fa-circle"></i><span>Nilai</span></a></li>
                     <li class="{{ request()->is('krs-approveByDosbing*') ? 'active' : '' }}"><a href="/krs-approveByDosbing"><i class="fa fa-gear"></i><span>krs-approveByDosbing</span></a></li>
                     @break
+                @case('lpm')
+                    <li class="{{ (request()->is('angket*')) ? 'active' : '' }}"><a href="/angket"><i class="fa fa-circle"></i><span>Angket</span></a></li>
+                    @break
+                @case('birokeuangan')
+                    <li class="{{ request()->is('krs-approveByKeuangan*') ? 'active' : '' }}"><a href="/krs-approveByKeuangan"><i class="fa fa-gear"></i><span>krs-approveByKeuangan</span></a></li>
+                    @break
+                @case('kaprodi')
+                    <li class="{{ request()->is('krs-approveByKaprodi*') ? 'active' : '' }}"><a href="/krs-approveByKaprodi"><i class="fa fa-gear"></i><span>krs-approveByKaprodi</span></a></li>
+                    @break
                 @default
                 <li class="{{ request()->is('setting*') ? 'active' : '' }}"><a href="/setting"><i class="fa fa-gear"></i><span>Setting</span></a></li>
                 <li class="{{ (request()->is('angket*')) ? 'active' : '' }}"><a href="/angket"><i class="fa fa-circle"></i><span>Angket</span></a></li>
@@ -45,8 +54,6 @@
                         <li class="{{ (request()->is('krs*')) ? 'active' : '' }}"><a href="/krs-detailprodi"><i class="fa fa-circle"></i><span>KRS</span></a></li>
                     </ul>
                 </li>
-                <li class="{{ request()->is('krs-approveByKeuangan*') ? 'active' : '' }}"><a href="/krs-approveByKeuangan"><i class="fa fa-gear"></i><span>krs-approveByKeuangan</span></a></li>
-                <li class="{{ request()->is('krs-approveByKaprodi*') ? 'active' : '' }}"><a href="/krs-approveByKaprodi"><i class="fa fa-gear"></i><span>krs-approveByKaprodi</span></a></li>
             @endswitch
         </ul>
     </section>

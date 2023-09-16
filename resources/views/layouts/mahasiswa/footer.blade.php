@@ -3,7 +3,7 @@
     <div class="container">
         <ul class="nav nav-pills nav-justified">
             <li class="nav-item">
-                <a class="nav-link active" href="index.html">
+                <a class="nav-link active" href="{{ route('dashboard') }}">
                     <span>
                         <i class="nav-icon bi bi-house"></i>
                         <span class="nav-text">Home</span>

@@ -50,7 +50,7 @@
             <div class="col-12">
                 <ul class="nav nav-pills">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html">
+                        <a class="nav-link active" aria-current="page" href="{{ route('dashboard') }}">
                             <div class="rounded avatar avatar-40 icon"><i class="bi bi-house-door"></i></div>
                             <div class="col">Dashboard</div>
                             <div class="arrow"><i class="bi bi-chevron-right"></i></div>
