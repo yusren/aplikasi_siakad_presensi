@@ -17,7 +17,6 @@
                 @case('mahasiswa')
                     <li class="{{ (request()->is('user*')) ? 'active' : '' }}"><a href="{{ route('user.edit', ['user' => auth()->user()->id, 'role' => 'mahasiswa']) }}"><i class="fa fa-circle"></i><span>Data Diri</span></a></li>
                     <li class="{{ (request()->is('krs*')) ? 'active' : '' }}"><a href="/krs"><i class="fa fa-circle"></i><span>Entri KRS</span></a></li>
-                    <li class="#"><a href="#"><i class="fa fa-circle"></i><span>Lihat KRS</span></a></li>
                     <li class="{{ (request()->is('rekap*')) ? 'active' : '' }}"><a href="/krs-rekap"><i class="fa fa-circle"></i><span>Lihat Rekap</span></a></li>
                     <li class="{{ (request()->is('jadwal*')) ? 'active' : '' }}"><a href="/jadwal"><i class="fa fa-circle"></i><span>Jadwal</span></a></li>
                     @break
@@ -46,8 +45,8 @@
                         <li class="{{ (request()->is('krs*')) ? 'active' : '' }}"><a href="/krs-detailprodi"><i class="fa fa-circle"></i><span>KRS</span></a></li>
                     </ul>
                 </li>
-                <li class="{{ request()->is('krs-approveByKaprodi*') ? 'active' : '' }}"><a href="/krs-approveByKaprodi"><i class="fa fa-gear"></i><span>krs-approveByKaprodi</span></a></li>
                 <li class="{{ request()->is('krs-approveByKeuangan*') ? 'active' : '' }}"><a href="/krs-approveByKeuangan"><i class="fa fa-gear"></i><span>krs-approveByKeuangan</span></a></li>
+                <li class="{{ request()->is('krs-approveByKaprodi*') ? 'active' : '' }}"><a href="/krs-approveByKaprodi"><i class="fa fa-gear"></i><span>krs-approveByKaprodi</span></a></li>
             @endswitch
         </ul>
     </section>

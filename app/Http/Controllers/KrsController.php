@@ -166,7 +166,7 @@ class KrsController extends Controller
 
     public function approveByDosbingKrs(Request $request)
     {
-        $krs = Krs::where('status', 'ajukan')
+        $krs = Krs::where('status', 'setujui_by_keuangan')
             ->whereHas('user', function ($query) {
                 $query->where('user_id', auth()->id());
             })
@@ -188,7 +188,7 @@ class KrsController extends Controller
 
     public function approveByKeuanganKrs(Request $request)
     {
-        $krs = Krs::where('status', 'setujui_by_kaprodi')->orWhere('status', 'setujui_by_keuangan')->get()
+        $krs = Krs::where('status', 'ajukan')->get()
             ->groupBy(['user_id', 'tahun_ajaran_id']);
 
         return view('krs.approveBykeuanganKrs', [

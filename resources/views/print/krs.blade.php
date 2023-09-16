@@ -105,9 +105,9 @@
                     <div class="text-center">
                         Mengetahui
                         <h5><b>Ketua Prodi</b></h5>
-                        @if ($krs->first()->status == 'setujui_by_kaprodi' || $krs->first()->status == 'setujui_by_keuangan')
+                        @if ($krs->first()->status == 'setujui_by_kaprodi')
                             <div style="display: flex; justify-content: center;">
-                                {!! DNS2D::getBarcodeHTML(auth()->user()->prodi->user->name, 'QRCODE') !!}
+                                {!! DNS2D::getBarcodeHTML('Dokumen ini telah ditandatangani secara elektronik oleh'.' '.auth()->user()->prodi->user->name, 'QRCODE') !!}
                             </div>
                         @endif
                         <u>{{ auth()->user()->prodi->user->name }}</u><br>
@@ -120,7 +120,7 @@
                         <h5><b>Dosen Pembimbing Akademik</b></h5>
                         @if ($krs->first()->status != 'menunggu' && $krs->first()->status != 'ajukan')
                         <div style="display: flex; justify-content: center;">
-                        {!! DNS2D::getBarcodeHTML(auth()->user()->user->name, 'QRCODE') !!}
+                        {!! DNS2D::getBarcodeHTML('Dokumen ini telah ditandatangani secara elektronik oleh'.' '.auth()->user()->user->name, 'QRCODE') !!}
                         </div>
                         @endif
                         <u>{{ auth()->user()->user->name }}</u><br>
@@ -130,9 +130,9 @@
                 <div class="col-4 col-sm-4 col-lg-4">
                     <div class="text-center">
                         Pacitan, {{ date('d M Y') }}
-                        @if ($krs->first()->status == 'setujui_by_keuangan')
+                        @if ($krs->first()->status == 'setujui_by_keuangan' || $krs->first()->status == 'setujui_by_kaprodi' || $krs->first()->status == 'setujui_by_dosbing')
                         <div style="display: flex; justify-content: center;">
-                        {!! DNS2D::getBarcodeHTML(json_decode(Storage::disk('public')->get('settings.json'), true)['keuangan'], 'QRCODE') !!}
+                        {!! DNS2D::getBarcodeHTML('Dokumen ini telah ditandatangani secara elektronik oleh'.' '.json_decode(Storage::disk('public')->get('settings.json'), true)['keuangan'], 'QRCODE') !!}
                         </div>
                         @endif
                         <h5><b>Kabiro Administrasi Keuangan</b></h5>
