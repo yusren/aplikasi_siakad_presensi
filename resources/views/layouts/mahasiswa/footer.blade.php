@@ -26,11 +26,11 @@
                         <i class="nav-icon bi bi-file-earmark-bar-graph"></i>
                     </span>
                     <div class="nav-menu-popover justify-content-between">
-                        <button type="button" class="btn btn-lg btn-icon-text" onclick="window.location.replace('{{ route('krs.index') }}');">
+                        <button type="button" class="btn btn-lg btn-icon-text" onclick="window.location.replace('{{ route('krs.index', ['aksiKrs' => 'lihat']) }}');">
                             <i class="bi bi-file-ruled size-32"></i><span>Lihat KRS</span>
                         </button>
 
-                        <button type="button" class="btn btn-lg btn-icon-text" onclick="window.location.replace('{{ route('krs.index') }}');">
+                        <button type="button" class="btn btn-lg btn-icon-text" onclick="window.location.replace('{{ route('krs.index', ['aksiKrs' => 'entri']) }}');">
                             <i class="bi bi-file-ruled size-32"></i><span>Entri KRS</span>
                         </button>
 

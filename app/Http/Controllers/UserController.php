@@ -116,6 +116,10 @@ class UserController extends Controller
 
         switch ($request->role) {
             case 'mahasiswa':
+                if (auth()->user()->role == 'mahasiswa') {
+                    return view('users.mahasiswa.profile', ['user' => $user, 'prodi' => $prodi, 'dosen' => $dosen, 'agama' => $agama]);
+                }
+
                 return view('users.mahasiswa.edit', ['user' => $user, 'prodi' => $prodi, 'dosen' => $dosen, 'agama' => $agama]);
             case 'dosen':
                 return view('users.dosen.edit', ['user' => $user, 'prodi' => $prodi, 'agama' => $agama]);
