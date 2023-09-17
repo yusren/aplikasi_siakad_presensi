@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.mahasiswa.master')
 
 @section('title', 'Jadwal')
 
@@ -14,13 +14,12 @@
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
-            <div class="box">
-                <div class="box-header">
+            <div class="card">
+                <div class="card-header">
                     <form method="GET" action="{{ url()->current() }}">
-                        <div class="form-group">
+                        <div class="mb-1 form-group">
                             <label>Tahun Ajaran</label>
-                            <select required class="form-control select2" name="tahun_ajaran_id"
-                                data-placeholder="Pilih Tahun Ajaran" style="width: 100%;">
+                            <select required class="form-control select2" name="tahun_ajaran_id" data-placeholder="Pilih Tahun Ajaran" style="width: 100%;">
                                 @foreach($tahunAjaran as $ta)
                                 <option value="{{ $ta->id }}" {{ (request('tahun_ajaran_id')==$ta->id ||
                                     $tahunAjaranAktif->id == $ta->id) ? 'selected' : '' }}>
@@ -31,8 +30,8 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Filter</button>
                     </form>
-                </div><!-- /.box-header -->
-                <div class="box-body table-responsive">
+                </div><!-- /.card-header -->
+                <div class="card-body table-responsive">
                     <table class="table table-bordered table-responsive">
                         <tbody>
                             <tr>
@@ -60,8 +59,8 @@
                         </tbody>
                         </tbody>
                     </table>
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
+                </div><!-- /.card-body -->
+            </div><!-- /.card -->
         </div><!-- /.col -->
     </div><!-- /.row -->
 </section><!-- /.content -->

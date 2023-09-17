@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.mahasiswa.master')
 
 @section('title', 'Edit Mahasiswa')
 
@@ -8,26 +8,25 @@
         <!-- left column -->
         <div class="col-md-12">
             <!-- general form elements -->
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Edit Mahasiswa</h3>
-                </div><!-- /.box-header -->
+            <div class="card card-primary">
+                <div class="card-header with-border">
+                    <h3 class="card-title">Edit Mahasiswa</h3>
+                </div><!-- /.card-header -->
                 <!-- form start -->
                 <form action="{{ route('user.update', ['user' => $user->id, 'role' => 'mahasiswa']) }}" method="POST" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
-                    <div class="box-body">
+                    <div class="card-body">
                         <div class="form-group">
+                            <label for="">Foto</label>
                             <img class="img-thumbnail" src="{{ asset($user->photo) }}" alt="" width="200px">
-                            <input type="file" class="form-control" name="photo" value="{{ old('photo') }}"
-                                placeholder="Masukkan Foto">
+                            <input type="file" class="form-control" name="photo" value="{{ old('photo') }}" placeholder="Masukkan Foto">
                             @error('photo')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
                             <label for="">Nama</label>
-                            <input type="text" class="form-control" name="name" value="{{ old('name', $user->name) }}"
-                                placeholder="Masukkan Nama">
+                            <input type="text" class="form-control" name="name" value="{{ old('name', $user->name) }}" placeholder="Masukkan Nama">
                             @error('name')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
@@ -51,8 +50,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Password</label>
-                            <input type="password" class="form-control" name="password" value="{{ old('password') }}"
-                                placeholder="Masukkan Password">
+                            <input type="password" class="form-control" name="password" value="{{ old('password') }}" placeholder="Masukkan Password">
                             @error('password')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
@@ -100,15 +98,13 @@
                         </div>
                         <div class="form-group">
                             <label for="">Tempat Lahir</label>
-                            <input type="text" class="form-control" name="tempat_lahir" value="{{ old('tempat_lahir', $user->tempat_lahir) }}"
-                                placeholder="Masukkan Tempat Lahir">
+                            <input type="text" class="form-control" name="tempat_lahir" value="{{ old('tempat_lahir', $user->tempat_lahir) }}" placeholder="Masukkan Tempat Lahir">
                             @error('tempat_lahir')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
                             <label for="">Tanggal Lahir</label>
-                            <input type="date" class="form-control" name="tanggal_lahir" value="{{ old('tanggal_lahir', $user->tanggal_lahir) }}"
-                                placeholder="Masukkan Tanggal Lahir">
+                            <input type="date" class="form-control" name="tanggal_lahir" value="{{ old('tanggal_lahir', $user->tanggal_lahir) }}" placeholder="Masukkan Tanggal Lahir">
                             @error('tanggal_lahir')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
@@ -147,21 +143,23 @@
                         </div>
                         <div class="form-group">
                             <label>Program Studi</label>
-                            <select required class="form-control select2" name="prodi_id" data-placeholder="Pilih Prodi" style="width: 100%;">
+                            <select @if (auth()->user()->role == 'mahasiswa') ? disabled : required @endif class="form-control select2" name="prodi_id" data-placeholder="Pilih Prodi" style="width: 100%;">
                                 @foreach ($prodi as $pr)
                                 <option value="{{ $pr->id }}" {{ old('prodi_id', $user->prodi_id) == $pr->id ? 'selected' : '' }}>{{ $pr->name }} </option>
                                 @endforeach
                             </select>
                         </div>
+                        <input type="hidden" name="prodi_id" value="{{ $user->prodi_id }}">
+                        <input type="hidden" name="status" value="{{ $user->status }}">
                         <input type="hidden" name="role" value="mahasiswa">
-                    </div><!-- /.box-body -->
+                    </div><!-- /.card-body -->
 
-                    <div class="box-footer">
+                    <div class="card-footer">
                         <a href="{{ route('user.index', ['role' => 'mahasiswa']) }}" class="btn btn-default">Kembali</a>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
-            </div><!-- /.box -->
+            </div><!-- /.card -->
         </div>
     </div>
 </section>

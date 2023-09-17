@@ -36,16 +36,16 @@
 <body class="body-scroll" data-page="index">
     @include('sweetalert::alert')
     <!-- loader section -->
-    <div class="container-fluid loader-wrap">
-        <div class="row h-100">
-            <div class="mx-auto text-center col-10 col-md-6 col-lg-5 col-xl-3 align-self-center">
-                <div class="mx-auto loader-cube-wrap loader-cube-animate">
-                    <img src="{{ asset('mahasiswa/img/logo.png') }}" alt="Logo">
-                </div>
-                <p class="mt-4">It's time for track budget<br><strong>Please wait...</strong></p>
-            </div>
-        </div>
-    </div>
+    {{-- <div class="container-fluid loader-wrap"> --}}
+        {{-- <div class="row h-100"> --}}
+            {{-- <div class="mx-auto text-center col-10 col-md-6 col-lg-5 col-xl-3 align-self-center"> --}}
+                {{-- <div class="mx-auto loader-cube-wrap loader-cube-animate"> --}}
+                    {{-- <img src="{{ asset('mahasiswa/img/logo.png') }}" alt="Logo"> --}}
+                {{-- </div> --}}
+                {{-- <p class="mt-4">It's time for track budget<br><strong>Please wait...</strong></p> --}}
+            {{-- </div> --}}
+        {{-- </div> --}}
+    {{-- </div> --}}
     <!-- loader section ends -->
     {{-- @include('layouts.mahasiswa.sidebar') --}}
 
@@ -63,14 +63,16 @@
                 <div class="text-center col align-self-center">
                     <div class="logo-small">
                         <img src="{{ asset('mahasiswa/img/logo.png') }}" alt="">
-                        <h5>FiMobile</h5>
+                        <h5>Mahasiswa</h5>
                     </div>
                 </div>
                 <div class="col-auto">
-                    <a href="notifications.html" target="_self" class="btn btn-light btn-44">
-                        <i class="bi bi-bell"></i>
-                        <span class="count-indicator"></span>
-                    </a>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button class="btn btn-light btn-44">
+                            <i class="bi bi-box-arrow-right"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
         </header>

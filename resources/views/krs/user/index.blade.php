@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.mahasiswa.master')
 
 @section('title', 'KRS')
 
@@ -14,8 +14,8 @@
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
-            <div class="box">
-                <div class="box-header">
+            <div class="card">
+                <div class="card-header">
                     <form method="GET" action="{{ url()->current() }}">
                         <div class="form-group">
                             <label>Tahun Ajaran</label>
@@ -51,8 +51,8 @@
                             <button type="submit" class="btn btn-success">Cetak KHS</button>
                         </div>
                     </form>
-                </div><!-- /.box-header -->
-                <div class="box-body table-responsive">
+                </div><!-- /.card-header -->
+                <div class="card-body table-responsive">
                     <table class="table table-bordered table-responsive">
                         <tbody>
                             <tr>
@@ -77,8 +77,8 @@
                             @endforelse
                         </tbody>
                     </table>
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
+                </div><!-- /.card-body -->
+            </div><!-- /.card -->
         </div><!-- /.col -->
     </div><!-- /.row -->
 </section><!-- /.content -->

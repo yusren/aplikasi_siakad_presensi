@@ -145,6 +145,8 @@ class UserController extends Controller
                 'penghasilan_ayah' => $request->penghasilan_ayah,
                 'penghasilan_ibu' => $request->penghasilan_ibu,
             ]);
+
+            return redirect()->back()->with('toast_warning', 'Berhasil Merubah Data!');
         }
 
         return redirect(route('user.index', ['role' => $request->role]))->with('toast_warning', 'Berhasil Merubah Data!');
