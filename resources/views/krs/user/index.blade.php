@@ -17,7 +17,7 @@
             <div class="card">
                 <div class="card-header">
                     <form method="GET" action="{{ url()->current() }}">
-                        <div class="form-group">
+                        <div class="mb-1 form-group">
                             <label>Tahun Ajaran</label>
                             <select required class="form-control select2" name="tahun_ajaran_id"
                                 data-placeholder="Pilih Tahun Ajaran" style="width: 100%;">
@@ -30,26 +30,6 @@
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Filter</button>
-                    </form>
-                    <hr />
-                    <form method="POST" action="{{ route('krs.pengajuan') }}">
-                        @csrf
-                        <div class="form-group">
-                            <input type="hidden" name="tahun_ajaran_id" value="{{ $tahunAjaranAktif->id }}">
-                            <button type="submit" class="btn btn-success">Ajukan KRS</button>
-                        </div>
-                    </form>
-                    <form method="GET" action="{{ route('export.print.krs') }}">
-                        <div class="form-group">
-                            <input type="hidden" name="tahun_ajaran_id" value="{{ $tahunAjaranAktif->id }}">
-                            <button type="submit" class="btn btn-success">Cetak KRS</button>
-                        </div>
-                    </form>
-                    <form method="GET" action="{{ route('export.print.khs') }}">
-                        <div class="form-group">
-                            <input type="hidden" name="tahun_ajaran_id" value="{{ $tahunAjaranAktif->id }}">
-                            <button type="submit" class="btn btn-success">Cetak KHS</button>
-                        </div>
                     </form>
                 </div><!-- /.card-header -->
                 <div class="card-body table-responsive">
@@ -78,6 +58,21 @@
                         </tbody>
                     </table>
                 </div><!-- /.card-body -->
+                <div class="card-footer">
+                    <form method="POST" action="{{ route('krs.pengajuan') }}">
+                        @csrf
+                        <div class="mb-1 form-group">
+                            <input type="hidden" name="tahun_ajaran_id" value="{{ $tahunAjaranAktif->id }}">
+                            <button type="submit" class="btn btn-success">Ajukan KRS</button>
+                        </div>
+                    </form>
+                    <form method="GET" action="{{ route('export.print.krs') }}">
+                        <div class="mb-1 form-group">
+                            <input type="hidden" name="tahun_ajaran_id" value="{{ $tahunAjaranAktif->id }}">
+                            <button type="submit" class="btn btn-success">Cetak KRS</button>
+                        </div>
+                    </form>
+                </div>
             </div><!-- /.card -->
         </div><!-- /.col -->
     </div><!-- /.row -->

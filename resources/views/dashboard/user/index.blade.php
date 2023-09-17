@@ -8,8 +8,10 @@
         </div>
     </div>
     <div class="col align-self-center ps-0">
-        <h4 class="text-color-theme"><span class="fw-normal">Hi</span>, {{ auth()->user()->name }}</h4>
-        <p class="text-muted">{{ auth()->user()->kelas->first()->name }}</p>
+        <h4 class="text-color-theme"><span class="fw-normal">Hi</span>, {{ auth()->user()->name }} - ( {{ auth()->user()->nomor }} )</h4>
+        <p class="text-muted">
+            {{ auth()->user()->kelas->first()->name }} - {{ auth()->user()->kelas->first()->prodi->name }}
+        </p>
     </div>
 </div>
 @endsection

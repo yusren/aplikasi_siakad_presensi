@@ -6,13 +6,21 @@ use App\Models\Krs;
 use App\Models\Matakuliah;
 use App\Models\TahunAjaran;
 use App\Models\User;
+use App\Services\NilaiService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class NilaiController extends Controller
 {
+    protected $nilaiService;
+
+    public function __construct(NilaiService $nilaiService)
+    {
+        $this->nilaiService = $nilaiService;
+    }
+
     public function index(Request $request)
     {
+        $bobot = $this->nilaiService->getBobot();
         $tahunAjaranId = $request->tahun_ajaran_id ?: TahunAjaran::where('is_active', true)->latest()->first()->id;
         $matakuliahId = $request->input('matakuliah_id', Matakuliah::where('user_id', auth()->id())->first()->id);
         $tahunAjaranAktif = TahunAjaran::find($tahunAjaranId);
@@ -26,10 +34,10 @@ class NilaiController extends Controller
         })->get();
 
         return view('input.index', [
-            'bobot_tugas' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_tugas'],
-            'bobot_uts' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_uts'],
-            'bobot_uas' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_uas'],
-            'bobot_keaktifan' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_keaktifan'],
+            'bobot_tugas' => $bobot['bobot_tugas'],
+            'bobot_uts' => $bobot['bobot_uts'],
+            'bobot_uas' => $bobot['bobot_uas'],
+            'bobot_keaktifan' => $bobot['bobot_keaktifan'],
             'users' => $users,
             'matakuliah' => Matakuliah::where('user_id', auth()->id())->get(),
             'tahunAjaran' => TahunAjaran::orderBy('name')->get(),
@@ -114,14 +122,16 @@ class NilaiController extends Controller
                 break;
         }
 
+        $bobot = $this->nilaiService->getBobot();
+
         return view("input.dosen.{$groupKey}.index", [
             'users' => $users,
             'tahunAjaranAktif' => TahunAjaran::find($tahunAjaranId),
             'tahunAjaran' => TahunAjaran::orderBy('name')->get(),
-            'bobot_tugas' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_tugas'],
-            'bobot_uts' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_uts'],
-            'bobot_uas' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_uas'],
-            'bobot_keaktifan' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_keaktifan'],
+            'bobot_tugas' => $bobot['bobot_tugas'],
+            'bobot_uts' => $bobot['bobot_uts'],
+            'bobot_uas' => $bobot['bobot_uas'],
+            'bobot_keaktifan' => $bobot['bobot_keaktifan'],
         ]);
     }
 

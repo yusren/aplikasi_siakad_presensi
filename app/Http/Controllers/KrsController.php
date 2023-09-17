@@ -8,11 +8,18 @@ use App\Models\Matakuliah;
 use App\Models\Prodi;
 use App\Models\TahunAjaran;
 use App\Models\User;
+use App\Services\NilaiService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class KrsController extends Controller
 {
+    protected $nilaiService;
+
+    public function __construct(NilaiService $nilaiService)
+    {
+        $this->nilaiService = $nilaiService;
+    }
+
     public function getUsersByRoleAndTahunAjaran($role, $tahunAjaranId)
     {
         return User::where('role', $role)
@@ -154,13 +161,14 @@ class KrsController extends Controller
 
     public function rekap(Request $request)
     {
+        $bobot = $this->nilaiService->getBobot();
+
         return view('krs.rekap', [
             'krs' => auth()->user()->krs->sortBy('tahunAjaran'),
-            'bobot_tugas' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_tugas'],
-            'bobot_uts' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_uts'],
-            'bobot_uas' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_uas'],
-            'bobot_keaktifan' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_keaktifan'],
-
+            'bobot_tugas' => $bobot['bobot_tugas'],
+            'bobot_uts' => $bobot['bobot_uts'],
+            'bobot_uas' => $bobot['bobot_uas'],
+            'bobot_keaktifan' => $bobot['bobot_keaktifan'],
         ]);
     }
 
@@ -244,4 +252,31 @@ class KrsController extends Controller
 
     //     return redirect(route('krs.approveBy'.$role))->with('toast_success', 'Krs Berhasil Di Approve '.$role.'!');
     // }
+
+    public function khs(Request $request)
+    {
+        $tahunAjaranId = $request->tahun_ajaran_id ?: TahunAjaran::where('is_active', true)->latest()->first()->id;
+        $krs = auth()->user()->krs->where('tahun_ajaran_id', $tahunAjaranId);
+        $bobot = $this->nilaiService->getBobot();
+        $totalScore = $this->nilaiService->calculateScore($krs, $bobot);
+        $totalSks = $this->nilaiService->getTotalSksAllSemesters($krs);
+
+        $ip = $totalScore / $totalSks;
+        $ipk = $this->nilaiService->getTotalScoreAllSemesters($krs) / $this->nilaiService->getTotalSksAllSemesters($krs);
+
+        $taUser = auth()->user()->krs->pluck('tahun_ajaran_id');
+
+        return view('krs.khs', [
+            'totalScore' => $totalScore,
+            'bobot_tugas' => $bobot['bobot_tugas'],
+            'bobot_uts' => $bobot['bobot_uts'],
+            'bobot_uas' => $bobot['bobot_uas'],
+            'bobot_keaktifan' => $bobot['bobot_keaktifan'],
+            'krs' => $krs,
+            'tahunAjaran' => TahunAjaran::whereIn('id', $taUser)->orderBy('name')->get(),
+            'tahunAjaranAktif' => TahunAjaran::find($tahunAjaranId),
+            'ip' => number_format($ip, 2),
+            'ipk' => number_format($ipk, 2),
+        ]);
+    }
 }

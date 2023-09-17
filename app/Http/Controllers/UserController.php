@@ -7,6 +7,7 @@ use App\Models\Jadwal;
 use App\Models\Prodi;
 use App\Models\TahunAjaran;
 use App\Models\User;
+use App\Services\NilaiService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
@@ -14,6 +15,13 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
+    protected $nilaiService;
+
+    public function __construct(NilaiService $nilaiService)
+    {
+        $this->nilaiService = $nilaiService;
+    }
+
     public function index(Request $request)
     {
         $users = User::where('role', $request->role)->get();
@@ -80,10 +88,10 @@ class UserController extends Controller
                 'jadwal' => $jadwal,
                 'tahunAjaranAktif' => $tahunAjaranAktif,
                 'tahunAjaran' => $tahunAjaran,
-                'bobot_tugas' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_tugas'],
-                'bobot_uts' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_uts'],
-                'bobot_uas' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_uas'],
-                'bobot_keaktifan' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_keaktifan'],
+                'bobot_tugas' => $bobot['bobot_tugas'],
+                'bobot_uts' => $bobot['bobot_uts'],
+                'bobot_uas' => $bobot['bobot_uas'],
+                'bobot_keaktifan' => $bobot['bobot_keaktifan'],
             ]);
         } else {
             $userid = $user->id;

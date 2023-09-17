@@ -5,11 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Angket;
 use App\Models\Pertanyaan;
 use App\Models\User;
+use App\Services\NilaiService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
+    protected $nilaiService;
+
+    public function __construct(NilaiService $nilaiService)
+    {
+        $this->nilaiService = $nilaiService;
+    }
+
     public function index(Request $request)
     {
         $angket = Angket::with('hasil')->first();
@@ -51,6 +59,8 @@ class DashboardController extends Controller
 
     public function setting()
     {
+        $bobot = $this->nilaiService->getBobot();
+
         return view('dashboard.setting', [
             'baak' => json_decode(Storage::disk('public')->get('settings.json'), true)['baak'],
             'baak_nomor' => json_decode(Storage::disk('public')->get('settings.json'), true)['baak_nomor'],
@@ -58,10 +68,10 @@ class DashboardController extends Controller
             'keuangan' => json_decode(Storage::disk('public')->get('settings.json'), true)['keuangan'],
             'keuangan_nomor' => json_decode(Storage::disk('public')->get('settings.json'), true)['keuangan_nomor'],
             'keuangan_status' => json_decode(Storage::disk('public')->get('settings.json'), true)['keuangan_status'],
-            'bobot_tugas' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_tugas'],
-            'bobot_uts' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_uts'],
-            'bobot_uas' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_uas'],
-            'bobot_keaktifan' => json_decode(Storage::disk('public')->get('settings.json'), true)['bobot_keaktifan'],
+            'bobot_tugas' => $bobot['bobot_tugas'],
+            'bobot_uts' => $bobot['bobot_uts'],
+            'bobot_uas' => $bobot['bobot_uas'],
+            'bobot_keaktifan' => $bobot['bobot_keaktifan'],
             'grade_boundaries' => [
                 'A' => json_decode(Storage::disk('public')->get('settings.json'), true)['A'],
                 'A-' => json_decode(Storage::disk('public')->get('settings.json'), true)['A-'],
