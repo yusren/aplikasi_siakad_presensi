@@ -5,7 +5,7 @@
         @csrf
 
         <div>
-            <x-input-label for="loginname" :value="__('Email/NIM')" />
+            <x-input-label for="loginname" :value="__('Email/NIDN/NITK')" />
             <x-text-input id="loginname" class="block w-full mt-1" type="text" name="loginname"
                 :value="old('loginname')" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('loginname')" class="mt-2" />

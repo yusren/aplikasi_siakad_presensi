@@ -14,9 +14,9 @@
     {{-- <link rel="manifest" href="{{ asset('mahasiswa/manifest.json') }}" /> --}}
 
     <!-- Favicons -->
-    <link rel="apple-touch-icon" href="{{ asset('mahasiswa/img/favicon180.png') }}" sizes="180x180">
-    <link rel="icon" href="{{ asset('mahasiswa/img/favicon32.png') }}" sizes="32x32" type="image/png">
-    <link rel="icon" href="{{ asset('mahasiswa/img/favicon16.png') }}" sizes="16x16" type="image/png">
+    <link rel="apple-touch-icon" href="{{ asset('img/logo.png') }}" sizes="180x180">
+    <link rel="icon" href="{{ asset('img/logo.png') }}" sizes="32x32" type="image/png">
+    <link rel="icon" href="{{ asset('img/logo.png') }}" sizes="16x16" type="image/png">
 
     <!-- Google fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,7 +51,7 @@
 
     <!-- Begin page -->
     <main class="h-100">
-
+        @auth
         <!-- Header -->
         <header class="header position-fixed">
             <div class="row">
@@ -62,8 +62,8 @@
                 </div>
                 <div class="text-center col align-self-center">
                     <div class="logo-small">
-                        <img src="{{ asset('mahasiswa/img/logo.png') }}" alt="">
-                        <h5>Mahasiswa</h5>
+                        <img src="{{ asset('img/logo.png') }}" alt="">
+                        <h5>Portal Mahasiswa</h5>
                     </div>
                 </div>
                 <div class="col-auto">
@@ -77,6 +77,7 @@
             </div>
         </header>
         <!-- Header ends -->
+        @endauth
 
         <!-- main page content -->
         <div class="container main-container">
