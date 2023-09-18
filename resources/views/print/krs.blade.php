@@ -118,7 +118,7 @@
                     <div class="text-center">
                         Menyetujui
                         <h5><b>Dosen Pembimbing Akademik</b></h5>
-                        @if ($krs->first()->status != 'menunggu' && $krs->first()->status != 'ajukan')
+                        @if ($krs->first()->status == 'setujui_by_dosbing' || $krs->first()->status == 'setujui_by_kaprodi')
                         <div style="display: flex; justify-content: center;">
                         {!! DNS2D::getBarcodeHTML('Dokumen ini telah ditandatangani secara elektronik oleh'.' '.auth()->user()->user->name, 'QRCODE', 3, 3) !!}
                         </div>
@@ -131,7 +131,7 @@
                     <div class="text-center">
                         Pacitan, {{ date('d M Y') }}
                         <h5><b>Kabiro Administrasi Keuangan</b></h5>
-                        @if ($krs->first()->status == 'setujui_by_keuangan' || $krs->first()->status == 'setujui_by_kaprodi' || $krs->first()->status == 'setujui_by_dosbing')
+                        @if ($krs->first()->status == 'setujui_by_keuangan' || $krs->first()->status == 'setujui_by_dosbing' || $krs->first()->status == 'setujui_by_kaprodi')
                         <div style="display: flex; justify-content: center;">
                         {!! DNS2D::getBarcodeHTML('Dokumen ini telah ditandatangani secara elektronik oleh'.' '.json_decode(Storage::disk('public')->get('settings.json'), true)['keuangan'], 'QRCODE', 3, 3) !!}
                         </div>

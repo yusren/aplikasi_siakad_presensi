@@ -90,7 +90,9 @@
     </main>
     <!-- Page ends-->
 
-    @include('layouts.mahasiswa.footer')
+    @auth
+        @include('layouts.mahasiswa.footer')
+    @endauth
     <!-- Required jquery and libraries -->
     <script src="{{ asset('mahasiswa/js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('mahasiswa/js/popper.min.js') }}"></script>

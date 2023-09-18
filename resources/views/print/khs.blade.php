@@ -127,6 +127,9 @@
                 <div class="col-4 col-sm-4 col-lg-4">
                     <div class="text-center">
                         <h5><b>Ketua BAAK</b></h5>
+                        <div style="display: flex; justify-content: center;">
+                            {!! DNS2D::getBarcodeHTML('Dokumen ini telah ditandatangani secara elektronik oleh'.' '.json_decode(Storage::disk('public')->get('settings.json'), true)['baak'], 'QRCODE', 3, 3) !!}
+                        </div>
                         <u>{{ json_decode(Storage::disk('public')->get('settings.json'), true)['baak'] }}</u><br>
                         {{ json_decode(Storage::disk('public')->get('settings.json'), true)['baak_status'] }}. {{
                         json_decode(Storage::disk('public')->get('settings.json'), true)['baak_nomor'] }}
@@ -135,6 +138,9 @@
                 <div class="col-4 col-sm-4 col-lg-4">
                     <div class="text-center">
                         <h5><b>Ketua Program Studi</b></h5>
+                        <div style="display: flex; justify-content: center;">
+                            {!! DNS2D::getBarcodeHTML('Dokumen ini telah ditandatangani secara elektronik oleh'.' '.auth()->user()->prodi->user->name, 'QRCODE', 3, 3) !!}
+                        </div>
                         <u>{{ auth()->user()->prodi->user->name }}</u><br>
                         NIDN. {{ auth()->user()->prodi->user->nomor }}
                     </div>
@@ -142,6 +148,9 @@
                 <div class="col-4 col-sm-4 col-lg-4">
                     <div class="text-center">
                         <b>Pacitan,</b> {{ date('d M Y') }}
+                        <div style="display: flex; justify-content: center;">
+                            {!! DNS2D::getBarcodeHTML('Dokumen ini telah ditandatangani secara elektronik oleh'.' '.auth()->user()->user->name, 'QRCODE', 3, 3) !!}
+                        </div>
                         <h5><b>Dosen Pembimbing Akademik</b></h5>
                         <u>{{ auth()->user()->user->name }}</u><br>
                         NIDN. {{ auth()->user()->user->nomor }}

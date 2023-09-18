@@ -82,6 +82,8 @@ class UserController extends Controller
                 ->whereIn('matakuliah_id', $matakuliahIds)
                 ->get();
 
+            $bobot = $this->nilaiService->getBobot();
+
             return view('users.mahasiswa.show', [
                 'user' => $user,
                 'krs' => $krs,
