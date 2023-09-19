@@ -67,7 +67,7 @@
                                 <option value="laki-laki">Laki-Laki</option>
                                 <option value="perempuan">Perempuan</option>
                             </select>
-                            @error('role')
+                            @error('jenis_kelamin')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">

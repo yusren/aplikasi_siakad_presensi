@@ -101,6 +101,7 @@
                     <th>Jumlah</th>
                     <td>{{ $krs->sum('matakuliah.sks') }}</td>
                     <td></td>
+                    <td></td>
                 </tr>
             </table>
 
@@ -192,6 +193,7 @@
     <!-- page script -->
     <script>
         $(function() {
+                window.print();
                 $(".select2").select2();
                 $("#example1").DataTable();
                 $('#example2').DataTable({

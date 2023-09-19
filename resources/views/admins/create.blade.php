@@ -17,6 +17,12 @@
                         @csrf
                         <div class="box-body">
                             <div class="form-group">
+                                <label for="">Nomor</label>
+                                <input type="text" class="form-control" name="nomor" value="{{ old('nomor') }}" placeholder="Masukkan Nomor">
+                                @error('nomor')
+                                <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                            </div>
+                            <div class="form-group">
                                 <label for="">Nama</label>
                                 <input type="text" class="form-control" name="name" value="{{ old('name') }}"
                                     placeholder="Masukkan Nama">

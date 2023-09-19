@@ -19,6 +19,12 @@
                     @csrf
                     <div class="box-body">
                         <div class="form-group">
+                            <label for="">Nomor</label>
+                            <input type="text" class="form-control" name="nomor" value="{{ old('nomor', $user->nomor) }}" placeholder="Masukkan Nomor">
+                            @error('nomor')
+                            <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                        </div>
+                        <div class="form-group">
                             <img class="img-thumbnail" src="{{ asset($user->photo) }}" alt="" width="200px">
                             <input type="file" class="form-control" name="photo" value="{{ old('photo') }}" placeholder="Masukkan Foto">
                             @error('photo') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
@@ -60,7 +66,7 @@
                                 <option value="laki-laki" @if ($user->jenis_kelamin == 'laki-laki') selected @endif>Laki-Laki</option>
                                 <option value="perempuan" @if ($user->jenis_kelamin == 'perempuan') selected @endif>Perempuan</option>
                             </select>
-                            @error('role') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                            @error('jenis_kelamin') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
                             <label>Status Registrasi</label>

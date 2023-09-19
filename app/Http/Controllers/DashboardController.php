@@ -53,6 +53,16 @@ class DashboardController extends Controller
         } else {
             return view('dashboard.index', [
                 'users' => User::count(),
+                'mhs' => User::where('role', 'mahasiswa')->count(),
+                'dosen' => User::where('role', 'dosen')->count(),
+                'mhs_pria' => User::where('role', 'mahasiswa')->where('jenis_kelamin', 'laki-laki')->count(),
+                'mhs_wanita' => User::where('role', 'mahasiswa')->where('jenis_kelamin', 'perempuan')->count(),
+                'mhs_islam' => User::where('role', 'mahasiswa')->where('agama', 'islam')->count(),
+                'mhs_kristen' => User::where('role', 'mahasiswa')->where('agama', 'kristen')->count(),
+                'mhs_katolik' => User::where('role', 'mahasiswa')->where('agama', 'katolik')->count(),
+                'mhs_hindu' => User::where('role', 'mahasiswa')->where('agama', 'hindu')->count(),
+                'mhs_budha' => User::where('role', 'mahasiswa')->where('agama', 'budha')->count(),
+                'mhs_konghucu' => User::where('role', 'mahasiswa')->where('agama', 'konghucu')->count(),
             ]);
         }
     }
