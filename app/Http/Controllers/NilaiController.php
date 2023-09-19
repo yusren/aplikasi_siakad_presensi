@@ -74,7 +74,7 @@ class NilaiController extends Controller
     {
         $prodi = $request->prodi;
         $kelas = $request->kelas;
-        $matakuliah = $request->matakuliah;
+        // $matakuliah = $request->matakuliah;
         $tahunAjaranId = $request->get('tahun_ajaran_id', TahunAjaran::where('is_active', true)->latest()->first()->id);
 
         switch ($groupKey) {
@@ -146,14 +146,15 @@ class NilaiController extends Controller
             $krs = Krs::findOrFail($krsId);
             if ($krs) {
                 $krs->update([
-                    'nilai_tugas' => $nilaiTugas[$index],
-                    'nilai_uts' => $nilaiUts[$index],
-                    'nilai_uas' => $nilaiUas[$index],
-                    'nilai_keaktifan' => $nilaiKeaktifan[$index],
+                    'nilai_tugas' => $nilaiTugas[$index] ?? 0,
+                    'nilai_uts' => $nilaiUts[$index] ?? 0,
+                    'nilai_uas' => $nilaiUas[$index] ?? 0,
+                    'nilai_keaktifan' => $nilaiKeaktifan[$index] ?? 0,
                 ]);
             }
         }
 
-        return redirect()->route('nilai.index')->with('success', 'Data updated successfully');
+        // return redirect()->route('nilai.index')->with('success', 'Data updated successfully');
+        return redirect()->back()->with('success', 'Data updated successfully');
     }
 }

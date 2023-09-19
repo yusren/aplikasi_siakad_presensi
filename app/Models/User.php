@@ -85,11 +85,7 @@ class User extends Authenticatable
 
     public function presensi()
     {
-        if ($this->role == 'mahasiswa') {
-            return $this->hasMany(Presensi::class);
-        }
-
-        return null;
+        return $this->hasMany(Presensi::class);
     }
 
     public function hasilAngket()

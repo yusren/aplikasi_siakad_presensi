@@ -45,6 +45,17 @@ class PresensiController extends Controller
         return redirect()->back()->with('toast_success', 'Berhasil Menyimpan Data!');
     }
 
+    public function storeBulk(Request $request)
+    {
+        foreach ($request->selectedNomor as $value) {
+            $mahasiswa = User::where('role', 'mahasiswa')->where('nomor', $value)->first();
+            Presensi::create([
+                'user_id' => $mahasiswa->id,
+                'pertemuan_id' => $request->pertemuan_id,
+            ]);
+        }
+    }
+
     public function show(Presensi $presensi)
     {
         dd($presensi);

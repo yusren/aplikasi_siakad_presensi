@@ -71,11 +71,16 @@
                                     <td>{{ $value->name }} <input type="hidden" name="krs_id[]" value="{{ $value->krs->first()->id }}"></td>
                                     <td>{{ $value->kelas->first()->name }}</td>
                                     <td>{{ $value->kelas->first()->prodi->name }}</td>
-                                    <td>{{ $value->presensi->count() }}</td>
-                                    <td><input type="number" name="nilai_tugas[]" value="{{ $value->krs->first()->nilai_tugas }}" min="0"></td>
-                                    <td><input type="number" name="nilai_uts[]" value="{{ $value->krs->first()->nilai_uts }}" min="0"></td>
-                                    <td><input type="number" name="nilai_uas[]" value="{{ $value->krs->first()->nilai_uas }}" min="0"></td>
-                                    <td><input type="number" name="nilai_keaktifan[]" value="{{ $value->krs->first()->nilai_keaktifan }}" min="0"></td>
+                                    <td>
+                                        @php
+                                            $absen = $value->presensi->where('pertemuan.jadwal.tahun_ajaran_id', $tahunAjaranAktif->id)->where('pertemuan.jadwal.matakuliah_id', $matakuliahAktif->id)->count();
+                                        @endphp
+                                        {{ $absen }}
+                                    </td>
+                                    <td><input @if ($absen < 13) disabled @endif type="number" name="nilai_tugas[]" value="{{ $value->krs->first()->nilai_tugas }}" min="0"></td>
+                                    <td><input @if ($absen < 13) disabled @endif type="number" name="nilai_uts[]" value="{{ $value->krs->first()->nilai_uts }}" min="0"></td>
+                                    <td><input @if ($absen < 13) disabled @endif type="number" name="nilai_uas[]" value="{{ $value->krs->first()->nilai_uas }}" min="0"></td>
+                                    <td><input @if ($absen < 13) disabled @endif type="number" name="nilai_keaktifan[]" value="{{ $value->krs->first()->nilai_keaktifan }}" min="0"></td>
                                     <td>{{ $convertScoreToGrade((($bobot_tugas/100)*$value->krs->first()->nilai_tugas)+(($bobot_uts/100)*$value->krs->first()->nilai_uts)+(($bobot_uas/100)*$value->krs->first()->nilai_uas)+(($bobot_keaktifan/100)*$value->krs->first()->nilai_keaktifan)) }}</td>
                                     <td>{{ (($bobot_tugas/100)*$value->krs->first()->nilai_tugas) + (($bobot_uts/100)*$value->krs->first()->nilai_uts) + (($bobot_uas/100)*$value->krs->first()->nilai_uas) + (($bobot_keaktifan/100)*$value->krs->first()->nilai_keaktifan) }}</td>
                                 </tr>

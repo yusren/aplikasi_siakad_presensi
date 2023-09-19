@@ -45,7 +45,7 @@
                         <input type="hidden" name="jadwal_id" value="{{ $jadwal->id }}">
                     </div>
                     <div class="box-footer">
-                        <a href="{{ route('jadwal.index') }}" class="btn btn-default">Kembali</a>
+                        <a href="{{ route('jadwal.index.detailpertemuan', ['matakuliah' => $jadwal->matakuliah_id, 'kelas' => $jadwal->kelas_id, 'tahun_ajaran_id' => $jadwal->tahun_ajaran_id ]) }}" class="btn btn-default">Kembali</a>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
