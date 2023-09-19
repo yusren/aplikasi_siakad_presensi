@@ -81,9 +81,14 @@
                             @error('kelas_id') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
-                            <label>Waktu/Jam</label>
+                            <label>Waktu/Jam Masuk</label>
                             <input type="time" name="jam" id="jam" class="form-input" value="{{ old('jam') }}">
                             @error('jam') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Waktu/Jam Selesai</label>
+                            <input type="time" name="jam_berakhir" id="jam_berakhir" class="form-input" value="{{ old('jam_berakhir') }}">
+                            @error('jam_berakhir') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
                             <label>Hari</label>

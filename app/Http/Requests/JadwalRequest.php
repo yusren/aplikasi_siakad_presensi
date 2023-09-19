@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\JadwalRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class JadwalRequest extends FormRequest
@@ -20,8 +21,9 @@ class JadwalRequest extends FormRequest
             'prodi_id' => 'required|integer',
             'matakuliah_id' => 'required|integer',
             'kelas_id' => 'required|integer',
-            'jam' => 'required|date_format:H:i',
+            'jam' => ['required', 'date_format:H:i', new JadwalRule($this->ruang_id, $this->hari, $this->jam_berakhir, $this->tahun_ajaran_id)],
             'hari' => 'required|string',
+            'jam_berakhir' => 'required',
         ];
     }
 }

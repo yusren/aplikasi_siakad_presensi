@@ -18,6 +18,7 @@ class Jadwal extends Model
         'kelas_id',
         'jam',
         'hari',
+        'jam_berakhir',
     ];
 
     public function user()
