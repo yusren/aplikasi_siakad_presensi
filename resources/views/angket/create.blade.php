@@ -40,6 +40,17 @@
                                 <option value="setelah_login">setelah_login</option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label>Mata Kuliah</label>
+                            <select required class="form-control select2" name="matakuliah_id" data-placeholder="Pilih Tahun Mata Kuliah" style="width: 100%;">
+                                <option value="" selected disabled>Pilih Mata Kuliah</option>
+                                @foreach ($matakuliah as $mk)
+                                <option value="{{ $mk->id }}" {{ old('matakuliah_id')==$mk->id ? 'selected' : '' }}>
+                                    {{ $mk->code }} {{ $mk->name }} - {{ $mk->prodi->name }} {{ $mk->user->name }}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <div class="box-footer">
                         <a href="{{ route('angket.index') }}" class="btn btn-default">Kembali</a>

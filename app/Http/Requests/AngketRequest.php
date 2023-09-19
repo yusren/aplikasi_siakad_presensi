@@ -20,6 +20,7 @@ class AngketRequest extends FormRequest
             'end_at' => 'required',
             'kondisi' => 'required',
             'kondisi_detail' => 'nullable',
+            'matakuliah_id' => 'required',
         ];
     }
 }

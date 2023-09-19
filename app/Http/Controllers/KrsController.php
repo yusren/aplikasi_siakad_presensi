@@ -265,7 +265,7 @@ class KrsController extends Controller
         $totalSks = $this->nilaiService->getTotalSksAllSemesters($krs);
 
         $ip = $totalScore / $totalSks;
-        $ipk = $this->nilaiService->getTotalScoreAllSemesters($krs) / $this->nilaiService->getTotalSksAllSemesters($krs);
+        $ipk = $this->nilaiService->getTotalScoreAllSemesters(auth()->user()->krs) / $this->nilaiService->getTotalSksAllSemesters(auth()->user()->krs);
 
         $taUser = auth()->user()->krs->pluck('tahun_ajaran_id');
 

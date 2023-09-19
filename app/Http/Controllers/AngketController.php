@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AngketRequest;
 use App\Models\Angket;
+use App\Models\Matakuliah;
 
 class AngketController extends Controller
 {
@@ -16,7 +17,7 @@ class AngketController extends Controller
 
     public function create()
     {
-        return view('angket.create');
+        return view('angket.create', ['matakuliah' => Matakuliah::get()]);
     }
 
     public function store(AngketRequest $request)
@@ -34,7 +35,7 @@ class AngketController extends Controller
 
     public function edit(Angket $angket)
     {
-        return view('angket.edit', ['angket' => $angket]);
+        return view('angket.edit', ['angket' => $angket, 'matakuliah' => Matakuliah::get()]);
     }
 
     public function update(AngketRequest $request, Angket $angket)

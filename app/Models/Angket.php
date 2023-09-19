@@ -16,6 +16,7 @@ class Angket extends Model
         'end_at',
         'kondisi',
         'kondisi_detail',
+        'matakuliah_id',
     ];
 
     public function pertanyaan()
@@ -26,5 +27,10 @@ class Angket extends Model
     public function hasil()
     {
         return $this->hasMany(HasilAngket::class);
+    }
+
+    public function matakuliah()
+    {
+        return $this->belongsTo(Matakuliah::class);
     }
 }

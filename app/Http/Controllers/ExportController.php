@@ -31,7 +31,7 @@ class ExportController extends Controller
         $totalSks = $this->nilaiService->getTotalSksAllSemesters($krs);
 
         $ip = $totalScore / $totalSks;
-        $ipk = $this->nilaiService->getTotalScoreAllSemesters($krs) / $this->nilaiService->getTotalSksAllSemesters($krs);
+        $ipk = $this->nilaiService->getTotalScoreAllSemesters(auth()->user()->krs) / $this->nilaiService->getTotalSksAllSemesters(auth()->user()->krs);
 
         return view('print.khs', [
             'totalScore' => $totalScore,
