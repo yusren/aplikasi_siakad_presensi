@@ -33,7 +33,7 @@
                                 <select required class="form-control select2" name="mahasiswa[]" data-placeholder="Pilih Mahasiswa" style="width: 100%;" multiple>
                                     @foreach ($mahasiswa as $mhs)
                                         <option value="{{ $mhs->id }}"
-                                            {{ old('mahasiswa') == $mhs->id ? 'selected' : '' }}>{{ $mhs->name }}
+                                            {{ old('mahasiswa') == $mhs->id ? 'selected' : '' }}>{{ $mhs->nomor }} - {{ $mhs->name }}
                                         </option>
                                     @endforeach
                                 </select>

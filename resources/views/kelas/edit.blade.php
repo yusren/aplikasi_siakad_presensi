@@ -34,7 +34,7 @@
                                 <select required class="form-control select2" name="mahasiswa[]" data-placeholder="Pilih Mahasiswa" style="width: 100%;" multiple>
                                     @foreach ($mahasiswa as $mhs)
                                         <option @foreach ($kelas->users as $value) @if ($value->id == $mhs->id) selected @endif @endforeach value="{{ $mhs->id }}" {{ old('mahasiswa') == $mhs->id ? 'selected' : '' }}>
-                                            {{ $mhs->name }}
+                                            {{ $mhs->nomor }} - {{ $mhs->name }}
                                         </option>
                                     @endforeach
                                 </select>

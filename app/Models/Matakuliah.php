@@ -38,4 +38,9 @@ class Matakuliah extends Model
     {
         return $this->hasMany(Krs::class);
     }
+
+    public function angket()
+    {
+        return $this->hasOne(Angket::class);
+    }
 }

@@ -68,8 +68,12 @@
                             <td>{{ $value->matakuliah->code }}</td>
                             <td>{{ $value->matakuliah->name }}</td>
                             <td>{{ $value->matakuliah->sks }}</td>
-                            <td>{{$convertScoreToGrade((($bobot_tugas/100)*$value->nilai_tugas)+(($bobot_uts/100)*$value->nilai_uts)+(($bobot_uas/100)*$value->nilai_uas)+(($bobot_keaktifan/100)*$value->nilai_keaktifan))}}</td>
-                            <td>{{ (($bobot_tugas/100)*$value->nilai_tugas) + (($bobot_uts/100)*$value->nilai_uts) +(($bobot_uas/100)*$value->nilai_uas) + (($bobot_keaktifan/100)*$value->nilai_keaktifan)}}</td>
+                            @if ($value->matakuliah->angket)
+                                <td colspan="2"><a class="btn btn-info" href="{{ route('test.show', $value->matakuliah->angket->id) }}">Show</a></td>
+                            @else
+                                <td>{{$convertScoreToGrade((($bobot_tugas/100)*$value->nilai_tugas)+(($bobot_uts/100)*$value->nilai_uts)+(($bobot_uas/100)*$value->nilai_uas)+(($bobot_keaktifan/100)*$value->nilai_keaktifan))}}</td>
+                                <td>{{ (($bobot_tugas/100)*$value->nilai_tugas) + (($bobot_uts/100)*$value->nilai_uts) +(($bobot_uas/100)*$value->nilai_uas) + (($bobot_keaktifan/100)*$value->nilai_keaktifan)}}</td>
+                            @endif
                         </tr>
                         @endforeach
                         <tr>

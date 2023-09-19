@@ -22,11 +22,8 @@ class NilaiService
     {
         $totalScore = 0;
         foreach ($krs as $value) {
-            $score = (($bobot['bobot_tugas'] / 100) * $value->nilai_tugas) +
-                (($bobot['bobot_uts'] / 100) * $value->nilai_uts) +
-                (($bobot['bobot_uas'] / 100) * $value->nilai_uas) +
-                (($bobot['bobot_keaktifan'] / 100) * $value->nilai_keaktifan);
-            $totalScore += $score * $value->matakuliah->sks;
+            $score = (($bobot['bobot_tugas'] / 100) * $value->nilai_tugas) + (($bobot['bobot_uts'] / 100) * $value->nilai_uts) + (($bobot['bobot_uas'] / 100) * $value->nilai_uas) + (($bobot['bobot_keaktifan'] / 100) * $value->nilai_keaktifan);
+            $totalScore += $this->convertScoreToBobot($score) * $value->matakuliah->sks;
         }
 
         return $totalScore;
@@ -44,21 +41,49 @@ class NilaiService
         return $krs->sum('matakuliah.sks');
     }
 
-    // public function convertScoreToBobot($score)
-    // {
-    //     if ($score >= 90) return 4;
-    //     if ($score >= 85) return 3.75;
-    //     if ($score >= 80) return 3.5;
-    //     if ($score >= 75) return 3.25;
-    //     if ($score >= 70) return 3;
-    //     if ($score >= 65) return 2.75;
-    //     if ($score >= 60) return 2.5;
-    //     if ($score >= 55) return 2;
-    //     if ($score >= 45) return 1.75;
-    //     if ($score >= 40) return 1.5;
-    //     if ($score >= 35) return 1.25;
-    //     if ($score >= 30) return 1;
+    public function convertScoreToBobot($score)
+    {
+        $settings = json_decode(Storage::disk('public')->get('settings.json'), true);
+        $range_bobot = [
+            'A' => $settings['A'],
+            'A-' => $settings['A-'],
+            'B+' => $settings['B+'],
+            'B' => $settings['B'],
+            'B-' => $settings['B-'],
+            'C+' => $settings['C+'],
+            'C' => $settings['C'],
+            'C-' => $settings['C-'],
+            'D' => $settings['D'],
+        ];
 
-    //     return 0; // score <30
-    // }
+        if ($score >= $range_bobot['A']) {
+            return 4;
+        }
+        if ($score >= $range_bobot['A-']) {
+            return 3.75;
+        }
+        if ($score >= $range_bobot['B+']) {
+            return 3.5;
+        }
+        if ($score >= $range_bobot['B']) {
+            return 3.25;
+        }
+        if ($score >= $range_bobot['B-']) {
+            return 3;
+        }
+        if ($score >= $range_bobot['C+']) {
+            return 2.75;
+        }
+        if ($score >= $range_bobot['C']) {
+            return 2.5;
+        }
+        if ($score >= $range_bobot['C-']) {
+            return 2;
+        }
+        if ($score >= $range_bobot['D']) {
+            return 1.75;
+        }
+
+        return 0;
+    }
 }
