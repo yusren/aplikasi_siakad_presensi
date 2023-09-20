@@ -197,6 +197,7 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
     /*
@@ -216,6 +217,7 @@ return [
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 
 ];

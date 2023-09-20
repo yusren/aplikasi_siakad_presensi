@@ -44,6 +44,7 @@ Route::middleware(['auth', 'checkangketsetelahlogin'])->group(function () {
     Route::resource('/fakultas', FakultasController::class);
     Route::get('/fakultas/{fakultas_id}/prodi', [FakultasController::class, 'getProdi']);
     Route::resource('/matakuliah', MatakuliahController::class);
+    Route::post('/matakuliah/import', [MatakuliahController::class, 'import'])->name('matakuliah.import');
     Route::resource('/ruang', RuangController::class);
     Route::resource('/kelas', KelasController::class);
     Route::resource('/prodi', ProdiController::class);

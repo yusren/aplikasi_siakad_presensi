@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MatakuliahRequest;
+use App\Imports\MatakuliahImport;
 use App\Models\Matakuliah;
 use App\Models\Prodi;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MatakuliahController extends Controller
 {
@@ -66,5 +69,17 @@ class MatakuliahController extends Controller
         $matakuliah->delete();
 
         return redirect(route('matakuliah.index'))->with('toast_error', 'Berhasil Menghapus Data!');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:csv,xlsx,xls|max:2048',
+        ]);
+
+        $file = $request->file('file');
+        Excel::import(new MatakuliahImport, $file);
+
+        return back()->with('success', 'Matakuliah imported successfully.');
     }
 }
