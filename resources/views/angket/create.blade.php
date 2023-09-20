@@ -36,13 +36,14 @@
                         <div class="form-group">
                             <label>Kondisi</label>
                             <select required class="form-control select2" name="kondisi" data-placeholder="Pilih Kondisi" style="width: 100%;">
+                                <option value="sebelum_entri_krs" selected>sebelum_entri_krs</option>
                                 <option value="sebelum_lihat_nilai" selected>sebelum_lihat_nilai</option>
                                 <option value="setelah_login">setelah_login</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Mata Kuliah</label>
-                            <select required class="form-control select2" name="matakuliah_id" data-placeholder="Pilih Tahun Mata Kuliah" style="width: 100%;">
+                            <select class="form-control select2" name="matakuliah_id" data-placeholder="Pilih Tahun Mata Kuliah" style="width: 100%;">
                                 <option value="" selected disabled>Pilih Mata Kuliah</option>
                                 @foreach ($matakuliah as $mk)
                                 <option value="{{ $mk->id }}" {{ old('matakuliah_id')==$mk->id ? 'selected' : '' }}>

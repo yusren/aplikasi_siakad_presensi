@@ -33,7 +33,11 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $value->name }}</td>
                             <td>{{ $value->tujuan }}</td>
-                            <td>{{ $value->matakuliah->code }} - {{ $value->matakuliah->name }}</td>
+                            <td>
+                            @if ($value->matakuliah)
+                                {{ $value->matakuliah->code }} - {{ $value->matakuliah->name }}
+                            @endif
+                            </td>
                             <td>
                                 <a class="btn btn-warning" href="{{ route('angket.edit', $value->id) }}">Edit</a>
                                 <a class="btn btn-info" href="{{ route('angket.show', $value->id) }}">Show</a>

@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'checkangketsetelahlogin' => \App\Http\Middleware\CheckAngketSetelahLogin::class,
         'checkangketsebelumlihatnilai' => \App\Http\Middleware\CheckAngketSblmLihatNilai::class,
+        'checkangketsebelumentrikrs' => \App\Http\Middleware\CheckAngketSblmEntriKrs::class,
     ];
 }
