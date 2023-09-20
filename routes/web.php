@@ -18,6 +18,7 @@ use App\Http\Controllers\PertemuanController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RpsController;
 use App\Http\Controllers\RuangController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\TestController;
@@ -86,6 +87,7 @@ Route::middleware(['auth', 'checkangketsetelahlogin'])->group(function () {
     Route::post('/uploadtugas', [PertemuanController::class, 'uploadtugas'])->name('pertemuan.uploadtugas');
     Route::resource('/presensi', PresensiController::class);
     Route::post('/presensi-bluk', [PresensiController::class, 'storeBulk'])->name('presensi.storeBulk');
+    Route::resource('/rps', RpsController::class);
     Route::resource('/angket', AngketController::class);
     Route::resource('/pertanyaan', PertanyaanController::class);
     Route::resource('/jawaban', JawabanController::class);
