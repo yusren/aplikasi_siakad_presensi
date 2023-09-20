@@ -15,7 +15,7 @@ class MatakuliahImport implements ToModel
         $user = User::where('name', $row[1])->first();
 
         if (! $prodi || ! $user) {
-            return null;
+            return dd('tidak ada prodi/mahasiswa');
         }
 
         return new Matakuliah([

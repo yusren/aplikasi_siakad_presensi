@@ -18,8 +18,8 @@
                     <div class="box-header">
                         <form action="{{ route('matakuliah.import') }}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            <div class="form-group"><input class="form-control" type="file" name="file" accept=".csv,.xlsx,.xls"></div>
                             <div class="form-group">
-                                <input class="form-control" type="file" name="file" accept=".csv,.xlsx,.xls">
                                 <button class="btn btn-sm btn-primary" type="submit">Import</button>
                             </div>
                         </form>

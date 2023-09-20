@@ -16,6 +16,13 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
+                    <form action="{{ route('mahasiswa.import') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group"><input class="form-control" type="file" name="file" accept=".csv,.xlsx,.xls"></div>
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Import</button>
+                        </div>
+                    </form>
                     <a href="{{ route('user.create', ['role'=>'mahasiswa']) }}" class="btn btn-md bg-green">Tambah</a>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive">

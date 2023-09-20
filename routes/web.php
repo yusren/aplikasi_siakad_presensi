@@ -41,6 +41,8 @@ Route::middleware(['auth', 'checkangketsetelahlogin'])->group(function () {
     Route::resource('/pengumuman', PengumumanController::class);
     Route::resource('/admin', AdminController::class);
     Route::resource('/user', UserController::class);
+    Route::post('/mahasiswa/import', [UserController::class, 'importMahasiswa'])->name('mahasiswa.import');
+    Route::post('/dosen/import', [UserController::class, 'importDosen'])->name('dosen.import');
     Route::resource('/fakultas', FakultasController::class);
     Route::get('/fakultas/{fakultas_id}/prodi', [FakultasController::class, 'getProdi']);
     Route::resource('/matakuliah', MatakuliahController::class);

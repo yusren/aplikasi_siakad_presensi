@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
+use App\Imports\DosenImport;
+use App\Imports\MahasiswaImport;
 use App\Models\Jadwal;
 use App\Models\Prodi;
 use App\Models\TahunAjaran;
@@ -12,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -171,5 +174,29 @@ class UserController extends Controller
         $user->delete();
 
         return redirect(route('user.index', ['role' => $request->role]))->with('toast_error', 'Berhasil Menghapus Data!');
+    }
+
+    public function importMahasiswa(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:csv,xlsx,xls|max:2048',
+        ]);
+
+        $file = $request->file('file');
+        Excel::import(new MahasiswaImport, $file);
+
+        return back()->with('success', 'Mahasiswa imported successfully.');
+    }
+
+    public function importDosen(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:csv,xlsx,xls|max:2048',
+        ]);
+
+        $file = $request->file('file');
+        Excel::import(new DosenImport, $file);
+
+        return back()->with('success', 'Dosen imported successfully.');
     }
 }
