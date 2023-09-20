@@ -78,6 +78,7 @@ Route::middleware(['auth', 'checkangketsetelahlogin'])->group(function () {
     Route::post('/nilai', [NilaiController::class, 'store'])->name('nilai.store');
 
     Route::resource('/pertemuan', PertemuanController::class);
+    Route::post('/uploadtugas', [PertemuanController::class, 'uploadtugas'])->name('pertemuan.uploadtugas');
     Route::resource('/presensi', PresensiController::class);
     Route::post('/presensi-bluk', [PresensiController::class, 'storeBulk'])->name('presensi.storeBulk');
     Route::resource('/angket', AngketController::class);

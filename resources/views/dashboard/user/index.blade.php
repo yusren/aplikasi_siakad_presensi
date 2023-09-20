@@ -151,8 +151,9 @@
                                 </div>
                             </div>
                             <div class="col align-self-center ps-0">
-                                <p class="mb-1 text-color-theme">Berkomitmen Cetak Pendidik Berkarakter, STKIP PGRI Pacitan Gelar Wisuda ke XXIV</p>
-                                <p class="text-muted size-12">Konsisten melahirkan lulusan yang profesional, STKIP PGRI Pacitan kembali menggelar wisuda untuk ke-24 kalinya. Mengusung tema ...</p>
+                                <p class="mb-1 text-color-theme">@judul('Berkomitmen Cetak Pendidik Berkarakter, STKIP PGRI Pacitan Gelar Wisuda ke XXIV')</p>
+                                <p class="text-muted size-12">@desc('Konsisten melahirkan lulusan yang profesional, STKIP PGRI Pacitan kembali menggelar wisuda untuk ke-24 kalinya.
+                                Mengusung tema')</p>
                             </div>
                         </div>
                     </div>
@@ -168,8 +169,8 @@
                                 </div>
                             </div>
                             <div class="col align-self-center ps-0">
-                                <p class="mb-1 text-color-theme">PENYERAHAN PENGHARGAAN TANDAI PUNCAK DIES NATALIS KE-31 STKIP PGRI PACITAN</p>
-                                <p class="text-muted size-12">Rangkaian kegiatan Dies Natalis ke-31 STKIP PGRI Pacitan telah berakhir. Puncak kegiatan digelar pada ...</p>
+                                <p class="mb-1 text-color-theme">@judul('PENYERAHAN PENGHARGAAN TANDAI PUNCAK DIES NATALIS KE-31 STKIP PGRI PACITAN')</p>
+                                <p class="text-muted size-12">@desc('Rangkaian kegiatan Dies Natalis ke-31 STKIP PGRI Pacitan telah berakhir. Puncak kegiatan digelar pada')</p>
                             </div>
                         </div>
                     </div>

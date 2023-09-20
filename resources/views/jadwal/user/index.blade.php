@@ -51,6 +51,28 @@
                                 <td>{{$j->ruang->name}}</td>
                                 <td>{{$j->user->name}}</td>
                             </tr>
+                            <tr>
+                                <td colspan="6">
+                                    <table class="table table-sm table-bordered">
+                                        <tr>
+                                            <td>Pertemuan Ke</td>
+                                            <td>Upload Tugas</td>
+                                        </tr>
+                                        @foreach ($j->pertemuan as $pertemuan)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>
+                                                @if ($pertemuan->tugas()->where('user_id', auth()->id())->first())
+                                                    <a href="{{ $pertemuan->tugas()->where('user_id', auth()->id())->first()->file }}" class="btn btn-sm btn-warning">Download</a>
+                                                @else
+                                                    <a href="{{ route('pertemuan.show', $pertemuan->id) }}" class="btn btn-sm btn-primary">{{ $pertemuan->name }}</a>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </table>
+                                </td>
+                            </tr>
                             @empty
                             <tr>
                                 <td colspan="5">Kosong</td>

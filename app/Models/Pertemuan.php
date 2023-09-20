@@ -32,4 +32,9 @@ class Pertemuan extends Model
     {
         return $this->hasMany(Presensi::class);
     }
+
+    public function tugas()
+    {
+        return $this->hasOne(UploadTugas::class);
+    }
 }

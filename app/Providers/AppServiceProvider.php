@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
 
@@ -24,6 +25,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Blade::directive('judul', function ($expression) {
+            return "<?php echo e(Str::words($expression, 7, '...')); ?>";
+        });
+
+        Blade::directive('desc', function ($expression) {
+            return "<?php echo e(Str::words($expression, 14, '...')); ?>";
+        });
+
         $grade_boundaries = [
             'A' => json_decode(Storage::disk('public')->get('settings.json'), true)['A'],
             'A-' => json_decode(Storage::disk('public')->get('settings.json'), true)['A-'],

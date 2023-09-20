@@ -14,32 +14,28 @@
                 <div class="box-body">
                     <div class="form-group">
                         <label for="">Nama Pertemuan</label>
-                        <input readonly type="text" class="form-control" name="name"
-                            value="{{ old('name', $pertemuan->name) }}">
+                        <input readonly type="text" class="form-control" name="name" value="{{ old('name', $pertemuan->name) }}">
                         @error('name')
                         <div class="invalid-feedback text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="">Topik</label>
-                        <input readonly type="text" class="form-control" name="topic"
-                            value="{{ old('topic', $pertemuan->topic) }}">
+                        <input readonly type="text" class="form-control" name="topic" value="{{ old('topic', $pertemuan->topic) }}">
                         @error('topic')
                         <div class="invalid-feedback text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="">Sub Topik</label>
-                        <input readonly type="text" class="form-control" name="sub_topic"
-                            value="{{ old('sub_topic', $pertemuan->sub_topic) }}">
+                        <input readonly type="text" class="form-control" name="sub_topic" value="{{ old('sub_topic', $pertemuan->sub_topic) }}">
                         @error('sub_topic')
                         <div class="invalid-feedback text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="">Dosen Pengganti</label>
-                        <input readonly type="text" class="form-control" name="dosen_pengganti"
-                            value="{{ old('dosen_pengganti', $pertemuan->dosen_pengganti) }}">
+                        <input readonly type="text" class="form-control" name="dosen_pengganti" value="{{ old('dosen_pengganti', $pertemuan->dosen_pengganti) }}">
                         @error('dosen_pengganti')
                         <div class="invalid-feedback text-danger">{{ $message }}</div>
                         @enderror

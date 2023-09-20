@@ -4,15 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Jadwal;
 use App\Models\Pertemuan;
+use App\Models\UploadTugas;
 use Illuminate\Http\Request;
 
 class PertemuanController extends Controller
 {
-    public function index()
-    {
-        //
-    }
-
     public function create(Request $request)
     {
         $jadwal = Jadwal::find($request->jadwal_id);
@@ -52,24 +48,37 @@ class PertemuanController extends Controller
             ];
         });
 
-        return view('pertemuan.show', [
-            'pertemuan' => $pertemuan,
-            'records' => $records,
+        switch (auth()->user()->role) {
+            case 'mahasiswa':
+                return view('pertemuan.user.show', [
+                    'pertemuan' => $pertemuan,
+                ]);
+            case 'dosen':
+                return view('pertemuan.show', [
+                    'pertemuan' => $pertemuan,
+                    'records' => $records,
+                ]);
+            default:
+                return '404';
+        }
+    }
+
+    public function uploadtugas(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|mimes:png,jpg,doc,docx,pdf,xls,xlsx',
         ]);
-    }
+        $file = $request->file('file');
+        $fileName = time().'.'.$file->getClientOriginalExtension();
+        $file->storeAs('public/files', $fileName);
+        $filePath = 'storage/files/'.$fileName;
 
-    public function edit(Pertemuan $pertemuan)
-    {
-        //
-    }
+        UploadTugas::create([
+            'pertemuan_id' => $request->pertemuan_id,
+            'user_id' => auth()->id(),
+            'file' => $filePath,
+        ]);
 
-    public function update(Request $request, Pertemuan $pertemuan)
-    {
-        //
-    }
-
-    public function destroy(Pertemuan $pertemuan)
-    {
-        //
+        return redirect(route('jadwal.index'))->with('toast_success', 'Berhasil Menyimpan Data!');
     }
 }
