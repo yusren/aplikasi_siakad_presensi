@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Angket;
+use App\Models\Pengumuman;
 use App\Models\Pertanyaan;
 use App\Models\User;
 use App\Services\NilaiService;
@@ -49,7 +50,7 @@ class DashboardController extends Controller
         }
 
         if (auth()->user()->role == 'mahasiswa') {
-            return view('dashboard.user.index', []);
+            return view('dashboard.user.index', ['pengumuman' => Pengumuman::where('role', 'mahasiswa')->get()]);
         } else {
             return view('dashboard.index', [
                 'users' => User::count(),
@@ -63,6 +64,7 @@ class DashboardController extends Controller
                 'mhs_hindu' => User::where('role', 'mahasiswa')->where('agama', 'hindu')->count(),
                 'mhs_budha' => User::where('role', 'mahasiswa')->where('agama', 'budha')->count(),
                 'mhs_konghucu' => User::where('role', 'mahasiswa')->where('agama', 'konghucu')->count(),
+                'pengumuman' => Pengumuman::where('role', 'non-mahasiswa')->get(),
             ]);
         }
     }

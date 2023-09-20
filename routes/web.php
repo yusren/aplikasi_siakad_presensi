@@ -12,6 +12,7 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\KrsController;
 use App\Http\Controllers\MatakuliahController;
 use App\Http\Controllers\NilaiController;
+use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\PertemuanController;
 use App\Http\Controllers\PresensiController;
@@ -37,6 +38,7 @@ Route::middleware(['auth', 'checkangketsetelahlogin'])->group(function () {
     Route::get('/setting', [DashboardController::class, 'setting'])->name('setting');
     Route::post('/setting-store', [DashboardController::class, 'store'])->name('setting.store');
 
+    Route::resource('/pengumuman', PengumumanController::class);
     Route::resource('/admin', AdminController::class);
     Route::resource('/user', UserController::class);
     Route::resource('/fakultas', FakultasController::class);
