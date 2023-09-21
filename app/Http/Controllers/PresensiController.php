@@ -9,16 +9,6 @@ use Illuminate\Http\Request;
 
 class PresensiController extends Controller
 {
-    public function index()
-    {
-        //
-    }
-
-    public function create()
-    {
-        //
-    }
-
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -61,14 +51,9 @@ class PresensiController extends Controller
         dd($presensi);
     }
 
-    public function edit(Presensi $presensi)
+    public function rekap(Request $request)
     {
-        //
-    }
-
-    public function update(Request $request, Presensi $presensi)
-    {
-        //
+        dd($request->all());
     }
 
     public function destroy(Presensi $presensi)

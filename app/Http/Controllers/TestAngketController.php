@@ -6,7 +6,7 @@ use App\Models\Angket;
 use App\Models\HasilAngket;
 use Illuminate\Http\Request;
 
-class TestController extends Controller
+class TestAngketController extends Controller
 {
     public function index(Request $request)
     {

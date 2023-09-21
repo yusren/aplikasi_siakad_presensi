@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'checkangketsetelahlogin' => \App\Http\Middleware\CheckAngketSetelahLogin::class,
         'checkangketsebelumlihatnilai' => \App\Http\Middleware\CheckAngketSblmLihatNilai::class,
         'checkangketsebelumentrikrs' => \App\Http\Middleware\CheckAngketSblmEntriKrs::class,
+        'checkrps' => \App\Http\Middleware\RpsMiddleware::class,
     ];
 }

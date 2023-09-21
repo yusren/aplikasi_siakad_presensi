@@ -101,4 +101,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(HasilAngket::class);
     }
+
+    public function hasilRps()
+    {
+        return $this->hasMany(RpsDetail::class);
+    }
 }

@@ -22,7 +22,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RpsController;
 use App\Http\Controllers\RuangController;
 use App\Http\Controllers\TahunAjaranController;
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\TestAngketController;
+use App\Http\Controllers\TestRpsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -32,7 +33,7 @@ Route::get('/', function () {
 });
 Route::get('/login-mhs', [AuthController::class, 'login'])->name('mahasiswa.login');
 
-Route::middleware(['auth', 'checkangketsetelahlogin'])->group(function () {
+Route::middleware(['auth', 'checkangketsetelahlogin', 'checkrps'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -87,6 +88,7 @@ Route::middleware(['auth', 'checkangketsetelahlogin'])->group(function () {
     Route::resource('/pertemuan', PertemuanController::class);
     Route::post('/uploadtugas', [PertemuanController::class, 'uploadtugas'])->name('pertemuan.uploadtugas');
     Route::resource('/presensi', PresensiController::class);
+    Route::get('/presensi-rekap', [PresensiController::class, 'rekap'])->name('presensi.rekap');
     Route::post('/presensi-bluk', [PresensiController::class, 'storeBulk'])->name('presensi.storeBulk');
     Route::resource('/rps', RpsController::class);
     Route::resource('/angket', AngketController::class);
@@ -98,7 +100,8 @@ Route::middleware(['auth', 'checkangketsetelahlogin'])->group(function () {
     Route::get('/print-jurnaldosen', [ExportController::class, 'printJurnalDosen'])->name('export.print.jurnaldosen');
 
 });
-Route::resource('/test', TestController::class)->middleware('auth');
+Route::resource('/inputrps', TestRpsController::class)->middleware('auth');
+Route::resource('/test', TestAngketController::class)->middleware('auth');
 Route::get('provinces', [DependantDropdownController::class, 'provinces'])->name('provinces');
 Route::get('cities', [DependantDropdownController::class, 'cities'])->name('cities');
 Route::get('districts', [DependantDropdownController::class, 'districts'])->name('districts');

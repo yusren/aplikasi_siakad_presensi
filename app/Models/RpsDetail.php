@@ -5,16 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Rps extends Model
+class RpsDetail extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'rps_id',
+        'user_id',
+        'file',
     ];
 
-    public function detail()
+    public function rps()
     {
-        return $this->hasMany(RpsDetail::class);
+        return $this->belongsTo(Rps::class); //Kapordi
     }
 }
