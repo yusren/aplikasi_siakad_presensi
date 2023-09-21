@@ -8,7 +8,7 @@
 
 <section class="content">
     <div class="row">
-
+<div id="container"></div>
         <div class="col-lg-4 col-xs-12">
             <div class="small-box bg-yellow-gradient">
                 <div class="inner">
@@ -409,6 +409,44 @@ new Highcharts.chart('chartIPKMhsPie', {
             color: '#0dbd5c',
             y: 12 // Jumlah mahasiswa dengan IPK < 3.00
         }]
+    }]
+});
+
+var data = @json($data);
+var flattenedData = [];
+
+for (var gender in data) {
+    for (var province in data[gender]) {
+        for (var city in data[gender][province]) {
+            for (var district in data[gender][province][city]) {
+                var name = province + ' - ' + city + ' - ' + district + ' - ' + gender;
+                var count = data[gender][province][city][district];
+                var color = gender === 'laki-laki' ? '#0000FF' : '#FFC0CB'; // Blue for 'laki-laki', pink for 'perempuan'
+                flattenedData.push({ name: name, y: count, color: color });
+            }
+        }
+    }
+}
+
+Highcharts.chart('container', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Alamat Mahasiswa'
+    },
+    xAxis: {
+        type: 'category'
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Number of Users'
+        }
+    },
+    series: [{
+        name: 'Mahasiswa',
+        data: flattenedData
     }]
 });
 </script>

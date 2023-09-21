@@ -9,6 +9,9 @@ use App\Models\User;
 use App\Services\NilaiService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Laravolt\Indonesia\Models\City;
+use Laravolt\Indonesia\Models\District;
+use Laravolt\Indonesia\Models\Province;
 
 class DashboardController extends Controller
 {
@@ -21,6 +24,36 @@ class DashboardController extends Controller
 
     public function index(Request $request)
     {
+        $usersAlamat = User::where('role', 'mahasiswa')
+            ->with('alamats')
+            ->get()
+            ->groupBy([
+                'jenis_kelamin',
+                function ($item) {
+                    $province = Province::find($item->alamats->provinsi);
+
+                    return $province ? $province->name : 'Unknown';
+                },
+                function ($item) {
+                    $city = City::find($item->alamats->kota);
+
+                    return $city ? $city->name : 'Unknown';
+                },
+                function ($item) {
+                    $district = District::find($item->alamats->kecamatan);
+
+                    return $district ? $district->name : 'Unknown';
+                },
+            ])
+            ->map(function ($items) {
+                return $items->map(function ($items) {
+                    return $items->map(function ($items) {
+                        return $items->map(function ($items) {
+                            return $items->count();
+                        });
+                    });
+                });
+            });
         $angket = Angket::with('hasil')->first();
         $pertanyaans = Pertanyaan::where('angket_id', $angket->id)->with('jawaban')->get();
         $results = [];
@@ -53,6 +86,7 @@ class DashboardController extends Controller
             return view('dashboard.user.index', ['pengumuman' => Pengumuman::where('role', 'mahasiswa')->get()]);
         } else {
             return view('dashboard.index', [
+                'data' => $usersAlamat,
                 'users' => User::count(),
                 'mhs' => User::where('role', 'mahasiswa')->count(),
                 'dosen' => User::where('role', 'dosen')->count(),

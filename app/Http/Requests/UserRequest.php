@@ -27,7 +27,7 @@ class UserRequest extends FormRequest
             'email' => ['required', 'email', Rule::unique('users')->ignore($this->user)],
             'password' => 'same:confirm-password',
             'agama' => 'required',
-            'alamat' => 'required',
+            'alamat' => 'nullable',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
             'provinsi' => 'required',
