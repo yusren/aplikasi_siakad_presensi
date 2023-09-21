@@ -50,7 +50,7 @@ class UserController extends Controller
             case 'mahasiswa':
                 return view('users.mahasiswa.create', ['prodi' => $prodi, 'agama' => $agama, 'dosen' => $dosen, 'provinces' => $provinces]);
             case 'dosen':
-                return view('users.dosen.create', ['prodi' => $prodi, 'agama' => $agama]);
+                return view('users.dosen.create', ['prodi' => $prodi, 'agama' => $agama, 'provinces' => $provinces]);
             default:
                 abort(404);
         }
@@ -150,7 +150,15 @@ class UserController extends Controller
                     'villages' => $villages ?? [],
                 ]);
             case 'dosen':
-                return view('users.dosen.edit', ['user' => $user, 'prodi' => $prodi, 'agama' => $agama]);
+                return view('users.dosen.edit', [
+                    'user' => $user,
+                    'prodi' => $prodi,
+                    'agama' => $agama,
+                    'provinces' => $provinces,
+                    'cities' => $cities ?? [],
+                    'districts' => $districts ?? [],
+                    'villages' => $villages ?? [],
+                ]);
             default:
                 abort(404);
         }

@@ -82,12 +82,6 @@
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
-                            <label for="">Alamat</label>
-                            <input type="text" class="form-control" name="alamat" value="{{ old('alamat', $user->alamat) }}" placeholder="Masukkan Alamat">
-                            @error('alamat')
-                            <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
-                        </div>
-                        <div class="form-group">
                             <label>Agama</label>
                             <select required class="form-control select2" name="agama" data-placeholder="Pilih Agama" style="width: 100%;">
                                 @foreach ($agama as $value)
@@ -166,6 +160,67 @@
                             @enderror
                         </div>
                         <input type="hidden" name="role" value="dosen">
+<div class="form-group">
+                            <label for="">Alamat</label>
+                            <input type="text" class="form-control" name="alamat" value="{{ old('alamat', $user->alamat) }}"
+                                placeholder="Masukkan Alamat">
+                            @error('alamat') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label class="form-label" for="provinsi">Provinsi</label>
+                            <div class="mb-1">
+                                <select style="width: 100%;" class="form-select select2" name="provinsi" id="provinsi" required>
+                                    <option>==Pilih Salah Satu==</option>
+                                    @if ($provinces)
+                                    @foreach ($provinces as $item)
+                                    <option value="{{ $item->id ?? '' }}" {{ old('provinsi', $user->alamats->provinsi ?? null)==$item->id ?
+                                        'selected' : '' }}>{{ $item->name ?? '' }}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="kota">Kabupaten / Kota</label>
+                            <div class="mb-1">
+                                <select style="width: 100%;" class="form-select select2" name="kota" id="kota" required>
+                                    {{-- <option>==Pilih Salah Satu==</option> --}}
+                                    @if ($cities)
+                                    @foreach($cities as $key => $item)
+                                    <option value="{{ $key ?? '' }}" {{ $user->alamats->kota == $key ? 'selected' : '' }}>{{$item??''}}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="kecamatan">Kecamatan</label>
+                            <div class="mb-1">
+                                <select style="width: 100%;" class="form-select select2" name="kecamatan" id="kecamatan" required>
+                                    {{-- <option>==Pilih Salah Satu==</option> --}}
+                                    @if ($districts)
+                                    @foreach($districts as $key => $item)
+                                    <option value="{{ $key ?? '' }}" {{ $user->alamats->kecamatan == $key ? 'selected' : '' }}>{{$item??''}}
+                                    </option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="desa">Desa</label>
+                            <div class="mb-1">
+                                <select style="width: 100%;" class="form-select select2" name="desa" id="desa" required>
+                                    {{-- <option>==Pilih Salah Satu==</option> --}}
+                                    @if ($villages)
+                                    @foreach($villages as $key => $item)
+                                    <option value="{{ $key ?? '' }}" {{ $user->alamats->desa == $key ? 'selected' : '' }}>{{$item??''}}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
                     </div><!-- /.box-body -->
 
                     <div class="box-footer">
@@ -177,4 +232,36 @@
         </div>
     </div>
 </section>
+@endsection
+@section('page-script')
+<script>
+    function onChangeSelect(url, id, name) {
+    $.ajax({
+        url: url,
+        type: 'GET',
+        data: { id: id },
+        success: function(data) {
+            $('#'+name).empty();
+            $('#'+name).append('<option>==Pilih Salah Satu==</option>');
+            $.each(data, function(key, value) {
+                $('#'+name).append('<option value="'+key+'">'+value+'</option>');
+            });
+        }
+    });
+}
+
+$(function() {
+    $('#provinsi').on('change', function() {
+        onChangeSelect('{{ route("cities") }}', $(this).val(), 'kota');
+    });
+
+    $('#kota').on('change', function() {
+        onChangeSelect('{{ route("districts") }}', $(this).val(), 'kecamatan');
+    });
+
+    $('#kecamatan').on('change', function() {
+        onChangeSelect('{{ route("villages") }}', $(this).val(), 'desa');
+    });
+});
+</script>
 @endsection
