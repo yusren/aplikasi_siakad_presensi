@@ -17,6 +17,7 @@ class Angket extends Model
         'kondisi',
         'kondisi_detail',
         'matakuliah_id',
+        'prodi',
     ];
 
     public function pertanyaan()

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AngketRequest;
 use App\Models\Angket;
 use App\Models\Matakuliah;
+use App\Models\Prodi;
 
 class AngketController extends Controller
 {
@@ -17,7 +18,15 @@ class AngketController extends Controller
 
     public function create()
     {
-        return view('angket.create', ['matakuliah' => Matakuliah::get()]);
+        $pilihan = [
+            'semua_user', //mahasiswa, dosen dll
+            'dosen',
+            'karyawan',
+            'dosen_karyawan',
+            'mahasiswa',
+        ];
+
+        return view('angket.create', ['matakuliah' => Matakuliah::get(), 'prodi' => Prodi::get(), 'pilihan' => $pilihan]);
     }
 
     public function store(AngketRequest $request)

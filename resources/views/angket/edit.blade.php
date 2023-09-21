@@ -38,6 +38,7 @@
                         <div class="form-group">
                             <label>Kondisi</label>
                             <select required class="form-control select2" name="kondisi" data-placeholder="Pilih Kondisi" style="width: 100%;">
+                                <option value="" selected disabled>Pilih</option>
                                 <option @if ($angket->kondisi == 'sebelum_entri_krs') selected @endif value="sebelum_entri_krs" selected>sebelum_entri_krs</option>
                                 <option @if ($angket->kondisi == 'sebelum_lihat_nilai') selected @endif value="sebelum_lihat_nilai" selected>sebelum_lihat_nilai</option>
                                 <option @if ($angket->kondisi == 'setelah_login') selected @endif value="setelah_login">setelah_login</option>
@@ -45,7 +46,7 @@
                         </div>
                         <div class="form-group">
                             <label>Mata Kuliah</label>
-                            <select class="form-control select2" name="matakuliah_id" data-placeholder="Pilih Tahun Mata Kuliah" style="width: 100%;">
+                            <select class="form-control select2" name="matakuliah_id" data-placeholder="Pilih Mata Kuliah" style="width: 100%;">
                                 <option value="" selected disabled>Pilih Mata Kuliah</option>
                                 @foreach ($matakuliah as $mk)
                                 <option value="{{ $mk->id }}" {{ old('matakuliah_id', $angket->matakuliah_id)==$mk->id ? 'selected' : '' }}>

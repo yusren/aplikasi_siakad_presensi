@@ -64,7 +64,7 @@ Route::middleware(['auth', 'checkangketsetelahlogin', 'checkrps'])->group(functi
     Route::get('/jadwal-detailpertemuan', [JadwalController::class, 'indexDetailpertemuan'])->name('jadwal.index.detailpertemuan');
 
     // Route::resource('/krs', KrsController::class)->middleware('checkangketsebelumlihatnilai'); //TODO Saat lihat KHS
-    Route::resource('/krs', KrsController::class)->middleware('checkangketsebelumentrikrs');
+    Route::resource('/krs', KrsController::class)->middleware(['checkangketsebelumentrikrs', 'checkangketsebelumlihatnilai']);
     Route::get('/khs', [KrsController::class, 'khs'])->name('krs.khs');
     Route::get('/krs-rekap', [KrsController::class, 'rekap'])->name('krs.rekap');
     Route::get('/krs-detailprodi', [KrsController::class, 'indexDetailprodi'])->name('krs.index.detailprodi');

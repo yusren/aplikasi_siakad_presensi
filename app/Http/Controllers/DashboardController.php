@@ -54,28 +54,30 @@ class DashboardController extends Controller
                     });
                 });
             });
-        $angket = Angket::with('hasil')->first();
-        $pertanyaans = Pertanyaan::where('angket_id', $angket->id)->with('jawaban')->get();
         $results = [];
+        $angket = Angket::with('hasil')->first();
+        if ($angket) {
+            $pertanyaans = Pertanyaan::where('angket_id', $angket->id)->with('jawaban')->get();
 
-        foreach ($pertanyaans as $pertanyaan) {
-            $counts = collect($angket->hasil)
-                ->map(function ($hasil) use ($pertanyaan) {
-                    $answers = json_decode($hasil->data_jawaban, true);
+            foreach ($pertanyaans as $pertanyaan) {
+                $counts = collect($angket->hasil)
+                    ->map(function ($hasil) use ($pertanyaan) {
+                        $answers = json_decode($hasil->data_jawaban, true);
 
-                    return $answers[$pertanyaan->id] ?? null;
-                })
-                ->countBy();
+                        return $answers[$pertanyaan->id] ?? null;
+                    })
+                    ->countBy();
 
-            $results[] = [
-                'pertanyaan_id' => $pertanyaan->id,
-                'description' => $pertanyaan->description,
-                'jawaban' => $counts->map(function ($count, $jawabanId) use ($pertanyaan) {
-                    $jawaban = $pertanyaan->jawaban()->find($jawabanId);
+                $results[] = [
+                    'pertanyaan_id' => $pertanyaan->id,
+                    'description' => $pertanyaan->description,
+                    'jawaban' => $counts->map(function ($count, $jawabanId) use ($pertanyaan) {
+                        $jawaban = $pertanyaan->jawaban()->find($jawabanId);
 
-                    return $jawaban ? ['answer_text' => $jawaban->answer_text, 'count' => $count] : null;
-                })->values(),
-            ];
+                        return $jawaban ? ['answer_text' => $jawaban->answer_text, 'count' => $count] : null;
+                    })->values(),
+                ];
+            }
         }
 
         if ($request->wantsJson()) {

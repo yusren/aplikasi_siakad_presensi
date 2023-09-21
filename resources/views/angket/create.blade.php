@@ -19,8 +19,15 @@
                             @error('name') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
-                            <label for="">Tujuan Angket</label>
-                            <input type="text" class="form-control" name="tujuan" value="{{ old('tujuan') }}" placeholder="Masukkan Tujuan Angket">
+                            <label>Tujuan Angket</label>
+                            <select class="form-control select2" name="tujuan" data-placeholder="Pilih Tujuan Angket" style="width: 100%;">
+                                <option value="" selected disabled>Pilih Tujuan Angket</option>
+                                @foreach ($pilihan as $tujuan)
+                                <option value="{{ $tujuan }}" {{ old('tujuan')==$tujuan ? 'selected' : '' }}>
+                                    {{ $tujuan }}
+                                </option>
+                                @endforeach
+                            </select>
                             @error('tujuan') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
@@ -36,19 +43,29 @@
                         <div class="form-group">
                             <label>Kondisi</label>
                             <select required class="form-control select2" name="kondisi" data-placeholder="Pilih Kondisi" style="width: 100%;">
-                                <option value="sebelum_entri_krs" selected>sebelum_entri_krs</option>
-                                <option value="sebelum_lihat_nilai" selected>sebelum_lihat_nilai</option>
+                                <option value="" selected disabled>Pilih</option>
+                                <option value="sebelum_entri_krs">sebelum_entri_krs</option>
+                                <option value="sebelum_lihat_nilai">sebelum_lihat_nilai</option>
                                 <option value="setelah_login">setelah_login</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Mata Kuliah</label>
-                            <select class="form-control select2" name="matakuliah_id" data-placeholder="Pilih Tahun Mata Kuliah" style="width: 100%;">
+                            <select class="form-control select2" name="matakuliah_id" data-placeholder="Pilih Mata Kuliah" style="width: 100%;">
                                 <option value="" selected disabled>Pilih Mata Kuliah</option>
                                 @foreach ($matakuliah as $mk)
                                 <option value="{{ $mk->id }}" {{ old('matakuliah_id')==$mk->id ? 'selected' : '' }}>
                                     {{ $mk->code }} {{ $mk->name }} - {{ $mk->prodi->name }} {{ $mk->user->name }}
                                 </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Program Studi</label>
+                            <select class="form-control select2" name="prodi_id" data-placeholder="Pilih Prodi" style="width: 100%;" multiple>
+                                <option value="" selected disabled>Pilih Prodi</option>
+                                @foreach ($prodi as $pr)
+                                    <option value="{{ $pr->id }}" {{ old('prodi_id') == $pr->id ? 'selected' : '' }}>{{ $pr->name }}</option>
                                 @endforeach
                             </select>
                         </div>
