@@ -10,6 +10,7 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+        "laravolt/indonesia": "^0.34.0",
         "maatwebsite/excel": "^3.1",
         "milon/barcode": "^10.0",
         "realrashid/sweet-alert": "^7.0"

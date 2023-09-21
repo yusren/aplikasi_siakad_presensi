@@ -30,6 +30,10 @@ class UserRequest extends FormRequest
             'alamat' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
+            'provinsi' => 'required',
+            'kota' => 'required',
+            'kecamatan' => 'required',
+            'desa' => 'required',
         ];
 
         if ($this->role == 'dosen') {

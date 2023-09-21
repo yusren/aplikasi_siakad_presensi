@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AngketController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DependantDropdownController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\FakultasController;
 use App\Http\Controllers\JadwalController;
@@ -98,6 +99,10 @@ Route::middleware(['auth', 'checkangketsetelahlogin'])->group(function () {
 
 });
 Route::resource('/test', TestController::class)->middleware('auth');
+Route::get('provinces', [DependantDropdownController::class, 'provinces'])->name('provinces');
+Route::get('cities', [DependantDropdownController::class, 'cities'])->name('cities');
+Route::get('districts', [DependantDropdownController::class, 'districts'])->name('districts');
+Route::get('villages', [DependantDropdownController::class, 'villages'])->name('villages');
 
 require __DIR__.'/auth.php';
 

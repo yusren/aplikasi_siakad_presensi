@@ -198,6 +198,7 @@ return [
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Laravolt\Indonesia\ServiceProvider::class,
     ],
 
     /*
@@ -218,6 +219,7 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Indonesia' => Laravolt\Indonesia\Facade::class,
     ])->toArray(),
 
 ];

@@ -45,26 +45,25 @@
                                     <thead>
                                         <tr>
                                             <th>Kelas</th>
-                                            <th colspan="4">{{$user->kelas->first()->name}}</th>
+                                            <td colspan="4">{{isset($user->kelas->first()->name) ? $user->kelas->first()->name : 'Belum Punya Kelas'}}</td>
                                         </tr>
                                         <tr>
                                             <th>Nama</th>
-                                            <th colspan="4">{{$user->name}}</th>
+                                            <td colspan="4">{{$user->name}}</td>
                                         </tr>
                                         <tr>
                                             <th>NIM</th>
-                                            <th colspan="4">{{$user->nomor}}</th>
+                                            <td colspan="4">{{$user->nomor}}</td>
                                         </tr>
                                         @if (count($krs) > 0)
                                         <tr>
                                             <th>Semester</th>
-                                            <th colspan="4">{{$krs->first()->semester}}</th>
+                                            <td colspan="4">{{$krs->first()->semester}}</td>
                                         </tr>
                                         @endif
                                         <tr>
                                             <th>Tahun Ajaran</th>
-                                            <th colspan="4">{{$tahunAjaranAktif->name}}, {{$tahunAjaranAktif->semester}}
-                                            </th>
+                                            <td colspan="4">{{$tahunAjaranAktif->name}}, {{$tahunAjaranAktif->semester}}</td>
                                         </tr>
                                     </thead>
                                 </table>

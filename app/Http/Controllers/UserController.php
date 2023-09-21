@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserRequest;
 use App\Imports\DosenImport;
 use App\Imports\MahasiswaImport;
+use App\Models\Alamat;
 use App\Models\Jadwal;
 use App\Models\Prodi;
 use App\Models\TahunAjaran;
@@ -44,9 +45,10 @@ class UserController extends Controller
         $prodi = Prodi::get();
         $dosen = User::where('role', 'dosen')->get();
         $agama = ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Konghucu'];
+        $provinces = \Indonesia::allProvinces();
         switch ($request->role) {
             case 'mahasiswa':
-                return view('users.mahasiswa.create', ['prodi' => $prodi, 'agama' => $agama, 'dosen' => $dosen]);
+                return view('users.mahasiswa.create', ['prodi' => $prodi, 'agama' => $agama, 'dosen' => $dosen, 'provinces' => $provinces]);
             case 'dosen':
                 return view('users.dosen.create', ['prodi' => $prodi, 'agama' => $agama]);
             default:
@@ -65,7 +67,14 @@ class UserController extends Controller
         }
         $data['password'] = Hash::make($data['password']);
 
-        User::create($data);
+        $user = User::create($data);
+        Alamat::create([
+            'user_id' => $user->id,
+            'provinsi' => $request->provinsi,
+            'kota' => $request->kota,
+            'kecamatan' => $request->kecamatan,
+            'desa' => $request->desa,
+        ]);
 
         return redirect(route('user.index', ['role' => $request->role]))->with('toast_success', 'Berhasil Menyimpan Data!');
     }
@@ -118,14 +127,28 @@ class UserController extends Controller
         $prodi = Prodi::get();
         $dosen = User::where('role', 'dosen')->get();
         $agama = ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Konghucu'];
-
+        $provinces = \Indonesia::allProvinces();
+        if ($user->alamats) {
+            $cities = \Indonesia::findProvince($user->alamats->provinsi, ['cities'])->cities->pluck('name', 'id');
+            $districts = \Indonesia::findCity($user->alamats->kota, ['districts'])->districts->pluck('name', 'id');
+            $villages = \Indonesia::findDistrict($user->alamats->kecamatan, ['villages'])->villages->pluck('name', 'id');
+        }
         switch ($request->role) {
             case 'mahasiswa':
                 if (auth()->user()->role == 'mahasiswa') {
                     return view('users.mahasiswa.profile', ['user' => $user, 'prodi' => $prodi, 'dosen' => $dosen, 'agama' => $agama]);
                 }
 
-                return view('users.mahasiswa.edit', ['user' => $user, 'prodi' => $prodi, 'dosen' => $dosen, 'agama' => $agama]);
+                return view('users.mahasiswa.edit', [
+                    'user' => $user,
+                    'prodi' => $prodi,
+                    'dosen' => $dosen,
+                    'agama' => $agama,
+                    'provinces' => $provinces,
+                    'cities' => $cities ?? [],
+                    'districts' => $districts ?? [],
+                    'villages' => $villages ?? [],
+                ]);
             case 'dosen':
                 return view('users.dosen.edit', ['user' => $user, 'prodi' => $prodi, 'agama' => $agama]);
             default:
@@ -152,6 +175,12 @@ class UserController extends Controller
         }
 
         $user->update($data);
+        Alamat::updateOrCreate(['user_id' => $user->id], [
+            'provinsi' => $request->provinsi,
+            'kota' => $request->kota,
+            'kecamatan' => $request->kecamatan,
+            'desa' => $request->desa,
+        ]);
 
         if (auth()->user()->role == 'mahasiswa') {
             $user->keluarga()->updateOrCreate([], [

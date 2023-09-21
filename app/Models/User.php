@@ -44,6 +44,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function alamats()
+    {
+        return $this->hasOne(Alamat::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class); //Pembimbing
