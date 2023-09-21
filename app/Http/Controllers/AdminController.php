@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AdminRequest;
+use App\Models\Prodi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -27,6 +28,7 @@ class AdminController extends Controller
                 'kaprodi',
                 'birokeuangan',
             ],
+            'prodi' => Prodi::get(),
         ]);
     }
 
@@ -56,6 +58,7 @@ class AdminController extends Controller
                 'kaprodi',
                 'birokeuangan',
             ],
+            'prodi' => Prodi::get(),
         ]);
     }
 
