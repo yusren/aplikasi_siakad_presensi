@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jadwal;
+use App\Models\Matakuliah;
 use App\Models\Pertemuan;
 use App\Models\TahunAjaran;
 use App\Models\UploadTugas;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PertemuanController extends Controller
@@ -15,19 +17,58 @@ class PertemuanController extends Controller
         $tahunAjaranId = $request->tahun_ajaran_id ?: TahunAjaran::where('is_active', true)->latest()->first()->id;
         $tahunAjaranAktif = TahunAjaran::find($tahunAjaranId);
         $tahunAjaran = TahunAjaran::orderBy('name')->get();
+        $matakuliah = Matakuliah::get();
+        $matakuliahId = $request->input('matakuliah_id', Matakuliah::first()->id);
+        $matakuliahAktif = Matakuliah::find($matakuliahId);
 
-        $pertemuan = Pertemuan::with('jadwal.matakuliah')->whereHas('jadwal', function ($query) use ($tahunAjaranId) {
-            $query->where('tahun_ajaran_id', $tahunAjaranId);
+        $pertemuan = Pertemuan::with('jadwal.matakuliah')->whereHas('jadwal', function ($query) use ($tahunAjaranId, $matakuliahId) {
+            $query->where('tahun_ajaran_id', $tahunAjaranId)->where('matakuliah_id', $matakuliahId);
         })->get();
 
-        $pertemuanGrouped = $pertemuan->groupBy(function ($item, $key) {
-            return $item['jadwal']['matakuliah']['name'];
-        });
+        // $pertemuanGrouped = $pertemuan->groupBy(function ($item, $key) {
+        //     return $item['jadwal']['matakuliah']['name'];
+        // });
+
+        // $students = User::where('role', 'mahasiswa')->get();
+        // $attendanceData = [];
+        // foreach ($students as $student) {
+        //     $studentAttendance = [];
+        //     $studentAttendance['Nama Mahasiswa'] = $student->name;
+        //     foreach ($pertemuan as $meeting) {
+        //         $attended = $meeting->presensi->contains('user_id', $student->id) ? 'Hadir' : 'Tidak Hadir';
+        //         $studentAttendance["Pertemuan {$meeting->id}"] = $attended;
+        //     }
+        //     $attendanceData[] = $studentAttendance;
+        // }
+        $students = collect();
+        foreach ($pertemuan as $meeting) {
+            $students = $students->concat($meeting->jadwal->kelas->users);
+        }
+        $students = $students->unique('id');
+
+        $attendanceData = [];
+        foreach ($students as $student) {
+            $studentAttendance = [];
+            $studentAttendance['Nama Mahasiswa'] = $student->name;
+            $studentAttendance['Kelas'] = $student->kelas[0]->name;
+            for ($i = 1; $i <= 16; $i++) {
+                if (isset($pertemuan[$i - 1])) {
+                    $attended = $pertemuan[$i - 1]->presensi->contains('user_id', $student->id) ? '✅' : '❌';
+                } else {
+                    $attended = 0;
+                }
+                $studentAttendance["Pertemuan {$i}"] = $attended;
+            }
+            $attendanceData[] = $studentAttendance;
+        }
 
         return view('pertemuan.index', [
-            'pertemuanGrouped' => $pertemuanGrouped,
+            'pertemuan' => $pertemuan,
             'tahunAjaranAktif' => $tahunAjaranAktif,
             'tahunAjaran' => $tahunAjaran,
+            'matakuliah' => $matakuliah,
+            'matakuliahAktif' => $matakuliahAktif,
+            'attendanceData' => $attendanceData,
         ]);
     }
 
