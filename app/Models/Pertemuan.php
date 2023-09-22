@@ -37,4 +37,12 @@ class Pertemuan extends Model
     {
         return $this->hasOne(UploadTugas::class);
     }
+
+    public function absentStudents()
+    {
+        $allStudents = $this->jadwal->kelas->users;
+        $presentStudents = $this->presensi->pluck('user_id');
+
+        return $allStudents->whereNotIn('id', $presentStudents);
+    }
 }

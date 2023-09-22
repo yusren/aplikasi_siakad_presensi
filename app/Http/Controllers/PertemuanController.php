@@ -4,11 +4,33 @@ namespace App\Http\Controllers;
 
 use App\Models\Jadwal;
 use App\Models\Pertemuan;
+use App\Models\TahunAjaran;
 use App\Models\UploadTugas;
 use Illuminate\Http\Request;
 
 class PertemuanController extends Controller
 {
+    public function index(Request $request)
+    {
+        $tahunAjaranId = $request->tahun_ajaran_id ?: TahunAjaran::where('is_active', true)->latest()->first()->id;
+        $tahunAjaranAktif = TahunAjaran::find($tahunAjaranId);
+        $tahunAjaran = TahunAjaran::orderBy('name')->get();
+
+        $pertemuan = Pertemuan::with('jadwal.matakuliah')->whereHas('jadwal', function ($query) use ($tahunAjaranId) {
+            $query->where('tahun_ajaran_id', $tahunAjaranId);
+        })->get();
+
+        $pertemuanGrouped = $pertemuan->groupBy(function ($item, $key) {
+            return $item['jadwal']['matakuliah']['name'];
+        });
+
+        return view('pertemuan.index', [
+            'pertemuanGrouped' => $pertemuanGrouped,
+            'tahunAjaranAktif' => $tahunAjaranAktif,
+            'tahunAjaran' => $tahunAjaran,
+        ]);
+    }
+
     public function create(Request $request)
     {
         $jadwal = Jadwal::find($request->jadwal_id);

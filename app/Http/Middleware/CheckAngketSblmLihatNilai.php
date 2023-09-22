@@ -11,28 +11,12 @@ class CheckAngketSblmLihatNilai
 {
     public function handle(Request $request, Closure $next)
     {
-        // if (Auth::check()) {
-        //     $angketIds = Angket::where('kondisi', 'sebelum_lihat_nilai')->pluck('id');
-        //     $userAngkets = Auth::user()->hasilAngket;
-
-        //     if (Auth::user()->role == 'mahasiswa' && $angketIds->count() > 0 && $userAngkets->whereIn('angket_id', $angketIds)->count() != Angket::where('kondisi', 'sebelum_lihat_nilai')->count()) {
-        //         return redirect()->route('test.index', ['kondisi' => 'sebelum_lihat_nilai'])->with('toast_warning', 'Isi Angket, Anda perlu mengisi angket terlebih dahulu!');
-        //     }
-        // }
-
         if (Auth::check()) {
-            $angkets = Angket::where('kondisi', 'sebelum_lihat_nilai')->get();
+            $angketIds = Angket::where('kondisi', 'sebelum_lihat_nilai')->pluck('id');
             $userAngkets = Auth::user()->hasilAngket;
 
-            foreach ($angkets as $angket) {
-                switch ($angket->tujuan) {
-                    case 'mahasiswa':
-                        if (Auth::user()->role == 'mahasiswa' && $userAngkets->where('angket_id', $angket->id)->count() == 0) {
-                            return redirect()->route('test.index', ['kondisi' => 'sebelum_lihat_nilai'])->with('toast_warning', 'Isi Angket, Anda perlu mengisi angket terlebih dahulu!');
-                        }
-                        break;
-                        // Add more cases here for other 'tujuan'
-                }
+            if (Auth::user()->role == 'mahasiswa' && $angketIds->count() > 0 && $userAngkets->whereIn('angket_id', $angketIds)->count() != Angket::where('kondisi', 'sebelum_lihat_nilai')->count()) {
+                return redirect()->route('test.index', ['kondisi' => 'sebelum_lihat_nilai'])->with('toast_warning', 'Isi Angket, Anda perlu mengisi angket terlebih dahulu!');
             }
         }
 

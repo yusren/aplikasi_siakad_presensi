@@ -27,10 +27,14 @@ class PresensiController extends Controller
             return redirect()->back()->with('toast_error', 'Tidak Termasuk Dalam Kelas/Jadwal!');
         }
 
-        Presensi::create([
+        Presensi::updateOrCreate([
             'user_id' => $mahasiswa->id,
             'pertemuan_id' => $request->pertemuan_id,
-        ]);
+        ],
+            [
+                'user_id' => $mahasiswa->id,
+                'pertemuan_id' => $request->pertemuan_id,
+            ]);
 
         return redirect()->back()->with('toast_success', 'Berhasil Menyimpan Data!');
     }
@@ -39,10 +43,16 @@ class PresensiController extends Controller
     {
         foreach ($request->selectedNomor as $value) {
             $mahasiswa = User::where('role', 'mahasiswa')->where('nomor', $value)->first();
-            Presensi::create([
-                'user_id' => $mahasiswa->id,
-                'pertemuan_id' => $request->pertemuan_id,
-            ]);
+            Presensi::updateOrCreate(
+                [
+                    'user_id' => $mahasiswa->id,
+                    'pertemuan_id' => $request->pertemuan_id,
+                ],
+                [
+                    'user_id' => $mahasiswa->id,
+                    'pertemuan_id' => $request->pertemuan_id,
+                ]
+            );
         }
     }
 
