@@ -5,12 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Angket;
 use App\Models\HasilAngket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TestAngketController extends Controller
 {
     public function index(Request $request)
     {
-        $angket = Angket::where('kondisi', $request->kondisi)->get();
+        $userAngkets = Auth::user()->hasilAngket->pluck('angket_id');
+        if (! in_array(Auth::user()->role, ['superadmin', 'admin', 'lpm', 'kaprodi', 'birokeuangan'])) {
+            $angket = Angket::where('kondisi', $request->kondisi)->whereNotIn('id', $userAngkets)->get();
+        } else {
+            $angket = Angket::get();
+        }
 
         return view('test.index', [
             'angket' => $angket,

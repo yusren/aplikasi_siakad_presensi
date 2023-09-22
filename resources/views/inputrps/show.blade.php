@@ -14,9 +14,11 @@
                         <div class="form-group">
                             <input class="form-control" type="file" name="file">
                         </div>
-                        <div class="form-group">
-                            <a href="{{ asset($hasilRps->file) }}" class="btn btn-sm btn-warning">Download</a>
-                        </div>
+@if ($hasilRps)
+                            <div class="form-group">
+                                <a href="{{ asset($hasilRps->file) }}" class="btn btn-sm btn-warning">Download</a>
+                            </div>
+@endif
                     </div>
                     <div class="box-footer">
                         <a href="{{ route('inputrps.index') }}" class="btn btn-default">Kembali</a>

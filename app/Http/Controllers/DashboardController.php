@@ -54,11 +54,11 @@ class DashboardController extends Controller
                     });
                 });
             });
+        $angkets = Angket::with('hasil')->get();
         $results = [];
-        $angket = Angket::with('hasil')->first();
-        if ($angket) {
-            $pertanyaans = Pertanyaan::where('angket_id', $angket->id)->with('jawaban')->get();
 
+        foreach ($angkets as $angket) {
+            $pertanyaans = Pertanyaan::where('angket_id', $angket->id)->with('jawaban')->get();
             foreach ($pertanyaans as $pertanyaan) {
                 $counts = collect($angket->hasil)
                     ->map(function ($hasil) use ($pertanyaan) {
@@ -67,8 +67,8 @@ class DashboardController extends Controller
                         return $answers[$pertanyaan->id] ?? null;
                     })
                     ->countBy();
-
                 $results[] = [
+                    'angket_id' => $angket->id,
                     'pertanyaan_id' => $pertanyaan->id,
                     'description' => $pertanyaan->description,
                     'jawaban' => $counts->map(function ($count, $jawabanId) use ($pertanyaan) {
@@ -88,6 +88,7 @@ class DashboardController extends Controller
             return view('dashboard.user.index', ['pengumuman' => Pengumuman::where('role', 'mahasiswa')->get()]);
         } else {
             return view('dashboard.index', [
+                'angkets' => $angkets,
                 'data' => $usersAlamat,
                 'users' => User::count(),
                 'mhs' => User::where('role', 'mahasiswa')->count(),

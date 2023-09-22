@@ -88,26 +88,18 @@
                 </div>
             </div>
         </div>
+        @foreach ($angkets as $index => $angket)
         <div class="col-lg-6 col-xs-12">
             <div class="box">
                 <div class="box-header">
                     <h3 class="text-center" style="font-size: 20px;">Chart Angket</h3>
                 </div>
                 <div class="box-body">
-                    <div id="angkets0"></div>
+                    <div id="angkets{{ $index }}"></div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-6 col-xs-12">
-            <div class="box">
-                <div class="box-header">
-                    <h3 class="text-center" style="font-size: 20px;">Chart Angket</h3>
-                </div>
-                <div class="box-body">
-                    <div id="angkets1"></div>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
 </section>
 @endsection
@@ -123,12 +115,12 @@ $.ajax({
     dataType: 'json',
     success: function(data) {
         let angkets = data.angkets;
-        angkets.forEach(function(item, index) {
-            let categories = item.jawaban.map(answer => answer.answer_text);
-            let seriesData = item.jawaban.map(answer => answer.count);
+        angkets.forEach(function(angket, index) {
+            let categories = angket.jawaban.map(answer => answer.answer_text);
+            let seriesData = angket.jawaban.map(answer => answer.count);
             Highcharts.chart('angkets' + index, {
                 chart: { type: 'column' },
-                title: { text: item.description },
+                title: { text: angket.description },
                 xAxis: { categories: categories },
                 yAxis: { min: 0, title: { text: 'Total Terpilih' } },
                 plotOptions: { column: { dataLabels: { enabled: true } } },
@@ -137,7 +129,7 @@ $.ajax({
                         return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + this.y;
                     }
                 },
-                series: [{ name: 'Jawaban', data: seriesData, colorByPoint: true, }]
+                series: [{ name: 'Jawaban', data: seriesData, colorByPoint: true }]
             });
         });
     },
