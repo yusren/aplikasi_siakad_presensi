@@ -14,6 +14,7 @@ class PengumumanRequest extends FormRequest
     public function rules()
     {
         return [
+            'cover' => 'required|mimes:png,jpg|max:2048',
             'judul' => 'required',
             'description' => 'required',
             'role' => 'required',

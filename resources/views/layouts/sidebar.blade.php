@@ -55,6 +55,8 @@
                         <li class="{{ (request()->is('krs*')) ? 'active' : '' }}"><a href="/krs-detailprodi"><i class="fa fa-archive"></i><span>KRS</span></a></li>
                 <li class="{{ (request()->is('angket*')) ? 'active' : '' }}"><a href="/angket"><i class="fa fa-bar-chart"></i><span>Angket</span></a></li>
                 <li class="{{ request()->is('setting*') ? 'active' : '' }}"><a href="/setting"><i class="fa fa-gear"></i><span>Setting</span></a></li>
+                <li class="{{ request()->is('pengumuman*') ? 'active' : '' }}"><a href="/pengumuman"><i class="fa fa-newspaper-o"></i><span>Pengumuman</span></a></li>
+                <li class="{{ request()->is('rps*') ? 'active' : '' }}"><a href="/rps"><i class="fa fa-circle"></i><span>RPS</span></a></li>
             @endswitch
         </ul>
     </section>

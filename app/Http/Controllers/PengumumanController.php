@@ -22,6 +22,13 @@ class PengumumanController extends Controller
     public function store(PengumumanRequest $request)
     {
         $data = $request->validated();
+        if ($request->hasFile('cover')) {
+            $cover = $request->file('cover');
+            $coverName = time().'.'.$cover->getClientOriginalExtension();
+            $cover->storeAs('public/covers', $coverName);
+            $coverPath = 'storage/covers/'.$coverName;
+        }
+        $data['cover'] = $coverPath;
         Pengumuman::create($data);
 
         return redirect(route('pengumuman.index'))->with('toast_success', 'Berhasil Menyimpan Data!');
@@ -40,6 +47,13 @@ class PengumumanController extends Controller
     public function update(PengumumanRequest $request, Pengumuman $pengumuman)
     {
         $data = $request->validated();
+        if ($request->hasFile('cover')) {
+            $cover = $request->file('cover');
+            $coverName = time().'.'.$cover->getClientOriginalExtension();
+            $cover->storeAs('public/covers', $coverName);
+            $coverPath = 'storage/covers/'.$coverName;
+        }
+        $data['cover'] = $coverPath;
         $pengumuman->update($data);
 
         return redirect(route('pengumuman.index'))->with('toast_success', 'Berhasil Mengubah Data!');

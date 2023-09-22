@@ -19,18 +19,6 @@
                             @error('name') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
-                            <label>Tujuan Angket</label>
-                            <select class="form-control select2" name="tujuan" data-placeholder="Pilih Tujuan Angket" style="width: 100%;">
-                                <option value="" selected disabled>Pilih Tujuan Angket</option>
-                                @foreach ($pilihan as $tujuan)
-                                <option value="{{ $tujuan }}" {{ old('tujuan')==$tujuan ? 'selected' : '' }}>
-                                    {{ $tujuan }}
-                                </option>
-                                @endforeach
-                            </select>
-                            @error('tujuan') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
-                        </div>
-                        <div class="form-group">
                             <label for="">Mulai Dari</label>
                             <input type="datetime-local" class="form-control" name="start_at" value="{{ old('start_at') }}" placeholder="Masukkan Tujuan Angket">
                             @error('start_at') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
@@ -50,9 +38,20 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label>Tujuan Angket</label>
+                            <select class="form-control select2" name="tujuan" data-placeholder="Pilih Tujuan Angket" style="width: 100%;">
+                                <option value="" selected disabled>Pilih Tujuan Angket</option>
+                                @foreach ($pilihan as $tujuan)
+                                <option value="{{ $tujuan }}" {{ old('tujuan')==$tujuan ? 'selected' : '' }}>
+                                    {{ $tujuan }}
+                                </option>
+                                @endforeach
+                            </select>
+                            @error('tujuan') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                        </div>
+                        <div class="form-group">
                             <label>Mata Kuliah</label>
-                            <select class="form-control select2" name="matakuliah_id" data-placeholder="Pilih Mata Kuliah" style="width: 100%;">
-                                <option value="" selected disabled>Pilih Mata Kuliah</option>
+                            <select class="form-control select2" name="matakuliah_id" data-placeholder="Pilih Mata Kuliah" style="width: 100%;" multiple>
                                 @foreach ($matakuliah as $mk)
                                 <option value="{{ $mk->id }}" {{ old('matakuliah_id')==$mk->id ? 'selected' : '' }}>
                                     {{ $mk->code }} {{ $mk->name }} - {{ $mk->prodi->name }} {{ $mk->user->name }}
@@ -63,7 +62,6 @@
                         <div class="form-group">
                             <label>Program Studi</label>
                             <select class="form-control select2" name="prodi_id" data-placeholder="Pilih Prodi" style="width: 100%;" multiple>
-                                <option value="" selected disabled>Pilih Prodi</option>
                                 @foreach ($prodi as $pr)
                                     <option value="{{ $pr->id }}" {{ old('prodi_id') == $pr->id ? 'selected' : '' }}>{{ $pr->name }}</option>
                                 @endforeach

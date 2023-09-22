@@ -27,6 +27,9 @@ class AdminController extends Controller
                 'lpm',
                 'kaprodi',
                 'birokeuangan',
+                'akademik',
+                'Keuangan_SDM',
+                'Kemahasiswaan',
             ],
             'prodi' => Prodi::get(),
         ]);

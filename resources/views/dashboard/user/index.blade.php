@@ -148,7 +148,7 @@
                 <div class="row">
                     <div class="col-auto">
                         <div class="shadow-sm avatar avatar-60 rounded-10 coverimg">
-                            <img src="{{ asset('img/logo.png') }}" alt="">
+                            <img src="{{ asset($item->cover) }}" alt="">
                         </div>
                     </div>
                     <div class="col align-self-center ps-0">

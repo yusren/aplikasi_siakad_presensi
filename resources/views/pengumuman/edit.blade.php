@@ -10,10 +10,15 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Edit Pengumuman</h3>
                 </div>
-                <form action="{{ route('pengumuman.update', $pengumuman->id) }}" method="POST">
+                <form action="{{ route('pengumuman.update', $pengumuman->id) }}" method="POST" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
                     <div class="box-body">
+                        <div class="form-group">
+                            <img class="img-thumbnail" src="{{ asset($pengumuman->cover) }}" alt="" width="200px">
+                            <input type="file" class="form-control" name="cover" value="{{ old('cover') }}" accept="image/*">
+                            @error('cover') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                        </div>
                         <div class="form-group">
                             <label for="">Nama Pengumuman</label>
                             <input type="text" class="form-control" name="judul" value="{{ old('judul', $pengumuman->judul) }}" placeholder="Masukkan Nama Pengumuman">

@@ -8,7 +8,6 @@
 
 <section class="content">
     <div class="row">
-<div id="container"></div>
         <div class="col-lg-4 col-xs-12">
             <div class="small-box bg-yellow-gradient">
                 <div class="inner">
@@ -44,6 +43,9 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-lg-12 col-xs-12">
+            <div id="container"></div>
+        </div>
         <div class="col-lg-6 col-xs-12">
             <div class="box">
                 <div class="box-header">

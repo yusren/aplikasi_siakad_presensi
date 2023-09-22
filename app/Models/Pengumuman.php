@@ -11,5 +11,5 @@ class Pengumuman extends Model
 
     protected $table = 'pengumuman';
 
-    protected $fillable = ['judul', 'description', 'role'];
+    protected $fillable = ['cover', 'judul', 'description', 'role'];
 }

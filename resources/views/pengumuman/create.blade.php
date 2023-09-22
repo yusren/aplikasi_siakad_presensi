@@ -10,9 +10,14 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Tambah Pengumuman</h3>
                 </div>
-                <form action="{{ route('pengumuman.store') }}" method="POST">
+                <form action="{{ route('pengumuman.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="box-body">
+                        <div class="form-group">
+                            <label for="">Cover</label>
+                            <input type="text" class="form-control" name="cover" value="{{ old('cover') }}" placeholder="Cover">
+                            @error('cover') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
+                        </div>
                         <div class="form-group">
                             <label for="">Nama Pengumuman</label>
                             <input type="text" class="form-control" name="judul" value="{{ old('judul') }}" placeholder="Masukkan Nama Pengumuman">
