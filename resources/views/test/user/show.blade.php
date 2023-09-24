@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.mahasiswa.master')
 
 @section('title', 'Isi Angket')
 
@@ -6,11 +6,11 @@
 <section class="content">
     <div class="row">
         <div class="col-md-12">
-            <div class="box box-primary">
+            <div class="card card-primary">
                 <form action="{{ route('test.update', $angket->id) }}" method="POST">
                     @method('PUT')
                     @csrf
-                    <div class="box-body table-responsive">
+                    <div class="card-body table-responsive">
                         <table id="" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
@@ -44,7 +44,7 @@
                             @endforeach
                         </table>
                     </div>
-                    <div class="box-footer">
+                    <div class="card-footer">
                         <a href="{{ route('test.index', ['kondisi' => $angket->kondisi]) }}" class="btn btn-default">Kembali</a>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>

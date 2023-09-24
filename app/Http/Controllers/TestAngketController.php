@@ -18,16 +18,26 @@ class TestAngketController extends Controller
             $angket = Angket::get();
         }
 
-        return view('test.index', [
-            'angket' => $angket,
-        ]);
+        if (auth()->user()->role == 'mahasiswa') {
+            return view('test.user.index', [
+                'angket' => $angket,
+            ]);
+        } else {
+            return view('test.index', [
+                'angket' => $angket,
+            ]);
+        }
     }
 
     public function show($id)
     {
         $angket = Angket::find($id);
 
-        return view('test.show', ['angket' => $angket, 'hasilAngket' => auth()->user()->hasilAngket->where('angket_id', $angket->id)->first()]);
+        if (auth()->user()->role == 'mahasiswa') {
+            return view('test.user.show', ['angket' => $angket, 'hasilAngket' => auth()->user()->hasilAngket->where('angket_id', $angket->id)->first()]);
+        } else {
+            return view('test.show', ['angket' => $angket, 'hasilAngket' => auth()->user()->hasilAngket->where('angket_id', $angket->id)->first()]);
+        }
     }
 
     public function update(Request $request, $id)

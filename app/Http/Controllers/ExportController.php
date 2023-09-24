@@ -6,6 +6,7 @@ use App\Models\Jadwal;
 use App\Models\TahunAjaran;
 use App\Services\NilaiService;
 use Illuminate\Http\Request;
+use PDF;
 
 class ExportController extends Controller
 {
@@ -18,9 +19,10 @@ class ExportController extends Controller
 
     public function printKrs(Request $request)
     {
-        return view('print.krs', [
-            'krs' => auth()->user()->krs->where('tahun_ajaran_id', $request->tahun_ajaran_id),
-        ]);
+        $krs = auth()->user()->krs->where('tahun_ajaran_id', $request->tahun_ajaran_id);
+        $pdf = PDF::loadview('print.krs-pdf', ['krs' => $krs]);
+
+        return $pdf->download('laporan-krs.pdf');
     }
 
     public function printKhs(Request $request)
@@ -33,7 +35,7 @@ class ExportController extends Controller
         $ip = $totalScore / $totalSks;
         $ipk = $this->nilaiService->getTotalScoreAllSemesters(auth()->user()->krs) / $this->nilaiService->getTotalSksAllSemesters(auth()->user()->krs);
 
-        return view('print.khs', [
+        $pdf = PDF::loadview('print.khs-pdf', [
             'totalScore' => $totalScore,
             'bobot_tugas' => $bobot['bobot_tugas'],
             'bobot_uts' => $bobot['bobot_uts'],
@@ -44,6 +46,9 @@ class ExportController extends Controller
             'ip' => number_format($ip, 2),
             'ipk' => number_format($ipk, 2),
         ]);
+
+        return $pdf->download('laporan-krs.pdf');
+
     }
 
     public function printJurnalDosen(Request $request)
