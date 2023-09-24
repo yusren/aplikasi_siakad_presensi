@@ -24,7 +24,7 @@ class NilaiController extends Controller
         $tahunAjaranId = $request->tahun_ajaran_id ?: TahunAjaran::where('is_active', true)->latest()->first()->id;
         $matakuliahId = $request->input('matakuliah_id', Matakuliah::where('user_id', auth()->id())->first()->id);
         $tahunAjaranAktif = TahunAjaran::find($tahunAjaranId);
-        $matakuliahAktif = Matakuliah::find($matakuliahId);
+        $matakuliahAktif = Matakuliah::where('user_id', auth()->id())->find($matakuliahId);
         $users = User::with(['krs' => function ($query) use ($tahunAjaranId, $matakuliahId) {
             $query->where('tahun_ajaran_id', $tahunAjaranId)
                 ->where('matakuliah_id', $matakuliahId);
@@ -79,7 +79,15 @@ class NilaiController extends Controller
 
         switch ($groupKey) {
             case 'prodi':
-                $users = $this->getusers($tahunAjaranId)->groupBy(function ($item, $key) {
+                $users = $this->getusers($tahunAjaranId)->map(function ($user) {
+                    $user->krs = $user->krs->filter(function ($krs) {
+                        return $krs->matakuliah()->where('user_id', auth()->id())->exists();
+                    });
+
+                    return $user;
+                })->filter(function ($user) {
+                    return $user->krs->count() > 0;
+                })->groupBy(function ($item, $key) {
                     return $item->kelas->first()->prodi->name;
                 });
                 break;

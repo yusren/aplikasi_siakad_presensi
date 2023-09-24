@@ -62,7 +62,7 @@
                 <tr>
                     <td>PRODI</td>
                     <td>:</td>
-                    <td></td>
+                    <td>{{ auth()->user()->prodi->name }}</td>
                 </tr>
             </table>
 

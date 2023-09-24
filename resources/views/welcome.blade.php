@@ -50,8 +50,12 @@
 <body>
     <div class="btn-container">
         <h2 style="color: white;">SIAKAD STKIP PGRI PACITAN</h2>
+        @auth
+        <a href="/dashboard" class="btn btn-primary login-btn">Dashboard</a>
+        @else
         <a href="/login-mhs" class="btn btn-primary login-btn">Login Mahasiswa</a>
         <a href="/login" class="btn btn-secondary login-btn">Login Dosen & Karyawan</a>
+        @endauth
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"

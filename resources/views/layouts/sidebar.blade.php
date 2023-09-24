@@ -22,6 +22,7 @@
                     @break
                 @case('dosen')
                     <li class="{{ (request()->is('matakuliah*')) ? 'active' : '' }}"><a href="/matakuliah"><i class="fa fa-book"></i><span>Mata Kuliah</span></a></li>
+                    <li class="{{ (request()->is('pertemuan*')) ? 'active' : '' }}"><a href="/pertemuan"><i class="fa fa-circle"></i><span>Pertemuan</span></a></li>
                     <li class="{{ (request()->is('jadwal*')) ? 'active' : '' }}"><a href="/jadwal-detailprodi"><i class="fa fa-users"></i><span>Presensi</span></a></li>
                     <li class="{{ (request()->is('nilai*')) ? 'active' : '' }}"><a href="/nilai-detailprodi"><i class="fa fa-tasks"></i><span>Penilaian</span></a></li>
                     <li class="{{ request()->is('krs-approveByDosbing*') ? 'active' : '' }}"><a href="/krs-approveByDosbing"><i class="fa fa-gear"></i><span>Approval KRS PA</span></a></li>

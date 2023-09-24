@@ -62,7 +62,7 @@
                             @foreach($attendanceData as $data)
                             <tr>
                                 @foreach($data as $key => $value)
-                                <td>{{$value}}</td>
+                                <td>{!! $value !!}</td>
                                 @endforeach
                             </tr>
                             @endforeach

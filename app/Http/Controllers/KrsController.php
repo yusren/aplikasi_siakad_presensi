@@ -184,7 +184,7 @@ class KrsController extends Controller
             ->get()
             ->groupBy(['user_id', 'tahun_ajaran_id']);
 
-        return view('krs.approveByDosbingKrs', ['krs' => $krs]);
+        return view('krs.approveby.dosbingkrs', ['krs' => $krs]);
     }
 
     public function approveByKaprodiKrs(Request $request)
@@ -195,7 +195,7 @@ class KrsController extends Controller
             ->get()
             ->groupBy(['user_id', 'tahun_ajaran_id']);
 
-        return view('krs.approveBykaprodiKrs', [
+        return view('krs.approveby.kaprodikrs', [
             'krs' => $krs,
         ]);
     }
@@ -205,7 +205,7 @@ class KrsController extends Controller
         $krs = Krs::where('status', 'ajukan')->get()
             ->groupBy(['user_id', 'tahun_ajaran_id']);
 
-        return view('krs.approveBykeuanganKrs', [
+        return view('krs.approveby.keuangankrs', [
             'krs' => $krs,
         ]);
     }

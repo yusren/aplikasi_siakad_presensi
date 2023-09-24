@@ -17,9 +17,9 @@ class PertemuanController extends Controller
         $tahunAjaranId = $request->tahun_ajaran_id ?: TahunAjaran::where('is_active', true)->latest()->first()->id;
         $tahunAjaranAktif = TahunAjaran::find($tahunAjaranId);
         $tahunAjaran = TahunAjaran::orderBy('name')->get();
-        $matakuliah = Matakuliah::get();
-        $matakuliahId = $request->input('matakuliah_id', Matakuliah::first()->id);
-        $matakuliahAktif = Matakuliah::find($matakuliahId);
+        $matakuliah = Matakuliah::where('user_id', auth()->id())->get();
+        $matakuliahId = $request->input('matakuliah_id', Matakuliah::where('user_id', auth()->id())->first()->id);
+        $matakuliahAktif = Matakuliah::where('user_id', auth()->id())->find($matakuliahId);
 
         $pertemuan = Pertemuan::with('jadwal.matakuliah')->whereHas('jadwal', function ($query) use ($tahunAjaranId, $matakuliahId) {
             $query->where('tahun_ajaran_id', $tahunAjaranId)->where('matakuliah_id', $matakuliahId);
@@ -53,9 +53,9 @@ class PertemuanController extends Controller
             $studentAttendance['Kelas'] = $student->kelas[0]->name;
             for ($i = 1; $i <= 16; $i++) {
                 if (isset($pertemuan[$i - 1])) {
-                    $attended = $pertemuan[$i - 1]->presensi->contains('user_id', $student->id) ? '✅' : '❌';
+                    $attended = $pertemuan[$i - 1]->presensi->contains('user_id', $student->id) ? "<i class='fa fa-solid fa-check' style='color: #1dc33e;'></i>" : "<i class='fa fa-times' style='color: red;'></i>";
                 } else {
-                    $attended = 0;
+                    $attended = "<i class='fa fa-circle' style='color: #367fa9;'></i>";
                 }
                 $studentAttendance["Pertemuan {$i}"] = $attended;
             }
