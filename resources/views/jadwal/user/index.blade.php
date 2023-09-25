@@ -41,6 +41,7 @@
                                 <th>Jam</th>
                                 <th>Ruang</th>
                                 <th>Dosen</th>
+                                <th></th>
                             </tr>
                             @forelse($jadwal as $j)
                             <tr>
@@ -50,28 +51,7 @@
                                 <td>{{$j->jam}}</td>
                                 <td>{{$j->ruang->name}}</td>
                                 <td>{{$j->user->name}}</td>
-                            </tr>
-                            <tr>
-                                <td colspan="6">
-                                    <table class="table table-sm table-bordered">
-                                        <tr>
-                                            <td>Pertemuan Ke</td>
-                                            <td>Upload Tugas</td>
-                                        </tr>
-                                        @foreach ($j->pertemuan as $pertemuan)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>
-                                                @if ($pertemuan->tugas()->where('user_id', auth()->id())->first())
-                                                    <a href="{{ $pertemuan->tugas()->where('user_id', auth()->id())->first()->file }}" class="btn btn-sm btn-warning">Download</a>
-                                                @else
-                                                    <a href="{{ route('pertemuan.show', $pertemuan->id) }}" class="btn btn-sm btn-primary">{{ $pertemuan->name }}</a>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </table>
-                                </td>
+                                <td><a href="{{ route('jadwal.show', $j) }}" class="text-white btn btn-info">Show</a></td>
                             </tr>
                             @empty
                             <tr>

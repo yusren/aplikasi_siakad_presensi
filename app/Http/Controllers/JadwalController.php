@@ -177,7 +177,7 @@ class JadwalController extends Controller
 
     public function show(Jadwal $jadwal)
     {
-        dd($jadwal);
+        return view('jadwal.user.show', ['jadwal' => $jadwal]);
     }
 
     public function edit(Jadwal $jadwal)
