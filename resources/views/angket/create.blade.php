@@ -49,7 +49,7 @@
                             </select>
                             @error('tujuan') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="matakuliah_id">
                             <label>Mata Kuliah</label>
                             <select class="form-control select2" name="matakuliah_id" data-placeholder="Pilih Mata Kuliah" style="width: 100%;" multiple>
                                 @foreach ($matakuliah as $mk)
@@ -59,7 +59,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="prodi_id">
                             <label>Program Studi</label>
                             <select class="form-control select2" name="prodi_id" data-placeholder="Pilih Prodi" style="width: 100%;" multiple>
                                 @foreach ($prodi as $pr)
@@ -77,4 +77,32 @@
         </div>
     </div>
 </section>
+@endsection
+@section('page-script')
+<script>
+$(document).ready(function() {
+    // Hide the fields initially
+    $('#matakuliah_id').hide();
+    $('#prodi_id').hide();
+
+    // Show 'matakuliah' field when 'sebelum_lihat_nilai' is selected
+    $('select[name="kondisi"]').change(function() {
+        if ($(this).val() == 'sebelum_lihat_nilai') {
+            $('#matakuliah_id').show();
+        } else {
+            $('#matakuliah_id').hide();
+        }
+    });
+
+    // Show 'prodi' field when 'mahasiswa' is selected
+    $('select[name="tujuan"]').change(function() {
+        if ($(this).val() == 'mahasiswa') {
+            $('#prodi_id').show();
+        } else {
+            $('#prodi_id').hide();
+        }
+    });
+});
+
+</script>
 @endsection
