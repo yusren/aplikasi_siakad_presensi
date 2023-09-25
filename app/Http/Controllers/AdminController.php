@@ -28,8 +28,8 @@ class AdminController extends Controller
                 'kaprodi',
                 'birokeuangan',
                 'akademik',
-                'Keuangan_SDM',
-                'Kemahasiswaan',
+                'keuangan_sdm',
+                'kemahasiswaan',
             ],
             'prodi' => Prodi::get(),
         ]);
@@ -60,6 +60,9 @@ class AdminController extends Controller
                 'lpm',
                 'kaprodi',
                 'birokeuangan',
+                'akademik',
+                'keuangan_sdm',
+                'kemahasiswaan',
             ],
             'prodi' => Prodi::get(),
         ]);

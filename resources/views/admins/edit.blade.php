@@ -70,8 +70,8 @@
                                 <select required class="form-control select2" name="prodi_id" data-placeholder="Pilih Prodi" style="width: 100%;">
                                     <option value="" selected disabled>Pilih Prodi</option>
                                     @foreach ($prodi as $pr)
-                                    <option value="{{ $pr->id }}" {{ old('prodi_id', $admin->prodi_id)==$pr->id ? 'selected' : '' }}>{{
-                                        $pr->name }}
+                                    <option value="{{ $pr->id }}" {{ old('prodi_id', $admin->prodi_id)==$pr->id ? 'selected' : '' }}>
+                                        {{$pr->name }}
                                     </option>
                                     @endforeach
                                 </select>
