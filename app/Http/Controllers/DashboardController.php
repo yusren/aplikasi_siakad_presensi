@@ -21,6 +21,29 @@ class DashboardController extends Controller
 
     public function index(Request $request)
     {
+        $users = User::where('role', 'mahasiswa')->get(); // Get all users with role 'mahasiswa'
+
+        $nilaiService = new NilaiService();
+        $ipkCategories = ['>3.50', '3.00 - 3.49', '<3.00'];
+        $ipkData = [0, 0, 0]; // Initialize IPK data
+
+        foreach ($users as $user) {
+            $krs = $user->krs; // Get the user's KRS data
+            $totalScore = $nilaiService->getTotalScoreAllSemesters($krs);
+            $totalSks = $nilaiService->getTotalSksAllSemesters($krs);
+
+            $ipk = $totalScore / $totalSks;
+
+            // Now you have the user's IPK, you can categorize it
+            if ($ipk > 3.50) {
+                $ipkData[0]++;
+            } elseif ($ipk >= 3.00 && $ipk <= 3.49) {
+                $ipkData[1]++;
+            } else {
+                $ipkData[2]++;
+            }
+        }
+
         $angkets = Angket::with('hasil')->get();
         $results = [];
 
@@ -55,6 +78,8 @@ class DashboardController extends Controller
             return view('dashboard.user.index', ['pengumuman' => Pengumuman::where('role', 'mahasiswa')->get()]);
         } else {
             return view('dashboard.index', [
+                'ipkCategories' => $ipkCategories,
+                'ipkData' => $ipkData,
                 'angkets' => $angkets,
                 'provinces' => \Indonesia::allProvinces(),
                 'users' => User::count(),

@@ -375,81 +375,38 @@ new Highcharts.chart('chartAgamaMhsPie', {
 
 //ipk
 new Highcharts.chart('chartIPKMhs', {
-    chart: {
-        type: 'bar'
-    },
-    title: {
-        text: ''
-    },
-    xAxis: {
-        categories: ['IPK']
-    },
-    yAxis: {
-        allowDecimals: false,
-        min: 0,
-        title: {
-            text: 'Jumlah Mahasiswa'
-        }
-    },
-    plotOptions: {
-        bar: {
-            dataLabels: {
-                enabled: true
-            }
-        },
-        series: {
-            dataLabels: {
-                enabled: true
-            }
-        }
-    },
+    chart: { type: 'bar' },
+    title: { text: '' },
+    xAxis: { categories: ['IPK'] },
+    yAxis: { allowDecimals: false, min: 0, title: { text: 'Jumlah Mahasiswa' } },
+    plotOptions: { bar: { dataLabels: { enabled: true } }, series: { dataLabels: { enabled: true } } },
     tooltip: {
         formatter: function() {
             return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + this.y;
         }
     },
-    series: [{
-        name: '>3.50',
-        color: '#5c0dbd',
-        data: [942] // Jumlah mahasiswa dengan IPK > 3.50
-    }, {
-        name: '3.00 - 3.49',
-        color: '#ff0d9e',
-        data: [28] // Jumlah mahasiswa dengan IPK antara 3.00 dan 3.49
-    }, {
-        name: '<3.00',
-        color: '#0dbd5c',
-        data: [12] // Jumlah mahasiswa dengan IPK < 3.00
-    }]
+    series: [
+        { name: '>3.50', color: '#5c0dbd', data: [{{ $ipkData[0] }}] },
+        { name: '3.00 - 3.49', color: '#ff0d9e', data: [{{ $ipkData[1] }}] },
+        { name: '<3.00', color: '#0dbd5c', data: [{{ $ipkData[2] }}] }
+    ]
 });
+
 new Highcharts.chart('chartIPKMhsPie', {
-    chart: {
-        type: 'pie'
-    },
-    title: {
-        text: ''
-    },
-    tooltip: {
-        pointFormat: '{series.name}: <b>{point.y}</b>'
-    },
-    series: [{
-        name: 'IPK',
-        colorByPoint: true,
-        data: [{
-            name: '>3.50',
-            color: '#5c0dbd',
-            y: 942 // Jumlah mahasiswa dengan IPK > 3.50
-        }, {
-            name: '3.00 - 3.49',
-            color: '#ff0d9e',
-            y: 28 // Jumlah mahasiswa dengan IPK antara 3.00 dan 3.49
-        }, {
-            name: '<3.00',
-            color: '#0dbd5c',
-            y: 12 // Jumlah mahasiswa dengan IPK < 3.00
-        }]
+    chart: { type:'pie' },
+    title:{ text:'' },
+    tooltip:{ pointFormat:'{series.name}: <b>{point.y}</b>' },
+    series:[{
+        name:'IPK',
+        colorByPoint:true,
+        data:[
+            {name:'>3.50', color:'#5c0dbd', y:{{ $ipkData[0] }}},
+            {name:'3.00 - 3.49', color:'#ff0d9e', y:{{ $ipkData[1] }}},
+            {name:'<3.00', color:'#0dbd5c', y:{{ $ipkData[2] }}}
+        ]
     }]
 });
+
 
 </script>
 <script>
