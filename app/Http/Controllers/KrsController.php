@@ -285,4 +285,26 @@ class KrsController extends Controller
             'ipk' => number_format($ipk, 2),
         ]);
     }
+
+    public function showDetails(Request $request)
+    {
+        $user = User::find($request->userId);
+        $krs = $user->krs->where('tahun_ajaran_id', $request->tahunAjaranId);
+
+        $krsDetailsHtml = "<table class='table table-sm table-bordered'>";
+        $krsDetailsHtml .= '<tr><th>Dosen</th><th>Matakuliah</th><th>Kode</th><th>SKS</th></tr>';
+
+        foreach ($krs as $data) {
+            $krsDetailsHtml .= '<tr>';
+            $krsDetailsHtml .= '<td>'.$data->matakuliah->user->name.'</td>';
+            $krsDetailsHtml .= '<td>'.$data->matakuliah->name.'</td>';
+            $krsDetailsHtml .= '<td>'.$data->matakuliah->code.'</td>';
+            $krsDetailsHtml .= '<td>'.$data->matakuliah->sks.'</td>';
+            $krsDetailsHtml .= '</tr>';
+        }
+
+        $krsDetailsHtml .= '</table>';
+
+        return response()->json(['html' => $krsDetailsHtml]);
+    }
 }

@@ -73,6 +73,7 @@ Route::middleware(['auth', 'checkangketsetelahlogin', 'checkrps'])->group(functi
     Route::get('/krs-detailmahasiswa', [KrsController::class, 'indexDetailmahasiswa'])->name('krs.index.detailmahasiswa');
     Route::post('/krs-pengajuan', [KrsController::class, 'pengajuanKrs'])->name('krs.pengajuan');
 
+    Route::post('/krs/showDetails', [KrsController::class, 'showDetails'])->name('krs.showDetails');
     Route::get('/krs-approveByDosbing', [KrsController::class, 'approveByDosbingKrs'])->name('krs.approveByDosbing');
     Route::post('/krs-approveByDosbingStore', [KrsController::class, 'approveByDosbingStoreKrs'])->name('krs.approveByDosbingStore');
     Route::get('/krs-approveByKaprodi', [KrsController::class, 'approveByKaprodiKrs'])->name('krs.approveByKaprodi');

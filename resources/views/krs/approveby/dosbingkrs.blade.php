@@ -36,7 +36,8 @@
                                     <td>{{ $kr->first()->user->name }}</td>
                                     <td>{{ $kr->first()->semester }}</td>
                                     <td>{{ $kr->first()->tahunAjaran->semester }} - {{ $kr->first()->tahunAjaran->name}}</td>
-                                    <td><a class="btn btn-info" href="{{ route('user.show', ['user' => $kr->first()->user->id, 'role' => 'mahasiswa' , 'tahun_ajaran_id' => $kr->first()->tahunAjaran->id]) }}">Show</a></td>
+                                    {{-- <td><a class="btn btn-info"href="{{ route('user.show', ['user' => $kr->first()->user->id, 'role' => 'mahasiswa' , 'tahun_ajaran_id' => $kr->first()->tahunAjaran->id]) }}">Show</a></td> --}}
+                                    <td><a class="btn btn-info show-krs-details" data-user-id="{{ $kr->first()->user->id }}" data-tahun-ajaran-id="{{ $kr->first()->tahunAjaran->id }}" href="#">Show</a></td>
                                 </tr>
                                 @endforeach
                                 @endforeach
@@ -52,4 +53,5 @@
         </div><!-- /.col -->
     </div><!-- /.row -->
 </section><!-- /.content -->
+@include('krs.components.modal-user-krs')
 @endsection
