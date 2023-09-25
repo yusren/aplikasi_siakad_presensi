@@ -66,7 +66,7 @@
         </a>
     </div>
     <div class="col-6 col-md-2 col-lg-3">
-        <a href="{{ route('krs.index', ['aksiKrs' => 'entri']) }}" target="_blank">
+        <a href="{{ route('krs.index', ['aksiKrs' => 'entri']) }}">
             <div class="mb-3 card">
                 <div class="text-center card-body">
                     <div class="avatar avatar-30 alert-primary text-dark rounded-circle">
@@ -119,7 +119,7 @@
         </a>
     </div>
     <div class="col-6 col-md-2 col-lg-3">
-        <a href="{{ route('profile.edit') }}" target="_blank">
+        <a href="{{ route('profile.edit') }}">
             <div class="mb-3 card">
                 <div class="text-center card-body">
                     <div class="avatar avatar-30 alert-primary text-dark rounded-circle">

@@ -68,7 +68,7 @@
                                 <td><input type="checkbox" name="selectedNomor[]" value="{{$record['nomor']}}"></td>
                                 <td>{{$record['nomor']}}</td>
                                 <td>{{$record['name']}}</td>
-                                <td>{{optional($record['created_at'])->format('h:i:s')}}</td>
+                                <td>{{ $record['created_at'] ? \Carbon\Carbon::parse($record['created_at'])->timezone('Asia/Jakarta')->format('H:i:s') : 'Absen Belum Dilakukan' }}</td>
                                 <td>
                                     @if($record['id'])
                                     <form action="{{ route('presensi.destroy', $record['id']) }}" method="post"

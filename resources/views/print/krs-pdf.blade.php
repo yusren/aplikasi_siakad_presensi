@@ -14,26 +14,21 @@
         .table {
             width: 100%;
             margin-bottom: 1rem;
-            border-collapse: collapse;
         }
 
         .table-sm {
             font-size: 85%;
         }
 
-        .table-borderless {
-            border: none;
+        .table-inf th,
+        .table-inf td {
+            border: 1px solid #dee2e6;
+            padding: 0.75rem;
         }
 
         .bg-info {
             background-color: #17a2b8;
             color: #fff;
-        }
-
-        .table th,
-        .table td {
-            border: 1px solid #dee2e6;
-            padding: 0.75rem;
         }
 
         .row::after {
@@ -79,15 +74,31 @@
     </style>
 </head>
 <body>
-<div class="text-center">
-    <h1><u>KARTU RENCANA STUDI</u></h1>
-    <h1>(KRS)</h1>
-</div>
-
-<table class="table table-sm table-borderless">
+<table width="100%">
     <tr>
-        <td>Nama Mahasiswa</td>
-        <td>:</td>
+        <td width="15%">
+            <img width="100px" src="{{ asset('img/logo.png') }}" >
+        </td>
+        <td style="text-align: center !important;"><br>
+            <p><strong style="font-size: 16px;">STKIP PGRI PACITAN<br>
+            SEKOLAH TINGGI KEGURUAN DAN ILMU PENDIDIKAN PGRI PACITAN</strong><br>
+            <strong style="font-size: 12px;">Jln. Cut Nya' Dien No. 4A Ploso Pacitan Pacitan Telp : 0357- 881488 Fax : 0357-884742<br>
+            e-mail : Info@stkippacitan.ac.id.Website : stkippacitan.ac.id
+            </strong></p>
+        </td>
+    </tr>
+</table>
+<hr style="border-top: 3px double;">
+<br>
+<p style="text-align: center;"><strong><u>
+    KARTU RENCANA STUDI
+</u><br>(KRS)</strong></p>
+<br>
+
+<table style="padding: 0.75rem; font-size: 100%;" class="table">
+    <tr>
+        <td width="25%">Nama Mahasiswa</td>
+        <td width="5%">:</td>
         <td>{{ auth()->user()->name }}</td>
     </tr>
     <tr>
@@ -96,13 +107,13 @@
         <td>{{ auth()->user()->nomor }}</td>
     </tr>
     <tr>
-        <td>PRODI</td>
+        <td>Program Studi</td>
         <td>:</td>
         <td>{{ auth()->user()->prodi->name }}</td>
     </tr>
 </table>
 
-<table class="table table-bordered">
+<table class="table table-bordered table-inf">
     <tr class="bg-info">
         <th>No</th>
         <th>Kode MK</th>
@@ -129,18 +140,21 @@
 </table>
 
 <h4>Petunjuk :</h4>
-<ol>
+<ol style="font-size: 14px;">
     <li>Tulislah semua mata kuliah yang akan ditempuh semester ini dalam Blanko KRS.</li>
     <li>Jumlah SKS yang diprogram maksimal: <b>24 SKS, termasuk Mata Kuliah Perbaikan.</b></li>
     <li>KRS dibuat rangkap 3(1. Untuk Prodi, 2. BAAK/BAUK, 3. Arsip Mahasiswa).</li>
     <li>Mata Kuliah yang diprogram dalam KRS ini secara otomatis akan diprogram menjadi <b>Kartu Rencana Ujian (KRU)</b></li>
 </ol>
 
-<div class="row">
-    <div class="col-4 col-sm-4 col-lg-4">
-        <div class="text-center">
-            Mengetahui
-            <h5><b>Ketua Prodi</b></h5>
+<table width="100%" class="text-center">
+    <tr>
+        <td width="33%">Mengetahui<br>Ketua Prodi</td>
+        <td width="33%">Menyetujui<br>Dosen Pembimbing Akademik</td>
+        <td width="33%">Pacitan, {{ date('d M Y') }}<br>Kabiro Administrasi Keuangan</td>
+    </tr>
+    <tr>
+        <td><br>
             @if ($krs->first()->status == 'setujui_by_kaprodi')
                 @php
                     $png = DNS2D::getBarcodePNG('Dokumen ini telah ditandatangani secara elektronik oleh'.' '.auth()->user()->prodi->user->name, 'QRCODE', 3, 3);
@@ -149,14 +163,8 @@
                     <img src="data:image/png;base64,{{ $png }}">
                 </div>
             @endif
-            <u>{{ auth()->user()->prodi->user->name }}</u><br>
-            NIDN. {{ auth()->user()->prodi->user->nomor }}
-        </div>
-    </div>
-    <div class="col-4 col-sm-4 col-lg-4">
-        <div class="text-center">
-            Menyetujui
-            <h5><b>Dosen Pembimbing Akademik</b></h5>
+        </td>
+        <td><br>
             @if ($krs->first()->status == 'setujui_by_dosbing' || $krs->first()->status == 'setujui_by_kaprodi')
             @php
                 $png = DNS2D::getBarcodePNG('Dokumen ini telah ditandatangani secara elektronik oleh'.' '.auth()->user()->user->name, 'QRCODE', 3, 3);
@@ -165,14 +173,8 @@
                 <img src="data:image/png;base64,{{ $png }}">
             </div>
             @endif
-            <u>{{ auth()->user()->user->name }}</u><br>
-            NIDN. {{ auth()->user()->user->nomor }}
-        </div>
-    </div>
-    <div class="col-4 col-sm-4 col-lg-4">
-        <div class="text-center">
-            Pacitan, {{ date('d M Y') }}
-            <h5><b>Kabiro Administrasi Keuangan</b></h5>
+        </td>
+        <td><br>
             @if ($krs->first()->status == 'setujui_by_keuangan' || $krs->first()->status == 'setujui_by_dosbing' || $krs->first()->status == 'setujui_by_kaprodi')
                 @php
                     $png = DNS2D::getBarcodePNG('Dokumen ini telah ditandatangani secara elektronik oleh'.' '.json_decode(Storage::disk('public')->get('settings.json'), true)['keuangan'], 'QRCODE', 3, 3);
@@ -181,10 +183,23 @@
                     <img src="data:image/png;base64,{{ $png }}">
                 </div>
             @endif
+        </td>
+    </tr>
+    <tr>
+        <td><br>
+            <u>{{ auth()->user()->prodi->user->name }}</u><br>
+            NIDN. {{ auth()->user()->prodi->user->nomor }}
+        </td>
+        <td><br>
+            <u>{{ auth()->user()->user->name }}</u><br>
+            NIDN. {{ auth()->user()->user->nomor }}
+        </td>
+        <td><br>
             <u>{{ json_decode(Storage::disk('public')->get('settings.json'), true)['keuangan'] }}</u><br>
             {{ json_decode(Storage::disk('public')->get('settings.json'), true)['keuangan_status'] }}. {{ json_decode(Storage::disk('public')->get('settings.json'), true)['keuangan_nomor'] }}
-        </div>
-    </div>
-</div>
+        </td>
+    </tr>
+</table>
+
 </body>
 </html>

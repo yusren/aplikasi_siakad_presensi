@@ -9,7 +9,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-body">
-                    <form method="GET" action="{{ url()->current() }}">
+                    <form method="GET" action="{{ url()->current() }}" style="display: inline !important;">
                         <div class="form-group">
                             <label>Tahun Ajaran</label>
                             <select required class="form-control select2" name="tahun_ajaran_id"
@@ -35,8 +35,27 @@
                             @error('matakuliah_id')
                             <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary">Filter</button>
+                        <button type="submit" class="btn btn-primary" style="display: inline !important;">Filter</button>
                     </form>
+                    <a href="#" data-toggle="modal" data-target="#notice" class="btn btn-success">Kelola LMS</a>
+
+                    <div class="modal fade" id="notice" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Notice !</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Menu Sedang Dinonaktifkan</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <hr />
                     @if ($matakuliahAktif)
                     <h3>{{ $matakuliahAktif->name }} {{ $matakuliahAktif->code }}</h3>

@@ -48,11 +48,27 @@
                                 <td>{{$kr->matakuliah->name}}</td>
                                 <td>{{$kr->matakuliah->code}}</td>
                                 <td>{{$kr->matakuliah->sks}}</td>
-                                <td>{{$kr->status}}</td>
+                                <td>
+                                    @if( $kr->status == 'menunggu')
+                                    Silahkan Ajukan KRS DI Menu Entri KRS
+                                    @elseif ( $kr->status == 'ajukan' )
+                                    Menunggu Validasi Keuangan Kemudian Diteruskan Ke Dosen PA
+                                    @elseif ( $kr->status == 'setujui_by_keuangan' )
+                                    Menunggu Validasi Dosen PA Kemudian Diteruskan Ke Kaprodi
+                                    @elseif ( $kr->status == 'setujui_by_dosbing' )
+                                    Menunggu Validasi Kaprodi Kemudian KRS Anda Akan Siap
+                                    @elseif ( $kr->status == 'setujui_by_kaprodi' )
+                                    KRS Telah Divalidasi Oleh Seluruh Validator
+                                    @endif
+                                </td>
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="5">Kosong</td>
+                                @if ($aksiKrs == 'entri')
+                                <td colspan="5">KRS Berhasil Diajukan. Lihat Perkembangan Validasi KRS Di Menu <a href="{{ route('krs.index', ['aksiKrs' => 'lihat']) }}"><u><b>Lihat KRS</b></u></a></td>
+                                @else
+                                <td colspan="5">KRS Belum Diajukan. Silahkan Ajukan KRS Di Menu <a href="{{ route('krs.index', ['aksiKrs' => 'entri']) }}"><u><b>Entri KRS</b></u></a></td>
+                                @endif
                             </tr>
                             @endforelse
                         </tbody>

@@ -16,7 +16,7 @@
             align-items: center;
             background-repeat: no-repeat;
             background-size: cover;
-            background-image: url('{{ asset(' img/ils.jpg') }}');
+            background-image: url('{{ asset('img/ils.jpg') }}');
             position: relative;
             /* Tambahkan ini untuk memungkinkan overlay */
         }

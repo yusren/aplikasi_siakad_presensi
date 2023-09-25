@@ -49,6 +49,6 @@ class TestAngketController extends Controller
             ['data_jawaban' => json_encode($request->except(['_method', '_token']))]
         );
 
-        return redirect()->route('test.show', $angket->id)->with('toast_success', 'Berhasil Menyimpan Data!');
+        return redirect()->route('dashboard')->with('toast_success', 'Berhasil Menyimpan Data!');
     }
 }

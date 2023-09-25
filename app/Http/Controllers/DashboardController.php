@@ -85,6 +85,7 @@ class DashboardController extends Controller
                 'users' => User::count(),
                 'mhs' => User::where('role', 'mahasiswa')->count(),
                 'dosen' => User::where('role', 'dosen')->count(),
+                'karyawan' => User::where('role', 'karyawan')->count(),
                 'mhs_pria' => User::where('role', 'mahasiswa')->where('jenis_kelamin', 'laki-laki')->count(),
                 'mhs_wanita' => User::where('role', 'mahasiswa')->where('jenis_kelamin', 'perempuan')->count(),
                 'mhs_islam' => User::where('role', 'mahasiswa')->where('agama', 'islam')->count(),

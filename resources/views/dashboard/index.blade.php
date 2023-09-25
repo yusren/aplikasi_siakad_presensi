@@ -33,7 +33,7 @@
         <div class="col-lg-4 col-xs-12">
             <div class="small-box bg-green-gradient">
                 <div class="inner">
-                    <p style="font-size:20px;">56</p>
+                    <p style="font-size:20px;">{{ $karyawan }}</p>
                     <p>Jumlah Karyawan</p>
                 </div>
                 <div class="icon">
