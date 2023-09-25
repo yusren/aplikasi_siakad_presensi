@@ -47,7 +47,7 @@ class ExportController extends Controller
             'ipk' => number_format($ipk, 2),
         ]);
 
-        return $pdf->download('laporan-krs.pdf');
+        return $pdf->download('laporan-khs.pdf');
 
     }
 

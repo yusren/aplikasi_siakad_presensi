@@ -25,6 +25,7 @@
                                     <th>Mahasiswa</th>
                                     <th>Semester</th>
                                     <th>Tahun Ajaran</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -35,6 +36,7 @@
                                     <td>{{ $kr->first()->user->name }}</td>
                                     <td>{{ $kr->first()->semester }}</td>
                                     <td>{{ $kr->first()->tahunAjaran->semester }} - {{ $kr->first()->tahunAjaran->name }}</td>
+                                    <td><a class="btn btn-info" href="{{ route('user.show', ['user' => $kr->first()->user->id, 'role' => 'mahasiswa' , 'tahun_ajaran_id' => $kr->first()->tahunAjaran->id]) }}">Show</a></td>
                                 </tr>
                                 @endforeach
                                 @endforeach

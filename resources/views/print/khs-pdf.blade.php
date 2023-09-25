@@ -165,8 +165,11 @@
             <div class="col-4 col-sm-4 col-lg-4">
                 <div class="text-center">
                     <h5><b>Ketua BAAK</b></h5>
+                    @php
+                        $png = DNS2D::getBarcodePNG('Dokumen ini telah ditandatangani secara elektronik oleh'.' '.json_decode(Storage::disk('public')->get('settings.json'), true)['baak'], 'QRCODE', 3, 3);
+                    @endphp
                     <div style="display: flex; justify-content: center;">
-                        {!! DNS2D::getBarcodeHTML('Dokumen ini telah ditandatangani secara elektronik oleh'.' '.json_decode(Storage::disk('public')->get('settings.json'), true)['baak'], 'QRCODE', 3, 3) !!}
+                        <img src="data:image/png;base64,{{ $png }}">
                     </div>
                     <u>{{ json_decode(Storage::disk('public')->get('settings.json'), true)['baak'] }}</u><br>
                     {{ json_decode(Storage::disk('public')->get('settings.json'), true)['baak_status'] }}. {{
@@ -176,8 +179,11 @@
             <div class="col-4 col-sm-4 col-lg-4">
                 <div class="text-center">
                     <h5><b>Ketua Program Studi</b></h5>
+                    @php
+                        $png = DNS2D::getBarcodePNG('Dokumen ini telah ditandatangani secara elektronik oleh'.' '.auth()->user()->prodi->user->name, 'QRCODE', 3, 3);
+                    @endphp
                     <div style="display: flex; justify-content: center;">
-                        {!! DNS2D::getBarcodeHTML('Dokumen ini telah ditandatangani secara elektronik oleh'.' '.auth()->user()->prodi->user->name, 'QRCODE', 3, 3) !!}
+                        <img src="data:image/png;base64,{{ $png }}">
                     </div>
                     <u>{{ auth()->user()->prodi->user->name }}</u><br>
                     NIDN. {{ auth()->user()->prodi->user->nomor }}
@@ -186,8 +192,11 @@
             <div class="col-4 col-sm-4 col-lg-4">
                 <div class="text-center">
                     <b>Pacitan,</b> {{ date('d M Y') }}
+                    @php
+                        $png = DNS2D::getBarcodePNG('Dokumen ini telah ditandatangani secara elektronik oleh'.' '.auth()->user()->user->name, 'QRCODE', 3, 3);
+                    @endphp
                     <div style="display: flex; justify-content: center;">
-                        {!! DNS2D::getBarcodeHTML('Dokumen ini telah ditandatangani secara elektronik oleh'.' '.auth()->user()->user->name, 'QRCODE', 3, 3) !!}
+                        <img src="data:image/png;base64,{{ $png }}">
                     </div>
                     <h5><b>Dosen Pembimbing Akademik</b></h5>
                     <u>{{ auth()->user()->user->name }}</u><br>
