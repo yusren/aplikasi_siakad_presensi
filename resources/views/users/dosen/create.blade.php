@@ -235,8 +235,7 @@
                 .append('<option>==Pilih Salah Satu==</option>');
 
             $.each(data, function (key, value) {
-                $('#' + name)
-                    .append('<option value="' + key + '">' + value + '</option>');
+                $('#' + name).append('<option value="' + key + '">' + value + '</option>');
             });
         }
     });

@@ -44,7 +44,52 @@
     </div>
     <div class="row">
         <div class="col-lg-12 col-xs-12">
-            <div id="container"></div>
+            <div class="box">
+                <div class="box-body">
+                    <div class="form-group">
+                        <label class="form-label" for="provinsi">Provinsi</label>
+                        <div class="mb-1">
+                            <select style="width: 100%;" class="form-select select2" name="provinsi" id="provinsi" required>
+                                <option selected disabled>==Pilih Salah Satu==</option>
+                                @foreach ($provinces as $item)
+                                    <option value="{{ $item->id ?? '' }}" {{ old('provinsi')==$item->id ? 'selected' : '' }}>{{ $item->name ?? '' }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="kota">Kabupaten / Kota</label>
+                        <div class="mb-1">
+                            <select style="width: 100%;" class="form-select select2" name="kota" id="kota" required>
+                                <option selected disabled>==Pilih Salah Satu==</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="kecamatan">Kecamatan</label>
+                        <div class="mb-1">
+                            <select style="width: 100%;" class="form-select select2" name="kecamatan" id="kecamatan" required>
+                                <option selected disabled>==Pilih Salah Satu==</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="desa">Desa</label>
+                        <div class="mb-1">
+                            <select style="width: 100%;" class="form-select select2" name="desa" id="desa" required>
+                                <option selected disabled>==Pilih Salah Satu==</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xs-12">
+            <div class="box">
+                <div class="box-body">
+                    <div id="container"></div>
+                </div>
+            </div>
         </div>
         <div class="col-lg-6 col-xs-12">
             <div class="box">
@@ -406,42 +451,125 @@ new Highcharts.chart('chartIPKMhsPie', {
     }]
 });
 
-var data = @json($data);
-var flattenedData = [];
-
-for (var gender in data) {
-    for (var province in data[gender]) {
-        for (var city in data[gender][province]) {
-            for (var district in data[gender][province][city]) {
-                var name = province + ' - ' + city + ' - ' + district + ' - ' + gender;
-                var count = data[gender][province][city][district];
-                var color = gender === 'laki-laki' ? '#0000FF' : '#FFC0CB'; // Blue for 'laki-laki', pink for 'perempuan'
-                flattenedData.push({ name: name, y: count, color: color });
-            }
-        }
-    }
-}
-
-Highcharts.chart('container', {
+</script>
+<script>
+new Highcharts.chart('container', {
     chart: {
         type: 'column'
     },
     title: {
-        text: 'Alamat Mahasiswa'
+        text: 'Jenis Kelamin Berdasarkan Alamat'
     },
     xAxis: {
-        type: 'category'
+        categories: ['Mahasiswa']
     },
     yAxis: {
+        allowDecimals: false,
         min: 0,
         title: {
-            text: 'Number of Users'
+            text: 'Jumlah Mahasiswa'
         }
     },
-    series: [{
-        name: 'Mahasiswa',
-        data: flattenedData
-    }]
+    plotOptions: {
+        column: {
+            dataLabels: {
+                enabled: true
+            }
+        },
+        series: {
+            dataLabels: {
+                enabled: true,
+            }
+        }
+    },
+    tooltip: {
+        formatter: function() {
+            return '<b>' + this.x + '</b><br/>' + this.series.name + ': ' + this.y;
+        }
+    },
+    series: [
+        {
+            name: 'Laki - Laki',
+            color: '#0000FF',
+            data: [pria]
+        },
+        {
+            name: 'Perempuan',
+            color: '#FFC0CB',
+            data: [wanita]
+        }
+    ]
+});
+function onChangeSelect(url, id, name) {
+    $.ajax({
+        url: url,
+        type: 'GET',
+        data: {
+            id: id
+        }, success: function (data) {
+            $('#' + name).empty();
+            $('#' + name).append('<option>==Pilih Salah Satu==</option>');
+
+            $.each(data, function (key, value) {
+                $('#' + name).append('<option value="' + key + '">' + value + '</option>');
+            });
+        }
+    });
+}
+$(function () {
+    $('#provinsi').on('change', function () {
+        $('#kota, #kecamatan, #desa').empty();
+        onChangeSelect('{{ route("cities") }}', $(this).val(), 'kota');
+    });
+    $('#kota').on('change', function () {
+        $('#kecamatan, #desa').empty();
+        onChangeSelect('{{ route("districts") }}', $(this).val(), 'kecamatan');
+    });
+    $('#kecamatan').on('change', function () {
+        $('#desa').empty();
+        onChangeSelect('{{ route("villages") }}', $(this).val(), 'desa');
+    });
+});
+function updateChart(data) {
+    var flattenedData = [];
+    for(var gender in data){
+        var count = data[gender];
+        var color = gender === 'laki-laki' ? '#0000FF' : '#FFC0CB';
+        flattenedData.push({name: gender, y: count, color: color});
+    }
+
+    Highcharts.chart('container', {
+        chart: { type: 'column' },
+        title: { text: 'Alamat Mahasiswa' },
+        xAxis: { type: 'category' },
+        yAxis: { min: 0, title: { text: 'Number of Users' } },
+        series: [{ name: 'Mahasiswa', data: flattenedData }]
+    });
+}
+$('#provinsi, #kota, #kecamatan, #desa').on('change', function () {
+    var provinsi = $('#provinsi').val();
+    var kota = $('#kota').val();
+    var kecamatan = $('#kecamatan').val();
+    var desa = $('#desa').val();
+
+    $.ajax({
+        url: '/gender',  // replace with your endpoint
+        type: 'GET',
+        data: {
+            provinsi: provinsi,
+            kota: kota,
+            kecamatan: kecamatan,
+            desa: desa
+        },
+        success: function(data) {
+            console.log(provinsi);
+            console.log(kota);
+            console.log(kecamatan);
+            console.log(desa);
+            console.table(data);
+            updateChart(data);
+        }
+    });
 });
 </script>
 @endsection

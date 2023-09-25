@@ -236,4 +236,45 @@ class UserController extends Controller
 
         return back()->with('success', 'Dosen imported successfully.');
     }
+
+    public function getUsersByLocation(Request $request)
+    {
+        $selectedProvinsi = $request->provinsi;
+        $selectedKota = $request->kota;
+        $selectedKecamatan = $request->kecamatan;
+        $selectedDesa = $request->desa;
+
+        $query = User::where('role', 'mahasiswa')->with('alamats');
+
+        if ($selectedProvinsi && $selectedProvinsi != '==Pilih Salah Satu==') {
+            $query->whereHas('alamats', function ($q) use ($selectedProvinsi) {
+                $q->where('provinsi', $selectedProvinsi);
+            });
+        }
+
+        if ($selectedKota && $selectedKota != '==Pilih Salah Satu==') {
+            $query->whereHas('alamats', function ($q) use ($selectedKota) {
+                $q->where('kota', $selectedKota);
+            });
+        }
+
+        if ($selectedKecamatan && $selectedKecamatan != '==Pilih Salah Satu==') {
+            $query->whereHas('alamats', function ($q) use ($selectedKecamatan) {
+                $q->where('kecamatan', $selectedKecamatan);
+            });
+        }
+
+        if ($selectedDesa && $selectedDesa != '==Pilih Salah Satu==') {
+            $query->whereHas('alamats', function ($q) use ($selectedDesa) {
+                $q->where('desa', $selectedDesa);
+            });
+        }
+
+        $usersAlamat = $query->get()->groupBy(['jenis_kelamin'])
+            ->map(function ($items) {
+                return $items->count();
+            });
+
+        return response()->json($usersAlamat);
+    }
 }

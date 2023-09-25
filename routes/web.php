@@ -44,6 +44,7 @@ Route::middleware(['auth', 'checkangketsetelahlogin', 'checkrps'])->group(functi
     Route::resource('/pengumuman', PengumumanController::class);
     Route::resource('/admin', AdminController::class);
     Route::resource('/user', UserController::class);
+    Route::get('/gender', [UserController::class, 'getUsersByLocation']);
     Route::post('/mahasiswa/import', [UserController::class, 'importMahasiswa'])->name('mahasiswa.import');
     Route::post('/dosen/import', [UserController::class, 'importDosen'])->name('dosen.import');
     Route::resource('/fakultas', FakultasController::class);
