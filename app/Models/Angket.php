@@ -32,13 +32,23 @@ class Angket extends Model
         return $this->hasMany(HasilAngket::class);
     }
 
-    public function matakuliah() //from matakuliah_id
+    // public function matakuliah() //from matakuliah_id
+    // {
+    //     return $this->belongsTo(Matakuliah::class);
+    // }
+
+    // public function prodi() //from prodi_id
+    // {
+    //     return $this->belongsTo(Prodi::class);
+    // }
+
+    public function matakuliah()
     {
-        return $this->belongsTo(Matakuliah::class);
+        return $this->belongsToMany(Matakuliah::class, 'angket_matakuliah');
     }
 
-    public function prodi() //from prodi_id
+    public function prodi()
     {
-        return $this->belongsTo(Prodi::class);
+        return $this->belongsToMany(Prodi::class, 'angket_prodi');
     }
 }

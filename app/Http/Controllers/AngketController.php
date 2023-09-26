@@ -32,15 +32,27 @@ class AngketController extends Controller
     public function store(AngketRequest $request)
     {
         $data = $request->validated();
-        $data['matakuliahs'] = isset($data['matakuliah']) ? json_encode($data['matakuliah']) : null;
-        $data['prodi'] = isset($data['prodi']) ? json_encode($data['prodi']) : null;
-        Angket::create($data);
+        $matakuliah = $data['matakuliah'] ?? null;
+        $prodi = $data['prodi'] ?? null;
+        unset($data['matakuliah'], $data['prodi']);
+        $angket = Angket::create($data);
+        if ($matakuliah) {
+            $angket->matakuliah()->sync($matakuliah);
+        }
+        if ($prodi) {
+            $angket->prodi()->sync($prodi);
+        }
 
         return redirect(route('angket.index'))->with('toast_success', 'Berhasil Menyimpan Data!');
     }
 
     public function show(Angket $angket)
     {
+        // dd(
+        //     $angket->toArray(),
+        //     $angket->matakuliah->toArray(),
+        //     $angket->prodi->toArray(),
+        // );
         return view('angket.show', ['angket' => $angket]);
     }
 
@@ -60,7 +72,16 @@ class AngketController extends Controller
     public function update(AngketRequest $request, Angket $angket)
     {
         $data = $request->validated();
+        $matakuliah = $data['matakuliah'] ?? null;
+        $prodi = $data['prodi'] ?? null;
+        unset($data['matakuliah'], $data['prodi']);
         $angket->update($data);
+        if ($matakuliah) {
+            $angket->matakuliah()->sync($matakuliah);
+        }
+        if ($prodi) {
+            $angket->prodi()->sync($prodi);
+        }
 
         return redirect(route('angket.index'))->with('toast_success', 'Berhasil Menyimpan Data!');
     }

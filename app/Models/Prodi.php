@@ -31,4 +31,9 @@ class Prodi extends Model
     {
         return $this->hasMany(Kelas::class);
     }
+
+    public function angkets()
+    {
+        return $this->belongsToMany(Angket::class, 'angket_prodi');
+    }
 }

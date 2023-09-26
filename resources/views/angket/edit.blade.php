@@ -39,36 +39,37 @@
                                 <option @if ($angket->kondisi == 'setelah_login') selected @endif value="setelah_login">setelah_login</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label>Tujuan Angket</label>
-                            <select class="form-control select2" name="tujuan" data-placeholder="Pilih Tujuan Angket" style="width: 100%;">
-                                <option value="" selected disabled>Pilih Tujuan Angket</option>
-                                @foreach ($pilihan as $tujuan)
-                                <option value="{{ $tujuan }}" {{ old('tujuan')==$tujuan ? 'selected' : '' }}>
-                                    {{ $tujuan }}
-                                </option>
-                                @endforeach
-                            </select>
-                            @error('tujuan') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
-                        </div>
-                        <div class="form-group" id="matakuliah">
-                            <label>Mata Kuliah</label>
-                            <select class="form-control select2" name="matakuliah[]" data-placeholder="Pilih Mata Kuliah" style="width: 100%;" multiple>
-                                @foreach ($matakuliah as $mk)
-                                <option value="{{ $mk->id }}" {{ old('matakuliah')==$mk->id ? 'selected' : '' }}>
-                                    {{ $mk->code }} {{ $mk->name }} - {{ $mk->prodi->name }} {{ $mk->user->name }}
-                                </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group" id="prodi">
-                            <label>Program Studi</label>
-                            <select class="form-control select2" name="prodi" data-placeholder="Pilih Prodi" style="width: 100%;" multiple>
-                                @foreach ($prodi as $pr)
-                                    <option value="{{ $pr->id }}" {{ old('prodi') == $pr->id ? 'selected' : '' }}>{{ $pr->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+<div class="form-group">
+    <label>Tujuan Angket</label>
+    <select class="form-control select2" name="tujuan" data-placeholder="Pilih Tujuan Angket" style="width: 100%;">
+        <option value="" selected disabled>Pilih Tujuan Angket</option>
+        @foreach($pilihan as $tujuan)
+            <option value="{{ $tujuan }}" {{ (old('tujuan') ?? $angket->tujuan) == $tujuan ? 'selected' : '' }}>{{ $tujuan }}</option>
+        @endforeach
+    </select>
+    @error('tujuan')
+        <div class="invalid-feedback text-danger">{{ $message }}</div>
+    @enderror
+</div>
+
+<div class="form-group" id="matakuliah">
+    <label>Mata Kuliah</label>
+    <select class="form-control select2" name="matakuliah[]" data-placeholder="Pilih Mata Kuliah" style="width: 100%;" multiple>
+        @foreach($matakuliah as $mk)
+            <option value="{{ $mk->id }}" {{ in_array($mk->id, old('matakuliah') ?? $angket->matakuliah->pluck('id')->toArray()) ? 'selected' : '' }}>{{ $mk->code }} {{ $mk->name }} - {{ $mk->prodi->name }} {{ $mk->user->name }}</option>
+        @endforeach
+    </select>
+</div>
+
+<div class="form-group" id="prodi">
+    <label>Program Studi</label>
+    <select class="form-control select2" name="prodi" data-placeholder="Pilih Prodi" style="width: 100%;" multiple>
+        @foreach($prodi as $pr)
+            <option value="{{ $pr->id }}" {{ in_array($pr->id, old('prodi') ?? $angket->prodi->pluck('id')->toArray()) ? 'selected' : '' }}>{{ $pr->name }}</option>
+        @endforeach
+    </select>
+</div>
+
                     </div>
                     <div class="box-footer">
                         <a href="{{ route('angket.index') }}" class="btn btn-default">Kembali</a>
