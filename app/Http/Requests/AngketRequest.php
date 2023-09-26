@@ -20,7 +20,8 @@ class AngketRequest extends FormRequest
             'end_at' => 'required',
             'kondisi' => 'required',
             'kondisi_detail' => 'nullable',
-            'matakuliah_id' => 'nullable',
+            'matakuliah' => 'required_if:kondisi,sebelum_lihat_nilai',
+            'prodi' => 'required_if:tujuan,mahasiswa',
         ];
     }
 }

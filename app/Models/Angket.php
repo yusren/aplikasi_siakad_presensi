@@ -17,6 +17,8 @@ class Angket extends Model
         'kondisi',
         'kondisi_detail',
         'matakuliah_id',
+        'prodi_id',
+        'matakuliahs',
         'prodi',
     ];
 
@@ -30,8 +32,13 @@ class Angket extends Model
         return $this->hasMany(HasilAngket::class);
     }
 
-    public function matakuliah()
+    public function matakuliah() //from matakuliah_id
     {
         return $this->belongsTo(Matakuliah::class);
+    }
+
+    public function prodi() //from prodi_id
+    {
+        return $this->belongsTo(Prodi::class);
     }
 }

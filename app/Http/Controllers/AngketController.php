@@ -32,6 +32,8 @@ class AngketController extends Controller
     public function store(AngketRequest $request)
     {
         $data = $request->validated();
+        $data['matakuliahs'] = isset($data['matakuliah']) ? json_encode($data['matakuliah']) : null;
+        $data['prodi'] = isset($data['prodi']) ? json_encode($data['prodi']) : null;
         Angket::create($data);
 
         return redirect(route('angket.index'))->with('toast_success', 'Berhasil Menyimpan Data!');
@@ -44,7 +46,15 @@ class AngketController extends Controller
 
     public function edit(Angket $angket)
     {
-        return view('angket.edit', ['angket' => $angket, 'matakuliah' => Matakuliah::get()]);
+        $pilihan = [
+            'semua_user', //mahasiswa, dosen dll
+            'dosen',
+            'karyawan',
+            'dosen_karyawan',
+            'mahasiswa',
+        ];
+
+        return view('angket.edit', ['angket' => $angket, 'matakuliah' => Matakuliah::get(), 'prodi' => Prodi::get(), 'pilihan' => $pilihan]);
     }
 
     public function update(AngketRequest $request, Angket $angket)
