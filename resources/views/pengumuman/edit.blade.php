@@ -29,18 +29,42 @@
                             <textarea name="description" class="form-control" id="description" cols="30" rows="10">{{ $pengumuman->description }}</textarea>
                             @error('description') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="role" id="mahasiswa" value="mahasiswa" @if($pengumuman->role == 'mahasiswa') checked @endif>
-                            <label class="form-check-label" for="mahasiswa">
-                                mahasiswa
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="role" id="non-mahasiswa" value="non-mahasiswa" @if($pengumuman->role == 'non-mahasiswa') checked @endif>
-                            <label class="form-check-label" for="non-mahasiswa">
-                                Selain Mahasiswa
-                            </label>
-                        </div>
+                        <hr />
+<div class="form-group">
+    <label>Program Users</label>
+    <select class="form-control select2" name="users[]" data-placeholder="Pilih User" style="width: 100%;" multiple>
+        @foreach($users as $user)
+        <option value="{{ $user->id }}" {{ $pusers && in_array($user->id, $pusers) ? 'selected' : ''}}>{{$user->nomor}}-{{$user->name}}</option>
+        @endforeach
+    </select>
+</div>
+
+<div class="form-group">
+    <label>Program Kelas</label>
+    <select class="form-control select2" name="kelas[]" data-placeholder="Pilih Kelas" style="width: 100%;" multiple>
+        @foreach($kelas as $kls)
+        <option value="{{ $kls->id }}" {{ $pkelas && in_array($kls->id, $pkelas) ? 'selected' : '' }}>{{$kls->name}}</option>
+        @endforeach
+    </select>
+</div>
+
+<div class="form-group">
+    <label>Program Studi</label>
+    <select class="form-control select2" name="prodi[]" data-placeholder="Pilih Prodi" style="width: 100%;" multiple>
+        @foreach($prodi as $pr)
+        <option value="{{ $pr->id }}" {{$pprodi && in_array($pr->id, $pprodi) ? 'selected' : ''}}>{{$pr->code}}-{{$pr->name}}</option>
+        @endforeach
+    </select>
+</div>
+
+<div class="form-group">
+    <label>Role</label>
+    <select class="form-control select2" name="role[]" data-placeholder="Pilih Role" style="width: 100%;" multiple>
+        @foreach($roles as $role)
+        <option value="{{ $role }}" {{$prole && in_array($role, $prole) ? 'selected' : '' }}>{{$role}}</option>
+        @endforeach
+    </select>
+</div>
                     </div>
                     <div class="box-footer">
                         <a href="{{ route('pengumuman.index') }}" class="btn btn-default">Kembali</a>

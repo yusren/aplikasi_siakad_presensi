@@ -46,14 +46,15 @@
                             <li class="#"><a href="{{ route('user.index', ['role' => 'mahasiswa']) }}"><i class="fa fa-user"></i><span>Mahasiswa</span></a></li>
                         </ul>
                 </li>
-                        <li class="{{ (request()->is('tahunajaran*')) ? 'active' : '' }}"><a href="/tahunajaran"><i class="fa fa-calendar"></i><span>Tahun Ajaran</span></a></li>
-                        <li class="{{ (request()->is('fakultas*')) ? 'active' : '' }}"><a href="/fakultas"><i class="fa fa-university"></i><span>Fakultas</span></a></li>
-                        <li class="{{ (request()->is('prodi*')) ? 'active' : '' }}"><a href="/prodi"><i class="fa fa-list-alt"></i><span>Program Studi</span></a></li>
-                        <li class="{{ (request()->is('matakuliah*')) ? 'active' : '' }}"><a href="/matakuliah"><i class="fa fa-book"></i><span>Mata Kuliah</span></a></li>
-                        <li class="{{ (request()->is('kelas*')) ? 'active' : '' }}"><a href="/kelas"><i class="fa fa-th-large"></i><span>Kelas</span></a></li>
-                        <li class="{{ (request()->is('ruang*')) ? 'active' : '' }}"><a href="/ruang"><i class="fa fa-columns"></i><span>Ruang</span></a></li>
-                        <li class="{{ (request()->is('jadwal*')) ? 'active' : '' }}"><a href="/jadwal"><i class="fa fa-calendar"></i><span>Jadwal</span></a></li>
-                        <li class="{{ (request()->is('krs*')) ? 'active' : '' }}"><a href="/krs-detailprodi"><i class="fa fa-archive"></i><span>KRS</span></a></li>
+                <li class="{{ (request()->is('tahunajaran*')) ? 'active' : '' }}"><a href="/tahunajaran"><i class="fa fa-calendar"></i><span>Tahun Ajaran</span></a></li>
+                <li class="{{ (request()->is('fakultas*')) ? 'active' : '' }}"><a href="/fakultas"><i class="fa fa-university"></i><span>Fakultas</span></a></li>
+                <li class="{{ (request()->is('prodi*')) ? 'active' : '' }}"><a href="/prodi"><i class="fa fa-list-alt"></i><span>Program Studi</span></a></li>
+                <li class="{{ (request()->is('matakuliah*')) ? 'active' : '' }}"><a href="/matakuliah"><i class="fa fa-book"></i><span>Mata Kuliah</span></a></li>
+                <li class="{{ (request()->is('pertemuan*')) ? 'active' : '' }}"><a href="/pertemuan"><i class="fa fa-circle"></i><span>Pertemuan</span></a></li>
+                <li class="{{ (request()->is('kelas*')) ? 'active' : '' }}"><a href="/kelas"><i class="fa fa-th-large"></i><span>Kelas</span></a></li>
+                <li class="{{ (request()->is('ruang*')) ? 'active' : '' }}"><a href="/ruang"><i class="fa fa-columns"></i><span>Ruang</span></a></li>
+                <li class="{{ (request()->is('jadwal*')) ? 'active' : '' }}"><a href="/jadwal"><i class="fa fa-calendar"></i><span>Jadwal</span></a></li>
+                <li class="{{ (request()->is('krs*')) ? 'active' : '' }}"><a href="/krs-detailprodi"><i class="fa fa-archive"></i><span>KRS</span></a></li>
                 <li class="{{ (request()->is('angket*')) ? 'active' : '' }}"><a href="/angket"><i class="fa fa-bar-chart"></i><span>Angket</span></a></li>
                 <li class="{{ request()->is('setting*') ? 'active' : '' }}"><a href="/setting"><i class="fa fa-gear"></i><span>Setting</span></a></li>
                 <li class="{{ request()->is('pengumuman*') ? 'active' : '' }}"><a href="/pengumuman"><i class="fa fa-newspaper-o"></i><span>Pengumuman</span></a></li>

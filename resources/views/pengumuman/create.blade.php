@@ -15,7 +15,7 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label for="">Cover</label>
-                            <input type="text" class="form-control" name="cover" value="{{ old('cover') }}" placeholder="Cover">
+                            <input type="file" class="form-control" name="cover" value="{{ old('cover') }}" placeholder="Cover">
                             @error('cover') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
@@ -28,17 +28,46 @@
                             <textarea name="description" class="form-control" id="description" cols="30" rows="10"></textarea>
                             @error('description') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="role" id="mahasiswa" value="mahasiswa">
-                            <label class="form-check-label" for="mahasiswa">
-                                mahasiswa
-                            </label>
+                        <hr />
+                        <div class="form-group">
+                            <label>Program Users</label>
+                            <select class="form-control select2" name="users[]" data-placeholder="Pilih User" style="width: 100%;" multiple>
+                                @foreach ($users as $user)
+                                <option value="{{ $user->id }}">
+                                    {{$user->nomor }} - {{$user->name }}
+                                </option>
+                                @endforeach
+                            </select>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="role" id="non-mahasiswa" checked value="non-mahasiswa">
-                            <label class="form-check-label" for="non-mahasiswa">
-                                Selain Mahasiswa
-                            </label>
+                        <div class="form-group">
+                            <label>Program Kelas</label>
+                            <select class="form-control select2" name="kelas[]" data-placeholder="Pilih Kelas" style="width: 100%;" multiple>
+                                @foreach ($kelas as $kls)
+                                <option value="{{ $kls->id }}">
+                                    {{$kls->name }}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Program Studi</label>
+                            <select class="form-control select2" name="prodi[]" data-placeholder="Pilih Prodi" style="width: 100%;" multiple>
+                                @foreach ($prodi as $pr)
+                                <option value="{{ $pr->id }}">
+                                    {{$pr->code }} - {{$pr->name }}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Role</label>
+                            <select class="form-control select2" name="role[]" data-placeholder="Pilih Role" style="width: 100%;" multiple>
+                                @foreach ($roles as $role)
+                                <option value="{{ $role }}">
+                                    {{$role }}
+                                </option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="box-footer">

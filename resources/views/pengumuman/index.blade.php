@@ -24,7 +24,7 @@
                                 <td>No</td>
                                 <td>Judul</td>
                                 <td>Deskripsi</td>
-                                <td>Role</td>
+                                <td>Tujuan</td>
                                 <td>Aksi</td>
                             </tr>
                         </thead>
@@ -33,7 +33,12 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>@judul($value->judul)</td>
                             <td>@desc($value->description)</td>
-                            <td>{{ $value->role }}</td>
+                            <td>
+                                {{ $value->users }},
+                                {{ $value->kelas }},
+                                {{ $value->prodi }},
+                                {{ $value->role }},
+                            </td>
                             <td>
                                 <a class="btn btn-warning" href="{{ route('pengumuman.edit', $value->id) }}">Edit</a>
                                 <form action="{{ route('pengumuman.destroy', $value->id) }}" method="post"

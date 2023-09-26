@@ -74,8 +74,27 @@ class DashboardController extends Controller
             return response()->json(['angkets' => $results]);
         }
 
+        $news = Pengumuman::get();
+        $pengumuman = [];
+
+        foreach ($news as $p) {
+            $users = json_decode($p->users, true);
+            $kelas = json_decode($p->kelas, true);
+            $prodi = json_decode($p->prodi, true);
+            $role = json_decode($p->role, true);
+
+            if (($users && in_array(auth()->user()->id, $users)) ||
+                ($role && in_array(auth()->user()->role, $role)) ||
+                (auth()->user()->role == 'mahasiswa' &&
+                    (($kelas && in_array(auth()->user()->kelas->first()->id, $kelas)) ||
+                        ($prodi && in_array(auth()->user()->prodi->id, $prodi))))
+            ) {
+                $pengumuman[] = $p;
+            }
+        }
+
         if (auth()->user()->role == 'mahasiswa') {
-            return view('dashboard.user.index', ['pengumuman' => Pengumuman::where('role', 'mahasiswa')->get()]);
+            return view('dashboard.user.index', ['pengumuman' => $pengumuman]);
         } else {
             return view('dashboard.index', [
                 'ipkCategories' => $ipkCategories,
@@ -94,7 +113,7 @@ class DashboardController extends Controller
                 'mhs_hindu' => User::where('role', 'mahasiswa')->where('agama', 'hindu')->count(),
                 'mhs_budha' => User::where('role', 'mahasiswa')->where('agama', 'budha')->count(),
                 'mhs_konghucu' => User::where('role', 'mahasiswa')->where('agama', 'konghucu')->count(),
-                'pengumuman' => Pengumuman::where('role', 'non-mahasiswa')->get(),
+                'pengumuman' => $pengumuman,
             ]);
         }
     }

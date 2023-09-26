@@ -14,10 +14,13 @@ class PengumumanRequest extends FormRequest
     public function rules()
     {
         return [
-            'cover' => 'required|mimes:png,jpg|max:2048',
+            'cover' => 'nullable|mimes:png,jpg|max:2048',
             'judul' => 'required',
             'description' => 'required',
-            'role' => 'required',
+            'role' => 'nullable',
+            'users' => 'nullable',
+            'kelas' => 'nullable',
+            'prodi' => 'nullable',
         ];
     }
 }
