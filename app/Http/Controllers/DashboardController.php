@@ -21,7 +21,7 @@ class DashboardController extends Controller
 
     public function index(Request $request)
     {
-        $users = User::where('role', 'mahasiswa')->get(); // Get all users with role 'mahasiswa'
+        $users = User::whereHas('krs')->where('role', 'mahasiswa')->get(); // Get all users with role 'mahasiswa'
 
         $nilaiService = new NilaiService();
         $ipkCategories = ['>3.50', '3.00 - 3.49', '<3.00'];

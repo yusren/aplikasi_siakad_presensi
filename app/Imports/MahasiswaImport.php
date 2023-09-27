@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use App\Models\Alamat;
 use App\Models\Prodi;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -18,7 +19,7 @@ class MahasiswaImport implements ToModel
             return dd('tidak ada prodi/dosen pa-nya');
         }
 
-        return new User([
+        $mahasiswa = User::create([
             'user_id' => $user->id,
             'prodi_id' => $prodi->id,
             'nomor' => $row[2],
@@ -38,5 +39,25 @@ class MahasiswaImport implements ToModel
             // 'pendidikan_tinggi' => null,
             // 'status_ikatan_kerja' => null,
         ]);
+
+        $provinceName = $row[12] ? strtoupper($row[12]) : null;
+        $cityName = $row[13] ? strtoupper($row[13]) : null;
+        $districtName = $row[14] ? strtoupper($row[14]) : null;
+        $villageName = $row[15] ? strtoupper($row[15]) : null;
+
+        $province = $provinceName ? \Indonesia::allProvinces()->where('name', $provinceName)->first() : null;
+        $city = $cityName ? \Indonesia::allCities()->where('name', $cityName)->where('province_code', $province ? $province->code : null)->first() : null;
+        $district = $districtName ? \Indonesia::allDistricts()->where('name', $districtName)->where('city_code', $city ? $city->code : null)->first() : null;
+        $village = $villageName ? \Indonesia::allVillages()->where('name', $villageName)->where('district_code', $district ? $district->code : null)->first() : null;
+
+        if ($province && $city && $district && $village) {
+            Alamat::create([
+                'user_id' => $mahasiswa->id,
+                'provinsi' => $province->id,
+                'kota' => $city->id,
+                'kecamatan' => $district->id,
+                'desa' => $village->id,
+            ]);
+        }
     }
 }

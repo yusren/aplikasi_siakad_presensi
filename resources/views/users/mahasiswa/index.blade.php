@@ -31,6 +31,7 @@
                             <tr>
                                 <td>No</td>
                                 <td>Nama</td>
+                                <td>NIM</td>
                                 <td>Role</td>
                                 <td>Satus</td>
                                 <td>Dosen Pembimbing Akademik</td>
@@ -41,6 +42,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $value->kelas->first()->name ?? '' }} {{ $value->name }}</td>
+                            <td>{{ $value->nomor }}</td>
                             <td>{{ $value->role }}</td>
                             <td>Registrasi {{ $value->status }}</td>
                             <td>{{ $value->user->name ?? '' }}</td>
