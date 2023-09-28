@@ -18,7 +18,7 @@ class Pertemuan extends Model
         'dosen_pengganti',
     ];
 
-    public function user()
+    public function user() //dosen
     {
         return $this->belongsTo(User::class);
     }

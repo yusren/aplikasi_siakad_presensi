@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AngketController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BimbinganController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DependantDropdownController;
 use App\Http\Controllers\ExportController;
@@ -86,6 +87,10 @@ Route::middleware(['role:dosen'])->group(function () {
     Route::post('/presensi-bluk', [PresensiController::class, 'storeBulk'])->name('presensi.storeBulk');
 
     Route::resource('/pertemuan', PertemuanController::class);
+    Route::resource('/bimbingan', BimbinganController::class);
+    Route::post('/presensi-bimbingan', [PresensiController::class, 'storebimbingan'])->name('presensi.bimbingan');
+    Route::post('/presensi-bimbingan-bulk', [PresensiController::class, 'storeBulkBimbingan'])->name('presensi.BulkBimbingan');
+    Route::delete('/presensi-bimbingan/{bimbingandetail}', [PresensiController::class, 'destroyBimbingan'])->name('presensi.bimbingan.destroy');
 });
 Route::middleware(['role:superadmin'])->group(function () {
     Route::resource('/admin', AdminController::class);

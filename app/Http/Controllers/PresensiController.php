@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bimbingan;
+use App\Models\Bimbingandetail;
 use App\Models\Pertemuan;
 use App\Models\Presensi;
 use App\Models\User;
@@ -39,6 +41,31 @@ class PresensiController extends Controller
         return redirect()->back()->with('toast_success', 'Berhasil Menyimpan Data!');
     }
 
+    public function storebimbingan(Request $request)
+    {
+        $this->validate($request, [
+            'bimbingan_id' => 'required',
+            'nim' => 'required',
+        ]);
+        $mahasiswa = User::where('role', 'mahasiswa')->where('nomor', $request->nim)->first();
+        $bimbingan = Bimbingan::find($request->bimbingan_id);
+        $presensi = Bimbingandetail::where('bimbingan_id', $bimbingan->id)->where('user_id', $mahasiswa->id)->first();
+        if (isset($presensi)) {
+            return redirect()->back()->with('toast_error', 'Sudah Absen!');
+        }
+
+        Bimbingandetail::updateOrCreate([
+            'user_id' => $mahasiswa->id,
+            'bimbingan_id' => $request->bimbingan_id,
+        ],
+            [
+                'user_id' => $mahasiswa->id,
+                'bimbingan_id' => $request->bimbingan_id,
+            ]);
+
+        return redirect()->back()->with('toast_success', 'Berhasil Menyimpan Data!');
+    }
+
     public function storeBulk(Request $request)
     {
         foreach ($request->selectedNomor as $value) {
@@ -51,6 +78,23 @@ class PresensiController extends Controller
                 [
                     'user_id' => $mahasiswa->id,
                     'pertemuan_id' => $request->pertemuan_id,
+                ]
+            );
+        }
+    }
+
+    public function storeBulkBimbingan(Request $request)
+    {
+        foreach ($request->selectedNomor as $value) {
+            $mahasiswa = User::where('role', 'mahasiswa')->where('nomor', $value)->first();
+            Bimbingandetail::updateOrCreate(
+                [
+                    'user_id' => $mahasiswa->id,
+                    'bimbingan_id' => $request->bimbingan_id,
+                ],
+                [
+                    'user_id' => $mahasiswa->id,
+                    'bimbingan_id' => $request->bimbingan_id,
                 ]
             );
         }
@@ -69,6 +113,13 @@ class PresensiController extends Controller
     public function destroy(Presensi $presensi)
     {
         $presensi->delete();
+
+        return redirect()->back()->with('toast_error', 'Berhasil Menghapus Data!');
+    }
+
+    public function destroyBimbingan(Bimbingandetail $bimbingandetail)
+    {
+        $bimbingandetail->delete();
 
         return redirect()->back()->with('toast_error', 'Berhasil Menghapus Data!');
     }
