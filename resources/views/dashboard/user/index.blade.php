@@ -29,7 +29,7 @@
 </div>
 
 <div class="mb-4 row">
-    <div class="col-6 col-md-2 col-lg-3">
+    <div class="col-6 col-md-3 col-lg-3">
         <a href="{{ route('dashboard') }}">
             <div class="mb-3 card">
                 <div class="text-center card-body">
@@ -41,7 +41,7 @@
             </div>
         </a>
     </div>
-    <div class="col-6 col-md-2 col-lg-3">
+    <div class="col-6 col-md-3 col-lg-3">
         <a href="{{ route('jadwal.index') }}">
             <div class="mb-3 card">
                 <div class="text-center card-body">
@@ -53,7 +53,7 @@
             </div>
         </a>
     </div>
-    <div class="col-6 col-md-2 col-lg-3">
+    <div class="col-6 col-md-3 col-lg-3">
         <a href="{{ route('krs.index', ['aksiKrs' => 'lihat']) }}">
             <div class="mb-3 card">
                 <div class="text-center card-body">
@@ -65,7 +65,7 @@
             </div>
         </a>
     </div>
-    <div class="col-6 col-md-2 col-lg-3">
+    <div class="col-6 col-md-3 col-lg-3">
         <a href="{{ route('krs.index', ['aksiKrs' => 'entri']) }}">
             <div class="mb-3 card">
                 <div class="text-center card-body">
@@ -82,7 +82,7 @@
 <!-- Saving targets -->
 <div class="mb-4 row">
 
-    <div class="col-6 col-md-2 col-lg-3">
+    <div class="col-6 col-md-3 col-lg-3">
         <a href="{{ route('krs.khs') }}">
             <div class="mb-3 card">
                 <div class="text-center card-body">
@@ -94,7 +94,7 @@
             </div>
         </a>
     </div>
-    <div class="col-6 col-md-2 col-lg-3">
+    <div class="col-6 col-md-3 col-lg-3">
         <a href="{{ route('krs.rekap') }}">
             <div class="mb-3 card">
                 <div class="text-center card-body">
@@ -106,7 +106,7 @@
             </div>
         </a>
     </div>
-    <div class="col-6 col-md-2 col-lg-3">
+    <div class="col-6 col-md-3 col-lg-3">
         <a href="{{ route('user.edit', ['user' => auth()->user()->id, 'role' => 'mahasiswa']) }}">
             <div class="mb-3 card">
                 <div class="text-center card-body">
@@ -118,7 +118,7 @@
             </div>
         </a>
     </div>
-    <div class="col-6 col-md-2 col-lg-3">
+    <div class="col-6 col-md-3 col-lg-3">
         <a href="{{ route('profile.edit') }}">
             <div class="mb-3 card">
                 <div class="text-center card-body">
@@ -143,7 +143,7 @@
 <div class="row">
     @foreach ($pengumuman as $item)
     <div class="col-12 col-md-6 col-lg-6">
-        <a href="#" class="mb-3 card">
+        <a href="{{ route('pengumuman.show', $item) }}" class="mb-3 card">
             <div class="card-body">
                 <div class="row">
                     <div class="col-auto">

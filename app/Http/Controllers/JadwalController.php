@@ -43,7 +43,14 @@ class JadwalController extends Controller
 
                 return view('jadwal.dosen.index', ['jadwal' => $jadwal, 'tahunAjaranAktif' => $tahunAjaranAktif, 'tahunAjaran' => $tahunAjaran]);
             default:
-                return view('jadwal.index', ['jadwal' => Jadwal::get()]);
+                return view('jadwal.index', ['jadwal' => Jadwal::join('prodis', 'jadwals.prodi_id', '=', 'prodis.id')
+                    ->join('fakultas', 'prodis.fakultas_id', '=', 'fakultas.id')
+                    ->join('matakuliahs', 'jadwals.matakuliah_id', '=', 'matakuliahs.id')
+                    ->select('jadwals.*') // avoid getting non-unique column names
+                    ->orderBy('fakultas.name')
+                    ->orderBy('prodis.name')
+                    ->orderBy('matakuliahs.name')
+                    ->get()]);
         }
     }
 

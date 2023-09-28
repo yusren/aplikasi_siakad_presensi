@@ -84,6 +84,7 @@
                                 <button type="submit" class="btn btn-success">Ajukan KRS</button>
                             </div>
                         </form>
+                        <button type="submit" class="btn btn-warning">Edit KRS</button>
                         @endif
                     @else
                     <form method="GET" action="{{ route('export.print.krs') }}">

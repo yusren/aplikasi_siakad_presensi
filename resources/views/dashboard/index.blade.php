@@ -43,7 +43,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-12 col-xs-12">
+        <div class="col-lg-6 col-xs-12">
             <div class="box">
                 <div class="box-body">
                     <div class="form-group">
@@ -81,16 +81,17 @@
                             </select>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6 col-xs-12">
-            <div class="box">
-                <div class="box-body">
                     <div id="container"></div>
                 </div>
             </div>
         </div>
+        {{-- <div class="col-lg-6 col-xs-12"> --}}
+            {{-- <div class="box"> --}}
+                {{-- <div class="box-body"> --}}
+                    {{-- <div id="container"></div> --}}
+                {{-- </div> --}}
+            {{-- </div> --}}
+        {{-- </div> --}}
         <div class="col-lg-6 col-xs-12">
             <div class="box">
                 <div class="box-header">
@@ -98,21 +99,21 @@
                 </div>
                 <div class="box-body">
                     <div id="chartIPKMhs"></div>
-                    <!--<div id="chartIPKMhsPie"></div>-->
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6 col-xs-12">
-            <div class="box">
-                <div class="box-header">
-                    <h3 class="text-center" style="font-size: 20px;">Chart IPK Mahasiswa</h3>
-                </div>
-                <div class="box-body">
-                    <!--<div id="chartIPKMhs"></div>-->
                     <div id="chartIPKMhsPie"></div>
                 </div>
             </div>
         </div>
+        {{-- <div class="col-lg-6 col-xs-12"> --}}
+            {{-- <div class="box"> --}}
+                {{-- <div class="box-header"> --}}
+                    {{-- <h3 class="text-center" style="font-size: 20px;">Chart IPK Mahasiswa</h3> --}}
+                {{-- </div> --}}
+                {{-- <div class="box-body"> --}}
+                    {{-- <!--<div id="chartIPKMhs"></div>--> --}}
+                    {{-- <div id="chartIPKMhsPie"></div> --}}
+                {{-- </div> --}}
+            {{-- </div> --}}
+        {{-- </div> --}}
         <div class="col-lg-6 col-xs-12">
             <div class="box">
                 <div class="box-header">
@@ -135,11 +136,16 @@
                 </div>
             </div>
         </div>
-        @foreach ($angkets as $index => $angket)
-        <div class="col-lg-6 col-xs-12">
+        <hr>
+        @php
+        $colSize = 12 / count($pertanyaans);
+        @endphp
+
+        @foreach($pertanyaans as $index=> $pertanyaan)
+        <div class="col-lg-{{ $colSize }} col-xs-{{ $colSize }}">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="text-center" style="font-size: 20px;">Chart Angket</h3>
+                    <h3 class="text-center" style="font-size: 20px;">Chart Angket {{$pertanyaan->angket->name}}</h3>
                 </div>
                 <div class="box-body">
                     <div id="angkets{{ $index }}"></div>
@@ -447,12 +453,12 @@ new Highcharts.chart('container', {
     series: [
         {
             name: 'Laki - Laki',
-            color: '#0000FF',
+            color: '#5c0dbd',
             data: [pria]
         },
         {
             name: 'Perempuan',
-            color: '#FFC0CB',
+            color: '#ff0d9e',
             data: [wanita]
         }
     ]

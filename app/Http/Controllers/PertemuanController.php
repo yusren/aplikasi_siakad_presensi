@@ -41,7 +41,7 @@ class PertemuanController extends Controller
                         if (isset($pertemuan[$i - 1])) {
                             $attended = $pertemuan[$i - 1]->presensi->contains('user_id', $student->id) ? "<i class='fa fa-solid fa-check' style='color: #1dc33e;'></i>" : "<i class='fa fa-times' style='color: red;'></i>";
                         } else {
-                            $attended = "<i class='fa fa-circle' style='color: #367fa9;'></i>";
+                            $attended = '';
                         }
                         $studentAttendance["Pertemuan {$i}"] = $attended;
                     }
@@ -83,7 +83,7 @@ class PertemuanController extends Controller
                             if (isset($pertemuanArray["Pertemuan {$i}"])) {
                                 $attended = "<i class='fa fa-solid fa-check' style='color: #1dc33e;'></i>";
                             } else {
-                                $attended = "<i class='fa fa-circle' style='color: #367fa9;'></i>";
+                                $attended = '';
                             }
                             $dosenAttendance["Pertemuan {$i}"] = $attended;
                         }

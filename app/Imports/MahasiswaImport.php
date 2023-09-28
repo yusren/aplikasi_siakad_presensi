@@ -27,23 +27,23 @@ class MahasiswaImport implements ToModel
             'username' => $row[3],
             'role' => 'mahasiswa',
             'email' => $row[4],
-            'password' => Hash::make($row[5]),
-            'alamat' => $row[6],
-            'no_telp' => $row[7],
-            'tempat_lahir' => $row[8],
-            'tanggal_lahir' => $row[9],
-            'jenis_kelamin' => $row[10],
-            'agama' => $row[11],
+            'password' => Hash::make($row[2]),
+            'alamat' => $row[5],
+            'no_telp' => $row[6],
+            'tempat_lahir' => $row[7],
+            'tanggal_lahir' => $row[8],
+            'jenis_kelamin' => $row[9],
+            'agama' => $row[10],
             // 'gelar_akademik' => null,
             // 'jabatan_akademik' => null,
             // 'pendidikan_tinggi' => null,
             // 'status_ikatan_kerja' => null,
         ]);
 
-        $provinceName = $row[12] ? strtoupper($row[12]) : null;
-        $cityName = $row[13] ? strtoupper($row[13]) : null;
-        $districtName = $row[14] ? strtoupper($row[14]) : null;
-        $villageName = $row[15] ? strtoupper($row[15]) : null;
+        $provinceName = $row[11] ? strtoupper($row[11]) : null;
+        $cityName = $row[12] ? strtoupper($row[12]) : null;
+        $districtName = $row[13] ? strtoupper($row[13]) : null;
+        $villageName = $row[14] ? strtoupper($row[14]) : null;
 
         $province = $provinceName ? \Indonesia::allProvinces()->where('name', $provinceName)->first() : null;
         $city = $cityName ? \Indonesia::allCities()->where('name', $cityName)->where('province_code', $province ? $province->code : null)->first() : null;

@@ -100,6 +100,7 @@ class DashboardController extends Controller
                 'ipkCategories' => $ipkCategories,
                 'ipkData' => $ipkData,
                 'angkets' => $angkets,
+                'pertanyaans' => Pertanyaan::get(),
                 'provinces' => \Indonesia::allProvinces(),
                 'users' => User::count(),
                 'mhs' => User::where('role', 'mahasiswa')->count(),
