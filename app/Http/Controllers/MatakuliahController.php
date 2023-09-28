@@ -18,13 +18,11 @@ class MatakuliahController extends Controller
             return view('matakuliah.index', [
                 'matakuliah' => Matakuliah::where('user_id', auth()->id())->get(),
             ]);
-        } elseif (auth()->user()->role == 'mahasiswa') {
-            return redirect('dashboard')->with('toast_error', 'Maaf Anda tidak punya akses');
+        } else {
+            return view('matakuliah.index', [
+                'matakuliah' => Matakuliah::get(),
+            ]);
         }
-
-        return view('matakuliah.index', [
-            'matakuliah' => Matakuliah::get(),
-        ]);
     }
 
     public function create()
@@ -41,7 +39,6 @@ class MatakuliahController extends Controller
         Matakuliah::create($data);
 
         return redirect(route('matakuliah.index'))->with('toast_success', 'Berhasil Menyimpan Data!');
-
     }
 
     public function show(Matakuliah $matakuliah)

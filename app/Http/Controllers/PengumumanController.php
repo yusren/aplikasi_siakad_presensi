@@ -62,7 +62,17 @@ class PengumumanController extends Controller
 
     public function show(Pengumuman $pengumuman)
     {
-        dd($pengumuman->toArray());
+        switch (auth()->user()->role) {
+            case 'mahasiswa':
+                return view('pengumuman.user.show', [
+                    'pengumuman' => $pengumuman,
+                ]);
+                break;
+
+            default:
+                // code...
+                break;
+        }
     }
 
     public function edit(Pengumuman $pengumuman)

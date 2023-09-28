@@ -118,6 +118,10 @@ class KrsController extends Controller
 
     public function create()
     {
+        if (auth()->user()->role == 'mahasiswa') {
+            return redirect('dashboard')->with('toast_error', 'Maaf Anda tidak punya akses');
+        }
+
         return view('krs.create', [
             'kelas' => Kelas::get(),
             'prodi' => Prodi::get(),

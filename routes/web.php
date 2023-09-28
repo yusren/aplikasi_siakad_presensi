@@ -38,8 +38,7 @@ Route::middleware(['auth', 'checkangketsetelahlogin', 'checkrps'])->group(functi
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::resource('/matakuliah', MatakuliahController::class);
-    Route::resource('/jadwal', JadwalController::class);
+
     Route::get('/jadwal-detailprodi', [JadwalController::class, 'indexDetailprodi'])->name('jadwal.index.detailprodi');
     Route::get('/jadwal-detailkelas', [JadwalController::class, 'indexDetailkelas'])->name('jadwal.index.detailkelas');
     Route::get('/jadwal-detailmatakuliah', [JadwalController::class, 'indexDetailmatakuliah'])->name('jadwal.index.detailmatakuliah');
@@ -52,24 +51,27 @@ Route::middleware(['auth', 'checkangketsetelahlogin', 'checkrps'])->group(functi
     Route::get('/krs-detailprodi', [KrsController::class, 'indexDetailprodi'])->name('krs.index.detailprodi');
     Route::get('/krs-detailkelas', [KrsController::class, 'indexDetailkelas'])->name('krs.index.detailkelas');
     Route::get('/krs-detailmahasiswa', [KrsController::class, 'indexDetailmahasiswa'])->name('krs.index.detailmahasiswa');
+    Route::post('/krs/showDetails', [KrsController::class, 'showDetails'])->name('krs.showDetails');
     Route::post('/krs-pengajuan', [KrsController::class, 'pengajuanKrs'])->name('krs.pengajuan');
 
-    Route::post('/krs/showDetails', [KrsController::class, 'showDetails'])->name('krs.showDetails');
     Route::get('/krs-approveByDosbing', [KrsController::class, 'approveByDosbingKrs'])->name('krs.approveByDosbing');
-    Route::post('/krs-approveByDosbingStore', [KrsController::class, 'approveByDosbingStoreKrs'])->name('krs.approveByDosbingStore');
     Route::get('/krs-approveByKaprodi', [KrsController::class, 'approveByKaprodiKrs'])->name('krs.approveByKaprodi');
-    Route::post('/krs-approveByKaprodiStore', [KrsController::class, 'approveByKaprodiStoreKrs'])->name('krs.approveByKaprodiStore');
     Route::get('/krs-approveByKeuangan', [KrsController::class, 'approveByKeuanganKrs'])->name('krs.approveByKeuangan');
+    Route::post('/krs-approveByDosbingStore', [KrsController::class, 'approveByDosbingStoreKrs'])->name('krs.approveByDosbingStore');
+    Route::post('/krs-approveByKaprodiStore', [KrsController::class, 'approveByKaprodiStoreKrs'])->name('krs.approveByKaprodiStore');
     Route::post('/krs-approveByKeuanganStore', [KrsController::class, 'approveByKeuanganStoreKrs'])->name('krs.approveByKeuanganStore');
 
     Route::get('/print-krs', [ExportController::class, 'printKrs'])->name('export.print.krs');
     Route::get('/print-khs', [ExportController::class, 'printKhs'])->name('export.print.khs');
     Route::get('/print-jurnaldosen', [ExportController::class, 'printJurnalDosen'])->name('export.print.jurnaldosen');
+    Route::get('/jadwal', [JadwalController::class, 'index'])->name('jadwal.index');
+    Route::get('/pengumuman/{pengumuman}', [PengumumanController::class, 'show'])->name('pengumuman.show');
 });
 
 Route::middleware(['role:mahasiswa'])->group(function () {
     Route::get('/khs', [KrsController::class, 'khs'])->name('krs.khs');
     Route::post('/uploadtugas', [PertemuanController::class, 'uploadtugas'])->name('pertemuan.uploadtugas');
+    Route::get('/jadwal/{jadwal}', [JadwalController::class, 'show'])->name('jadwal.show');
 });
 Route::middleware(['role:dosen'])->group(function () {
     Route::get('/khs', [KrsController::class, 'khs'])->name('krs.khs');
@@ -99,6 +101,7 @@ Route::middleware(['role:superadmin'])->group(function () {
     Route::get('/prodi/{prodi_id}/kelas', [ProdiController::class, 'getKelas']);
     Route::resource('/kelas', KelasController::class);
     Route::resource('/ruang', RuangController::class);
+    Route::resource('/jadwal', JadwalController::class)->except(['index', 'show']);
 
     Route::post('/matakuliah/import', [MatakuliahController::class, 'import'])->name('matakuliah.import');
     Route::get('/setting', [DashboardController::class, 'setting'])->name('setting');
@@ -108,8 +111,12 @@ Route::middleware(['role:superadmin'])->group(function () {
     Route::resource('/angket', AngketController::class);
     Route::resource('/pertanyaan', PertanyaanController::class);
     Route::resource('/jawaban', JawabanController::class);
-    Route::resource('/pengumuman', PengumumanController::class);
+    Route::resource('/pengumuman', PengumumanController::class)->except(['show']);
     Route::resource('/rps', RpsController::class);
+});
+
+Route::middleware(['role:superadmin|dosen'])->group(function () {
+    Route::resource('/matakuliah', MatakuliahController::class);
 });
 
 Route::resource('/inputrps', TestRpsController::class)->middleware('auth');
