@@ -18,6 +18,8 @@ class MatakuliahController extends Controller
             return view('matakuliah.index', [
                 'matakuliah' => Matakuliah::where('user_id', auth()->id())->get(),
             ]);
+        } elseif (auth()->user()->role == 'mahasiswa') {
+            return redirect('dashboard')->with('toast_error', 'Maaf Anda tidak punya akses');
         }
 
         return view('matakuliah.index', [

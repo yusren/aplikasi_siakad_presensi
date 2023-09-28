@@ -43,11 +43,21 @@
                             @error('semester') <div class="invalid-feedback text-danger"> {{ $message }} </div> @enderror
                         </div>
                         <div class="form-group">
-                            <label>Mata Kuliah</label>
-                            <select required class="form-control select2" name="matakuliah[]" data-placeholder="Pilih Mata Kuliah" style="width: 100%;" multiple id="matakuliah">
-                                <option value="" selected disabled>Pilih Mata Kuliah</option>
+                            <label>Matakuliah</label>
+                            <select required class="form-control select2" name="matakuliah[]" data-placeholder="Pilih Matakuliah" style="width: 100%;" multiple>
+                                @foreach ($matakuliah as $mk)
+                                <option value="{{ $mk->id }}">
+                                    {{ $mk->code }} - {{ $mk->name }} - {{ $mk->user->name }}
+                                </option>
+                                @endforeach
                             </select>
                         </div>
+                        {{-- <div class="form-group"> --}}
+                            {{-- <label>Mata Kuliah</label> --}}
+                            {{-- <select required class="form-control select2" name="matakuliah[]" data-placeholder="Pilih Mata Kuliah" style="width: 100%;" multiple id="matakuliah"> --}}
+                                {{-- <option value="" selected disabled>Pilih Mata Kuliah</option> --}}
+                            {{-- </select> --}}
+                        {{-- </div> --}}
                     </div>
                     <div class="box-footer">
                         <a href="{{ route('krs.index') }}" class="btn btn-default">Kembali</a>
