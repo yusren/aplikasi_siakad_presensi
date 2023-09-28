@@ -1,0 +1,16 @@
+{
+    "preset": "laravel",
+    "rules": {
+        "line_ending": false,
+        "binary_operator_spaces": false,
+        "no_whitespace_in_blank_line": false,
+        "single_blank_line_at_eof": false,
+        "trailing_comma_in_multiline": false,
+        "class_attributes_separation": false,
+        "curly_braces_position": false,
+        "blank_line_after_namespace": false,
+        "no_extra_blank_lines": false,
+        "method_chaining_indentation": false
+    },
+    "exclude": ["database", "app/Actions/Fortify"]
+}

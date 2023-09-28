@@ -16,9 +16,15 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label for="">Nama Bimbingan</label>
-                            <input type="text" class="form-control" name="name" value="{{ old('name') }}"
-                                placeholder="Masukkan Nama Bimbingan">
+                            <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Masukkan Nama Bimbingan">
                             @error('name')
+                            <div class="invalid-feedback text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="">Pokok Bahasan</label>
+                            <input type="text" class="form-control" name="topic" value="{{ old('topic') }}" placeholder="Masukkan Pokok Bahasan">
+                            @error('topic')
                             <div class="invalid-feedback text-danger">{{ $message }}</div>
                             @enderror
                         </div>

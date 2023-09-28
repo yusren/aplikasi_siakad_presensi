@@ -16,12 +16,14 @@
             <div class="box">
                 <div class="box-body table-responsive">
                     <table id="" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Nama Bimbingan</th>
-                                <td>{{ $bimbingan->name }}</td>
-                            </tr>
-                        </thead>
+                        <tr>
+                            <th>Nama Bimbingan</th>
+                            <td>{{ $bimbingan->name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Pokok Bahasan</th>
+                            <td>{{ $bimbingan->topic }}</td>
+                        </tr>
                         <tr>
                             <th>Tahun Ajaran</th>
                             <td>{{ $bimbingan->tahunAjaran->semester }} - {{ $bimbingan->tahunAjaran->name }}</td>

@@ -15,6 +15,7 @@ class BimbinganRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'topic' => 'nullable',
             'user_id' => 'nullable',
             'tahun_ajaran_id' => 'required',
         ];

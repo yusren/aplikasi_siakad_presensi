@@ -18,6 +18,7 @@ return new class extends Migration
         Schema::create('bimbingans', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100)->nullable();
+            $table->string('topic')->nullable();
             $table->foreignIdFor(User::class)->nullable()->constrained()->cascadeOnDelete();
             $table->foreignIdFor(TahunAjaran::class)->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();

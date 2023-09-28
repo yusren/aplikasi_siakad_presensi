@@ -11,6 +11,7 @@ class Bimbingan extends Model
 
     protected $fillable = [
         'name',
+        'topic',
         'user_id',
         'tahun_ajaran_id',
     ];
